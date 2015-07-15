@@ -42,7 +42,11 @@ Requirements:
         - KVM or XEN Hypervisor installed
         - VM(s) installed
         - Since SR-IOV/PCI-passthrough is required on SLES 12, this script has been tested on that version.
-           
+Known Issues:
+        - In general Broadcom cards may not support SR-IOV.  PCI-Passthrough may be configured
+          using two Broadcom cards.
+        - Some servers may crash/reboot when removing NIC driver.  If this happens, applying latest
+          kernel updates may fix the issue.
 Options:
 	-h	Print this help text and exit.
 	
@@ -80,7 +84,7 @@ function checkHypervisor(){
 
 #=========================================================#
 # Check intel_iommu is set in cmdline
-#
+# exit 1 means missing set up items
 function checkIommu(){
 ${CAT} /proc/cmdline | ${GREP} intel_iommu >> ${LOG} 2>&1
  iommuStatus="$?"
@@ -91,11 +95,11 @@ ${CAT} /proc/cmdline | ${GREP} intel_iommu >> ${LOG} 2>&1
             yast2 bootloader
             echo -e "Reboot the system for the change to take effect." \
             " Good Bye"              
-            exit 0
+            exit 1
         else
             echo -e "Please add intel_iommu=on to boot parameter for SR-IOV to work." \
                "Good Bye.\n"              
-         exit 0
+            exit 1
         fi
     else
         echo -e "intel_iommu=on found in cmdline !" >> ${LOG}
@@ -109,7 +113,7 @@ function checkNicForSriov(){
 ${LSPCI} -v | ${GREP} -e ".*Capabilities.*Virtualization"  >> ${LOG} 2>&1
  nicVirt="$?"
    if [ $nicVirt -ne 0 ] ; then
-      echo "Function result: SR-IOV capability NOT found in NIC.\n" >> ${LOG} 2>&1
+      echo -e "Function result: SR-IOV capability NOT found in NIC.\n" >> ${LOG} 2>&1
       return 1
    else
         echo -e "Function result: SR-IOV capability FOUND in NIC.\n" >> ${LOG} 2>&1
@@ -124,7 +128,7 @@ function pciList(){
 local pciList=$(${LSPCI} | ${GREP} Ethernet | ${SED} 's/ /_/g')
 #echo -e "\n\n*** pciList: ${pciList}"	
     idx=0  
-    printf "The following Ethernet pci-ids were found:\n" | ${TEE} -a ${LOG}
+    printf "\nThe following Ethernet pci-ids were found:\n" | ${TEE} -a ${LOG}
     for c in ${pciList[@]};  do
         idx=$(( ++idx ))
         echo "${idx}) $c" | ${TEE} -a ${LOG}
@@ -226,31 +230,65 @@ echo "c: ${c}" >> ${LOG}
 virsh dumpxml ${nameGuest} | ${GREP} -e ".*bus='0x${a}' slot='0x${b}' function='0x${c}'.*" >> ${LOG}
     rc=$?
     if [ ${rc} -eq 0 ]; then
-       echo -e "PCI device: \"${idPcd}\" is already assigned to \"${guestName}\".  Not assigning device again.\n" >> ${LOG} 
+       echo -e "\nPCI device: \"${idPcd}\" is already assigned to \"${guestName}\".  Not assigning device again.\n" >> ${LOG} 
         return 0
     else
-        echo -e "pciid: ${idPcd} not assigned to ${nameGuest}\n" >> ${LOG}  
+        echo -e "\npciid: ${idPcd} not assigned to ${nameGuest}\n" >> ${LOG}  
             return 1
     fi
 } #assigncheck
+
+#=========================================================#
+# Shutdown VMs
+#
+function runningVmCheck(){
+
+    virsh list | grep -e "[1-9]" >> ${LOG}	
+    rc=$?
+    if [ ${rc} -eq 0 ]; then
+    idx=0
+    for i in `virsh list | grep -e "[1-9]" | awk '{print $1}'`;do 
+        myarray[idx]=$i 
+        idx=$(( ++idx ))
+    done
+       virsh list           
+       echo -en "\nVM(s) appear to be running, would you like me to power off all of them [y/n](Recommended)?: "
+       read shutDownResponse
+
+       if [ "${shutDownResponse}" = "y" -o "${shutDownResponse}" = "Y" ]; then
+        for t in "${myarray[@]}"; do 
+            virsh destroy $t
+        done     
+       else
+            echo -e "After setting up sriov, you may have to reboot all VMs."           
+
+       fi
+    else
+        echo -e "\nNo VMs appear to be running" >> ${LOG}   
+    fi
+}
+
+
 #=========================================================#
 # SRIOV Set up
-#
+# exit 2 means something fail while attempting to configure
 function sriovSetup(){
 echo -e "SR-IOV Capability FOUND in NIC.  Therefore, doing SR-IOV set up.\n" | ${TEE} -a ${LOG}
 setupType="sriov"
 
 checkNicForSriov
+runningVmCheck
 
 #Show all NIC drivers available
-nicDrivers="$(${LSPCI} -k | ${GREP} -A 3 Ethernet | ${GREP} -e "Kernel driver in use" | ${CUT} -d: -f2 | ${SORT} | uniq)"
+nicDrivers=$(${LSPCI} -k | ${GREP} -A 3 Ethernet | ${GREP} -e "Kernel" | ${CUT} -d: -f2 | ${SORT} | uniq)
+echo -e "Result of: ${LSPCI} -k | ${GREP} -A 3 Ethernet | ${GREP} -e "Kernel" | ${CUT} -d: -f2 | ${SORT} | uniq is: ${nicDrivers}" >> ${LOG} 2>&1
 idx1=0 
-echo -e "The following NIC drivers are loaded on this system:" | ${TEE} -a ${LOG}
+echo -e "\nThe following NIC drivers were found on this system:" | ${TEE} -a ${LOG}
 for a in ${nicDrivers[@]};  do
         idx1=$(( ++idx1 ))
         echo "${idx1}) $a" | ${TEE} -a ${LOG}
     done
-echo -en "\tPlease choose NIC driver where VFs should be loaded:"
+echo -en "\n\tPlease choose NIC driver where VFs should be loaded:"
 read driverSelected
 
 idx2=0
@@ -266,15 +304,15 @@ done
 
 
 # FIGURE out NIC driver VFS parameter
-vfParm="$(${MODINFO} ${vfDriver} | ${GREP} parm | ${GREP} vf | ${TR} -d ' ' | ${CUT} -d: -f 2)"
-echo "vfParm: ${vfParm}" >> ${LOG}
+vfParm=$(${MODINFO} ${vfDriver} | ${GREP} parm | ${GREP} vf | ${TR} -d ' ' | ${CUT} -d: -f 2)
+echo "vfParm: ${vfParm}" >> ${LOG} 2>&1
 
 # Check if driver is already loaded with VFs parm (separate driver)
-${LSPCI} -k | ${GREP} -A 3 Ethernet | ${GREP} -e "Kernel driver in use" | ${CUT} -d: -f2 | ${SORT} | uniq | ${GREP} .*vf.* >> ${LOG} 2>&1
+${LSPCI} -k | ${GREP} -A 3 Ethernet | ${GREP} -e "Kernel" | ${CUT} -d: -f2 | ${SORT} | uniq | ${GREP} .*vf.* >> ${LOG} 2>&1
 vfSeparateLoaded=$?
 
 # Check if driver is already loaded with VFs parm (same driver)
-${SYSTOOL} -vm ${vfDriver} | ${GREP} -e "${vfParm}=[1-9]" >> ${LOG} 2>&1
+${SYSTOOL} -vm ${vfDriver} | ${GREP} -e "${vfParm}.*=.*[1-9].*" >> ${LOG} 2>&1
 vfLoaded=$?
 # Capture original number of NIC devices
 pciList >> ${LOG} 2>&1 
@@ -282,31 +320,56 @@ pciBefore=$?
 
 ##TODO: Ask to verify if device being assign is correct one.
 if [ ${vfSeparateLoaded} -eq 0 ]; then
-        echo "It appears driver: \"${vfDriver}\" already has VFs loaded.  Not reloading it" | ${TEE} -a ${LOG}
+        echo -e "\nIt appears driver: \"${vfDriver}\" already has VFs loaded.  Not reloading it" | ${TEE} -a ${LOG}
 
 elif [ ${vfLoaded} -eq 0 ]; then
-        echo "Driver \"${vfDriver}\" already loaded with VFS: \"${vfParm}=x\" parameter.  Not reloading it." | ${TEE} -a ${LOG}
+        echo -e "\nDriver \"${vfDriver}\" already loaded with VFS: \"${vfParm}=x\" parameter.  Not reloading it." | ${TEE} -a ${LOG}
 else
         # Remove NIC driver and reload it with VF parm
+        echo -e "\nAbout to remove driver \"${vfDriver}\" with \"modprobe -r ${vfDriver}\"" | ${TEE} -a ${LOG}
+        sleep 3
         ${MODPROBE} -r ${vfDriver} >> ${LOG} 2>&1        
+        echo -e "\nAbout to load driver \"${vfDriver}\" with \"modprobe ${vfDriver} ${vfParm}=1\"" | ${TEE} -a ${LOG}        
+        sleep 3
         ${MODPROBE} ${vfDriver} ${vfParm}=1 >> ${LOG} 2>&1
         rc=$?
         # Count NIC devices after loading with VF parm, the number must be greater than before loading VF.
         pciList >> ${LOG} 2>&1
         pciAfter=$?
         if [ ${rc} -eq 0 -a ${pciAfter} -gt ${pciBefore} ]; then
-            echo "Driver \"${vfDriver}\" loaded with \"${vfParm}=1\" successfully " | ${TEE} -a ${LOG}
+            echo -e "\nDriver \"${vfDriver}\" loaded with \"${vfParm}=1\" successfully " | ${TEE} -a ${LOG}
          else
-                echo "*** Error loading driver: \"${vfDriver}\" with: \"${vfParm}=1\".  Please check dmesg, 
-                system log, etc. to determine and fix the problem.  Then run this script again. ***" | ${TEE} -a ${LOG}    
+                echo -e "\n*** Error loading driver: \"${vfDriver}\" with: \"${vfParm}=1\".  Please check dmesg, 
+                system log, etc. to determine and fix the problem.  Then run this script again. ***" | ${TEE} -a ${LOG}
+                exit 2     
         fi
 fi
 
     # List all Ethernet devices including newly created ones.
     pciList
-    
-    echo -en "\tPlease choose VF device to assign to VM: "
+mychoice="n"
+vfDevice=""
+while [ "${mychoice}" = "n" -o "${mychoice}" = "N" ] ; do    
+    echo -en "\n\tPlease choose VF device to assign to VM: "
     read vfDevice
+
+    PciList=$(${LSPCI} | ${GREP} Ethernet | ${SED} 's/ /_/g')
+    
+    idx4=0
+    for d in ${PciList[@]};  do
+        idx4=$(( ++idx4 ))
+        if [ ${idx4} -eq ${vfDevice} ]; then
+            #echo -en "VF Device selected is $d"
+            pciSelected=$(echo "${d}" | ${CUT} -d_ -f1)
+                    
+        break        
+        fi
+               
+    done
+    echo -en "\nYou have chosen PCI-ID: \"${pciSelected}\", is this correct?[y/n]: "
+    read mychoice
+done
+
 
     selectVfDevice ${vfDevice} "pciId"
     echo "vf Selected: ${pciId}" >> ${LOG}
@@ -316,27 +379,40 @@ fi
 
 
 # Show available domains
-echo -e "Showing all VMs installed on this host: \n"
+echo -e "\nShowing all VMs installed on this host: \n"
 virsh list --all
 
 echo "builtPciId: ${builtPciId}" >> ${LOG}
 
-    echo -en "\tGuest name/id to attached VF NIC to: "
+guestName=""
+mychoice="n"
+while [ "${mychoice}" = "n" -o "${mychoice}" = "N" ] ; do   
+    echo -en "\n\tGuest name/id to attach VF NIC to: "
     read guestName
+    echo -en "\nYou have chosen Guest: \"${guestName}\", is this correct?[y/n]: "
+    read mychoice
+done
     #Check if pci-id selected is already assigned to guest    
     assignCheck ${pciId} ${guestName}
 
     rc=$?
     if [ ${rc} -eq 0 ]; then
-       echo "PCI device: \"${pciId}\" is already assigned to \"${guestName}\".  Not assigning device again." | ${TEE} -a ${LOG}
+       echo -e "\nPCI device: \"${pciId}\" is already assigned to \"${guestName}\".  Not assigning device again." | ${TEE} -a ${LOG}
     else
         #Unbind/Detach VF NIC from host
         virsh nodedev-detach ${builtPciId} >> ${LOG} 2>&1
         echo "${builtPciId} detached" >> ${LOG}       
         # Attach VF NIC to guest
         virsh attach-device ${guestName} ${vfFile} --config >> ${LOG} 2>&1
+        rc=$?
+        if [ ${rc} -eq 0 ]; then
+            echo -e "\nDevice \"${pciId}\" attached to \"${guestName}\" successfully." | ${TEE} -a ${LOG}
+	    else
+	        echo -e "\n**** Failed to attach \"${pciId}\" to \"${guestName}\" Please check log
+	                    sriov_setup-<timestamp>.log\" for more details."
+        fi
         # Re-start the network
-        echo "Re-starting network services.  Please wait ..." | ${TEE} -a ${LOG}
+        echo -e "\nRestarting network services.  Please wait ..." | ${TEE} -a ${LOG}
         if [ ${osVer} -eq 12 ] ; then
            ${SYSTEMCTL} restart network.service >> ${LOG} 2>&1
         else
@@ -349,12 +425,12 @@ echo "builtPciId: ${builtPciId}" >> ${LOG}
 ${GREP} -e ".*${vfDriver}.*${vfParm}.*" /etc/modprobe.d/99-local.conf >> ${LOG} 2>&1
 vfParmset=$?
 if [ $vfParmset -eq 0 ] ; then
-    echo -e "Driver: \"${vfDriver}\" with Parm: \"${vfParm}\" is already in /etc/modprobe.d/99-local.conf Not re-adding it. \n" | ${TEE} -a ${LOG}
+    echo -e "\nDriver: \"${vfDriver}\" with Parm: \"${vfParm}\" is already in /etc/modprobe.d/99-local.conf Not re-adding it. \n" | ${TEE} -a ${LOG}
 else
       echo "options ${vfDriver} ${vfParm}=1" >> /etc/modprobe.d/99-local.conf   
-      echo -e "Driver: \"${vfDriver}\" with Parm: \"${vfParm}\" has been added to /etc/modprobe.d/99-local.conf\n" | ${TEE} -a ${LOG}
+      echo -e "\nDriver: \"${vfDriver}\" with Parm: \"${vfParm}\" has been added to /etc/modprobe.d/99-local.conf\n" | ${TEE} -a ${LOG}
 fi
-echo "Finished SR-IOV set up.  Good Bye." | ${TEE} -a ${LOG}
+echo -e "\nFinished SR-IOV set up.  Good Bye." | ${TEE} -a ${LOG}
 } #end sriovSetup
 
 #=========================================================#
@@ -362,7 +438,7 @@ echo "Finished SR-IOV set up.  Good Bye." | ${TEE} -a ${LOG}
 #
 function pciPassThroughSetup(){
 
-echo -e "Doing PCI-Passthrough set up since no SR-IOV capability found in NIC.\n" | ${TEE} -a ${LOG}
+echo -e "\nDoing PCI-Passthrough set up since no SR-IOV capability found in NIC.\n" | ${TEE} -a ${LOG}
     setupType="pcipass"
        echo "Doing ${setupType}" >> ${LOG}
 
@@ -373,8 +449,29 @@ while [ "${anotherPass}" = "y" -o "${anotherPass}" = "Y" ] ; do
     
     pciList
     
-    echo -en "\tPlease choose PCI-id device to assign to VM: "
-    read vfDevice
+    mychoice="n"
+    vfDevice=""
+    while [ "${mychoice}" = "n" -o "${mychoice}" = "N" ] ; do    
+        echo -en "\n\tPlease choose PCI-id device to assign to VM: "
+        read vfDevice
+
+        PciList=$(${LSPCI} | ${GREP} Ethernet | ${SED} 's/ /_/g')
+        
+        idx4=0
+        for d in ${PciList[@]};  do
+            idx4=$(( ++idx4 ))
+            if [ ${idx4} -eq ${vfDevice} ]; then
+                #echo -en "VF Device selected is $d"
+                pciSelected=$(echo "${d}" | ${CUT} -d_ -f1)
+                        
+            break        
+            fi
+                   
+        done
+        echo -en "\nYou have chosen PCI-ID: \"${pciSelected}\", is this correct?[y/n]: "
+        read mychoice
+    done
+    
 
     selectVfDevice "${vfDevice}" "pciIdSelected"
     echo "pci Selected: ${pciIdSelected}" >> ${LOG}
@@ -383,20 +480,26 @@ while [ "${anotherPass}" = "y" -o "${anotherPass}" = "Y" ] ; do
     #Gather the information about the domain, bus, and function: virsh nodedev-dumpxml pci_8086_1d26
     buildXmlFile "${pciIdSelected}" "${setupType}" "vfFile" "builtPciId"
 
-# Show available domains
-echo "Showing all VMs installed on this host: "
-virsh list --all
+    # Show available domains
+    echo "\nShowing all VMs installed on this host: "
+    virsh list --all
 
-echo "builtPciId: ${builtPciId}" >> ${LOG}
+    echo "builtPciId: ${builtPciId}" >> ${LOG}
 
-    echo -en "Guest name/id to attached VF NIC to: "
-    read guestName
+    guestName=""
+    mychoice="n"
+    while [ "${mychoice}" = "n" -o "${mychoice}" = "N" ] ; do   
+        echo -en "\n\tGuest name/id to attached VF NIC to: "
+        read guestName
+        echo -en "\nYou have chosen Guest ID: \"${guestName}\", is this correct?[y/n]: "
+        read mychoice
+    done
     
     #Check if pci-id selected is already assigned to guest    
     assignCheck ${pciIdSelected} ${guestName}
     rc=$?
     if [ ${rc} -eq 0 ]; then
-       echo "PCI device: ${pciIdSelected} is already assigned to ${guestName}.  Not assigning device again." | ${TEE} -a ${LOG}
+       echo "\nPCI device: ${pciIdSelected} is already assigned to ${guestName}.  Not assigning device again." | ${TEE} -a ${LOG}
     else
         #Unbind/Detach VF NIC from host
         virsh nodedev-detach ${builtPciId} >> ${LOG} 2>&1
@@ -406,6 +509,13 @@ echo "builtPciId: ${builtPciId}" >> ${LOG}
         fi
         # Attach VF NIC to guest
         virsh attach-device ${guestName} ${vfFile} --config >> ${LOG} 2>&1
+        rc=$?
+        if [ ${rc} -eq 0 ]; then
+            echo -e "\nDevice \"${pciId}\" attached to \"${guestName}\" successfully." | ${TEE} -a ${LOG}
+	    else
+	        echo -e "\n**** Failed to attach \"${pciId}\" to \"${guestName}\" Please check log 
+		                sriov_setup-<timestamp>.log\" for more details."
+        fi
         # Re-start the network
         echo "Re-starting network services.  Please wait ..." | ${TEE} -a ${LOG}
         if [ ${osVer} -eq 12 ] ; then
@@ -415,11 +525,11 @@ echo "builtPciId: ${builtPciId}" >> ${LOG}
    
         fi
     fi
-    echo -en "PCI-Passthrough another device? (y/n): "
+    echo -en "\nPCI-Passthrough another device? (y/n): "
     read anotherPass
     
 done 
-echo "Finished PCI-Passthrough set up.  Good Bye." | ${TEE} -a ${LOG}
+echo -e "\nFinished PCI-Passthrough set up.  Good Bye." | ${TEE} -a ${LOG}
 
 } # End pciPassThroughSetup
 
@@ -454,10 +564,10 @@ prefix="sriov_setup"
 basename="${prefix}-${timestamp}"
 if [ "${projectDir}" = "" ] ; then 
 	LOG=/var/opt/suse/testKits/system/${basename}.log
-	CFG_NOTE=/var/opt/suse/testKits/system/${prefix}.cfgNote
+	# CFG_NOTE=/var/opt/suse/testKits/system/${prefix}.cfgNote
 else
 	LOG=/var/opt/suse/testKits/system/${projectDir}/${basename}.log
-	CFG_NOTE=/var/opt/suse/testKits/system/${projectDir}/${prefix}.cfgNote
+	# CFG_NOTE=/var/opt/suse/testKits/system/${projectDir}/${prefix}.cfgNote
 fi
 
 libdirs="/opt/suse/testKits/system/lib /usr/lib"
@@ -480,33 +590,35 @@ unset lib_found libdirs
 # (see also: cert_tests.lib)
 # Everything we need available?
 #
-RPM=/bin/rpm
-PING=/bin/ping
-IP=/sbin/ip
-YAST2=/sbin/yast2
-RCNETWORK=/sbin/rcnetwork
+# RPM=/bin/rpm
+# PING=/bin/ping
+# IP=/sbin/ip
+# YAST2=/sbin/yast2
+# RCNETWORK=/sbin/rcnetwork
 SCP=/usr/bin/scp
-XL=/usr/sbin/xl
-LSCPU=/usr/bin/lscpu
+# XL=/usr/sbin/xl
+# LSCPU=/usr/bin/lscpu
 VM_INSTALL=/usr/bin/vm-install
 VIRT_INSTALL=/usr/bin/virt-install
 MODPROBE=/sbin/modprobe
 MKINITRD=/sbin/mkinitrd
 SYSTOOL=/usr/bin/systool
+# MODINFO=/sbin/modinfo
+
+NEEDED_CMDS=""
 checkosrel
 osVer=$?
 if [ ${osVer} -eq 12 ] ; then
 	CHMOD=/usr/bin/chmod
-   
+   NEEDED_CMDS="${RPM} ${CAT} ${CUT} ${AWK} ${GREP} ${LSCPU} ${TR} ${FREE} ${MODINFO} ${VIRT_INSTALL} ${MODPROBE} ${SYSTOOL}"
    
 else
 	CHMOD=/bin/chmod
 	SYSTEMCTL=""
+	NEEDED_CMDS="${RPM} ${CAT} ${CUT} ${AWK} ${GREP} ${LSCPU} ${TR} ${FREE} ${MODINFO} ${VM_INSTALL} ${MODPROBE} ${SYSTOOL}"
 fi
 
 setupType=""
-
-NEEDED_CMDS="${RPM} ${CAT} ${CUT} ${AWK} ${GREP} ${LSCPU} ${TR} ${FREE}"
 
 check_for_needed_cmds ${NEEDED_CMDS} || exit 1
 
@@ -525,8 +637,10 @@ elif [ ${hyperCheck} -eq 2 ]; then #XEN hypervisor
     echo "For help, use: \"./sriov_setup -h\""    
     echo -e "Hypervisor found: ${runningHyper}" | ${TEE} -a ${LOG}
 else [ ${hyperCheck} -gt 2 ]
-    echo "** Error: KVM or XEN hypervisor not found.  Please install hypervisor before proceeding.***\n" \
-        "Good Bye.\n" | ${TEE} -a ${LOG}
+    echo -e "\n** Error: KVM or XEN hypervisor not found.  Please install hypervisor and at least \
+one VM before proceeding. For more details see Testkit documentation at
+https://www.suse.com/partners/ihv/yes/system-test-tools-for-suse-linux.html ***\n" \
+"\n Good Bye.\n" | ${TEE} -a ${LOG}
         exit 1
 fi
 
