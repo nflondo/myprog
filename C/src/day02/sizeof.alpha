@@ -1,0 +1,14 @@
+Signed   : Size                  Min                    Max
+char     :  1                   -128                    127
+short    :  2                 -32768                  32767
+int      :  4            -2147483648             2147483647
+long     :  8   -9223372036854775808    9223372036854775807
+
+Unsigned : Size                  Min                    Max
+char     :  1                      0                    255
+short    :  2                      0                  65535
+int      :  4                      0             4294967295
+long     :  8                      0   18446744073709551615
+
+single prec. float : 4
+double prec. float : 8

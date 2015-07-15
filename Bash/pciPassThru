@@ -1,0 +1,483 @@
+#! /bin/bash
+#
+#    Copyright © 2000-2014 Novell, Inc.  All Rights Reserved.
+#
+#    USE AND REDISTRIBUTION OF THIS WORK IS SUBJECT TO THE DEVELOPER LICENSE
+# AGREEMENT OR OTHER AGREEMENT THROUGH WHICH NOVELL, INC. MAKES THE WORK
+# AVAILABLE.  THIS WORK MAY NOT BE ADAPTED WITHOUT NOVELL'S PRIOR WRITTEN
+# CONSENT.
+#
+#    NOVELL PROVIDES THE WORK "AS IS," WITHOUT ANY EXPRESS OR IMPLIED WARRANTY,
+# INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.  NOVELL, THE AUTHORS
+# OF THE WORK, AND THE OWNERS OF COPYRIGHT IN THE WORK ARE NOT LIABLE FOR ANY
+# CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT,
+# OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE WORK OR THE
+# USE OR OTHER DEALINGS IN THE WORK.
+#
+# Authors:	Craig Salmond <csalmond@suse.com> 2014
+#
+# set -x
+# set +x
+# http://docserv.nue.suse.com/documents/SLES/SLES-kvm/single-html/
+# http://docserv.nue.suse.com/documents/SLES/SLES-xen/single-html/
+# http://wiki.libvirt.org/page/Networking#PCI_Passthrough_of_host_network_devices
+#
+# This feature is available from both, AMD* and Intel*. For AMD machines, the 
+# feature is called IOMMU, in Intel speak, this is VT-d. Note that Intel-VT 
+# technology is not sufficient to use this feature for fully virtualized guests.
+#
+# To make use of PCI Pass-Through, your motherboard chipset, BIOS, and CPU must
+# have support for AMD's IOMMU (or VT-d in Intel speak) virtualization
+# technology. To make sure that your computer supports this feature, ask your
+# supplier specifically to deliver a system that supports PCI Pass-Through.
+#
+# If the PCI device shares IRQ with other devices, it cannot be assigned to a 
+# VM Guest.
+#
+# KVM also supports PCI device hot-plugging to a VM Guest. To achieve this, you
+# need to switch to a QEMU monitor (see Chapter 14, Administrating Virtual
+# Machines with QEMU Monitor for more information) and issue the following
+# commands:
+#	hot add:
+#		device_add pci-assign,host=00:1b.0,id=new_pci_device
+#	hot remove:
+#		device_del new_pci_device
+
+# TODO: 1) Make sure that CONFIG_DMAR_DEFAULT_ON is set in the SUT's host running Kernel: 
+# grep CONFIG_DMAR_DEFAULT_ON /boot/config-`uname -r`
+# edit your boot loader configuration and add intel_iommu=on (Intel machines) 
+# or iommu=pt iommu=1 (AMD machines). Then reboot the host machine.
+#
+# TODO: 2) Check for VT-d/IOMMU support on the SUT host
+# dmesg | grep -e DMAR -e IOMMU		# on Intel machines
+# dmesg | grep AMD-Vi				# on AMD machines
+#
+# 3) Identify the host PCI device to assign to the guest.
+#
+# 4) Unbind the device from host Kernel driver and bind it to the PCI stub driver.
+#
+# 5) Now run the VM Guest with the PCI device assigned.
+#
+# PCI-passthru devices that are assigned to a VM have the driver "pciback"
+# The Module Alias remains the same on the host as it is on the guest.
+# The Model, Vendor, Device, SubVendor, SubDevice, and Revision
+# remains the same on the host as it is on the guest.
+# The only way to get information on the PCI-passthru guest is to go thru the TC.
+#
+#194: PCI 1600.1: 0200 Ethernet controller
+#  [Created at pci.328]
+#  Unique ID: dTbt.l1b4Vj3sdL8
+#  Parent ID: jDmU._ZPoheafKLA
+#  SysFS ID: /devices/pci0000:00/0000:00:02.2/0000:16:00.1
+#  SysFS BusID: 0000:16:00.1
+#  Hardware Class: network
+#  Model: "Intel I350 Gigabit Network Connection"
+#  Vendor: pci 0x8086 "Intel Corporation"
+#  Device: pci 0x1521 "I350 Gigabit Network Connection"
+#  SubVendor: pci 0x8086 "Intel Corporation"
+#  SubDevice: pci 0x1521 
+#  Revision: 0x01
+#  Driver: "pciback"
+#  Driver Modules: "pciback", "pciback"
+#  Memory Range: 0xd4540000-0xd457ffff (rw,non-prefetchable)
+#  I/O Ports: 0x3fa0-0x3fbf (rw)
+#  Memory Range: 0xd44f4000-0xd44f7fff (rw,non-prefetchable)
+#  IRQ: 37 (no events)
+#  Module Alias: "pci:v00008086d00001521sv00008086sd00001521bc02sc00i00"
+#  Driver Info #0:
+#    Driver Status: igb is active
+#    Driver Activation Cmd: "modprobe igb"
+#  Config Status: cfg=new, avail=yes, need=no, active=unknown
+#  Attached to: #11 (PCI bridge)
+
+
+###############################################################################
+###############################################################################
+# Functions
+###############################################################################
+###############################################################################
+
+
+#=============================================================================#
+# Usage Message
+#
+function usage()
+{
+	>&2 echo "
+Usage:	$cmdname [-h] [-d project_name] -s SUT_IP_Address -v VM_IP_Address 
+
+Tests to make sure the given VM is set up correctly with a PCI pass thru
+or SR-IOV device.
+
+Options:
+	-h	Print this help text and exit.
+	-d	Name of project directory (for logging).
+	-s	The SUT's (host) IP address (required).
+	-v	The VM's (with PCI pass thru/SR-IOV device) IP address
+"
+}
+
+
+#=============================================================================#
+# Sets Global: slots
+# Exits with 0 on PASS
+# Exits with 1 on FAIL
+#
+function listKvmPciBackDevice()
+{
+	local domainNames=""
+	local domainName=""
+	local cardsInfo=""
+	local cardInfo=""
+	local rc=1
+
+	 execRemoteCmd ${sutHostIpAddr} "${VIRSH} list | ${GREP} \"running\" | ${TR} -s ' ' | ${CUT} -d ' ' -f 3"
+	domainNames="${results}"
+	echo "listKvmPciBackDevice: Running domains: ${domainNames}" >> ${LOG}
+	for domainName in ${domainNames} ; do
+		# PCI pass-thru
+		# <address domain='0x0000' bus='0x07' slot='0x00' function='0x3'/>
+		execRemoteCmd ${sutHostIpAddr} "${VIRSH} dumpxml ${domainName} | ${GREP} \"<address domain=\" | sed 's/ /%/g'"
+		cardsInfo="${results}"
+		if [ "${cardsInfo}" != "" ] ; then
+			echo "listKvmPciBackDevice: NIC cards assigned to ${domainName}:" \
+				"${cardsInfo}" >> ${LOG}
+			for cardInfo in ${cardsInfo} ; do
+				local domain=$( echo "${cardInfo}" | ${CUT} -d "'" -f 2 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: domain=${domain}" >> ${LOG}
+				local bus=$( echo "${cardInfo}" | ${CUT} -d "'" -f 4 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: bus=${bus}" >> ${LOG}
+				local slot=$( echo "${cardInfo}" | ${CUT} -d "'" -f 6 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: slot=${slot}" >> ${LOG}
+				local funct=$( echo "${cardInfo}" | ${CUT} -d "'" -f 8 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: funct=${funct}" >> ${LOG}
+				busId="${bus}:${slot}.${funct}"
+				echo "listKvmPciBackDevice: busId=${busId}" >> ${LOG}
+				execRemoteCmd ${sutHostIpAddr} \
+					"${LSPCI} -nn | ${GREP} \"Ethernet\" | ${GREP} ${busId}"
+				nicCard="${results}"
+				echo "listKvmPciBackDevice: nicCard=${nicCard}" >> ${LOG}
+				if [ "${nicCard}" != "" ] ; then
+					echo "PCI pass thru device: ${nicCard} is assigned to" \
+						"${domainName}" | ${TEE} -a ${LOG}
+					slots="${slots} ${domain}:${bus}:${slot}.${funct}"
+					rc=0
+				fi
+			done
+		else	# SR-IOV pass-thru
+			execRemoteCmd ${sutHostIpAddr} "${VIRSH} dumpxml ${domainName}"
+			cardsInfo=$( echo "${results}" \
+				| ${GREP} -A 8 "<interface type='hostdev'" \
+				| ${GREP} -A 2 "<source>" \
+				| ${GREP} "<address type=" | ${SED} 's/ /%/g' )
+			echo "listKvmPciBackDevice: NIC cards assigned to ${domainName}:" \
+				"${cardsInfo}" >> ${LOG}
+			for cardInfo in ${cardsInfo} ; do
+				local domain=$( echo "${cardInfo}" | ${CUT} -d "'" -f 4 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: domain=${domain}" >> ${LOG}
+				local bus=$( echo "${cardInfo}" | ${CUT} -d "'" -f 6 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: bus=${bus}" >> ${LOG}
+				local slot=$( echo "${cardInfo}" | ${CUT} -d "'" -f 8 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: slot=${slot}" >> ${LOG}
+				local funct=$( echo "${cardInfo}" | ${CUT} -d "'" -f 10 \
+					| ${CUT} -d "x" -f 2 )
+				echo "listKvmPciBackDevice: funct=${funct}" >> ${LOG}
+				busId="${bus}:${slot}.${funct}"
+				echo "listKvmPciBackDevice: busId=${busId}" >> ${LOG}
+				execRemoteCmd ${sutHostIpAddr} \
+					"${LSPCI} -nn | ${GREP} \"Ethernet\" | ${GREP} ${busId}"
+				nicCard="${results}"
+				echo "listKvmPciBackDevice: nicCard=${nicCard}" >> ${LOG}
+				if [ "${nicCard}" != "" ] ; then
+					echo "PCI pass thru device: ${nicCard} is assigned to" \
+						"${domainName}" | ${TEE} -a ${LOG}
+					slots="${slots} ${domain}:${bus}:${slot}.${funct}"
+					rc=0
+				fi
+			done
+		fi
+	done
+	if [ ${rc} -eq 1 ] ; then
+		popupAndLogMsg "PCI Pass Through" "Error: No PCI Pass Thru device" \
+			"was attached to a running virtual machine"
+	fi
+	return ${rc}
+}
+
+
+#=============================================================================#
+# Sets global: slots
+# Exits with 0 on PASS
+# Exits with 1 on FAIL
+#
+function listXenPciBackDevice()
+{
+	local pass=0
+	local rc=0
+	local slot=""
+	slots=""
+	local devId=""
+	local bus=""
+	local funct=""
+	local guest=""
+	local guests=""
+	local assigned=""
+	local network=""
+
+	if [ -e ${CFG_NOTE} ] ; then
+		rm ${CFG_NOTE}
+	fi
+	execRemoteCmd ${sutHostIpAddr} "cat /sys/bus/pci/drivers/pciback/slots"
+	slots="${results}"
+	echo "listXenPciBackDevice: PCI pass thru device(s) found: ${slots}" \
+		>> ${LOG}
+	if [ "${slots}" = "" ] ; then
+		popupAndLogMsg "PCI Pass Through" "Error: No PCI-PassThru devices" \
+			"found on the SUT (host): ${sutHostIpAddr}."
+		exit 1
+	fi
+	execRemoteCmd ${sutHostIpAddr} "${VIRSH} list"
+	guests=$( echo "${results}" | ${GREP} -E "running|idle" \
+		| ${GREP} -v "Domain-0" | ${TR} -s ' ' | ${CUT} -d ' ' -f 3 )
+	echo "listXenPciBackDevice: guests=${guests}" >> ${LOG}
+	if [ "${slots}" = "" ] ; then
+		popupAndLogMsg "PCI Pass Through" "Error: No Guests found on the SUT" \
+			"(host): ${sutHostIpAddr}."
+		exit 1
+	fi
+	for devId in ${slots} ; do
+		pass=0
+		echo "listXenPciBackDevice: device ID/slot=${devId}" >> ${LOG}
+		domain=$( echo "${devId}" | ${CUT} -d ':' -f 1 )
+		echo "listXenPciBackDevice: domain=${domain}" >> ${LOG}
+		bus=$( echo "${devId}" | ${CUT} -d ':' -f 2 )
+		echo "listXenPciBackDevice: bus=${bus}" >> ${LOG}
+		slot=$( echo "${devId}" | ${CUT} -d ':' -f 3 | ${CUT} -d '.' -f 1 )
+		echo "listXenPciBackDevice: slot=${slot}" >> ${LOG}
+		funct=$( echo "${devId}" | ${CUT} -d '.' -f 2 )
+		echo "listXenPciBackDevice: funct=${funct}" >> ${LOG}
+		for guest in ${guests} ; do
+			execRemoteCmd ${sutHostIpAddr} "${VIRSH} dumpxml ${guest}"
+			assigned=$( echo "${results}" | ${GREP} "domain='0x${domain}' bus='0x${bus}' slot='0x${slot}' function='0x${funct}'" )
+			echo "listXenPciBackDevice: assigned=${assigned}" >> ${LOG}
+			if [ "${assigned}" != "" ] ; then
+				execRemoteCmd ${sutHostIpAddr} "lspci \
+					| ${GREP} ${bus}:${slot}.${funct}"
+				# Note: This message is the wording wanted for config notes
+				# on the bulletin.
+				echo "PCI Network Pass-Through: System was tested using PCI" \
+					"pass-through where one of the host network adapters was" \
+					"given to the (${guest}) guest. One of the (${results}." \
+					"IP address: ${vmIpAddr}) Adapters was used during" \
+					"testing." | ${TEE} -a ${LOG} ${CFG_NOTE}
+				pass=1
+				break
+			fi
+		done
+		if [ ${pass} -ne 1 ] ; then
+			popupAndLogMsg "PCI Pass Through" "Error: No guest has been" \
+				"assigned the device ${devId} on the SUT host" \
+				"(${sutHostIpAddr})."
+			rc=1
+		fi
+	done
+	return ${rc}
+}
+
+
+#=============================================================================#
+#   Module Alias: "pci:v00008086d00001521sv00008086sd00001521bc02sc00i00"
+# Uses Globals: slots, results, sutHostIpAddr, vmIpAddr
+#
+function verifyModuleAlias()
+{
+	local index=0
+	local modAlias=""
+	local slot=""
+	local data=""
+	local pass=""
+
+	execRemoteCmd ${vmIpAddr} "yast2 lan list 2>&1"
+	# make sure there is only one net card configured
+	data=$( echo "${results}" | ${GREP} "^[0-9]" \
+		| ${GREP} -v "Not configured" )
+	echo "Configured NIC cards on ${vmIpAddr}: ${data}"
+	index=$( echo "${data}" | ${WC} -l )
+	if [ ${index} -ne 1 ] ; then
+		if [ ${index} -gt 1 ] ; then
+			popupAndLogMsg "PCI Pass Through" "Error: The VM (${vmIpAddr})" \
+				"has more than one LAN device.\nOnly the" \
+				"PCI-Passthru/SR-IOV device is allowed to be configured on" \
+				"the VM."
+		else
+			popupAndLogMsg "PCI Pass Through" "Error: The VM (${vmIpAddr})" \
+				"has no LAN device."
+		fi
+		exit 1
+	fi
+	# We can asertain, that since there is one card and it is the 
+	# PCI-passthru/SR-IOV, then it is configured correctly, since
+	# we are talking to it, but double check...
+
+	# make sure that is has the correct driver on host
+	execRemoteCmd ${sutHostIpAddr} "${HWINFO} --netcard"
+	for slot in ${slots} ; do
+		data=$( echo "${results}" | ${GAWK} "/${slot}/{print;}" RS="\n[^ ]" \
+			ORS="\n\n" )
+		echo -e "\n\ngetModuleAlias: ${sutHostIpAddr} ${HWINFO} --netcard" \
+			"(slot=${slot}):\n${data}" >> ${LOG}
+		if [ ${xen} -eq 1 ] ; then
+			pass=$( echo "${data}" | ${GREP} "Driver: \"pciback\"" )
+		else
+			pass=$( echo "${data}" | ${GREP} "Driver: \"pci-stub\"" )
+		fi
+		if [ "${pass}" = "" ] ; then
+			popupAndLogMsg "PCI Pass Through" \
+				"Error: Incorrect driver found in slot (${slot}) on host."
+			exit 1
+		fi
+		modAlias[${index}]=$( echo "${data}" | ${GREP} "Module Alias: " \
+			| ${SED} 's/ /%/g' )
+		index=$(( index +1 ))
+	done
+	# Make sure the module alias matches one of the SUT's 
+	# PCI-passthru/SR-IOV module alias'.
+	index=0
+	execRemoteCmd ${vmIpAddr} "${HWINFO} --netcard"
+	for data in ${modAlias[@]} ; do
+		pass=$( echo "${results}" | ${SED} 's/ /%/g' | ${GREP} "${data}" )
+		if [ "${pass}" != "" ] ; then
+			echo "Found Unique ID match: ${data}" >> ${LOG}
+			index=$(( index +1 ))
+		fi
+	done
+	if [ ${index} -eq 0 ] ; then
+		popupAndLogMsg "PCI Pass Through" "Error: No matching" \
+			"PCI-passthru/SR-IOV LAN card found on VM guest ${vmIpAddr}:\n" \
+			"${modAlias[@]}"
+		exit 1
+	fi
+}
+
+
+###############################################################################
+###############################################################################
+# Main line code
+###############################################################################
+###############################################################################
+
+
+#=============================================================================#
+# Evaluate and check the commandline
+#
+sutHostIpAddr=""
+vmIpAddr=""
+projectDir=""
+
+while getopts hd:s:v: optchar ; do
+	case "$optchar" in
+		h)	usage
+			exit 1					;;
+		d)	projectDir=${OPTARG}	;; # normally gets this from testwrapper
+		s)	sutHostIpAddr=${OPTARG}	;;
+		v)	vmIpAddr=${OPTARG}		;;
+		*)	usage
+			exit 1					;;
+	esac
+done
+shift $((OPTIND - 1))
+
+# This should done as soon as possible in this script.
+# echo "1" > /var/opt/suse/testKits/system/${projectDir}/testwrapper/pci-passthru_status
+
+#=============================================================================#
+# Used library
+#
+lib_found=""
+timestamp=$( date "+%Y%m%d.%H%M%S" )
+prefix="pciPassThru"
+basename="${prefix}-${timestamp}"
+if [ "${projectDir}" = "" ] ; then 
+	LOG=/var/opt/suse/testKits/system/${basename}.log
+	CFG_NOTE=/var/opt/suse/testKits/system/${prefix}.cfgNote
+else
+	LOG=/var/opt/suse/testKits/system/${projectDir}/${basename}.log
+	CFG_NOTE=/var/opt/suse/testKits/system/${projectDir}/${prefix}.cfgNote
+fi
+libdirs="/opt/suse/testKits/system/lib"
+
+for dir in ${libdirs} ; do
+	if [ -x ${dir}/cert_tests.lib ] ; then
+		  . ${dir}/cert_tests.lib -d ${projectDir}
+		  lib_found="yes"
+		  break  # found ; one time is enough
+	fi
+done
+if [ -z "${lib_found}" ] ; then
+	echo -e "$0: Needed cert_tests.lib not found in: ${libdirs}. Aborting..." \
+		> /var/opt/suse/testKits/system/${basename}.log
+	exit 1 
+fi
+unset lib_found libdirs
+
+#=============================================================================#
+# Commands used
+# (see also: cert_tests.lib)
+# Is everything we need available?
+#
+VIRSH=/usr/bin/virsh
+
+NEEDED_CMDS="${CUT} ${GAWK} ${GREP} ${LS} ${LSPCI} ${MKDIR} ${MV} ${RM} ${ROUTE} ${SED} ${SLEEP} ${SYNC} ${TEE} ${TR} ${UNAME} ${WGET}"
+check_for_needed_cmds $NEEDED_CMDS || exit 1
+
+
+timed_log "PCI-passthru Test started" | ${TEE} -a ${LOG}
+
+xen=0
+exitStatus=1
+
+if [ "${sutHostIpAddr}" = "" ] ; then
+	popupAndLogMsg "PCI Pass Through" "Error: SUT (host) IP address missing."
+	usage
+	exit 1
+fi
+if [ "${vmIpAddr}" = "" ] ; then
+	popupAndLogMsg "PCI Pass Through" "Error: PCI-passthru/SR-IOV VM (guest)" \
+		"IP address missing."
+	usage
+	exit 1
+fi
+insureSshWorks ${sutHostIpAddr}
+if [ $? -ne 0 ] ; then
+	exit 1
+fi
+insureSshWorks ${vmIpAddr}
+if [ $? -ne 0 ] ; then
+	exit 1
+fi
+execRemoteCmd ${sutHostIpAddr} "${LS} -d /dev/xen 2>&1"
+if [ $? -ne 0 ] ; then
+	execRemoteCmd ${sutHostIpAddr} "${LS} /dev/kvm 2>&1"
+	if [ $? -ne 0 ] ; then
+		popupAndLogMsg "PCI Pass Through" "Error: XEN and KVM are not" \
+			"running on the SUT (host) ${sutHostIpAddr}."
+		exit 1
+	else
+		echo "Please ignore previous message: \"Error 2: ssh failed.\"" >> ${LOG}
+		listKvmPciBackDevice
+	fi
+else
+	xen=1
+	listXenPciBackDevice
+fi
+verifyModuleAlias
+timed_log "Test Finished normally - PASSED" | ${TEE} -a ${LOG}
+exit 0

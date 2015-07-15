@@ -1,0 +1,710 @@
+#!/bin/bash
+#set -x
+#
+#    Copyright © 2014-2015 Novell, Inc.  All Rights Reserved.
+#
+#    USE AND REDISTRIBUTION OF THIS WORK IS SUBJECT TO THE DEVELOPER LICENSE
+# AGREEMENT OR OTHER AGREEMENT THROUGH WHICH NOVELL, INC. MAKES THE WORK
+# AVAILABLE.  THIS WORK MAY NOT BE ADAPTED WITHOUT NOVELL'S PRIOR WRITTEN CONSENT.
+#
+#    NOVELL PROVIDES THE WORK "AS IS," WITHOUT ANY EXPRESS OR IMPLIED WARRANTY,
+# INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.  NOVELL, THE AUTHORS
+# OF THE WORK, AND THE OWNERS OF COPYRIGHT IN THE WORK ARE NOT LIABLE FOR ANY
+# CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT,
+# OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE WORK OR THE
+# USE OR OTHER DEALINGS IN THE WORK.
+#
+# Authors:	Nefi Munoz <nmunoz@suse.com> 2014-2015 
+
+#  install_vm - Automate KVM and XEN VM installs via vm-install or virt-install on SUT
+# Requires system testkit installed on SUT
+
+###############################################################################
+###############################################################################
+# Functions
+###############################################################################
+###############################################################################
+
+#=========================================================#
+# display the usage of this script
+#
+function usage() 
+{
+    >&2 echo "
+Usage: $0 [-h] 
+
+	This script is meant to be run on SUT and uses vm-install and virt-install 
+    to automate VM installation in KVM and XEN on SLES 11 and 12 hosts.
+  
+Requirements:
+        - TestKit installed on SUT
+        - This script will use existing partitions or lvm volumes for VM storage.  
+          Hence, those should already be set up.  This script can create a local file image 
+          for VM storage is that option is selected.
+        - Prior to running this script, SLES 11/12 ISOs should be added to TC via configinstserver.sh.  
+          Only one ISO per OS release should be added.  For example, only have:
+          \"SLES-11-SP4-DVD-i586-GM-DVD1\" 
+          \"SLE-12-Server-DVD-x86_64-GM-DVD1\"
+            and not 
+          \"SLES-11-SP4-DVD-i586-Beta3-DVD1\" 
+          \"SLES-11-SP4-DVD-i586-GM-DVD1\"
+          \"SLE-12-Server-DVD-x86_64-GM-DVD1\"
+        - This script will leverage existing SLES 11/12 autoyast files in TC at /opt/suse/testKits/system/autoyast.  
+          It will not create autoyast files for you.
+        - This script version will only look for SLES 11 SP4 and 12 ISOs and install them. (it won't look for 11 SP3)
+           
+Options:
+	-h	Print this help text and exit.
+	
+"
+}
+
+
+#=========================================================#
+
+#=========================================================#
+# Check existence of disk
+#
+function diskExists(){
+    #echo "Value of parameter passed: ${1}"
+    ${STAT} $1 >> ${LOG} 2>&1
+    # echo "In diskExists function"
+    local diskStatus="$?"
+    if [ $diskStatus -ne 0 ] ; then
+        echo -e "*** Error: Disk path provided does not exists.  Please try again. ***" | ${TEE} -a ${LOG}
+      return 1
+    fi
+      #echo "Disk path provided does exists- 0" 
+    return 0
+
+} #End diskExists
+#=========================================================#
+# Checks for integers only
+#
+function numbersOnly(){
+   
+   if [[ ! $1 =~ ^[0-9]+$ ]]; then
+    echo -e "Invalid Entry: Numbers only please." | ${TEE} -a ${LOG}
+    return 1
+   fi
+     return 0
+
+} #End numbersOnly
+#=========================================================#
+# Checks for numbers 1-4 only
+#
+function oneToFour(){
+   
+   if [[ ! $1 =~ ^[1-4]+$ ]]; then
+    echo -e "Invalid Entry: Choose 1 - 4." | ${TEE} -a ${LOG}
+    return 1
+   fi
+     return 0
+
+} #End oneToFour
+#=========================================================#
+# Checks for numbers 1-4 only
+#
+function checkYyNn(){
+   
+   if [[ ! $1 =~ ^[YyNn]+$ ]]; then
+    echo -e "Invalid Entry: Choose (y/n)" | ${TEE} -a ${LOG}
+    return 1
+   fi
+     return 0
+
+} #End oneToFour
+
+#=============================================================================#
+# Returns 0 if the IP Address is okay.
+# Returns 1 if there is a problem with the IP Address.
+function checkIpAddr(){
+   local ipAddress=${1}
+   local temp=""
+   # do some basic checks on the IP address entered.
+	temp=$(echo "${ipAddress}" | ${GREP} -E "^[1-2]?[0-9]?[0-9]\.[1-2]?[0-9]?[0-9]\.[1-2]?[0-9]?[0-9]\.[1-2]?[0-9]?[0-9]$")
+	if [ "${temp}" != "" ] ; then
+		# do not allow x.x.x.0 or x.x.x.255
+		temp=$(echo "${ipAddress}" | ${GREP} -E "*\.255$")
+		if [ "${temp}" != "" ] ; then
+			echo -e "\n***Invalid Entry: An IP address cannot use 255," \
+				"Please try again.***\nPress <Enter> to continue..." \
+				| ${TEE} -a ${LOG}
+			read selection
+			return 1
+		fi
+		temp=$(echo "${ipAddress}" | ${GREP} -E "*\.0$")
+		if [ "${temp}" != "" ] ; then
+			echo -e "\n***Invalid Entry: An IP address cannot end with .0, Please" \
+				"try again.***\nPress <Enter> to continue..." \
+				| ${TEE} -a ${LOG}
+			read selection
+			return 1
+		fi
+   else
+		echo -e "\n***Invalid Entry: The IP address must be in the format:" \
+			"<1-254>.<0-254>.<0-254>.<1-254>, Please try again.***\n" \
+			"Press <Enter> to continue..." | ${TEE} -a ${LOG}
+		read selection
+		return 1
+	fi
+
+}
+#==============================================================================
+# GetISOName
+function GetIsoName()
+{
+   local ip=$1	
+   local pattern=$2
+   #echo "This is the pattern passed: ${pattern}" >> ${LOG}
+   #local sp=$3
+	
+	local contentFile=""
+	
+		execRemoteCmd "${ip}" "${MOUNT}"
+        #execRemoteCmd "${ip}" "${MOUNT} | ${GREP} "iso" | ${CUT} -d ' ' -f 3 | ${CUT} -d '/' -f 4"
+		contentFile="${results}"
+        #echo "contentFile: ${contentFile}"
+   
+   #Convert spaces into new lines
+   #local isoList=$(echo ${contentFile} | ${TR} ')' '\n' | ${TR} ' ' '\n' | ${GREP} /home/InstSource)
+   #echo -e "\n\n*** isoList: ${isoList}"	
+   # local idx=0  
+   # printf "The following ISOS were found:\n" 
+   # for t in ${isoList[@]};  do
+   #     idx=$(( ++idx ))
+   #     echo "${idx}) $t"
+   # done
+
+
+   local isoName="$( echo ${contentFile} | ${TR} ')' '\n' | ${GREP} ${pattern} | ${TR} ' ' '\n' | ${GREP} /home/InstSource | ${CUT} -d '/' -f 4)"
+# | ${CUT} -d ' ' -f 3 | ${CUT} -d '/' -f 4 | ${GREP} -e "${pattern}")
+   # local isoName=$(echo ${contentFile} | ${GREP} -e "${pattern}")
+   #echo "isoName:${isoName}" >> ${LOG}
+	eval "$3"="${isoName}" > /dev/null 2>&1
+    #eval $(echo $3=${isoName}) this doesn't work
+
+}
+
+#=========================================================#
+#Install SLES 11/12 VMs on a SLES 12 GA SUT
+#
+function virtInstall(){
+
+local vmVariant
+local vmName
+local vmMem
+local vmCpu
+local vmDisk
+local osVariant
+local autoYast
+local instSource
+
+# 1 = KVM   
+# 2 = XEN
+# 3 = No supported hypervisor
+if [ $1 -eq 1 ] ; then
+ local vmHyper="kvm"
+ local vmType="hvm"
+elif [ $1 -eq 2 ] ; then 
+ local vmHyper="xen"
+#   VMTYPE="paravirt"
+else
+   echo "No supported hypervisor found"
+fi
+
+
+echo -e "\tInstall Guest VMs?(y/n): \c"
+read instVms
+if [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; then
+	
+   rc=1
+   while [ ${rc} -ne 0 ] ;do	
+      echo -e "\tTest Console IP: \c"
+	   read tcIp
+      checkIpAddr "${tcIp}"
+      rc=$?
+   done
+
+fi
+while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
+
+   rc=1	
+   while [ ${rc} -ne 0 ] ;do
+	   echo -e "\tChoose VM OS:
+         1) sles11-SP4-x86_64, 2) sles11-SP4-i586, 3) sles12, 4) Win Server(Manual): \c"
+	   read vmVariant
+      oneToFour "${vmVariant}"
+      rc=$?
+   done
+  
+    # Windows Server is manual install
+    if [ "${vmVariant}" -eq 4 ] ; then		
+		
+		${VM_INSTALL} &
+        
+        sleep 2
+        echo -e "\tInstall another VMs?(y/n): \c"
+        read instVms
+        continue
+	fi
+
+    if [ "${vmHyper}" = "xen" ] ; then
+			echo -e "\tChoose 1) Full-virtualization or 2) Para-virtualization: \c"
+			read readVmtype
+			if [ ${readVmtype} -eq 1 ] ; then
+			    vmType="hvm"
+            fi			
+            if [ ${readVmtype} -eq 2 ] ; then 
+			    vmType="paravirt"
+			    
+			fi
+	fi
+
+    echo -e "\tVM Name: \c"
+	read vmName
+    
+    rc=1
+	while [ ${rc} -ne 0 ] ;do
+        echo -en "\tVM Mem(MB): "
+   	    read vmMem
+      numbersOnly "${vmMem}"
+      rc=$?
+    done
+
+	rc=1	
+    while [ ${rc} -ne 0 ] ;do
+        echo -e "\tVM vcpus: \c"
+	    read vmCpu
+        numbersOnly "${vmCpu}"
+          rc=$?
+    done
+   
+    rc=1
+   while [ ${rc} -ne 0 ] ; do
+      echo -ne "\tPlease enter Disk path " \
+      "or size in GB (e.g \"/dev/sda5\", \"/dev/volGroup/lvmVol\", or \"10\"): "
+      read vmDisk
+    if [[ "${vmDisk}" =~ ^[0-9]+$ ]] ; then
+      local tempDisk="size=${vmDisk}"
+      ${vmDisk}="${tempDisk}"
+        rc=0    
+    else    
+      diskExists "${vmDisk}"
+      rc=$?
+    fi
+   done   
+   
+	
+	case "${vmVariant}" in
+
+   # sles11-sp4-x86_64
+	 1)  
+        GetIsoName "${tcIp}" ".*11.*SP4.*x86_64.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
+        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
+        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+      osVariant="sles11"
+
+         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
+			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc >> ${LOG} &
+	 ;;
+   # sles11-sp4-i586  
+   2)
+        
+      GetIsoName "${tcIp}" ".*11.*SP4.*i586.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
+        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
+        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+
+      osVariant="sles11"
+   
+         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
+			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+	;;
+   # sles12	
+   3)
+       GetIsoName "${tcIp}" ".*12.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
+       GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+       instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+
+      osVariant="sles12"
+
+      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
+		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+
+		;;
+   
+	 *) echo "invalid OS Variant" | ${TEE} -a ${LOG}
+		;;
+	esac
+	
+	sleep 15
+	
+	rc=1
+    while [ ${rc} -ne 0 ] ;do
+        echo -e "\tInstall another VMs?(y/n): \c"
+        read instVms
+        checkYyNn "${instVms}"
+        rc=$?
+    done
+done
+
+}  #End of function
+
+
+
+#==============================================================================
+# Install SLES 11 VMS on a SLES 11 SUT host
+#
+function vmInstall(){
+
+local vmVariant
+local vmFlavor
+local vmName
+local vmMem
+local vmCpu
+local vmDisk
+local osVariant
+local autoYast
+local instSource
+# 1 = KVM   
+# 2 = XEN
+# 3 = No supported hypervisor
+if [ $1 -eq 1 ] ; then
+ local vmHyper="kvm"
+ local vmType="V"
+elif [ $1 -eq 2 ] ; then 
+  local vmHyper="xen"
+else
+   echo "No supported hypervisor found"
+fi
+
+
+echo -e "\tInstall VMs?(y/n): \c"
+read instVms
+if [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; then
+   
+   rc=1
+   while [ ${rc} -ne 0 ] ;do	
+      echo -e "\tTest Console IP: \c"
+	   read tcIp
+      checkIpAddr "${tcIp}"
+      rc=$?
+   done
+fi
+while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
+   rc=1	
+   while [ ${rc} -ne 0 ] ;do
+	   echo -e "\tPlease Choose VM OS:
+         1) sles11-SP4-x86_64, 2) sles11-SP4-i586, 3) sles12, 4) Win Server(Manual): \c"
+	   read vmFlavor
+      oneToFour "${vmFlavor}"
+      rc=$?
+   done
+    
+    # Win Server
+    if [ "${vmFlavor}" -eq 4 ] ; then		
+		
+		${VM_INSTALL} &
+        
+        sleep 2
+        echo -e "\tInstall another VMs?(y/n): \c"
+        read instVms
+        continue
+	fi
+    
+	if [ "${vmHyper}" = "xen" ] ; then
+			echo -e "\t1) Full-virtualization or 2) Para-virtualization: \c"
+			read readVmtype
+			if [ $readVmtype -eq 1 ] ; then
+			    vmType="V"
+            fi			
+            if [ $readVmtype -eq 2 ] ; then 
+			  vmType="v"
+			    
+			fi
+	fi
+    echo -e "\tVM Name: \c"
+	read vmName
+   rc=1	
+   while [ ${rc} -ne 0 ] ;do
+      echo -en "\tVM Mem(MB): "
+   	  read vmMem
+      numbersOnly "${vmMem}"
+      rc=$?
+   done
+	
+   rc=1	
+   while [ ${rc} -ne 0 ] ;do
+    echo -e "\tVM vcpus: \c"
+	read vmCpu
+    numbersOnly "${vmCpu}"
+      rc=$?
+   done
+	# echo -e "\tVM Disk path or image size in MB (e.g \"/dev/sda5\", \"/dev/volGroup/lvmVol\", 20480): \c"
+	# read vmDisk
+   rc=1
+   while [ ${rc} -ne 0 ] ; do
+      echo -ne "\tPlease enter Disk path " \
+      "or size in MB (e.g \"/dev/sda5\", \"/dev/volGroup/lvmVol\", or \"30720\"): "
+      read vmDisk
+      if [[ "${vmDisk}" =~ ^[0-9]+$ ]] ; then
+              tempDisk="file:/var/lib/libvirt/images/${vmName}/disk0.raw,xvda,disk,w,${vmDisk},sparse=0"
+              vmDisk="${tempDisk}"
+        rc=0
+       else 
+              diskExists "${vmDisk}"
+              rc=$?
+      fi
+   done   
+
+	
+	# sles11-x86_64	
+	if [ "${vmFlavor}" -eq 1 ] ; then
+        vmVariant="sles11"
+      
+      GetIsoName "${tcIp}" ".*11.*SP4.*x86_64.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
+      GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
+      	   
+      autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+      
+      instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+
+        if [ "${vmHyper}" = "kvm" -o "${vmType}" = "v" ] ; then
+         echo "${VM_INSTALL} --background --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" --os-settings "${autoYast}" --source "${instSource}"" >> ${LOG} 
+         ${VM_INSTALL} --background --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" --os-settings "${autoYast}" --source "${instSource}" >> ${LOG} &
+        fi
+        if   [ "${vmHyper}" = "xen" ] && [ "${vmType}" = "V" ] ; then	
+         echo "${VM_INSTALL} --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" -p "${tcIp}"" >> ${LOG}		
+         ${VM_INSTALL} --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" -p "${tcIp}" >> ${LOG} &
+        fi
+
+        
+	fi
+    # sles11-i586
+	if [ "${vmFlavor}" -eq 2 ] ; then
+        vmVariant="sles11"
+      GetIsoName "${tcIp}" ".*11.*SP4.*i586.*" "instSourceIso"
+      GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName"
+		      
+    autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"	
+    instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+        
+        if [ "${vmHyper}" = "kvm" -o "${vmType}" = "v" ] ; then
+          echo "${VM_INSTALL} --background --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" --os-settings "${autoYast}" --source "${instSource}"" >> ${LOG}
+		    ${VM_INSTALL} --background --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" --os-settings "${autoYast}" --source "${instSource}" >> ${LOG} &
+	    fi
+        if   [ "${vmHyper}" = "xen" ] && [ "${vmType}" = "V" ] ; then	
+            echo "${VM_INSTALL} --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" -p "${tcIp}"" >> ${LOG}
+            ${VM_INSTALL} --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" -p "${tcIp}" >> ${LOG} &
+        fi			
+	fi
+    # sles12
+    if [ "${vmFlavor}" -eq 3 ] ; then
+		vmVariant="sles12"
+        GetIsoName "${tcIp}" ".*12.*" "instSourceIso"
+        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName"
+		
+        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+		
+        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"		
+    if [ "${vmHyper}" = "kvm" -o "${vmType}" = "v" ] ; then
+         echo "${VM_INSTALL} --background --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" --os-settings "${autoYast}" --source "${instSource}"" >> ${LOG}
+		    ${VM_INSTALL} --background --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" --os-settings "${autoYast}" --source "${instSource}" >> ${LOG} &
+	    fi
+        if   [ "${vmHyper}" = "xen" ] && [ "${vmType}" = "V" ] ; then	
+            echo "${VM_INSTALL} --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" -p "${tcIp}"" >> ${LOG} 
+            ${VM_INSTALL} --os-type "${vmVariant}" -c "${vmCpu}" -d "${vmDisk}" -m "${vmMem}" -"${vmType}" --name "${vmName}" -p "${tcIp}" >> ${LOG} &
+        fi			
+	fi
+	
+
+sleep 5
+    rc=1
+    while [ ${rc} -ne 0 ] ;do
+        echo -e "\tInstall another VMs?(y/n): \c"
+        read instVms
+        checkYyNn "${instVms}"
+        rc=$?
+    done
+done
+} #function vmInstall
+#==============================================================================
+# Figure out hypervisor (either KVM or XEN)
+#
+function getHypervisor(){
+
+local kvmCheck
+local xenCheck
+local vcpuXen
+local memXen
+local memXenGb
+local tVcpu
+local tMem
+local tMemGb
+   #Find out hypervisor
+   # 1 = KVM   
+   # 2 = XEN
+   # 3 = No supported hypervisor
+    kvmCheck=$(${RPM} -qa | ${GREP} kvm)
+    xenCheck=$(${UNAME} -a | ${GREP} xen)
+    
+    if [ ! -z "${xenCheck}" ] ; then
+        HYPER=2
+    # Host Environment information 
+    vcpuXen=$(${XL} info | ${GREP} nr_cpus | ${CUT} -d: -f2)
+    echo -e "----------------------------------"  
+    echo "**** XEN detected ****"  
+    echo "You may keep track of VM installation via \"virt-manager\""
+    echo "For help, use: \"./instal_vm -h\""
+    echo -e "Host total VCPUs: $vcpuXen" | ${TEE} -a ${LOG}   
+    memXen=$(${XL} info | ${GREP} total_memory | ${CUT} -d: -f2)
+    memXenGb=$(($memXen/1024))
+    echo -e "Host total Memory: ~ $memXenGb GB /$memXen MB" | ${TEE} -a ${LOG}
+    
+    echo -e "----------------------------------"
+    echo -e "\n"
+
+    elif [ ! -z "${kvmCheck}" ] ; then
+        HYPER=1
+    # Host Environment information    
+    echo -e "----------------------------------"
+    echo "_ _ _ _ KVM detected _ _ _ _"
+    echo "You may keep track of VM installation via \"virt-manager\""
+    echo "For help, use: \"./instal_vm -h\""
+    #show amount of mem and number of vcpus available, then ask to decide
+    tVcpu=$(${LSCPU} | ${GREP} -e "^CPU(s)" | ${AWK} '{print $2}')
+    echo -e "Host total VCPUs: $tVcpu" | ${TEE} -a ${LOG}
+
+    tMem="$(${CAT} /proc/meminfo | ${GREP} MemTotal | ${AWK} '{print $2}')"
+    #TMEMGB=$(($TMEM/1024/1024))
+    tMemGb="$(${FREE} -g | ${GREP} Mem | ${TR} -s ' ' | ${CUT} -d ' ' -f2)"
+    echo -e "Host total Memory: ~ $tMemGb GB /$tMem MB" | ${TEE} -a ${LOG}
+    echo -e "----------------------------------"
+    echo -e "\n"
+        
+    else
+      #echo "No kvm/xen hypervisor found\n"
+      HYPER=3
+      echo "No KVM or XEN hypervisor found. Run Yast to install hypervisor now? (y/n)\c" | ${TEE} -a ${LOG}
+      read runYast
+      if [ "${runYast}" = "y" -o "${runYast}" = "Y" ] && [ "${osVer}" = "11" ] ; then
+         yast2 xen
+      elif [ "${runYast}" = "y" -o "${runYast}" = "Y" ] && [ "${osVer}" = "12" ] ;  then
+         yast2 virtualization
+      else
+       echo "Quitting.  Good bye"   
+      fi
+      
+   fi
+   return "${HYPER}"
+
+} # End of getHypervisor()
+
+###############################################################################
+###############################################################################
+# Main line code
+###############################################################################
+###############################################################################
+#=========================================================#
+# Evaluate and check the command line
+#
+
+while getopts h optchar ; do
+	case "${optchar}" in
+		h)	usage
+			exit 1					;;
+		
+		*)	usage
+			exit 1					;;
+	esac
+done
+shift $((OPTIND - 1))
+
+
+#=========================================================#
+# Used library
+#
+lib_found=""
+libdirs="/opt/suse/testKits/system/lib"
+
+for dir in ${libdirs} ; do
+	if [ -x ${dir}/cert_tests.lib ] ; then
+		  . ${dir}/cert_tests.lib
+		  lib_found="yes"
+		  break  # found ; one time is enough
+	fi
+done
+if [ -z "${lib_found}" ] ; then
+	>&2 echo -e "\a$0: Needed cert_tests.lib not found in: ${libdirs} . TestKit Not Installed ? Aborting..." | ${TEE} -a ${LOG}
+	exit 1 
+fi
+unset lib_found libdirs
+
+
+
+#=========================================================#
+# Commands used
+# (see also: cert_tests.lib)
+# Everything we need available?
+#
+checkosrel
+osVer=$?
+if [ ${osVer} -eq 12 ] ; then
+	CHMOD=/usr/bin/chmod
+else
+	CHMOD=/bin/chmod
+	SYSTEMCTL=""
+fi
+
+RCNETWORK=/sbin/rcnetwork
+SCP=/usr/bin/scp
+XL=/usr/sbin/xl
+LSCPU=/usr/bin/lscpu
+VM_INSTALL=/usr/bin/vm-install
+VIRT_INSTALL=/usr/bin/virt-install
+
+#NEEDED_CMDS="${CAT} ${CHMOD} ${CUT} ${DATE} ${GAWK} ${GREP} ${HWINFO} ${IFCONFIG} ${IP} ${LS} ${MKDIR} ${PING} ${PS} ${RCNETWORK} ${RM} ${RPM} ${SED} ${SCP} ${SLEEP} ${SSHPASS} ${SYSTEMCTL} ${TEE} ${TR} ${YAST2}"
+
+NEEDED_CMDS="${RPM} ${CAT} ${CUT} ${AWK} ${GREP} ${LSCPU} ${TR} ${FREE}"
+
+check_for_needed_cmds ${NEEDED_CMDS} || exit 1
+
+## Install VMs 
+getHypervisor
+
+# 1 = KVM   
+# 2 = XEN
+# 3 = No supported hypervisor
+
+## Set up Log file
+timeStamp=$(${DATE} "+%Y%m%d_%H%M%S")
+###Log=${DEFAULT_LOGDIR}/install_vm-${timeStamp}.log
+LOG=${DEFAULT_LOGDIR}/install_vm-${timeStamp}.log
+
+   
+if [ ${HYPER} -eq 2 ] ; then 
+        NEEDED_XEN_CMDS="${XL}"
+        check_for_needed_cmds ${NEEDED_XEN_CMDS} || exit 1    
+fi
+
+if [ "${osVer}" = "12" ] ; then
+    NEEDED_12_CMDS="${VIRT_INSTALL}"
+    check_for_needed_cmds ${NEEDED_12_CMDS} || exit 1
+
+    virtInstall "${HYPER}"
+
+elif [ "${osVer}" = "11" ] ; then
+    NEEDED_11_CMDS="${VM_INSTALL}"
+    check_for_needed_cmds ${NEEDED_11_CMDS} || exit 1
+   
+    vmInstall "${HYPER}"
+else
+     echo "OS version not supported" | ${TEE} -a ${LOG}
+fi
+
+echo "Good Bye"
+exit 0
