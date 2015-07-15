@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <bootloader>
+    <global>
+      <activate>true</activate>
+      <timeout config:type="integer">8</timeout>
+    </global>
+  </bootloader>
+  <scripts>
+    <pre-scripts config:type="list">
+      <script>
+        <debug config:type="boolean">false</debug>
+        <feedback config:type="boolean">false</feedback>
+        <filename>pre-install.sh</filename>
+        <interpreter>shell</interpreter>
+        <source>
+          <![CDATA[
+#!/bin/bash
+echo "This is the pre-install script."
+cp /tmp/profile/autoinst.xml /tmp/profile/modified.xml
+sectors=""
+driveStatus=""
+deviceFile=""
+features=""
+for diskInfo in $( hwinfo --disk | sed 's/ /%/g' \
+	| egrep -i "^%%Hardware%Class:|^%%Device%File:|^%%Features:|^%%Size:|^%%Drive%status:" )
+do
+	# echo "diskInfo=${diskInfo}"
+	classDisk=$( echo "${diskInfo}" | grep -i "^%%Hardware%Class:%disk$" )
+	if [ "${classDisk}" != "" ] ; then
+		if [ "${driveStatus}" != "no%medium" ] ; then
+			if [ "${features}" != "Hotpluggable" ] ; then
+				if [ "${sectors}" != "" -a "${deviceFile}" != "" ] ; then
+					if [ ${sectors} -ge 5000000 ] ; then
+						echo -e "${deviceFile} looks okay to use.\n\n"
+						break	# use first drive that looks okay.
+					fi
+				fi	
+			fi
+		fi
+		sectors=""
+		driveStatus=""
+		deviceFile=""
+		features=""
+		continue
+	fi
+	sizeLine=$( echo "${diskInfo}" | grep -i "^%%Size:" )
+	if [ "${sizeLine}" != "" ] ; then
+		echo "sizeLine=${sizeLine}"
+		sectorSize=$( echo "${sizeLine}" | cut -d '%' -f 7 )
+		echo "sectorSize=${sectorSize}"
+		sectors=$( echo "${sizeLine}" | cut -d '%' -f 4 )
+		echo "sectors=${sectors}"
+		if [ ${sectorSize} -eq 512 ] ; then
+			sectors=$(( sectors / 2 ))
+		fi
+		echo "1024 byte sectors=${sectors}"
+	fi
+	driveStatusLine=$( echo "${diskInfo}" | grep -i "^%%Drive%status:" )
+	if [ "${driveStatusLine}" != "" ] ; then
+		echo "driveStatusLine=${driveStatusLine}"
+		driveStatus=$( echo ${driveStatusLine} | cut -d '%' -f 5- )
+		echo "driveStatus=${driveStatus}"
+	fi
+	deviceFileLine=$( echo "${diskInfo}" | grep -i "^%%Device%File:" )
+	if [ "${deviceFileLine}" != "" ] ; then
+		echo "deviceFileLine=${deviceFileLine}"
+		deviceFile=$( echo ${deviceFileLine} | cut -d '%' -f 5 | sed 's/\//\\\//g' )
+		echo "deviceFile=${deviceFile}"
+	fi
+	featuresLine=$( echo "${diskInfo}" | grep -i "^%%Features:" )
+	if [ "${featuresLine}" != "" ] ; then
+		echo "featuresLine=${featuresLine}"
+		features=$( echo ${featuresLine} | cut -d '%' -f 4 )
+		echo "features=${features}"
+	fi
+done
+if [ ${sectors} -ge 5000000 ] ; then
+	sed -i s/"^      <device>REPLACEWITHDEVICE<\/device>"/"      <device>${deviceFile}<\/device>"/1 /tmp/profile/modified.xml
+else
+	# initialize and format the device if it is too small
+	sed -i s/"^    <\/drive>"/"    <\/drive>\n    <drive>\n      <initialize config:type=\"boolean\">true<\/initialize>\n      <device>${deviceFile}<\/device>\n    <\/drive>"/1 /tmp/profile/modified.xml
+fi
+devNum=1
+sed -i "s/^    <interfaces config:type=\"list\"\/>/    <interfaces config:type=\"list\">\n    <\/interfaces>/g" /tmp/profile/modified.xml
+sed -i "s/^    <net-udev config:type=\"list\"\/>/    <net-udev config:type=\"list\">\n    <\/net-udev>/g" /tmp/profile/modified.xml
+while [ $devNum -le 16 ] ; do
+	dev=`ip addr show | grep "^${devNum}" | cut -d ":" -f 2 | tr -d ' '`
+	echo "dev=\"${dev}\""
+	if [ "${dev}" = "" ] ; then
+		break
+	fi
+	macAddr=`ip addr show ${dev} 2>/dev/null | grep -i "link/ether" | cut -d ' ' -f 6`
+	echo "macAddr=\"${macAddr}\""
+	if [ "${macAddr}" != "" ]; then
+		sed -i "s/^    <\/net-udev>/      <rule>\n        <name>${dev}<\/name>\n        <rule>ATTR\{address\}<\/rule>\n        <value>${macAddr}<\/value>\n      <\/rule>\n    <\/net-udev>/g" /tmp/profile/modified.xml
+		sed -i "s/^    <\/interfaces>/      <interface>\n        <bootproto>dhcp<\/bootproto>\n        <device>${dev}<\/device>\n        <startmode>auto<\/startmode>\n      <\/interface>\n    <\/interfaces>/g" /tmp/profile/modified.xml
+	fi
+	let "devNum = $devNum + 1"
+done
+          ]]>
+        </source>
+      </script>
+    </pre-scripts>
+    <chroot-scripts config:type="list">
+      <script>
+        <chrooted config:type="boolean">true</chrooted>
+        <debug config:type="boolean">false</debug>
+        <feedback config:type="boolean">false</feedback>
+        <network_needed config:type="boolean">true</network_needed>
+        <filename>chroot-install.sh</filename>
+        <interpreter>shell</interpreter>
+        <source>
+          <![CDATA[
+#!/bin/bash
+echo "This is the chroot script."
+          ]]>
+        </source>
+      </script>
+    </chroot-scripts>
+    <post-scripts config:type="list">
+      <script>
+        <debug config:type="boolean">false</debug>
+        <feedback config:type="boolean">false</feedback>
+        <network_needed config:type="boolean">true</network_needed>
+        <filename>post-install.sh</filename>
+        <interpreter>shell</interpreter>
+        <source>
+          <![CDATA[
+#!/bin/bash
+echo "This is the post-install script."
+# set it up to install the system test kit, when the user logs on.
+echo "#!/bin/bash" > /root/.bashrc
+echo "IPAddr=`grep "^Server:" /var/lib/YaST2/install.inf | cut -d ' ' -f 2`" >> /root/.bashrc
+echo "mkdir -p /opt/suse/testKits/system/data/" >> /root/.bashrc
+echo "mkdir -p /var/opt/suse/testKits/system/" >> /root/.bashrc
+echo "mkdir -p /mnt/\${IPAddr}/" >> /root/.bashrc
+echo "mount -t nfs \${IPAddr}:/home/InstSource/sck/ /mnt/\${IPAddr}/" >> /root/.bashrc
+echo "mkdir -p /root/sck/" >> /root/.bashrc
+echo "cp -rp /mnt/\${IPAddr}/* /root/sck/" >> /root/.bashrc
+echo "umount /mnt/\${IPAddr}/" >> /root/.bashrc
+echo "rmdir /mnt/\${IPAddr}/" >> /root/.bashrc
+echo "echo \${IPAddr} > /opt/suse/testKits/system/data/tc-ipaddr" >> /root/.bashrc
+echo "echo single > /var/opt/suse/testKits/system/autoyast" >> /root/.bashrc
+echo "gnome-terminal -x /root/sck/sck_install.sh \${IPAddr}" >> /root/.bashrc
+chmod 744 /root/.bashrc
+          ]]>
+        </source>
+      </script>
+    </post-scripts>
+    <init-scripts config:type="list">
+      <script>
+        <chrooted config:type="boolean">true</chrooted>
+        <network_needed config:type="boolean">true</network_needed>
+        <filename>initScript.sh</filename>
+        <interpreter>shell</interpreter>
+        <source>
+          <![CDATA[
+#!/bin/bash
+echo "This is the init script."
+          ]]>
+        </source>
+      </script>
+    </init-scripts>
+  </scripts>
+  <firewall>
+    <FW_ALLOW_FW_BROADCAST_DMZ>no</FW_ALLOW_FW_BROADCAST_DMZ>
+    <FW_ALLOW_FW_BROADCAST_EXT>no</FW_ALLOW_FW_BROADCAST_EXT>
+    <FW_ALLOW_FW_BROADCAST_INT>no</FW_ALLOW_FW_BROADCAST_INT>
+    <FW_DEV_EXT>any</FW_DEV_EXT>
+    <FW_IGNORE_FW_BROADCAST_DMZ>no</FW_IGNORE_FW_BROADCAST_DMZ>
+    <FW_IGNORE_FW_BROADCAST_EXT>yes</FW_IGNORE_FW_BROADCAST_EXT>
+    <FW_IGNORE_FW_BROADCAST_INT>no</FW_IGNORE_FW_BROADCAST_INT>
+    <FW_IPSEC_TRUST>no</FW_IPSEC_TRUST>
+    <FW_LOAD_MODULES>nf_conntrack_netbios_ns</FW_LOAD_MODULES>
+    <FW_LOG_ACCEPT_ALL>no</FW_LOG_ACCEPT_ALL>
+    <FW_LOG_ACCEPT_CRIT>yes</FW_LOG_ACCEPT_CRIT>
+    <FW_LOG_DROP_ALL>no</FW_LOG_DROP_ALL>
+    <FW_LOG_DROP_CRIT>yes</FW_LOG_DROP_CRIT>
+    <FW_MASQUERADE>no</FW_MASQUERADE>
+    <FW_PROTECT_FROM_INT>no</FW_PROTECT_FROM_INT>
+    <FW_ROUTE>no</FW_ROUTE>
+    <enable_firewall config:type="boolean">false</enable_firewall>
+    <start_firewall config:type="boolean">false</start_firewall>
+  </firewall>
+  <general>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+  </general>
+  <language>
+    <language>en_US</language>
+  </language>
+  <networking>
+    <dhcp_options>
+      <dhclient_hostname_option>AUTO</dhclient_hostname_option>
+    </dhcp_options>
+    <dns>
+      <dhcp_hostname config:type="boolean">false</dhcp_hostname>
+      <domain>site</domain>
+      <resolv_conf_policy>auto</resolv_conf_policy>
+      <write_hostname config:type="boolean">false</write_hostname>
+    </dns>
+    <interfaces config:type="list">
+    </interfaces>
+    <managed config:type="boolean">false</managed>
+    <net-udev config:type="list">
+    </net-udev>
+    <routing>
+      <ip_forward config:type="boolean">false</ip_forward>
+    </routing>
+  </networking>
+  <nis>
+    <netconfig_policy>auto</netconfig_policy>
+    <nis_broadcast config:type="boolean">false</nis_broadcast>
+    <nis_broken_server config:type="boolean">false</nis_broken_server>
+    <nis_local_only config:type="boolean">false</nis_local_only>
+    <start_autofs config:type="boolean">false</start_autofs>
+    <start_nis config:type="boolean">false</start_nis>
+  </nis>
+  <partitioning config:type="list">
+    <drive>
+      <device>REPLACEWITHDEVICE</device>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+  </partitioning>
+  <report>
+    <errors>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">0</timeout>
+    </errors>
+    <messages>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">0</timeout>
+    </messages>
+    <warnings>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">0</timeout>
+    </warnings>
+    <yesno_messages>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">0</timeout>
+    </yesno_messages>
+  </report>
+  <runlevel>
+    <default>5</default>
+  </runlevel>
+  <software>
+    <packages config:type="list">
+      <package>bonnie</package>
+      <package>dvd+rw-tools</package>
+      <package>kexec-tools</package>
+      <package>makedumpfile</package>
+      <package>mgetty</package>
+      <package>nmap</package>
+      <package>suse-sam</package>
+      <package>vsftpd</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>32bit</pattern>
+      <pattern>base</pattern>
+      <pattern>Basis-Devel</pattern>
+      <pattern>documentation</pattern>
+      <pattern>file_server</pattern>
+      <pattern>gnome</pattern>
+      <pattern>Minimal</pattern>
+      <pattern>x11</pattern>
+    </patterns>
+  </software>
+  <timezone>
+    <hwclock>UTC</hwclock>
+    <timezone>America/Denver</timezone>
+  </timezone>
+  <user_defaults>
+    <group>100</group>
+    <groups>video,dialout</groups>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+  </user_defaults>
+  <users config:type="list">
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <shell>/bin/bash</shell>
+      <uid>0</uid>
+      <user_password>$2a$05$ldk627KvDL2YdIg2XlkUj.dH5TDE7PFr6EaGX6JQmU8aBRJ.HvR42</user_password>
+      <username>root</username>
+    </user>
+  </users>
+  <x11>
+    <display_manager>gdm</display_manager>
+    <window_manager>gnome</window_manager>
+  </x11>
+</profile>
