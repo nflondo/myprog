@@ -2,12 +2,13 @@
 # Check if a name is in a class
 
 def check_student(name):
-    myClass = [anna,benjamin,liliana,samuel]
+    myClass = ['anna','benjamin','liliana','samuel']
     
     for student in myClass:
         if student == name:
-            break
             return True
+            break
+    
     return False
 
 def main():
