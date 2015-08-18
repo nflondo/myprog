@@ -10,6 +10,12 @@ class Student(object):
             school = raw_input(" What is the student's school? ") 
         if not grade: 
             grade = self.get_grade() 
+            
+        while not grade.isdigit():
+            print "I'm sorry but {0} isn't valid.".format(grade)
+            grade = raw_input("Enter student's grade? [K, 1-5]: ")
+            print "Thanks.  The grade you gave me is {0}".format(grade)
+            
         self.name = name 
         self.school = school 
         self.grade = grade 
@@ -32,7 +38,8 @@ class Student(object):
 def main(): 
     student1 = Student() 
     student2 = Student(name ="Byron Bale", grade ="2", school ="Minnieville") 
-
+    student3 = Student(name ="test", grade ="dos", school ="Minnieville") 
+    
 if __name__ == "__main__": 
     main()
 
