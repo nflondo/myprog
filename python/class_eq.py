@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # class that test for equality and inequality of an object
-
+import pdb
 class Test( object):
     def __init__( self, num):
         self.num = num
@@ -21,6 +21,7 @@ class Test( object):
             return False
 
 def main(): 
+    pdb.set_trace()
     a = Test(5)
     b = Test(5)
     c = Test(7)
