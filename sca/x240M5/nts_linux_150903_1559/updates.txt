@@ -1,0 +1,1170 @@
+#==[ Verification ]=================================#
+# rpm -V zypper-1.12.12-1.1.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /bin/date
+Thu Sep  3 16:00:23 MDT 2015
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks services
+# | Alias             | Name              | Enabled | GPG Check | Refresh | Type 
+--+-------------------+-------------------+---------+-----------+---------+------
+1 | SLES12-SP1-12.1-0 | SLES12-SP1-12.1-0 | Yes     | (r ) Yes  | Yes     | yast2
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks repos
+# | Alias             | Name              | Enabled | GPG Check | Refresh
+--+-------------------+-------------------+---------+-----------+--------
+1 | SLES12-SP1-12.1-0 | SLES12-SP1-12.1-0 | Yes     | (r ) Yes  | Yes    
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks patch-check
+Loading repository data...
+Reading installed packages...
+0 patches needed (0 security patches)
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks patches
+Loading repository data...
+Reading installed packages...
+No needed patches found.
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks list-patches
+Loading repository data...
+Reading installed packages...
+No updates found.
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks products
+Loading repository data...
+Reading installed packages...
+S | Repository | Internal Name | Name                                | Version | Arch   | Is Base
+--+------------+---------------+-------------------------------------+---------+--------+--------
+i | @System    | SLES          | SUSE Linux Enterprise Server 12 SP1 | 12.1-0  | x86_64 | Yes    
+
+#==[ Command ]======================================#
+# /usr/bin/zypper --non-interactive --no-gpg-checks --xml products
+<?xml version='1.0'?>
+<stream>
+<message type="info">Loading repository data...</message>
+<message type="info">Reading installed packages...</message>
+<product-list>
+<product name="SLES" version="12.1" release="0" epoch="0" arch="x86_64" vendor="SUSE LLC &lt;https://www.suse.com/&gt;" summary="SUSE Linux Enterprise Server 12 SP1 Beta2" repo="SLES12-SP1-12.1-0" productline="" registerrelease="" shortname="SLES12-SP1" flavor="DVD" isbase="false" installed="false"><endoflife time_t="1730332800" text="2024-10-30T18:00:00-06"/><registerflavor/><description>SUSE Linux Enterprise offers a comprehensive
+        suite of products built on a single code base.
+        The platform addresses business needs from
+        the smallest thin-client devices to the world&apos;s
+        most powerful high-performance computing
+        and mainframe servers. SUSE Linux Enterprise
+        offers common management tools and technology
+        certifications across the platform, and
+        each product is enterprise-class.</description></product>
+<product name="SLES" version="12.1" release="0" epoch="0" arch="x86_64" vendor="SUSE" summary="SUSE Linux Enterprise Server 12 SP1" repo="@System" productline="sles" registerrelease="" shortname="SLES12-SP1" flavor="DVD" isbase="true" installed="true"><endoflife time_t="1730332800" text="2024-10-30T18:00:00-06"/><registerflavor/><description>SUSE Linux Enterprise offers a comprehensive
+        suite of products built on a single code base.
+        The platform addresses business needs from
+        the smallest thin-client devices to the world&apos;s
+        most powerful high-performance computing
+        and mainframe servers. SUSE Linux Enterprise
+        offers common management tools and technology
+        certifications across the platform, and
+        each product is enterprise-class.</description></product>
+</product-list>
+</stream>
+
+#==[ Verification ]=================================#
+# RPM Not Installed: lsb
+
+#==[ Configuration File ]===========================#
+# /etc/zypp/zypp.conf
+[main]
+multiversion = provides:multiversion(kernel)
+multiversion.kernels = latest,latest-1,running
+
+
+#==[ Configuration File ]===========================#
+# /etc/zypp/credentials.d/NCCcredentials - File not found
+
+#==[ Verification ]=================================#
+# rpm -V SUSEConnect-0.2.20-1.1.x86_64
+# Verification Status: Passed
+
+#==[ Verification ]=================================#
+# rpm -V ruby2.1-rubygem-suse-connect-0.2.20-1.1.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /usr/sbin/SUSEConnect --status
+[{"identifier":"SLES","version":"12.1","arch":"x86_64","status":"Not Registered"}]
+
+#==[ Configuration File ]===========================#
+# /etc/SUSEConnect - File not found
+
+#==[ Command ]======================================#
+# /usr/bin/curl --verbose --capath /etc/ssl/certs/ --digest --remote-time --fail https://updates.suse.com/
+* Hostname was NOT found in DNS cache
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Could not resolve host: updates.suse.com
+* Closing connection 0
+curl: (6) Could not resolve host: updates.suse.com
+
+#==[ Command ]======================================#
+# /usr/bin/curl --verbose --capath /etc/ssl/certs/ --digest --remote-time --fail https://scc.suse.com/
+* Hostname was NOT found in DNS cache
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Could not resolve host: scc.suse.com
+* Closing connection 0
+curl: (6) Could not resolve host: scc.suse.com
+
+#==[ Command ]======================================#
+# /usr/bin/installation_sources -s
+# | Alias             | Name              | Enabled | GPG Check | Refresh | Type 
+--+-------------------+-------------------+---------+-----------+---------+------
+1 | SLES12-SP1-12.1-0 | SLES12-SP1-12.1-0 | Yes     | (r ) Yes  | Yes     | yast2
+
+#==[ Verification ]=================================#
+# RPM Not Installed: suseRegister
+
+#==[ Command ]======================================#
+# /usr/bin/env | grep -i proxy | grep -v CMDLINE
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/proxy
+PROXY_ENABLED="no"
+HTTP_PROXY=""
+HTTPS_PROXY=""
+FTP_PROXY=""
+GOPHER_PROXY=""
+NO_PROXY="localhost, 127.0.0.1"
+
+
+#==[ Log File ]=====================================#
+# /var/log/zmd-backend.log - File not found
+
+#==[ Log File ]=====================================#
+# /var/log/pk_backend_zypp - Last 500 Lines
+
+
+#==[ Log File ]=====================================#
+# /var/log/zypper.log - Last 500 Lines
+2015-09-03 16:00:29 <1> linux(25489) [zypp] RpmDb.cc(~RpmDb):272 ~RpmDb()
+2015-09-03 16:00:29 <1> linux(25489) [zypp] RpmDb.cc(~RpmDb):275 ~RpmDb() end
+2015-09-03 16:00:30 <1> linux(25525) [zypper] main.cc(main):76 ===== Hi, me zypper 1.12.12
+2015-09-03 16:00:30 <1> linux(25525) [zypper] main.cc(main):77 ===== 'zypper' '--no-refresh' '--xmlout' '--non-interactive' 'products' '-i' =====
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(_autodetectSystemArchitecture):71 Uname architecture is 'x86_64'
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(_autodetectTextLocale):207 Default text locale is 'en'
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(Impl):319 libzypp: 15.13.0 built Aug 18 2015 15:20:28
+2015-09-03 16:00:30 <1> linux(25525) [zypp] IniParser.cc(parse):84 Start parsing /etc/zypp/zypp.conf[g___]
+2015-09-03 16:00:30 <1> linux(25525) [zypp] IniParser.cc(parse):138 Done parsing /etc/zypp/zypp.conf[_eF_]
+2015-09-03 16:00:30 <1> linux(25525) [Progress++] ProgressData.cc(report):88 {#1|/etc/zypp/zypp.conf}END
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(Impl):559 ZConfig singleton created.
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(ZConfig):693 libzypp: 15.13.0 built Aug 18 2015 15:20:28
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(ZConfig):693 libsolv: 0.6.11
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(ZConfig):693 zypp.conf: '/etc/zypp/zypp.conf'
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(ZConfig):693 TextLocale: 'en' (en)
+2015-09-03 16:00:30 <1> linux(25525) [zconfig] ZConfig.cc(ZConfig):693 SystemArchitecture: 'x86_64' (x86_64)
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(Zypper):184 Zypper instance created.
+2015-09-03 16:00:30 <1> linux(25525) [zypper] media.h(MediaCallbacks):184 Set media callbacks..
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processGlobalOptions):482 START
+2015-09-03 16:00:30 <5> linux(25525) [Measure] Measure.cc(Impl):147 START MEASURE(ReadConfig)
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Augeas.cc(Augeas):21 Going to read zypper config using Augeas...
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Augeas.cc(Augeas):102 Done reading conf files:
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Augeas.cc(Augeas):107 user conf read: no
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Augeas.cc(Augeas):108 global conf read: yes
+2015-09-03 16:00:30 <5> linux(25525) [Measure] Measure.cc(elapsed):170 ELAPSED(ReadConfig) 0 (u 0.01 s 0.00 c 0.00)
+2015-09-03 16:00:30 <5> linux(25525) [Measure] Measure.cc(~Impl):155 MEASURE(ReadConfig) 0 (u 0.01 s 0.00 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):611 Verbosity 1
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):612 Output type 2
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processGlobalOptions):793 Entering non-interactive mode
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):869 repos.d dir = /etc/zypp/repos.d
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):870 cache dir = /var/cache/zypp
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):871 raw cache dir = /var/cache/zypp/raw
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):872 solv cache dir = /var/cache/zypp/solv
+2015-09-03 16:00:30 <1> linux(25525) [zypper++] Zypper.cc(processGlobalOptions):873 package cache dir = /var/cache/zypp/packages
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processGlobalOptions):885 Repositories enabled
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processGlobalOptions):892 Autorefresh disabled.
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processGlobalOptions):1005 DONE
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processCommandOptions):1188 START
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processCommandOptions):3005 Done parsing options.
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(processCommandOptions):3024 Done 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppFactory.cc(_openLockFile):166 Open lockfile /var/run/zypp.pid
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppFactory.cc(readLockFile):221 read: Lockfile /var/run/zypp.pid has pid 0 (our pid: 25525) 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppFactory.cc(writeLockFile):233 write: Lockfile /var/run/zypp.pid got pid 25525
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppFactory.cc(_closeLockFile):184 Close lockfile /var/run/zypp.pid
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(ZYppImpl):70 libzypp: 15.13.0 built Aug 18 2015 15:20:28
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(ZYppImpl):70 libsolv: 0.6.11
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(ZYppImpl):70 zypp.conf: '/etc/zypp/zypp.conf'
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(ZYppImpl):70 TextLocale: 'en' (en)
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(ZYppImpl):70 SystemArchitecture: 'x86_64' (x86_64)
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(ZYppImpl):71 Initializing keyring...
+2015-09-03 16:00:30 <1> linux(25525) [zypp::KeyRing] KeyRing.cc(Impl):193 Current KeyRing::DefaultAccept: 0000000000
+2015-09-03 16:00:30 <1> linux(25525) [zypper] Zypper.cc(doCommand):3127 Going to process command products
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/services.d 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /usr/lib/zypp/plugins/services 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoManager.cc(init_knownRepositories):742 start construct known repos
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoManager.cc(repositories_in_dir):222 directory /etc/zypp/repos.d
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/repos.d 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoManager.cc(repositories_in_file):204 repo file: /etc/zypp/repos.d/SLES12-SP1-12.1-0.repo
+2015-09-03 16:00:30 <1> linux(25525) [zypp] IniParser.cc(parse):84 Start parsing /etc/zypp/repos.d/SLES12-SP1-12.1-0.repo[g___]
+2015-09-03 16:00:30 <1> linux(25525) [zypp] IniParser.cc(parse):138 Done parsing /etc/zypp/repos.d/SLES12-SP1-12.1-0.repo[_eF_]
+2015-09-03 16:00:30 <1> linux(25525) [Progress++] ProgressData.cc(report):88 {#2|/etc/zypp/repos.d/SLES12-SP1-12.1-0.repo}END
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 --------------------------------------
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - alias       : SLES12-SP1-12.1-0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - name        : SLES12-SP1-12.1-0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - enabled     : 1
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - autorefresh : 1
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - url         : nfs://10.1.60.200/home/InstSource/SLE-12-SP1-Server-DVD-x86_64-Beta2-DVD1
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - path        : /
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - type        : yast2
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - priority    : 99
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - gpgcheck    : D(Y) repoD(Y) sig? pkgD(Y)
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 - keeppackages: 0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoFileReader.cc(repositories_in_stream):165 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /var/cache/zypp/raw 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /var/cache/zypp/solv 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /var/cache/zypp/packages 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoManager.cc(init_knownRepositories):802 end construct known repos
+2015-09-03 16:00:30 <1> linux(25525) [zypper] repos.cc(init_target):904 Initializing target
+2015-09-03 16:00:30 <1> linux(25525) [zypp] ZYppImpl.cc(initializeTarget):121 initTarget( /)
+2015-09-03 16:00:30 <1> linux(25525) [zypp] librpmDb.cc(globalInit):145 librpm init done: (_target:x86_64-linux) (_dbpath:/var/lib/rpm)
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(initDatabase):352 Calling initDatabase: '(/)/var/lib/rpm'
+2015-09-03 16:00:30 <1> linux(25525) [zypp] librpmDb.cc(unblockAccess):341 Unblock access
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(DbDirInfo):519 '(/)/var/lib/rpm':
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(DbDirInfo):519   Dir:    /var/lib/rpm{d 0755 0/0}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(DbDirInfo):519   V4:     /var/lib/rpm/Packages{- 0644 0/0 size 87150592}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(DbDirInfo):519   V3:     /var/lib/rpm/packages.rpm{[2-No such file or directory]}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(DbDirInfo):519   V3ToV4: /var/lib/rpm/packages.rpm3{[2-No such file or directory]}
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(internal_initDatabase):475 Found rpm4 database in /var/lib/rpm{d 0755 0/0}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] RpmDb.cc(internal_initDatabase):492 Initial state: V4(X--)V3(---): '(/)/var/lib/rpm'[librpmDb CLOSED '(/)/var/lib/rpm']
+2015-09-03 16:00:30 <1> linux(25525) [zypp] librpmDb.cc(dbAccess):237 Set new database location: '(/)/var/lib/rpm'
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(D):97 DBACCESS {NULL(/)/var/lib/rpm}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] RpmDb.cc(internal_initDatabase):511 Access state: V4(X--)V3(---): '(/)/var/lib/rpm'[ReferenceCounted(@0xfbc380<=1){NULL(/)/var/lib/rpm}]
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(dbRelease):308 dbRelease: release, outstanding 0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(initDatabase):433 Synchronizing keys with zypp keyring
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(syncTrustedKeys):969 Going to sync trusted keys...
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(D):97 DBACCESS {NULL(/)/var/lib/rpm}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(dbRelease):308 dbRelease: release, outstanding 0
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] RpmDb.cc(computeKeyRingSync):949 gpg-pubkey-39db7c82-510a966b R_
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] RpmDb.cc(computeKeyRingSync):949 gpg-pubkey-50a3dd1c-50f35137 R_
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(syncTrustedKeys):973 Rpm keys to export into zypp trusted keyring: 2
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(syncTrustedKeys):974 Zypp trusted keys to import into rpm database: 0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(syncTrustedKeys):980 Exporting rpm keyring into zypp trusted keyring
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(D):97 DBACCESS {NULL(/)/var/lib/rpm}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] ExternalProgram.cc(start_program):249 Executing '/usr/bin/gpg2' '--import' '--homedir' '/var/tmp/zypp.ujXooC/zypp-trusted-krJgo12Q' '--no-default-keyring' '--quiet' '--no-tty' '--no-greeting' '--no-permission-warning' '--status-fd' '1' '/var/tmp/zypp.ujXooC/TmpFile.VW8qok'
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] ExternalProgram.cc(start_program):412 pid 25529 launched
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] ExternalProgram.cc(checkStatus):513 Pid 25529 successfully completed
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(unlink):663 unlink /var/tmp/zypp.ujXooC/TmpFile.VW8qok
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] TmpPath.cc(~Impl):78 TmpPath cleaned up /var/tmp/zypp.ujXooC/TmpFile.VW8qok{- 0600 0/0 size 1952}
+2015-09-03 16:00:30 <1> linux(25525) [zypp++] librpmDb.cc(dbRelease):308 dbRelease: release, outstanding 0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(syncTrustedKeys):1023 Trusted keys synced.
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RpmDb.cc(initDatabase):442 InitDatabase: RpmDb[V4(X--)V3(---): '(/)/var/lib/rpm']
+2015-09-03 16:00:30 <1> linux(25525) [zypp] HistoryLog.cc(setRoot):173 installation log file /var/log/zypp/history
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(TargetImpl):834 Initialized target on /
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/products.d 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(buildCache):986 Read cookie: /var/cache/zypp/solv/@System/cookie{- 0644 0/0 size 52}
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(buildCache):993 Read cookie: /var/cache/zypp/solv/@System/cookie says: uptodate
+2015-09-03 16:00:30 <1> linux(25525) [zypper] repos.cc(do_init_repos):677 Going to initialize repositories.
+2015-09-03 16:00:30 <1> linux(25525) [zypper] repos.cc(do_init_repos):743 checking if to refresh SLES12-SP1-12.1-0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoManager.cc(buildCache):1185 SLES12-SP1-12.1-0 is already cached.
+2015-09-03 16:00:30 <1> linux(25525) [zypp] RepoManager.cc(buildCache):1190 SLES12-SP1-12.1-0 cache is up to date with metadata.
+2015-09-03 16:00:30 <1> linux(25525) [zypper] repos.cc(load_resolvables):3326 Going to load resolvables
+2015-09-03 16:00:30 <1> linux(25525) [zypper] repos.cc(load_repo_resolvables):3352 Loading SLES12-SP1-12.1-0 resolvables.
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setDirty):228 _createRepo SLES12-SP1-12.1-0
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setDirty):228 _addSolv SLES12-SP1-12.1-0
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 repo_add_solv took 31 ms
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 repo size: 5155 solvables
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 repo memory used: 513 K incore, 589 K idarray
+2015-09-03 16:00:30 <1> linux(25525) [zypp] Repository.cc(addSolv):336 sat::repo(SLES12-SP1-12.1-0){prio 0.0, size 5155} after adding /var/cache/zypp/solv/SLES12-SP1-12.1-0/solv
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setDirty):228 setRepoInfo SLES12-SP1-12.1-0
+2015-09-03 16:00:30 <1> linux(25525) [zypp] Repository.cc(setInfo):288 sat::repo(SLES12-SP1-12.1-0){prio -99.3, size 5155}
+2015-09-03 16:00:30 <1> linux(25525) [zypper] repos.cc(load_target_resolvables):3433 Going to read RPM database
+2015-09-03 16:00:30 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/products.d 
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(buildCache):986 Read cookie: /var/cache/zypp/solv/@System/cookie{- 0644 0/0 size 52}
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(buildCache):993 Read cookie: /var/cache/zypp/solv/@System/cookie says: uptodate
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(load):1142 New cache built: false, force loading: true
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(load):1148 adding /var/cache/zypp/solv/@System/solv to pool(@System)
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setDirty):228 _createRepo @System
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setDirty):228 setRepoInfo @System
+2015-09-03 16:00:30 <1> linux(25525) [zypp] Repository.cc(setInfo):288 sat::repo(@System){prio -99.0, size 0}
+2015-09-03 16:00:30 <1> linux(25525) [zypp] TargetImpl.cc(load):1172 adding /var/cache/zypp/solv/@System/solv to system
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setDirty):228 _addSolv @System
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 repo_add_solv took 24 ms
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 repo size: 1817 solvables
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 repo memory used: 200 K incore, 311 K idarray
+2015-09-03 16:00:30 <1> linux(25525) [zypp] Repository.cc(addSolv):336 sat::repo(@System){prio -99.0, size 1817} after adding /var/cache/zypp/solv/@System/solv
+2015-09-03 16:00:30 <2> linux(25525) [zypp] RequestedLocalesFile.cc(load):39 Can't read /var/lib/zypp/RequestedLocales{[2-No such file or directory]}
+2015-09-03 16:00:30 <1> linux(25525) [zypp] SolvIdentFile.cc(load):51 Read /var/lib/zypp/AutoInstalled{- 0644 0/0 size 25035}
+2015-09-03 16:00:30 <2> linux(25525) [zypp] HardLocksFile.cc(load):40 Can't read /etc/zypp/locks{[2-No such file or directory]}
+2015-09-03 16:00:30 <1> linux(25525) [zypp::satpool] PoolImpl.cc(prepare):272 pool_createwhatprovides...
+2015-09-03 16:00:30 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 found 227 file dependencies, 112 installed file dependencies
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 addfileprovides took 53 ms
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 number of solvables: 6974, memory used: 381 K
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 number of ids: 85561 + 39323
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 string memory used: 334 K array + 1799 K data,  rel memory used: 460 K array
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 string hash memory: 1024 K, rel hash memory : 0 K
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 provide ids: 51228
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 provide space needed: 161160 + 78646
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 shrunk whatprovidesdata from 161160 to 10330
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 shrunk whatprovidesauxdata from 161160 to 109851
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 whatprovides memory used: 491 K id array, 347 K data
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 whatprovidesaux memory used: 334 K id array, 429 K data
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 createwhatprovides took 16 ms
+2015-09-03 16:00:31 <1> linux(25525) [zypp::satpool] PoolImpl.cc(setTextLocale):424 pool_set_languages: (en)
+2015-09-03 16:00:31 <1> linux(25525) [zypp++] PoolItem.cc(setBuddy):163 I__s_(6942)product:SLES-12.1-0.x86_64(@System) has buddy I__s_(6629)sles-release-12.1-1.159.x86_64(@System)
+2015-09-03 16:00:31 <1> linux(25525) [zypp++] PoolItem.cc(setBuddy):163 U__s_(5156)product:SLES-12.1-0.x86_64(SLES12-SP1-12.1-0) has buddy U__s_(3075)sles-release-12.1-1.159.x86_64(SLES12-SP1-12.1-0)
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PoolImpl.h(reapplyHardLocks):231 Re-apply 0 HardLockQueries
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PoolImpl.h(reapplyHardLocks):237 HardLockQueries match 0 Solvables.
+2015-09-03 16:00:31 <1> linux(25525) [zypp] TargetImpl.cc(updateFileContent):863 updating '/var/lib/zypp/LastDistributionFlavor' content.
+2015-09-03 16:00:31 <1> linux(25525) [zypp] TargetImpl.cc(load):1236 Target loaded: 1817 resolvables
+2015-09-03 16:00:31 <1> linux(25525) [zypper] repos.cc(load_resolvables):3334 Done loading resolvables
+2015-09-03 16:00:31 <1> linux(25525) [zypper++] solve-commit.cc(set_force_resolution):263 force resolution: false
+2015-09-03 16:00:31 <1> linux(25525) [zypper++] solve-commit.cc(set_clean_deps):280 clean deps on remove: 1
+2015-09-03 16:00:31 <1> linux(25525) [zypper++] solve-commit.cc(set_no_recommends):297 no recommends (only requires): 0
+2015-09-03 16:00:31 <1> linux(25525) [zypper++] solve-commit.cc(set_ignore_recommends_of_installed):308 ignore recommends of already installed packages: 1
+2015-09-03 16:00:31 <1> linux(25525) [zypper++] solve-commit.cc(resolve):340 Calling the solver...
+2015-09-03 16:00:31 <1> linux(25525) [zypp] Resolver.cc(solverInit):297 -------------- Calling SAT Solver -------------------
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(resolvePool):790 SATResolver::resolvePool()
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solverInit):691 SATResolver::solverInit()
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/multiversion.d 
+2015-09-03 16:00:31 <1> linux(25525) [zypp::satpool] PoolImpl.cc(multiversionListInit):585 Multiversion install provides:multiversion(kernel): 17 matches
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SystemCheck.cc(loadFile):127 Read /etc/zypp/systemCheck{- 0644 0/0 size 360}
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/systemCheck.d 
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(setSystemRequirements):1522 SYSTEM Requires glibc
+2015-09-03 16:00:31 <1> linux(25525) [zypp::satpool] PoolImpl.cc(depSetDirty):256 /etc/sysconfig/storage change
+2015-09-03 16:00:31 <1> linux(25525) [zypp::satpool] PoolImpl.cc(prepare):272 pool_createwhatprovides...
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 found 227 file dependencies, 112 installed file dependencies
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 addfileprovides took 53 ms
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 number of solvables: 6974, memory used: 381 K
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 number of ids: 85561 + 39323
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 string memory used: 334 K array + 1799 K data,  rel memory used: 460 K array
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 string hash memory: 1024 K, rel hash memory : 512 K
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 provide ids: 51228
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 provide space needed: 161160 + 78646
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 shrunk whatprovidesdata from 161160 to 10330
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 shrunk whatprovidesauxdata from 161160 to 109851
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 whatprovides memory used: 491 K id array, 347 K data
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 whatprovidesaux memory used: 334 K id array, 429 K data
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 createwhatprovides took 17 ms
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):510 Starting solving....
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511 <resolver>
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   ALLOW_DOWNGRADE	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   ALLOW_ARCHCHANGE	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   ALLOW_VENDORCHANGE	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   ALLOW_UNINSTALL	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   NO_UPDATEPROVIDE	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   SPLITPROVIDES	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   IGNORE_RECOMMENDED	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   ADD_ALREADY_RECOMMENDED	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   NO_INFARCHCHECK	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   ALLOW_NAMECHANGE	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   KEEP_EXPLICIT_OBSOLETES	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   BEST_OBEY_POLICY	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   NO_AUTOTARGET	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   DUP_ALLOW_DOWNGRADE	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   DUP_ALLOW_ARCHCHANGE	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   DUP_ALLOW_VENDORCHANGE	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   DUP_ALLOW_NAMECHANGE	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   KEEP_ORPHANS	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   BREAK_ORPHANS	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   FOCUS_INSTALLED	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   YUM_OBSOLETES	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   distupgrade	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   distupgrade_removeunsupported	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   solveSrcPackages	= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   cleandepsOnRemove	= 1
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511   fixsystem		= 0
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):511 <resolver/>
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 solver started
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 dosplitprovides=1, noupdateprovide=0, noinfarchcheck=0
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 allowuninstall=0, allowdowngrade=0, allownamechange=1, allowarchchange=0, allowvendorchange=0
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 promoteepoch=0, forbidselfconflicts=0
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 obsoleteusesprovides=0, implicitobsoleteusesprovides=0, obsoleteusescolors=0, implicitobsoleteusescolors=0
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 dontinstallrecommended=0, addalreadyrecommended=0
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 obsoletes data: 1 entries
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 added 23642 pkg rules for installed solvables
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 added 296 pkg rules for updaters of installed solvables
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 added 0 pkg rules for packages involved in a job
+2015-09-03 16:00:31 <1> linux(25525) [MODALIAS++] Modalias.cc(Impl):125 Using /sys directory.
+2015-09-03 16:00:31 <1> linux(25525) [zypp++] Sysconfig.cc(read):36 Load '/etc/sysconfig/storage'
+2015-09-03 16:00:31 <1> linux(25525) [zypp] Sysconfig.cc(read):76 done reading '/etc/sysconfig/storage'
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 added 222 pkg rules because of weak dependencies
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 added 0 pkg rules because of linked packages
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 3675 of 5274 installable solvables considered for solving
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 pruned rules from 24161 to 20188
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114   binary: 1960
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114   normal: 18227, 36607 literals
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 pkg rule memory used: 473 K
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 pkg rule creation took 278 ms
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/vendors.d 
+2015-09-03 16:00:31 <1> linux(25525) [zypp::VendorAttr] VendorAttr.cc(VendorAttr):166 Equivalent vendors:
+2015-09-03 16:00:31 <1> linux(25525) [zypp::VendorAttr] VendorAttr.cc(VendorAttr):166    [2] opensuse
+2015-09-03 16:00:31 <1> linux(25525) [zypp::VendorAttr] VendorAttr.cc(VendorAttr):166    [2] suse
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion openvswitch-kmp-xen-2.1.2_k3.12.46_2-4.2.9.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion lttng-modules-kmp-default-2.7.0.rc1_k3.12.46_2-1.10.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-xen-devel-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-devel-3.12.46-2.3.noarch
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion openvswitch-kmp-default-2.1.2_k3.12.46_2-4.2.9.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-source-3.12.46-2.3.noarch
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-default-devel-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion oracleasm-kmp-default-2.0.8_k3.12.46_2-2.19.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion crash-kmp-default-7.0.5_k3.12.46_2-3.11.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion oracleasm-kmp-xen-2.0.8_k3.12.46_2-2.19.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion crash-kmp-xen-7.0.5_k3.12.46_2-3.11.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-default-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion xen-kmp-default-4.5.1_04_k3.12.46_2-1.16.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-default-base-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-syms-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-xen-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: multiversion kernel-xen-base-3.12.46-2.3.x86_64
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:GNOME Package Installer
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:GNOME Package Updater
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:GNOME System Monitor
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:Power Statistics
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:Tweak Tool
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:Virtual Machine Manager
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed application:gedit
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed bonnie
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed dvd+rw-tools
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed glibc
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed grub2-x86_64-efi
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed irqbalance
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed kdump
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed kernel-default
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed kexec-tools
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed lftp
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed mgetty
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed mokutil
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed nmap
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed numactl
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed openssh
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:32bit
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:Basis-Devel
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:Minimal
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:apparmor
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:base
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:documentation
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:file_server
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:gnome-basic
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed pattern:x11
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sle-gnome-basic
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-32bit
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-Basis-Devel
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-Minimal
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-apparmor
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-base
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-documentation
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-file_server
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-kvm_server
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-kvm_tools
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-x11
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-xen_server
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed patterns-sles-xen_tools
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed perl-Bootloader-YAML
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed product:SLES
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed sck-common
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed sck-sut
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed setserial
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed shim
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed sles-release
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed sysstat
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: user installed tclink
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - no rule created
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116 job: install providing glibc
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116   - job Rule #23822:
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116     glibc-2.19-29.4.x86_64 [1124] (w1)
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116     glibc-2.19-29.4.x86_64 [5409]I (w2)
+2015-09-03 16:00:31 <1> linux(25525) [libsolv] PoolImpl.cc(logSat):116     next rules: 0 0
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 choice rule creation took 2 ms
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 20187 pkg rules, 2 * 1817 update rules, 1 job rules, 0 infarch rules, 0 dup rules, 0 choice rules, 0 best rules
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 overall rule memory used: 558 K
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 solver statistics: 0 learned rules, 0 unsolvable, 0 minimization steps
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 done solving.
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 solver took 2 ms
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 final solver statistics: 0 problems, 0 learned rules, 0 unsolvable
+2015-09-03 16:00:31 <1> linux(25525) [libsolv++] PoolImpl.cc(logSat):114 solver_solve took 284 ms
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(solving):513 ....Solver end
+2015-09-03 16:00:31 <1> linux(25525) [zypp] SATResolver.cc(resolvePool):845 SATResolver::resolvePool() done. Ret:1
+2015-09-03 16:00:31 <1> linux(25525) [zypper] Zypper.cc(cleanup):5310 START
+2015-09-03 16:00:31 <1> linux(25525) [zypper] main.cc(~Bye):61 ===== Exiting main() =====
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PathInfo.cc(recursive_rmdir):430 recursive_rmdir /var/tmp/zypp.ujXooC 
+2015-09-03 16:00:31 <1> linux(25525) [zypp++] TmpPath.cc(~Impl):78 TmpPath cleaned up /var/tmp/zypp.ujXooC{d 0700 0/0}
+2015-09-03 16:00:31 <1> linux(25525) [zypp] ZYppFactory.cc(_openLockFile):166 Open lockfile /var/run/zypp.pid
+2015-09-03 16:00:31 <1> linux(25525) [zypp] ZYppFactory.cc(~ZYppGlobalLock):115 Cleanned lock file. (25525)
+2015-09-03 16:00:31 <1> linux(25525) [zypp] ZYppFactory.cc(_closeLockFile):184 Close lockfile /var/run/zypp.pid
+2015-09-03 16:00:31 <1> linux(25525) [zypper] Zypper.cc(~Zypper):191 Zypper instance destroyed. Bye!
+2015-09-03 16:00:31 <1> linux(25525) [zypp] PathInfo.cc(recursive_rmdir):430 recursive_rmdir /var/tmp/TmpDir.FieNJn 
+2015-09-03 16:00:31 <1> linux(25525) [zypp++] TmpPath.cc(~Impl):78 TmpPath cleaned up /var/tmp/TmpDir.FieNJn{d 0700 0/0}
+2015-09-03 16:00:31 <1> linux(25525) [zypp] RpmDb.cc(closeDatabase):738 Calling closeDatabase: RpmDb[V4(X--)V3(---): '(/)/var/lib/rpm']
+2015-09-03 16:00:31 <1> linux(25525) [zypp] librpmDb.cc(blockAccess):328 Block access
+2015-09-03 16:00:31 <1> linux(25525) [zypp] RpmDb.cc(closeDatabase):769 closeDatabase: RpmDb[NO_INIT]
+2015-09-03 16:00:31 <1> linux(25525) [zypp] TargetImpl.cc(~TargetImpl):950 Targets closed
+2015-09-03 16:00:31 <1> linux(25525) [zypp] RpmDb.cc(~RpmDb):272 ~RpmDb()
+2015-09-03 16:00:31 <1> linux(25525) [zypp] RpmDb.cc(~RpmDb):275 ~RpmDb() end
+2015-09-03 16:00:33 <1> linux(25612) [zypper] main.cc(main):76 ===== Hi, me zypper 1.12.12
+2015-09-03 16:00:33 <1> linux(25612) [zypper] main.cc(main):77 ===== 'zypper' 'service-list' =====
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(_autodetectSystemArchitecture):71 Uname architecture is 'x86_64'
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(_autodetectTextLocale):207 Default text locale is 'en'
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(Impl):319 libzypp: 15.13.0 built Aug 18 2015 15:20:28
+2015-09-03 16:00:33 <1> linux(25612) [zypp] IniParser.cc(parse):84 Start parsing /etc/zypp/zypp.conf[g___]
+2015-09-03 16:00:33 <1> linux(25612) [zypp] IniParser.cc(parse):138 Done parsing /etc/zypp/zypp.conf[_eF_]
+2015-09-03 16:00:33 <1> linux(25612) [Progress++] ProgressData.cc(report):88 {#1|/etc/zypp/zypp.conf}END
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(Impl):559 ZConfig singleton created.
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(ZConfig):693 libzypp: 15.13.0 built Aug 18 2015 15:20:28
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(ZConfig):693 libsolv: 0.6.11
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(ZConfig):693 zypp.conf: '/etc/zypp/zypp.conf'
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(ZConfig):693 TextLocale: 'en' (en)
+2015-09-03 16:00:33 <1> linux(25612) [zconfig] ZConfig.cc(ZConfig):693 SystemArchitecture: 'x86_64' (x86_64)
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(Zypper):184 Zypper instance created.
+2015-09-03 16:00:33 <1> linux(25612) [zypper] media.h(MediaCallbacks):184 Set media callbacks..
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(processGlobalOptions):482 START
+2015-09-03 16:00:33 <5> linux(25612) [Measure] Measure.cc(Impl):147 START MEASURE(ReadConfig)
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Augeas.cc(Augeas):21 Going to read zypper config using Augeas...
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Augeas.cc(Augeas):102 Done reading conf files:
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Augeas.cc(Augeas):107 user conf read: no
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Augeas.cc(Augeas):108 global conf read: yes
+2015-09-03 16:00:33 <5> linux(25612) [Measure] Measure.cc(elapsed):170 ELAPSED(ReadConfig) 0 (u 0.01 s 0.00 c 0.00)
+2015-09-03 16:00:33 <5> linux(25612) [Measure] Measure.cc(~Impl):155 MEASURE(ReadConfig) 0 (u 0.01 s 0.00 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):611 Verbosity 1
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):612 Output type 1
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):869 repos.d dir = /etc/zypp/repos.d
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):870 cache dir = /var/cache/zypp
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):871 raw cache dir = /var/cache/zypp/raw
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):872 solv cache dir = /var/cache/zypp/solv
+2015-09-03 16:00:33 <1> linux(25612) [zypper++] Zypper.cc(processGlobalOptions):873 package cache dir = /var/cache/zypp/packages
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(processGlobalOptions):885 Repositories enabled
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(processGlobalOptions):1005 DONE
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(processCommandOptions):1188 START
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(processCommandOptions):3005 Done parsing options.
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(processCommandOptions):3024 Done 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppFactory.cc(IWantIt):74 ZYPP_READONLY promised.
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppFactory.cc(getZYpp):358 ZYPP_READONLY active.
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppImpl.cc(ZYppImpl):70 libzypp: 15.13.0 built Aug 18 2015 15:20:28
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppImpl.cc(ZYppImpl):70 libsolv: 0.6.11
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppImpl.cc(ZYppImpl):70 zypp.conf: '/etc/zypp/zypp.conf'
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppImpl.cc(ZYppImpl):70 TextLocale: 'en' (en)
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppImpl.cc(ZYppImpl):70 SystemArchitecture: 'x86_64' (x86_64)
+2015-09-03 16:00:33 <1> linux(25612) [zypp] ZYppImpl.cc(ZYppImpl):71 Initializing keyring...
+2015-09-03 16:00:33 <1> linux(25612) [zypp::KeyRing] KeyRing.cc(Impl):193 Current KeyRing::DefaultAccept: 0000000000
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(doCommand):3127 Going to process command services
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/services.d 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(dirForEach):557 readdir /usr/lib/zypp/plugins/services 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoManager.cc(init_knownRepositories):742 start construct known repos
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoManager.cc(repositories_in_dir):222 directory /etc/zypp/repos.d
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(dirForEach):557 readdir /etc/zypp/repos.d 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoManager.cc(repositories_in_file):204 repo file: /etc/zypp/repos.d/SLES12-SP1-12.1-0.repo
+2015-09-03 16:00:33 <1> linux(25612) [zypp] IniParser.cc(parse):84 Start parsing /etc/zypp/repos.d/SLES12-SP1-12.1-0.repo[g___]
+2015-09-03 16:00:33 <1> linux(25612) [zypp] IniParser.cc(parse):138 Done parsing /etc/zypp/repos.d/SLES12-SP1-12.1-0.repo[_eF_]
+2015-09-03 16:00:33 <1> linux(25612) [Progress++] ProgressData.cc(report):88 {#2|/etc/zypp/repos.d/SLES12-SP1-12.1-0.repo}END
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 --------------------------------------
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - alias       : SLES12-SP1-12.1-0
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - name        : SLES12-SP1-12.1-0
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - enabled     : 1
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - autorefresh : 1
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - url         : nfs://10.1.60.200/home/InstSource/SLE-12-SP1-Server-DVD-x86_64-Beta2-DVD1
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - path        : /
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - type        : yast2
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - priority    : 99
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - gpgcheck    : D(Y) repoD(Y) sig? pkgD(Y)
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 - keeppackages: 0
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoFileReader.cc(repositories_in_stream):165 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(dirForEach):557 readdir /var/cache/zypp/raw 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(dirForEach):557 readdir /var/cache/zypp/solv 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(dirForEach):557 readdir /var/cache/zypp/packages 
+2015-09-03 16:00:33 <1> linux(25612) [zypp] RepoManager.cc(init_knownRepositories):802 end construct known repos
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(cleanup):5310 START
+2015-09-03 16:00:33 <1> linux(25612) [zypper] main.cc(~Bye):61 ===== Exiting main() =====
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(recursive_rmdir):430 recursive_rmdir /var/tmp/zypp.ZTb1rA 
+2015-09-03 16:00:33 <1> linux(25612) [zypp++] TmpPath.cc(~Impl):78 TmpPath cleaned up /var/tmp/zypp.ZTb1rA{d 0700 0/0}
+2015-09-03 16:00:33 <1> linux(25612) [zypper] Zypper.cc(~Zypper):191 Zypper instance destroyed. Bye!
+2015-09-03 16:00:33 <1> linux(25612) [zypp] PathInfo.cc(recursive_rmdir):430 recursive_rmdir /var/tmp/TmpDir.XZ7d5d 
+2015-09-03 16:00:33 <1> linux(25612) [zypp++] TmpPath.cc(~Impl):78 TmpPath cleaned up /var/tmp/TmpDir.XZ7d5d{d 0700 0/0}
+
+
+#==[ Log File ]=====================================#
+# /var/log/zypp/history - Last 500 Lines
+2015-09-02 09:36:30|install|libyelp0|3.10.2-1.20|x86_64||SLES12-SP1-12.1-0|7f74e4892b96533db4b0bbf4c3a88ebf300b0f0cf10fc4bb9bdf345b1b08abf1|
+2015-09-02 09:36:30|install|libgoa-backend-1_0-1|3.10.5-1.11|x86_64||SLES12-SP1-12.1-0|28e059a08fdbcc057dab456af4e087d85287a06727b4b600b2475141ea2e0837|
+2015-09-02 09:36:30|install|libwebkitgtk3-lang|2.4.8-16.2|noarch||SLES12-SP1-12.1-0|157178d719592fa5a2f1e76eb03c688982d9f95037db5290e753bfa808c25101|
+2015-09-02 09:36:30|install|gstreamer-plugins-bad-lang|1.2.4-2.4|noarch||SLES12-SP1-12.1-0|fa1e0544ad88af3f4a4ceef8ebdd47680015f57fdac8523aae60b674149a4144|
+2015-09-02 09:36:30|install|libcheese7|3.10.2-1.152|x86_64||SLES12-SP1-12.1-0|e48af5cdbc0089cd521d45f97c95ffb5d3f48cd5df3569f4a4f295fadaedc2c4|
+2015-09-02 09:36:32|install|brasero|3.10.0-1.212|x86_64||SLES12-SP1-12.1-0|7076213ab1f9c6c48810fabb7472b5352b9a3fc6f557850ae2d478db5cde554e|
+2015-09-02 09:36:32|install|gstreamer-plugins-good-lang|1.2.4-1.23|noarch||SLES12-SP1-12.1-0|9ccac2bbd9184ea488adcef8a2382bd94d9238855bd76f574e13a5381bdddfcb|
+2015-09-02 09:36:32|install|libsamba-passdb0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|9c9c573cc94515f56d9baca354600885809f866f74c1ea6641aa7933c3ed5658|
+2015-09-02 09:36:32|install|yast2-auth-server|3.1.15-1.2|x86_64||SLES12-SP1-12.1-0|db963caaea42232fe1c20c2c5d957566c6ecc957a309d49a9fcdbf6d901d1006|
+2015-09-02 09:36:32|install|yast2-sudo|3.1.2-3.2|noarch||SLES12-SP1-12.1-0|9788949f19597c0467faeec6ce2dd80506850896431fbaf6de30fc7cdc717247|
+2015-09-02 09:36:32|install|yast2-samba-server|3.1.12-10.1|noarch||SLES12-SP1-12.1-0|7f496fefad2ac7323623b0ed58808184d08fc46aec1d7c2bb117ea1b36585fd9|
+# 2015-09-02 09:36:32 yast2-mail-3.1.5-3.71.noarch.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/mail...
+# 
+2015-09-02 09:36:32|install|yast2-mail|3.1.5-3.71|noarch||SLES12-SP1-12.1-0|04984e3461aa230bf340bb2d945ec1944e6ef761be39a6239fe9600d15858b21|
+2015-09-02 09:36:32|install|yast2-inetd|3.1.11-1.2|noarch||SLES12-SP1-12.1-0|b0563da59175c6bd3de7bb218466d962b4700061c5ab2e1f661480d038a96f75|
+2015-09-02 09:36:32|install|yast2-dhcp-server|3.1.5-3.95|noarch||SLES12-SP1-12.1-0|98852fb4024293b1db56ff5df6886d131fd39130b715ed42cc6295d1d7992467|
+2015-09-02 09:36:33|install|yast2-update|3.1.33-1.1|x86_64||SLES12-SP1-12.1-0|f663db750344c6840d6f4ae51d6a16b4b5ec16cb5a947ab81e3f7b4580fea4ea|
+2015-09-02 09:36:33|install|yelp|3.10.2-1.20|x86_64||SLES12-SP1-12.1-0|c62ea9c7364f59720bd7992311f067c90cf0fccadd475dbd50ef9fe1bc214b65|
+2015-09-02 09:36:33|install|libcheese-gtk23|3.10.2-1.152|x86_64||SLES12-SP1-12.1-0|9110a993649234dd416072b8579542a324d1c3fbc58715c72f27d84c5c99f347|
+2015-09-02 09:36:34|install|brasero-lang|3.10.0-1.212|noarch||SLES12-SP1-12.1-0|d0f25d0992dd4145a823a0652e9e4682f7e10adc7f8baed717ee91f75537eeed|
+2015-09-02 09:36:34|install|libdcerpc-binding0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|21ab74d96ccbba9440b05309e5f45714a9ab6b92dc08ea0f9bf15269e84bd0c8|
+2015-09-02 09:36:34|install|yast2-ftp-server|3.1.8-8.1|noarch||SLES12-SP1-12.1-0|fc21d5630c53f643f797fb34b9fb19c28ec8c1098793540395e4511aeed424b7|
+2015-09-02 09:36:34|install|yast2-add-on|3.1.10-3.64|noarch||SLES12-SP1-12.1-0|7c4103ae73907bf3c6e2e2ad2d74ba6c0b1735302e2b05d03dafff940e3fca8e|
+# 2015-09-02 09:36:34 autoyast2-3.1.90-1.8.noarch.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/autoinstall...
+# 
+2015-09-02 09:36:34|install|autoyast2|3.1.90-1.8|noarch||SLES12-SP1-12.1-0|d30cc340c0fe495f5806c6a9107fb3aa64d14d632e375e03e9540aace009c718|
+2015-09-02 09:36:34|install|yelp-lang|3.10.2-1.20|noarch||SLES12-SP1-12.1-0|8e0bc1a14fcd59c46b74a6b9b8e76e8500e6c1f12daac4c7ba654a29ae20bf39|
+2015-09-02 09:36:34|install|libsmbldap0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|a9802da906370af1888f49568031f746286795b4226e99b8e7fa2d1f0cec1d38|
+2015-09-02 09:36:34|install|yast2-registration|3.1.142-1.1|noarch||SLES12-SP1-12.1-0|7b21e3e2764546a3f7af7e7909a0c6a3d150dcc84e6aabd4a2d70a827fb5e2ff|
+2015-09-02 09:36:34|install|libsmbclient-raw0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|c55cc67ac1d048b5ea365383f3fe243872b6adf56a2d89b120cdac5c6c860818|
+2015-09-02 09:36:35|install|patterns-sles-base|12-63.1|x86_64||SLES12-SP1-12.1-0|ff60ade2dedbe8ea46a2e3a5c13e12160d331b294c59fe8b16bba346d15603de|
+2015-09-02 09:36:35|install|libdcerpc0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|ac0f29559aa70b7b2b3f7d4b137b727d5f4ce53cf1d97c63296f279253add0e5|
+2015-09-02 09:36:35|install|patterns-sles-x11|12-63.1|x86_64||SLES12-SP1-12.1-0|9c32df29492391f3c5d3cc9ae18489702c439e88eda97f65d39eb7da395cb21f|
+2015-09-02 09:36:35|install|patterns-sles-apparmor|12-63.1|x86_64||SLES12-SP1-12.1-0|313f46dc325ccd78c66dd5ce187d5c4584316ef42ae24c1c89709cfa3f391fce|
+2015-09-02 09:36:35|install|libndr-krb5pac0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|7be8818a87d3b2ccd748ab619896973c0497ba1dc48177b3654e5508c6e7acaa|
+2015-09-02 09:36:35|install|libnetapi0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|6e798babf6e1a9cc13276982752234da4ff6579f5c3c6f77a6eaa707ebf5229a|
+2015-09-02 09:36:35|install|libsmbclient0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|d9063ba71fef030fbac7ea5ca5e237c0e7aa6af05a198519f802368427402838|
+2015-09-02 09:36:35|install|libregistry0|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|bde140107692ed26f9bb0b05acd628ba5fd2d573ffcfb0f886d9dd08af37f09a|
+2015-09-02 09:36:35|install|cifs-utils|6.4-6.3|x86_64||SLES12-SP1-12.1-0|78699686bfe1f022bd1545185c107b94ddfe079187630f78821183b77ce28aa1|
+2015-09-02 09:36:35|install|python-smbc|1.0.13-11.9|x86_64||SLES12-SP1-12.1-0|5abfc44d8086a5ecae2e984bb0a9c2ec599715642af2a9e3901b3a84efdf1602|
+2015-09-02 09:36:36|install|gvfs-backends|1.18.3-3.28|x86_64||SLES12-SP1-12.1-0|4d81a312b63567d2767e5be568e0c41d88d8d594b20afb6bcf8055295df4005b|
+2015-09-02 09:36:36|install|gnome-control-center|3.10.3-13.1|x86_64||SLES12-SP1-12.1-0|2f6114816fa30d952295f091fafb0a5dc8880af06c7f40e58bfa2abec17f784d|
+# 2015-09-02 09:36:37 samba-client-4.2.3-3.9.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/samba...
+# Updating /etc/sysconfig/network/dhcp...
+# 
+2015-09-02 09:36:37|install|samba-client|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|0328e8fcd78646e7f417639023471b5654c3f103af6345cba29a19141e5b08d7|
+2015-09-02 09:36:37|install|system-config-printer-common|1.4.5-1.5|noarch||SLES12-SP1-12.1-0|09fd3bb93156f4e013aaa74a16ef5f7cf4bb8c306ef13b0762f7e6805779d2c9|
+2015-09-02 09:36:37|install|gnome-session-default-session|3.10.1-7.16|x86_64||SLES12-SP1-12.1-0|6fd1fa51794bfeedef3d79e4266e773d7c0fe973f448b137760e8850b17f4e24|
+2015-09-02 09:36:37|install|gnome-control-center-lang|3.10.3-13.1|noarch||SLES12-SP1-12.1-0|f18474f1ac13e793d92cc3be7bf50184e7cc6274e39ced2427ef0e6921cf1f91|
+# 2015-09-02 09:36:38 samba-winbind-4.2.3-3.9.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/samba...
+# 
+2015-09-02 09:36:38|install|samba-winbind|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|c12fafbaa0692c4f6b4c4b65409de4b005ca6fb2013205427a3d9a8223186662|
+# 2015-09-02 09:36:38 samba-4.2.3-3.9.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/samba...
+# 
+2015-09-02 09:36:38|install|samba|4.2.3-3.9|x86_64||SLES12-SP1-12.1-0|165668f1a12345dc4e69fa0b42bae8623ef99f5cb7a9f86456638b772d9a1185|
+2015-09-02 09:36:38|install|system-config-printer-dbus-service|1.4.5-1.5|noarch||SLES12-SP1-12.1-0|a4e85c87fd982f12a3f9686056c9fa8b7f3f1c67ef7a5d32ff02966920071dff|
+2015-09-02 09:36:38|install|system-config-printer-common-lang|1.4.5-1.5|noarch||SLES12-SP1-12.1-0|ddafeb4a344330231addd376a75a39963735e4b58558b5e364f8704094fd16e9|
+2015-09-02 09:36:38|install|gnome-session|3.10.1-7.16|x86_64||SLES12-SP1-12.1-0|59cc23d9bc3f90f12054d092d3dbcbec24dba2359406f6ff28e82c3015298dbc|
+2015-09-02 09:36:38|install|nautilus-share|0.7.3-11.81|x86_64||SLES12-SP1-12.1-0|20055c3fb60e4c0e43e71daecd0c6365225b741ba07e101d7204d8ef7e6b62ff|
+2015-09-02 09:36:39|install|gnome-shell|3.10.4-33.1|x86_64||SLES12-SP1-12.1-0|0b20221eb7a54c351eb8fd274ae7e4fc9b21272c73c383045571186f1fc270b3|
+2015-09-02 09:36:39|install|nautilus-share-lang|0.7.3-11.81|noarch||SLES12-SP1-12.1-0|5b946c3253f7cf5d93c6c338cbbfb26b44d7de13278be06977cf4df9cfbefb58|
+2015-09-02 09:36:39|install|patterns-sle-gnome-basic|12-5.8|x86_64||SLES12-SP1-12.1-0|bb49e41309d45cdd7a8251da72974315391ba533fb20d1c82862790d02eebbcf|
+2015-09-02 09:36:39|install|gnome-shell-search-provider-nautilus|3.10.1-9.5|x86_64||SLES12-SP1-12.1-0|2b31763a104fcb56d8ff458bedd443fdb2e46bada93ac504df6e1cc9462a47db|
+2015-09-02 09:36:39|install|gnome-shell-browser-plugin|3.10.4-33.1|x86_64||SLES12-SP1-12.1-0|10077025766bbb07bb77af55de97d706968070b173093225bbe7a6610f3a1513|
+2015-09-02 09:36:39|install|gnome-tweak-tool|3.10.1-5.18|noarch||SLES12-SP1-12.1-0|fc56cf76c03822a143f046350d87bccc923db80a400d7a68a8436ba1ad004ac1|
+2015-09-02 09:36:39|install|gnome-shell-lang|3.10.4-33.1|noarch||SLES12-SP1-12.1-0|2d71054fab10243c63b715fd4d6cc8058aac4c8a6b39bfceab9299a2ad386782|
+2015-09-02 09:36:39|install|gnome-shell-extensions-common|3.10.1-27.3|noarch||SLES12-SP1-12.1-0|c3a2ab07d4595b56291d8c78d0cd9fabd42e997f2583d239544980b525868201|
+2015-09-02 09:36:40|install|gnome-shell-classic|3.10.1-27.3|noarch||SLES12-SP1-12.1-0|d1541d3fc4b08f1dd66054c36fb02c291bc36efc2dab7d1d8ab39d4a2fe12abe|
+2015-09-02 09:36:40|install|gnome-session-lang|3.10.1-7.16|noarch||SLES12-SP1-12.1-0|e1ec073801e525e088672d134d6a45de1aea55adae53f00a2e05ba7147888a15|
+2015-09-02 09:36:40|install|gdm-branding-upstream|3.10.0.1-16.1|noarch||SLES12-SP1-12.1-0|adae9c761dce2e7c8fc4350e82a328c048f8710c627f49785f34c7e03f1fbb23|
+2015-09-02 09:36:40|install|gnome-tweak-tool-lang|3.10.1-5.18|noarch||SLES12-SP1-12.1-0|04e41dfd8bd39fa204724eb03607691aed957742956e5755fe1028ad7175b09a|
+2015-09-02 09:36:40|install|gnome-shell-extensions-common-lang|3.10.1-27.3|noarch||SLES12-SP1-12.1-0|2fa5f65bcdf7fbc0734326a0b5a7c55623ce3a8ae366a279b72964520c73f7cb|
+2015-09-02 09:36:40|install|gdm|3.10.0.1-16.1|x86_64||SLES12-SP1-12.1-0|6749e3ecc23a67fb76edc0dc9ddb90448b376a7b6d9ad1a3bf46a0e1c3b20402|
+2015-09-02 09:36:40|install|gdm-lang|3.10.0.1-16.1|noarch||SLES12-SP1-12.1-0|f1402f0a0fb767870581e437e78901ed2011ca30bcdd9db8cd523b90b3eee5c3|
+# 2015-09-02 09:36:55 Output of ucode-intel-20140913-1.7.x86_64.rpm %posttrans script:
+#     Creating initrd: /boot/initrd-3.12.46-2-default
+#     Executing: /usr/bin/dracut --logfile /var/log/YaST2/mkinitrd.log --force /boot/initrd-3.12.46-2-default 3.12.46-2-default
+#     dracut module 'fcoe-uefi' will not be installed, because command 'dcbtool' could not be found!
+#     dracut module 'fcoe-uefi' will not be installed, because command 'fipvlan' could not be found!
+#     dracut module 'fcoe-uefi' will not be installed, because command 'lldpad' could not be found!
+#     dracut module 'fcoe-uefi' will not be installed, because command 'dcbtool' could not be found!
+#     dracut module 'fcoe-uefi' will not be installed, because command 'fipvlan' could not be found!
+#     dracut module 'fcoe-uefi' will not be installed, because command 'lldpad' could not be found!
+#     *** Including module: bash ***
+#     *** Including module: i18n ***
+#     No KEYMAP configured.
+#     *** Including module: ifcfg ***
+#     *** Including module: drm ***
+#     *** Including module: plymouth ***
+#     *** Including module: kernel-modules ***
+#     Failed to install module unix
+#     Failed to install module ehci-platform
+#     Failed to install module atkbd
+#     Failed to install module i8042
+#     Failed to install module pcmcia
+#     Failed to install module sdhci_acpi
+#     Failed to install module swap
+#     *** Including module: resume ***
+#     *** Including module: rootfs-block ***
+#     *** Including module: terminfo ***
+#     *** Including module: udev-rules ***
+#     Skipping udev rule: 91-permissions.rules
+#     Skipping udev rule: 80-drivers-modprobe.rules
+#     *** Including module: haveged ***
+#     *** Including module: systemd ***
+#     Failed to install module ipv6
+#     *** Including module: usrmount ***
+#     *** Including module: base ***
+#     *** Including module: fs-lib ***
+#     *** Including module: shutdown ***
+#     *** Including module: suse ***
+#     *** Including modules done ***
+#     *** Installing kernel module dependencies and firmware ***
+#     *** Installing kernel module dependencies and firmware done ***
+#     *** Resolving executable dependencies ***
+#     *** Resolving executable dependencies done***
+#     *** Hardlinking files ***
+#     *** Hardlinking files done ***
+#     *** Stripping files ***
+#     *** Stripping files done ***
+#     *** Generating early-microcode cpio image ***
+#     *** Constructing GenuineIntel.bin ****
+#     *** Store current command line parameters ***
+#     Stored kernel commandline:
+#      resume=UUID=d03cce05-b791-4fbf-b5f8-64df2b80bc94
+#     root=UUID=083ae1fb-02e3-46a0-8610-b1c1cafd31b0 rootflags=rw,relatime,data=ordered rootfstype=ext4
+#     *** Creating image file ***
+#     *** Creating image file done ***
+#     Some kernel modules could not be included: 
+#     unix
+#     ehci-platform
+#     atkbd
+#     i8042
+#     pcmcia
+#     sdhci_acpi
+#     swap
+#     ipv6
+#     Update bootloader...
+# 2015-09-02 09:36:55 Output of dmraid-1.0.0.rc16-31.5.x86_64.rpm %posttrans script:
+#     Updating /etc/sysconfig/dmraid...
+# 2015-09-02 09:36:55 /var/adm/update-scripts/xterm-308-3.8-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/intlfonts-1.2.1-13.5-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/google-opensans-fonts-1.0-9.128-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/gnu-unifont-bitmap-fonts-20080123-83.182-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/fonts-config-20140604-1.57-reconfigure-fonts-cjk executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/fonts-config-20140604-1.57-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/efont-unicode-bitmap-fonts-0.4.2-224.144-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/dejavu-fonts-2.34-3.189-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/cantarell-fonts-0.0.15-1.167-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/bitstream-vera-fonts-1.10-312.171-reconfigure-fonts executed
+# 2015-09-02 09:37:16 /var/adm/update-scripts/xorg-x11-fonts-7.6-29.45-reconfigure-fonts executed
+2015-09-02 09:37:55|radd   |SLES12-SP1-12.1-0|nfs://10.1.60.200/home/InstSource/SLE-12-SP1-Server-DVD-x86_64-Beta2-DVD1|
+2015-09-02 16:31:28|command|root@linux|'/usr/lib/YaST2/bin/y2base' 'virtualization' 'qt'|
+2015-09-02 16:31:28|install|python-ipaddr|2.1.10-12.9|noarch||SLES12-SP1-12.1-0|00b082d44491e9dd0343c5dfb00166c62ccad2ccdd3ed625bb3e23aec9ae21dd|
+2015-09-02 16:31:28|install|python-urlgrabber|3.9.1-15.2|noarch||SLES12-SP1-12.1-0|ec47ceb502ef3f0e22629c69795fc1778b5b1092b5059333a80a8c2b262eee15|
+2015-09-02 16:31:28|install|bridge-utils|1.5-17.56|x86_64||SLES12-SP1-12.1-0|bb52013d6e0ffb9e11c279edec5bcc02e730dd8f2c65aa60e79dc16614af68ae|
+2015-09-02 16:31:28|install|dnsmasq|2.71-8.2|x86_64||SLES12-SP1-12.1-0|a8b6fef56faeb7d18faef3ab06f9dbf420455031636dd16f3129653e9da5cb2a|
+2015-09-02 16:31:29|install|ebtables|2.0.10.4-12.1|x86_64||SLES12-SP1-12.1-0|a105195e92afb5e4c922df9a113c26cf146a1101489850c43f09126cd6557481|
+2015-09-02 16:31:29|install|gnutls|3.2.15-7.2|x86_64||SLES12-SP1-12.1-0|3967a0859c742fb90a57adb15f92136f632e01ddfa894cc5b613979b4cce1432|
+2015-09-02 16:31:30|install|grub2-x86_64-xen|2.02~beta2-60.22|x86_64||SLES12-SP1-12.1-0|932906bc977cd5dae27b67d3314ff71a1da7be360fd906bef2d843402f5a3d9d|
+# 2015-09-02 16:31:52 kernel-xen-3.12.46-2.3.x86_64.rpm installed ok
+# Additional rpm output:
+# Free diskspace below /boot: 759680960 blocks
+# Creating initrd: /boot/initrd-3.12.46-2-xen
+# Executing: /usr/bin/dracut --logfile /var/log/YaST2/mkinitrd.log --force /boot/initrd-3.12.46-2-xen 3.12.46-2-xen
+# dracut module 'fcoe-uefi' will not be installed, because command 'dcbtool' could not be found!
+# dracut module 'fcoe-uefi' will not be installed, because command 'fipvlan' could not be found!
+# dracut module 'fcoe-uefi' will not be installed, because command 'lldpad' could not be found!
+# dracut module 'fcoe-uefi' will not be installed, because command 'dcbtool' could not be found!
+# dracut module 'fcoe-uefi' will not be installed, because command 'fipvlan' could not be found!
+# dracut module 'fcoe-uefi' will not be installed, because command 'lldpad' could not be found!
+# *** Including module: bash ***
+# *** Including module: warpclock ***
+# *** Including module: i18n ***
+# *** Including module: ifcfg ***
+# *** Including module: drm ***
+# *** Including module: plymouth ***
+# *** Including module: kernel-modules ***
+# Failed to install module unix
+# Failed to install module ehci-platform
+# Failed to install module atkbd
+# Failed to install module i8042
+# Failed to install module pcmcia
+# Failed to install module hid-hyperv
+# Failed to install module hv-vmbus
+# Failed to install module sdhci_acpi
+# Failed to install module virtio
+# Failed to install module virtio_blk
+# Failed to install module virtio_ring
+# Failed to install module virtio_pci
+# Failed to install module virtio_scsi
+# Failed to install module swap
+# *** Including module: resume ***
+# *** Including module: rootfs-block ***
+# *** Including module: terminfo ***
+# *** Including module: udev-rules ***
+# Skipping udev rule: 91-permissions.rules
+# Skipping udev rule: 80-drivers-modprobe.rules
+# *** Including module: haveged ***
+# *** Including module: systemd ***
+# Failed to install module ipv6
+# *** Including module: usrmount ***
+# *** Including module: base ***
+# *** Including module: fs-lib ***
+# *** Including module: shutdown ***
+# *** Including module: suse ***
+# *** Including modules done ***
+# *** Installing kernel module dependencies and firmware ***
+# *** Installing kernel module dependencies and firmware done ***
+# *** Resolving executable dependencies ***
+# *** Resolving executable dependencies done***
+# *** Hardlinking files ***
+# *** Hardlinking files done ***
+# *** Stripping files ***
+# *** Stripping files done ***
+# *** Generating early-microcode cpio image ***
+# *** Constructing GenuineIntel.bin ****
+# *** Store current command line parameters ***
+# Stored kernel commandline:
+#  resume=UUID=d03cce05-b791-4fbf-b5f8-64df2b80bc94
+# root=UUID=083ae1fb-02e3-46a0-8610-b1c1cafd31b0 rootflags=rw,relatime,data=ordered rootfstype=ext4
+# *** Creating image file ***
+# *** Creating image file done ***
+# Some kernel modules could not be included: 
+# unix
+# ehci-platform
+# atkbd
+# i8042
+# pcmcia
+# hid-hyperv
+# hv-vmbus
+# sdhci_acpi
+# virtio
+# virtio_blk
+# virtio_ring
+# virtio_pci
+# virtio_scsi
+# swap
+# ipv6
+# Update bootloader...
+# SKIP: /etc/uefi/certs/02C2DB63.crt is already in db
+# 
+2015-09-02 16:31:52|install|kernel-xen|3.12.46-2.3|x86_64||SLES12-SP1-12.1-0|e37075d07715cc44e865fef3e453d37251ba162ae4766565948148f059bc0dbe|
+2015-09-02 16:31:53|install|libavahi-core7|0.6.31-20.59|x86_64||SLES12-SP1-12.1-0|e6de42745ea233ea3305e1003ad70fd3dea6b58b97fd08b116f046df0d0c320e|
+2015-09-02 16:31:53|install|libcelt051-0|0.5.1.3-8.81|x86_64||SLES12-SP1-12.1-0|917a6a39d8b82b999020cd8f569e330637ad01e8d284f1d251ace0c6b8d5fcd8|
+2015-09-02 16:31:53|install|libdaemon0|0.14-14.57|x86_64||SLES12-SP1-12.1-0|df9a8f73c14b87a3a51ddca2b2beba0d6ec70346bac3d207ec5f29680630f451|
+2015-09-02 16:31:53|install|libgvnc-1_0-0|0.5.3-1.134|x86_64||SLES12-SP1-12.1-0|48dd3d545c94f245e3ac7eb0f597cd191edc08c959cdb83513eaaa73c7fe2786|
+2015-09-02 16:31:53|install|libnetcontrol0|0.3.0-3.12|x86_64||SLES12-SP1-12.1-0|a61833fc8fa9046519665b63e10b286176141bd659fe264c6027cb7e0508b149|
+2015-09-02 16:31:53|install|libosinfo|0.2.12-2.2|x86_64||SLES12-SP1-12.1-0|e36d56f1eaa7326fc286e12a28d01a367c715113277f89308fd175f9c2c05062|
+2015-09-02 16:31:53|install|libquadmath0|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|ac1a18d194789e871da64a5650ab125c98dc6bbd738a4c37697069d0d6e1086c|
+2015-09-02 16:31:54|install|librados2|0.80.9-5.1|x86_64||SLES12-SP1-12.1-0|05bb5993b50609866dd0b1c962edf95c7d42ff32aaa08cd7973149a68706825a|
+2015-09-02 16:31:54|install|libspice-controller0|0.29-1.3|x86_64||SLES12-SP1-12.1-0|63d130cdf7c40f61953385d76be8466bc1868bab746d8dfcee21517fe1880510|
+2015-09-02 16:31:54|install|libusbredirparser1|0.6-5.55|x86_64||SLES12-SP1-12.1-0|102ca63ce00ebccbd625836a9bf366c83f5f39d4fb1792c2245720930f2b445f|
+2015-09-02 16:31:54|install|libyajl2|2.0.1-15.77|x86_64||SLES12-SP1-12.1-0|a358282a22a92a6decf16c1e6634f81d4926bfddaba2c9598c4cbc11770ab796|
+2015-09-02 16:31:54|install|libyajl2-32bit|2.0.1-15.77|x86_64||SLES12-SP1-12.1-0|2328feb20f477aeaca6bbae8a32d3bd324985368be0179c8fb7509676f735e0f|
+2015-09-02 16:31:54|install|numad|0.5.20130522-3.23|x86_64||SLES12-SP1-12.1-0|eed53e29cf7085dd8417f79342a9e41bfea45ea9623d34ce1fd30f71bcbefa2f|
+2015-09-02 16:31:54|install|patterns-sles-xen_server-32bit|12-63.1|x86_64||SLES12-SP1-12.1-0|f1112b0a7e41adc963034e65e159ed5aa7466f1bba771974dc5133e06851c76d|
+2015-09-02 16:31:54|install|patterns-sles-xen_tools-32bit|12-63.1|x86_64||SLES12-SP1-12.1-0|c4266b5d7b36119a1f1b0b689b158909b8560bb7c1f11464bc4bb5457c8645ed|
+2015-09-02 16:31:55|install|python-curses|2.7.9-18.1|x86_64||SLES12-SP1-12.1-0|c79924ba3e54ff50cc1f0c7d93f11b23339d83751bc67abceeb339e20f607ee5|
+2015-09-02 16:31:55|install|python-gobject2|2.28.6-24.80|x86_64||SLES12-SP1-12.1-0|bc45d51590a115756e9d42d67f6d66b65cd1bab6a19ee5f1723acaee07ba5b59|
+2015-09-02 16:31:55|install|python-libxml2|2.9.1-10.1|x86_64||SLES12-SP1-12.1-0|c80d00b6783e1f29b51ef3ac2c30596a1a420b053ed98cfafa2b5d0969f1a99a|
+2015-09-02 16:31:55|install|python-lxml|3.2.3-4.55|x86_64||SLES12-SP1-12.1-0|538bf33edc314a93b955e7b9d980a9ca79e4c91bed935b234d9b7ff0c69d5f03|
+2015-09-02 16:31:55|install|python-pam|0.5.0-88.56|x86_64||SLES12-SP1-12.1-0|b105450be3894bdff2cc5b0a4fb389c9cf4653a58835ec536e48ff7a92134f18|
+2015-09-02 16:31:55|install|qemu-block-curl|2.3.1-1.6|x86_64||SLES12-SP1-12.1-0|d666430fbbd3d1f517fa6c23c26d70fc642a47ee3704eb2f541bdf16543a1a52|
+2015-09-02 16:31:55|install|qemu-tools|2.3.1-1.6|x86_64||SLES12-SP1-12.1-0|c44e1a3e82b64db23e6fa0b0db31f3297962a28473574106310dfd85a1285082|
+2015-09-02 16:31:55|install|tftp|5.2-8.84|x86_64||SLES12-SP1-12.1-0|028e91ec1d936b630742c84f23a0e031c9ff5cc7d20432470e2b071bc4744b9c|
+2015-09-02 16:31:56|install|typelib-1_0-Vte-2_90|0.34.9-1.84|x86_64||SLES12-SP1-12.1-0|50bf1a63ffb2c4d0e8484b85115b32260e2c63ccbcac92bb3b8b995017795d1e|
+2015-09-02 16:31:56|install|udhcp|0.9.8-22.56|x86_64||SLES12-SP1-12.1-0|294d1b18d2350e1b7c4f81fa6cdb3f010155ae111434f1de36d59d45a8c59ff6|
+2015-09-02 16:31:59|install|xen|4.5.1_04-1.16|x86_64||SLES12-SP1-12.1-0|30bccc96fa8e4a8005d8b3909a688b9607abc8a5557f4073e54454b5fd5a3b3f|
+2015-09-02 16:31:59|install|xen-doc-html|4.5.1_04-1.16|x86_64||SLES12-SP1-12.1-0|a8545432c7eacb05913e0def0fa42097dab6112269d48ff72b96a81f61170cfd|
+2015-09-02 16:32:05|install|xen-kmp-default|4.5.1_04_k3.12.46_2-1.16|x86_64||SLES12-SP1-12.1-0|ec3c411c2f187ae92508f634eb0ecc2dce485dc39c411cbf14a62f173392b854|
+2015-09-02 16:32:11|install|crash-kmp-xen|7.0.5_k3.12.46_2-3.11|x86_64||SLES12-SP1-12.1-0|755c4d8142bff0bf0074a92f5ddcb198215ee76547882af7c332267500146836|
+2015-09-02 16:32:11|install|libspice-server1|0.12.5-1.4|x86_64||SLES12-SP1-12.1-0|bf6c9fabc784443f8046157d1943d1c3cc74496a904694f237a31b8c255d4a2b|
+# 2015-09-02 16:32:12 radvd-1.9.7-2.17.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/radvd...
+# created /etc/radvd.conf with ULA prefix fd90:21f0:119c:0001::/64
+# 
+2015-09-02 16:32:12|install|radvd|1.9.7-2.17|x86_64||SLES12-SP1-12.1-0|606c339f80cdb8a5472595cd8134fa62e7e76c201f05bca78e6b2091e52cde72|
+# 2015-09-02 16:32:12 avahi-0.6.31-20.59.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/avahi...
+# Updating /etc/sysconfig/security...
+# 
+2015-09-02 16:32:12|install|avahi|0.6.31-20.59|x86_64||SLES12-SP1-12.1-0|a0c656db20a439d24cfba7806ea79d68e3e603d65261e2ed800224f06f624fc5|
+2015-09-02 16:32:12|install|typelib-1_0-GVnc-1_0|0.5.3-1.134|x86_64||SLES12-SP1-12.1-0|edc73c8bf270509ed7a7e494ef735d416d5ab54e0728665630c2c7fb036d3b2e|
+2015-09-02 16:32:12|install|libgtk-vnc-2_0-0|0.5.3-1.134|x86_64||SLES12-SP1-12.1-0|f548f81b3146dce269cb3d2d6b2c85b239a31d29fff2bd3485019fafadd65fb0|
+2015-09-02 16:32:12|install|libosinfo-1_0-0|0.2.12-2.2|x86_64||SLES12-SP1-12.1-0|9d14257176031f9b60fc4c2d1deef4648fc17903bea123f06c11a67880eb5b2f|
+2015-09-02 16:32:13|install|libgfortran3|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|db4d436783cd0d0a3b1e01ddc949999b4aa65c37a57a9851ad748f58688f01d4|
+2015-09-02 16:32:13|install|librbd1|0.80.9-5.1|x86_64||SLES12-SP1-12.1-0|48f6430ac1c3f5401ce7c741233560898ceb0055144d687a1d83d3b649ef3c9b|
+2015-09-02 16:32:13|install|libusbredirhost1|0.6-5.55|x86_64||SLES12-SP1-12.1-0|b38900dffd1ba9399639c03156fdba5b934357d1ee632a9a01a99dca37bfdf9a|
+2015-09-02 16:32:13|install|xen-libs|4.5.1_04-1.16|x86_64||SLES12-SP1-12.1-0|4b77f21178454c79c3007cf2cd8257a4624aece70220712c6c48556d98692052|
+2015-09-02 16:32:13|install|xen-libs-32bit|4.5.1_04-1.16|x86_64||SLES12-SP1-12.1-0|f171fc08479f533a8970fd35049a08536fce4796eb7d90e5d976333a2f3df939|
+2015-09-02 16:32:13|install|python-gconf|2.28.1-21.92|x86_64||SLES12-SP1-12.1-0|0c34614bc969d0baa84b6e422606f9ab0cc371d01e3a3fbd8af2bd4f24116153|
+2015-09-02 16:32:13|install|nss-mdns|0.10-62.64|x86_64||SLES12-SP1-12.1-0|5f3e1461b44c7f06d77c9fb96c52d77ae1740545b3716e0196a1c7925ee21a19|
+2015-09-02 16:32:13|install|typelib-1_0-GtkVnc-2_0|0.5.3-1.134|x86_64||SLES12-SP1-12.1-0|23ef2e40d9596628e3f32d8c430f1cdedf85f24d8e9c9fc83b182204af7fb4b9|
+2015-09-02 16:32:13|install|typelib-1_0-Libosinfo-1_0|0.2.12-2.2|x86_64||SLES12-SP1-12.1-0|f964f3a19985a6c1b06eade351f6074cd9b1e47c56d797318eaad741c8a7e3b5|
+2015-09-02 16:32:13|install|libosinfo-lang|0.2.12-2.2|noarch||SLES12-SP1-12.1-0|1b7fa597a0b979965d24bd3c2356f4ed16707659e3daa01fd006731750d80b1a|
+# 2015-09-02 16:32:14 libblas3-3.5.0-1.40.x86_64.rpm installed ok
+# Additional rpm output:
+# update-alternatives: using /usr/lib64/libblas.so.3.5.0 to provide /usr/lib64/libblas.so.3 (libblas.so.3) in auto mode
+# 
+2015-09-02 16:32:14|install|libblas3|3.5.0-1.40|x86_64||SLES12-SP1-12.1-0|ae0e6407bc8471f1ca16761915cc8c262f026e717d2e1b18a28a79162e7756d0|
+2015-09-02 16:32:14|install|libspice-client-glib-2_0-8|0.29-1.3|x86_64||SLES12-SP1-12.1-0|01362927d1c34e08736c09df31e3daddeb82175fdb9b9bcf4470ef49f9b72a4e|
+# 2015-09-02 16:32:16 xen-tools-4.5.1_04-1.16.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/xencommons...
+# Updating /etc/sysconfig/xendomains...
+# 
+2015-09-02 16:32:16|install|xen-tools|4.5.1_04-1.16|x86_64||SLES12-SP1-12.1-0|5b4d2bf435b0faeafc0fd6d66df15fac87f9ec02faa84b945b951490bcc051f2|
+# 2015-09-02 16:32:17 libvirt-client-1.2.18-1.9.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/libvirt-guests...
+# 
+2015-09-02 16:32:17|install|libvirt-client|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|ccb6860ec1b3c5f18f690e52acc59d0cb7fd81268c8592f02e5fb1517274d5cd|
+2015-09-02 16:32:17|install|nss-mdns-32bit|0.10-62.64|x86_64||SLES12-SP1-12.1-0|5fcd2cb30b30858c09e9f955db8fd198f7f40ebe2e99b219ba9118a251afe8a6|
+2015-09-02 16:32:17|install|avahi-lang|0.6.31-20.59|noarch||SLES12-SP1-12.1-0|cd1a5f97bcf023fb5648b4be5f95a3da318505fa97af545c75b0b50ce5ae0fcf|
+# 2015-09-02 16:32:18 liblapack3-3.5.0-1.40.x86_64.rpm installed ok
+# Additional rpm output:
+# update-alternatives: using /usr/lib64/liblapack.so.3.5.0 to provide /usr/lib64/liblapack.so.3 (liblapack.so.3) in auto mode
+# 
+2015-09-02 16:32:18|install|liblapack3|3.5.0-1.40|x86_64||SLES12-SP1-12.1-0|baf668749e33254440213f495934661184e8a7604f39e3545dd238c080f00a0a|
+2015-09-02 16:32:18|install|typelib-1_0-SpiceClientGlib-2_0|0.29-1.3|x86_64||SLES12-SP1-12.1-0|2ffb41e8d281715db0fce847723fada8d355bed2d6e06db6947ccb86b092063b|
+2015-09-02 16:32:18|install|libspice-client-gtk-3_0-4|0.29-1.3|x86_64||SLES12-SP1-12.1-0|f8bc7dde72a0b7394c3ad791bb6f5e5eda8fdf94112b46bcfd2a583ab01e72d9|
+2015-09-02 16:32:18|install|patterns-sles-xen_server|12-63.1|x86_64|7772:y2base|SLES12-SP1-12.1-0|3eb02391e1463f7ab83c54ed1a0005b4c549ae803bd16420bd7942ebcd599d57|
+2015-09-02 16:32:18|install|libvirt-python|1.2.18-1.1|x86_64||SLES12-SP1-12.1-0|3d37679061ce970d052d82b6e0893fa8733947f042c87a7b7da45a31c9d7e890|
+2015-09-02 16:32:18|install|libvirt-glib-1_0-0|0.1.8-2.8|x86_64||SLES12-SP1-12.1-0|47300c978e8d6fd0b831a4ed3d67ce50a6a6022b8f1cd0182853e2d8b919d9a8|
+# 2015-09-02 16:32:19 libvirt-daemon-1.2.18-1.9.x86_64.rpm installed ok
+# Additional rpm output:
+# Updating /etc/sysconfig/libvirtd...
+# Updating /etc/sysconfig/virtlockd...
+# 
+2015-09-02 16:32:19|install|libvirt-daemon|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|204717c308778af5d3fe8fa57bbda3ee29f2d800b5095c7cf981d7e8b72bfa3a|
+2015-09-02 16:32:19|install|python-numpy|1.8.0-3.158|x86_64||SLES12-SP1-12.1-0|8f02a9bf209f57cb7edc7b432ed252f1af6c62e46e3bd22423780941e1a2d662|
+2015-09-02 16:32:19|install|virt-viewer|1.0-1.12|x86_64||SLES12-SP1-12.1-0|abe6288f1dd1b542e760972445ba9369969bbce9055ffd391be05d0f8b383cba|
+2015-09-02 16:32:19|install|typelib-1_0-SpiceClientGtk-3_0|0.29-1.3|x86_64||SLES12-SP1-12.1-0|d02e31fa5d7bd71e47ffa11114680d67ceadaf65b279aeb83df33d7070af9638|
+2015-09-02 16:32:20|install|vm-install|0.8.42-1.2|x86_64||SLES12-SP1-12.1-0|e213065321a5cba9d5b567b1333ff054c482eb3aed08b5bb6ccc91e7dc512821|
+2015-09-02 16:32:20|install|virt-manager-common|1.2.1-4.1|noarch||SLES12-SP1-12.1-0|ca0aa63676f2ca94b2b76908cdc75a98b03f4ecd5182df5d1bb8be8c804994d9|
+2015-09-02 16:32:20|install|typelib-1_0-LibvirtGLib-1_0|0.1.8-2.8|x86_64||SLES12-SP1-12.1-0|0b532f474981ba67d63ec148c5529dae50cf806e46ac24ae1ac4e43fd1e9008a|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-storage|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|b7bbbd7db1be60129ce07c147d517c0ba5ea938c649a63d87e66d340831f0838|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-secret|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|d423cb0f0c13d9ee4da51baac9d069e46c890ef162b7cadba4c4ea276cc77c5d|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-nwfilter|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|15ea5a82e4985afa2ec259939d876654162398eb7b5fc39679dfb1aafbb11870|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-nodedev|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|5db35fcfcdd1635ae260cbe2ad60dd50163f71103cab59d2449af94f6ae8fbdf|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-network|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|7d3149a6978016562efc8712ba91a26560fb698c3b79a368a4ae667c5def56b1|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-libxl|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|e9bfb5ea01d1eb114aff6354e4a88668208b1492809ad3e0ba11a550c1e77fb9|
+2015-09-02 16:32:20|install|libvirt-daemon-driver-interface|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|47e047d786fb32fc5b260fccbb5e0fecd919d3da2207119ec35a7ff79ffc7986|
+2015-09-02 16:32:21|install|python-gtk|2.24.0-13.115|x86_64||SLES12-SP1-12.1-0|147e61db297822d12f917ccead792f116cfa0508333d443a20392d41a1959621|
+2015-09-02 16:32:21|install|virt-install|1.2.1-4.1|noarch||SLES12-SP1-12.1-0|4d93165c1c30e7f5e7ae5b1ad6a3e52bf9b7c356c0a1990c92380cf4dfe5c97f|
+2015-09-02 16:32:21|install|libvirt-daemon-config-network|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|356b552a76c1b5003566a325c66d0b9749cf7696e339b1361ab61aa41667fc90|
+2015-09-02 16:32:21|install|libvirt-daemon-xen|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|d7371af0ed4d314d65657864a6dbc2649bc7c2613fbf93694615e82eb1d59f46|
+2015-09-02 16:32:21|install|virt-manager|1.2.1-4.1|noarch||SLES12-SP1-12.1-0|00b18035e37bbb64fed72c8af9f49296d4554164100ccc98a5da7d188b197b65|
+2015-09-02 16:32:21|install|patterns-sles-xen_tools|12-63.1|x86_64|7772:y2base|SLES12-SP1-12.1-0|08d0025818aa3f8705acf92b8ab074a3d1f202fa94598d7bb4d83095af116558|
+2015-09-03 11:57:14|command|root@linux|'/usr/lib/YaST2/bin/y2base' 'sw_single' 'qt'|
+2015-09-03 11:57:15|install|emacs-info|24.3-14.44|noarch||SLES12-SP1-12.1-0|1e02f509e196b13e957231f892fbe22e6325b365b6819712ddd801bdcb69b833|
+2015-09-03 11:57:15|install|gcc48-info|4.8.5-18.1|noarch||SLES12-SP1-12.1-0|faa5cde237cd00e5b04d2541e4da4d67777cca88043a4fb305dbed80c5366f60|
+2015-09-03 11:57:16|install|glibc-info|2.19-29.4|noarch||SLES12-SP1-12.1-0|8a1038844f7254fdd07f2b84761ef10deba7199e47c08d1fa8172e3f5ff732ac|
+2015-09-03 11:57:16|install|kernel-macros|3.12.46-2.3|noarch||SLES12-SP1-12.1-0|23f5356760e8870e1b6293df11cf88ab171c008ab0f0955870ede07eae0aab03|
+2015-09-03 11:57:16|install|linux-glibc-devel|3.12-6.9|noarch||SLES12-SP1-12.1-0|f24ecb75b6f34749551afad8442f47fbb0d9db36755a1873bfb4dbe45297acc5|
+2015-09-03 11:57:17|install|m17n-db|1.6.5-1.15|noarch||SLES12-SP1-12.1-0|58b717289ea3072d400ed7da5f775bf7cea4fa414d62516d232d3d585c1c0b69|
+2015-09-03 11:57:17|install|aspell|0.60.6.1-16.76|x86_64||SLES12-SP1-12.1-0|7c2c9a9ed0e2e7f296d633585efe221f98cca131c894d51e637359b9c3d69d4e|
+2015-09-03 11:57:17|install|bison|2.7-6.107|x86_64||SLES12-SP1-12.1-0|752078e9175d17ef09aa12c812323955a6929e846d50756ab0d1c0687e528482|
+2015-09-03 11:57:18|install|bison-32bit|2.7-6.107|x86_64||SLES12-SP1-12.1-0|9cb68ecd504fb917998ec45edb64292e8bd18973c720e005763ec121625ed2b9|
+2015-09-03 11:57:18|install|cvs|1.12.12-181.63|x86_64||SLES12-SP1-12.1-0|3f9166705d3ef3b2c616133e97ddf3ae24fe05f28ac2b036525cf8f0dddac079|
+2015-09-03 11:57:18|install|etags|24.3-14.44|x86_64||SLES12-SP1-12.1-0|5afbc879499bb31a40a658bcf7a7fc4c96aee236ffb14ae0c56169bae19ae83b|
+2015-09-03 11:57:18|install|flex|2.5.37-6.208|x86_64||SLES12-SP1-12.1-0|2f4bfd71d7ee2e0e77a348b4e049986d6ac1e5be303cb5bd0be9b5d6aa365d28|
+2015-09-03 11:57:18|install|flex-32bit|2.5.37-6.208|x86_64||SLES12-SP1-12.1-0|f30cc2ee7b2b6f26d0c6148202983f0c49727f889b096f7a2c46c2863d71c15d|
+2015-09-03 11:57:18|install|gdbm-devel|1.10-9.70|x86_64||SLES12-SP1-12.1-0|2a46466d1e49147bf9e2c5cb61ef4e60dd0aae6274a89fd08af6854b608bb5c3|
+2015-09-03 11:57:19|install|libHalf11|2.1.0-2.14|x86_64||SLES12-SP1-12.1-0|163384e3552b2fbec728457bf9f16276b035588757f94672bd83ed58656b961e|
+2015-09-03 11:57:19|install|libIex-2_1-11|2.1.0-2.14|x86_64||SLES12-SP1-12.1-0|dab4b72b8e13c1edb9a219f7490c430270ce941d5b308e110218c02840e49a1a|
+2015-09-03 11:57:19|install|libasan0-32bit|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|325109979d42ffabf4283eb5b0ab4ec53a2bb839327cd67bd664d568e0c3e058|
+2015-09-03 11:57:19|install|libasan0|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|5057a3eed9434bd0a99be4217b33158c64abeb4f656a0c5e199b4eb0a68657a9|
+2015-09-03 11:57:19|install|libatomic1-32bit|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|3702caf437b6844dd2154e95b5b607f005c9e7c3c8886b4230990b7198a04371|
+2015-09-03 11:57:19|install|libatomic1|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|6e4c5680b59691a31ab3d1492697333abd42d6d30acc6b4e6764af8c5ea52e33|
+2015-09-03 11:57:19|install|libgif6|5.0.5-3.61|x86_64||SLES12-SP1-12.1-0|38b3862dbd59029a62df34a2dd2f0c4372805b25bff4dda88d6e0130c71322a6|
+2015-09-03 11:57:20|install|libgomp1-32bit|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|2fb47db0153456edbb395b8acb59c0fcf50525a0f71f8baa13f6cad1a37532da|
+2015-09-03 11:57:20|install|libgomp1|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|44d3d5ca03b7f5989980e050b1c47c192227275fc92266679426b187a3a661ee|
+2015-09-03 11:57:20|install|libitm1-32bit|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|2764288568b911a025067292f56af4f9ca957246f4cfecb9a216c22a21a904fb|
+2015-09-03 11:57:20|install|libitm1|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|76a31407423989601793a4f574dd7547451c3ea3f2f16f3bf3747a8855030d73|
+2015-09-03 11:57:20|install|libncurses6-32bit|5.9-40.124|x86_64||SLES12-SP1-12.1-0|d216e86de0a2b4478e86acdeab0d08fd5f3aa651e497e90ac49a05041a306a22|
+2015-09-03 11:57:20|install|libotf0|0.9.13-4.6|x86_64||SLES12-SP1-12.1-0|6a7747ec0f3e42d78b85d59efee74f18602571b8dc1f6f42665e0be81d5f1a0c|
+2015-09-03 11:57:20|install|libtsan0|5.2.1+r226025-1.18|x86_64||SLES12-SP1-12.1-0|fac0900c6e32c8cdd12210ed7b6693208b0f2adba71253a601b393bf3f5af8d0|
+2015-09-03 11:57:21|install|patterns-sles-Basis-Devel-32bit|12-63.1|x86_64||SLES12-SP1-12.1-0|d0546ac330d0ea003dbb9898aa0c227702c59d3dac66d5d185a365964a32afee|
+2015-09-03 11:57:21|install|rcs|5.8-1018.64|x86_64||SLES12-SP1-12.1-0|87f90e1e6f42bfd564fe5e03a9605b69ee95453c66b33584ef23ef402c88eed0|
+2015-09-03 11:57:21|install|tack|5.9-40.124|x86_64||SLES12-SP1-12.1-0|06a1307d5900f921ba56b8767de361868cf5027daed4a16e852c97da990cc52c|
+2015-09-03 11:57:21|install|gcc-info|4.8-6.189|x86_64||SLES12-SP1-12.1-0|224d5b34b0e36a4a08aff9a4de7bcee1c010e8dd87921d032894d8c3fc453796|
+2015-09-03 11:57:23|install|kernel-devel|3.12.46-2.3|noarch||SLES12-SP1-12.1-0|1d4661d0b2fbfb92e23f0d121036fca632b9872c258c4a00fa3f798d7ba575ca|
+2015-09-03 11:57:23|install|glibc-devel|2.19-29.4|x86_64||SLES12-SP1-12.1-0|c034783b340e0b69615b64a347186865bbab6922d12e4b10b8eaf3b2b25c65ab|
+2015-09-03 11:57:23|install|aspell-ispell|0.60.6.1-16.76|x86_64||SLES12-SP1-12.1-0|8e0efc9d95e584ad867a511bb823eda7a19dafb1353b50fa16d1928d46926536|
+2015-09-03 11:57:24|install|aspell-en|7.1-11.181|x86_64||SLES12-SP1-12.1-0|ac26aa4df3b141c493570e541acaf0de98b93d5d794752093080a820b88caf9a|
+2015-09-03 11:57:24|install|patterns-sles-Basis-Devel|12-63.1|x86_64||SLES12-SP1-12.1-0|741757f252d40fea02514bb749247db7ed8d9f9a964bd426b8016715f6f6d367|
+2015-09-03 11:57:24|install|gdbm-devel-32bit|1.10-9.70|x86_64||SLES12-SP1-12.1-0|05dfde4cf7bad1f2f7caa951383dc8fe0adcc6536b9df65b1aeebc9cc8a86ca7|
+2015-09-03 11:57:24|install|libIlmThread-2_1-11|2.1.0-2.14|x86_64||SLES12-SP1-12.1-0|f4dcafa1631559a86611a6d3bbdc840d074034f1e658c68b0f3ad0174935a767|
+2015-09-03 11:57:24|install|libm17n0|1.6.4-3.77|x86_64||SLES12-SP1-12.1-0|4a8eeb489e54a4f944e93cfce981a53b58a89f9089ff487c6e4497805f7ffa09|
+2015-09-03 11:57:25|install|ncurses-devel|5.9-40.124|x86_64||SLES12-SP1-12.1-0|a38aef8d38492f8fed9d4dd95eb759412707979e6d4cec2a5a715cecf8a0d04e|
+2015-09-03 11:57:26|install|kernel-xen-devel|3.12.46-2.3|x86_64||SLES12-SP1-12.1-0|752650d51d422f9b8b39922ba4f3c816ddbc39700e6f37247623485aa9ce7a0a|
+2015-09-03 11:57:27|install|kernel-default-devel|3.12.46-2.3|x86_64||SLES12-SP1-12.1-0|73f30a559b17f068b22b336d54f32b1f1078d7646d3a201676a3d604e006a18a|
+2015-09-03 11:57:35|install|kernel-source|3.12.46-2.3|noarch||SLES12-SP1-12.1-0|ea22ecbcf8ee20c64fcbbe513d980606f512fccccebad87ef214c4dde9c66b19|
+2015-09-03 11:57:36|install|libstdc++48-devel|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|3e67700b23000a8419a3f3cb56af366d74dfdc1a73a6165d08d5fbd070f02d8d|
+2015-09-03 11:57:36|install|libaio-devel|0.3.109-17.15|x86_64||SLES12-SP1-12.1-0|f5fe5b003b47f2e388a95836d865d4bc974115a63b1273e599da0facdb21c5f1|
+2015-09-03 11:57:36|install|glibc-devel-32bit|2.19-29.4|x86_64||SLES12-SP1-12.1-0|0ca6a5b3a39b9c2efbad4d339dfbf5085cb0543a2fa20aba64facd867e34e0d3|
+2015-09-03 11:57:37|install|gcc48|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|8b5027073f27693492901675dea2426ac559cd8adab801266a0655aab31b5cdc|
+2015-09-03 11:57:37|install|libIlmImf-Imf_2_1-21|2.1.0-4.5|x86_64||SLES12-SP1-12.1-0|ed7729050a43538c6aad60b43a766a2e15ce40520fcc7f2b57cac26ccbc9dbbd|
+2015-09-03 11:57:38|install|ncurses-devel-32bit|5.9-40.124|x86_64||SLES12-SP1-12.1-0|4b8a38e593113013cf3560ede8a234bfa59959340c9cf0e954f6d4eec891bcd8|
+2015-09-03 11:57:38|install|libstdc++-devel|4.8-6.189|x86_64||SLES12-SP1-12.1-0|23b34fbf313d85b806557b281d0d510766cb91b69dca854465d3d2c8c7ba55b4|
+2015-09-03 11:57:38|install|libstdc++48-devel-32bit|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|a4d3d12e2919f0b19c4ae6cce5de2e20816f2db4e203ec27d05b2390d0385a06|
+2015-09-03 11:57:39|install|gcc48-locale|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|ab93052e730e1a8fc618bd4ed4ca19e84f5f2cfc9c28757fc6ef7959c52857a4|
+2015-09-03 11:57:39|install|gcc48-c++|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|e7747cb7661ab91cdbdbd925fd4fc9197bc48136b7cb1676499c1044bb135185|
+2015-09-03 11:57:40|install|gcc48-32bit|4.8.5-18.1|x86_64||SLES12-SP1-12.1-0|29b52a0e88bbc41fbe512a7f08f75d54d09d7f6f692f1366c5e0f6eac68a654f|
+2015-09-03 11:57:40|install|gcc|4.8-6.189|x86_64||SLES12-SP1-12.1-0|c685bd45333fc0ffac2c407a0a5d3409340eb2c7ae00ba9dd37661a6d9a0f5a9|
+2015-09-03 11:57:40|install|libMagickCore-6_Q16-1|6.8.8.1-8.2|x86_64||SLES12-SP1-12.1-0|c9db24fd8260455162e135759214df0f87ee7262c54c52a42450871d0c9fd473|
+2015-09-03 11:57:40|install|libstdc++-devel-32bit|4.8-6.189|x86_64||SLES12-SP1-12.1-0|0d3c66f8303ae352f2e2dcc26ab7e2bb48a76ac0055af8030484be79081dd82c|
+2015-09-03 11:57:40|install|gcc-locale|4.8-6.189|x86_64||SLES12-SP1-12.1-0|8c8cab9ae75efda2b2759aa534472bf13ea45e56cee1ee013f89c5601deb203f|
+2015-09-03 11:57:40|install|gcc-c++|4.8-6.189|x86_64||SLES12-SP1-12.1-0|01f3eafb994977298d5d8ac255412f9d52b92c7fd5101947f1cfed37c7cc3b7b|
+2015-09-03 11:57:41|install|gcc-32bit|4.8-6.189|x86_64||SLES12-SP1-12.1-0|c26a3696f8beb20ef0425af2b4630795002bd87ca4b7380f2c1415ed9fb01660|
+2015-09-03 11:57:41|install|libMagickWand-6_Q16-1|6.8.8.1-8.2|x86_64||SLES12-SP1-12.1-0|4d8aa56d8e23b3c03b1f690ebaaf4f936c39d6b8c4ef274fadc6c960773f229d|
+2015-09-03 11:57:41|install|gcc-c++-32bit|4.8-6.189|x86_64||SLES12-SP1-12.1-0|cedbef1628809a3a2b698df54cc86b9c324dade31caf45383fe2e1332f5d53e0|
+2015-09-03 11:57:43|install|emacs|24.3-14.44|x86_64||SLES12-SP1-12.1-0|dd0b8ac744ec322d2c5930ecfbb2cc56f2904dabeab616a81139f66d9af6ac2a|
+2015-09-03 11:57:43|install|emacs-x11|24.3-14.44|x86_64||SLES12-SP1-12.1-0|2ceb491233e89989d89d0cfb1f33e007c4fef803450d9d4f7abb5b627ef6d7da|
+2015-09-03 11:58:08|command|root@linux|'zypper' '-n' 'install' '-t' 'pattern' 'file_server'|
+2015-09-03 11:58:08|install|patterns-sles-file_server|12-63.1|x86_64||SLES12-SP1-12.1-0|3882ef2683b2512a208d90d32e3e1832be08ae34c36acc66fc9249c19168d000|
+2015-09-03 11:58:08|install|patterns-sles-file_server-32bit|12-63.1|x86_64||SLES12-SP1-12.1-0|74b40c77a133965d1a499db078e94e99f20f378eade32ec21ebef179c7eb3286|
+2015-09-03 11:58:20|command|root@linux|'zypper' '-n' 'in' '-t' 'package' 'setserial'|
+2015-09-03 11:58:20|install|setserial|2.17-740.14|x86_64|root@linux|SLES12-SP1-12.1-0|6fd636595c71f2e83b9db09ef46eb77e9367bdd0fdcb49c4430d54bc79008e38|
+2015-09-03 11:58:21|command|root@linux|'zypper' '-n' 'in' '-t' 'package' 'dvd+rw-tools'|
+2015-09-03 11:58:22|install|libisoburn1|1.3.4-1.120|x86_64||SLES12-SP1-12.1-0|6a45a7d65f340512d72e273b7b4db8b59f0bdcbc71fa468130059bf34ba60d78|
+2015-09-03 11:58:22|install|dvd+rw-tools|7.1-58.85|x86_64|root@linux|SLES12-SP1-12.1-0|ec3e41ed6e61da381e0bd2d31e1d06f91d1cad808c2afc34922b5cf4c74f2534|
+2015-09-03 11:58:23|command|root@linux|'zypper' '-n' 'in' '-t' 'package' 'lftp'|
+# 2015-09-03 11:58:23 lftp-4.5.1-3.4.x86_64.rpm installed ok
+# Additional rpm output:
+# update-alternatives: using /usr/bin/lftp_wrapper to provide /usr/bin/ftp (ftp) in auto mode
+# 
+2015-09-03 11:58:23|install|lftp|4.5.1-3.4|x86_64|root@linux|SLES12-SP1-12.1-0|2d979bf9632033bc7e85cd33d1cd98827f9a9fffae5ee106e360c6300d07be6a|
+2015-09-03 11:58:24|command|root@linux|'zypper' '-n' 'in' '-t' 'package' 'mgetty'|
+2015-09-03 11:58:24|install|g3utils|1.1.36-54.100|x86_64||SLES12-SP1-12.1-0|ed1f471b82c8995bbd3bf9906da7d018b0e8501deba223aeee521f1817f1e5e1|
+2015-09-03 11:58:24|install|mgetty|1.1.36-54.100|x86_64|root@linux|SLES12-SP1-12.1-0|4db873a907516fcd8432430814b188475bac83299a1d7ee2692f99d9bed42bc5|
+2015-09-03 11:58:26|command|root@linux|'zypper' '-n' 'in' '-t' 'package' 'sysstat'|
+2015-09-03 11:58:26|install|sysstat|10.2.1-1.11|x86_64|root@linux|SLES12-SP1-12.1-0|751562101b6d3f0e53dce99a58ddc975a984cbb239a90f9af273437cbec74761|
+2015-09-03 15:25:42|command|root@linux|'/usr/lib/YaST2/bin/y2base' 'virtualization' 'qt'|
+2015-09-03 15:25:43|install|perl-Class-Singleton|1.4-4.15|noarch||SLES12-SP1-12.1-0|02413d3e800bfc1f40697da506f87868e4dad3a428dc383c9e2ec0199f448c6c|
+2015-09-03 15:25:43|install|perl-Module-Runtime|0.014-4.1|noarch||SLES12-SP1-12.1-0|04db87d782642dd5f9b43c73ef96daa1bbcd61487faa63cf695005cf079512d4|
+2015-09-03 15:25:43|install|perl-String-ShellQuote|1.04-3.18|noarch||SLES12-SP1-12.1-0|fca765ce7d91efe68cd13dad55973085b15ddfa5a858dde5f712250a74239846|
+2015-09-03 15:25:43|install|perl-Sub-Install|0.927-1.15|noarch||SLES12-SP1-12.1-0|dfccee1f58f26f08ff2fb627f6f86b40de29860c654de84a25f15e8fe6d09197|
+2015-09-03 15:25:43|install|perl-Try-Tiny|0.16-3.19|noarch||SLES12-SP1-12.1-0|50b21d7f22b1f47040c1bb79841b1db57213f890da1e3c72c5c7c3fc7eecc4c2|
+2015-09-03 15:25:43|install|perl-XML-RegExp|0.04-7.19|noarch||SLES12-SP1-12.1-0|b58b5235fcba3f8024cf2f85d7a6833010e67300b944a34fca5c0e780a72e70c|
+2015-09-03 15:25:43|install|qemu-ipxe|1.0.0-1.6|noarch||SLES12-SP1-12.1-0|8f286b8863861d80fd38f0f96dd93cb3928e8329b9a38f3aa7677384f8e0d680|
+2015-09-03 15:25:43|install|qemu-seabios|1.8.1-1.6|noarch||SLES12-SP1-12.1-0|6ecb6d082c0d33a1ddfcd936ba36736a9d9d2960bd3c228028e0b61d5ef21f83|
+2015-09-03 15:25:43|install|qemu-sgabios|8-1.6|noarch||SLES12-SP1-12.1-0|1e46856875e1a8ad8fe1f0ffd5ef576466e6ec1835c5e2018fc9a49d17a40fc3|
+2015-09-03 15:25:43|install|qemu-vgabios|1.8.1-1.6|noarch||SLES12-SP1-12.1-0|7e97446a772dfd8a8363b4f43d758b98b39e7a8f8934a749ecb74d91e8e503f8|
+2015-09-03 15:25:47|install|guestfs-data|1.26.10-2.16|x86_64||SLES12-SP1-12.1-0|025e18c7c17c0af19dbfa21a7e9762cba126654a9139bd430e9990455098eb0b|
+2015-09-03 15:25:47|install|libconfig9|1.4.9-5.92|x86_64||SLES12-SP1-12.1-0|a5b2cfdcbcbf7694b688aab4e42aad79dbd162d023d8ab65d371182539a44fa3|
+2015-09-03 15:25:47|install|libfdt1|1.4.0-4.20|x86_64||SLES12-SP1-12.1-0|995e0eca9794bc06a1ba2e2bb789ed03f6f4d660d6332b217c429a5d0554c7b4|
+2015-09-03 15:25:47|install|libguestfs0|1.26.10-2.16|x86_64||SLES12-SP1-12.1-0|c025fb86ae46a7e48282fa09d8d530fdd76fa26e252ed721ffc402a2afd0993a|
+2015-09-03 15:25:47|install|libhivex0|1.3.10-4.1|x86_64||SLES12-SP1-12.1-0|b1acd0e4a18258287d40e519da4d64fa6d261c1283b3fa45a9cde45fcb80e8e6|
+2015-09-03 15:25:47|install|libibverbs1|1.1.7-12.1|x86_64||SLES12-SP1-12.1-0|ca4736dfe04c60b8b801888a55732f20de3ea4118f2055aad99a1933c81ed92d|
+2015-09-03 15:25:48|install|libvdeplug3|2.3.2-6.87|x86_64||SLES12-SP1-12.1-0|140d8fea781d51af1c6ccc4b51b2ee0ecfd2caa5de296e1464834f3aaf17bed8|
+2015-09-03 15:25:48|install|lzop|1.03-7.163|x86_64||SLES12-SP1-12.1-0|ed4d4adbbc7a51b9cc076266a61a1b0cca0e08b3b08505b09b8d3fc3b882c452|
+2015-09-03 15:25:48|install|patterns-sles-kvm_server-32bit|12-63.1|x86_64||SLES12-SP1-12.1-0|c997cda50b13749f32cf54dbb12ba9dde90f509ba48e387f946fe3290aa6610b|
+2015-09-03 15:25:48|install|patterns-sles-kvm_tools-32bit|12-63.1|x86_64||SLES12-SP1-12.1-0|9e6b0e6401a22ae7a2f991a42c8c51e67504d213b45d093c8fe6d4dc300abf1d|
+2015-09-03 15:25:48|install|perl-Class-MethodMaker|2.18-1.122|x86_64||SLES12-SP1-12.1-0|416b36d741361094ba1196f75ec8578fcb2cfed7aa39546cf1a18d8ce94d5245|
+2015-09-03 15:25:48|install|perl-Crypt-SSLeay|0.64-3.57|x86_64||SLES12-SP1-12.1-0|9b79920fc9ee94d8c8ab93d7e091e56bb00235ffca9108b986134e24fa66c989|
+2015-09-03 15:25:48|install|perl-IO-String|1.08-163.16|x86_64||SLES12-SP1-12.1-0|7224c2cb75a89d715ab31930dabba452f861fc882d9aeac079c317cb2a9e7fdf|
+2015-09-03 15:25:49|install|perl-Package-Stash-XS|0.28-1.18|x86_64||SLES12-SP1-12.1-0|8973407fbdfefd3237b0d2c30ecde5f66a6742b51a838084414090aa6f6ef9fe|
+2015-09-03 15:25:49|install|perl-Params-Util|1.07-1.26|x86_64||SLES12-SP1-12.1-0|af3774876d54feb5c302c2d9e183bc564676c8a4f02639069301cd6f6eb6b4b5|
+2015-09-03 15:25:49|install|perl-Sys-Virt|1.2.18-1.1|x86_64||SLES12-SP1-12.1-0|7fdece1f027a163aabff3ddb3b19b5a38e4e2923207607f92f20497f60f00fc8|
+2015-09-03 15:25:49|install|perl-libintl-perl|1.20-23.61|x86_64||SLES12-SP1-12.1-0|ecf0c09e04d860051619a4c517a3e4f43bade51237542f3dfd89766077998f1f|
+2015-09-03 15:25:49|install|perl-libxml-perl|0.08-157.20|x86_64||SLES12-SP1-12.1-0|4a17b0c256bf4db80ac76eaf9f3ee2d73339c9e57ac386f14bff6d397d2689a8|
+2015-09-03 15:25:50|install|qemu|2.3.1-1.6|x86_64||SLES12-SP1-12.1-0|96ae4f3b93ebc668a6996deff0bd2d9f6e4432f7d004e8e3a4895e03fe0ebf37|
+2015-09-03 15:25:50|install|perl-Dist-CheckConflicts|0.09-1.7|noarch||SLES12-SP1-12.1-0|4db042cf12d987de55498e243381095e6c5aabf14d8d15a90dcb10bb76140e96|
+2015-09-03 15:25:50|install|perl-Module-Implementation|0.07-2.5|noarch||SLES12-SP1-12.1-0|ce47ae633a736637d313a7b44be658f89b806f4194512923fed8793f9817be5f|
+2015-09-03 15:25:50|install|perl-Win-Hivex|1.3.10-4.1|x86_64||SLES12-SP1-12.1-0|6a1c624855b797564e94e43b98d0499e4f3f0616d82682f26757a589cd34ae9c|
+2015-09-03 15:25:50|install|librdmacm1|1.0.18.1-1.14|x86_64||SLES12-SP1-12.1-0|d529bb3ed56ffa49fe445591aaa015f7a0de3f651491fee90486e1410028ef1f|
+2015-09-03 15:25:51|install|perl-Term-ProgressBar|2.14-1.7|x86_64||SLES12-SP1-12.1-0|3f794bc6400a8306879b22a1e4a56e6da681be794356c636462672f96007d514|
+2015-09-03 15:25:51|install|perl-Data-OptList|0.109-1.9|noarch||SLES12-SP1-12.1-0|9d69d237439651e0dbdf60ee3537e258b0955ad509070bbd5fc59cc412ed598d|
+2015-09-03 15:25:51|install|perl-Sys-Guestfs|1.26.10-2.16|x86_64||SLES12-SP1-12.1-0|e0d0b45f1d2f7b9e348e56d79c96d530b642808090d685149d26c76fdfeb0035|
+2015-09-03 15:25:51|install|perl-XML-DOM|1.44-167.10|noarch||SLES12-SP1-12.1-0|abe2d511508b8362bc54b2f9f4979184da9af9cf42230d908acbc60fbf0170f1|
+2015-09-03 15:25:51|install|libvirt-daemon-driver-qemu|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|36a0db654e946e00bf5ae731378cb20032dcacbb9e1eaa0e33ba3ce72b956eb3|
+2015-09-03 15:25:51|install|perl-Params-Validate|1.06-2.18|x86_64||SLES12-SP1-12.1-0|8b1639f0ddae513d68739c5e46ae1be7067b86482a935b21f4c6f284688b4b9d|
+2015-09-03 15:25:51|install|perl-Package-Stash|0.36-2.5|noarch||SLES12-SP1-12.1-0|8797ce3d239afa7d29144511e2e5c3ccdbcdab7e70cf2898613ce31ec2d626d1|
+2015-09-03 15:25:52|install|qemu-x86|2.3.1-1.6|x86_64||SLES12-SP1-12.1-0|dd80ebcdd2432435c3c32f6c42fa93d386c1af1dab7d3e702cf7eaf66aa28788|
+2015-09-03 15:25:52|install|perl-XML-DOM-XPath|0.14-1.5|noarch||SLES12-SP1-12.1-0|ccb61230c7fd5545dfd1b34805df3c1c5dc923fb29b2ba7982bcb1a1b73aaa6e|
+2015-09-03 15:25:52|install|libvirt-daemon-qemu|1.2.18-1.9|x86_64||SLES12-SP1-12.1-0|84a360ec0573e25a67b1d4561e7a229809ef5890d398df4bce3aeb1fea31b929|
+2015-09-03 15:25:52|install|perl-DateTime-Locale|0.45-10.5|noarch||SLES12-SP1-12.1-0|a36e230549615f7f29b998df7fa87d10351e9da33760fc5ef2946f51867af218|
+2015-09-03 15:25:53|install|perl-Class-Load|0.20-1.5|noarch||SLES12-SP1-12.1-0|648373d5f75d2b0a78914c68e622388ea5b076499e1c04317678dcbe5305c0f1|
+2015-09-03 15:25:53|install|qemu-kvm|2.3.1-1.6|x86_64||SLES12-SP1-12.1-0|b751daf961c975a37e579ce270f3f467ef7e4f977770174218695f037b21cdf2|
+2015-09-03 15:25:53|install|guestfs-tools|1.26.10-2.16|x86_64||SLES12-SP1-12.1-0|05d7a14710874e64d294f3a8716fe4478f918bdd7ee1246d5b0f60d0c46e6cd2|
+2015-09-03 15:25:53|install|perl-DateTime-TimeZone|1.63-1.4|noarch||SLES12-SP1-12.1-0|7a65a1ce9f11a539781eb8e42b9577ff5a084ae0bf115e1eadf9874f4a9a7ec8|
+2015-09-03 15:25:53|install|patterns-sles-kvm_server|12-63.1|x86_64|6495:y2base|SLES12-SP1-12.1-0|a9c8a5308dee41fe84ced877ca867c9423ead6008409417bbd68f8e714088749|
+2015-09-03 15:25:53|install|perl-DateTime|1.04-2.14|x86_64||SLES12-SP1-12.1-0|b3d24333af8721bd394b93d16d1496d06956bd0158e410b6e6016abd560623eb|
+2015-09-03 15:25:53|install|patterns-sles-kvm_tools|12-63.1|x86_64|6495:y2base|SLES12-SP1-12.1-0|0cd0284d9d89dc4ab6cd4d8985ac6ef69328e5bf047af69c2afa3763ceb301f4|
+2015-09-03 15:25:54|install|virt-v2v|0.9.1-12.1|x86_64||SLES12-SP1-12.1-0|512d1b0ed2a9753d56ccaf5492b96e98409340f99f82586cbc6d7b52ae5fa47f|
+
+
+#==[ Log File ]=====================================#
+# /root/.suse_register.log - File not found
+
+#==[ Log File ]=====================================#
+# grep -i suse_register /var/log/messages - Last 500 Lines
+
+
+#==[ Configuration File ]===========================#
+# /proc/kgr_in_progress - File not found
+
+#==[ Note ]=========================================#
+# Processes blocking kGraft patching
+

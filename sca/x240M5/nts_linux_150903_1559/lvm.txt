@@ -1,0 +1,592 @@
+#==[ Verification ]=================================#
+# rpm -V lvm2-2.02.120-54.1.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /bin/systemctl status 'lvm2-activation-early.service'
+lvm2-activation-early.service
+   Loaded: not-found (Reason: No such file or directory)
+   Active: inactive (dead)
+
+
+#==[ Command ]======================================#
+# /sbin/pvs
+
+#==[ Command ]======================================#
+# /sbin/vgs
+
+#==[ Command ]======================================#
+# /sbin/lvs
+
+#==[ Configuration File ]===========================#
+# /etc/lvm/lvm.conf
+config {
+    checks = 1
+    abort_on_errors = 0
+    profile_dir = "/etc/lvm/profile"
+}
+devices {
+    dir = "/dev"
+    scan = [ "/dev" ]
+    obtain_device_list_from_udev = 1
+    filter = [ "r|/dev/.*/by-path/.*|", "r|/dev/.*/by-id/.*|", "r|/dev/fd.*|", "r|/dev/cdrom|", "a/.*/" ]
+    cache_dir = "/etc/lvm/cache"
+    cache_file_prefix = ""
+    write_cache_state = 1
+    sysfs_scan = 1
+    multipath_component_detection = 1
+    md_component_detection = 1
+    md_chunk_alignment = 1
+    data_alignment_detection = 1
+    data_alignment = 0
+    data_alignment_offset_detection = 1
+    ignore_suspended_devices = 0
+    ignore_lvm_mirrors = 1
+    disable_after_error_count = 0
+    require_restorefile_with_uuid = 1
+    pv_min_size = 2048
+    issue_discards = 0
+}
+allocation {
+    maximise_cling = 1
+    use_blkid_wiping = 1
+    wipe_signatures_when_zeroing_new_lvs = 1
+    mirror_logs_require_separate_pvs = 0
+    cache_pool_metadata_require_separate_pvs = 0
+    thin_pool_metadata_require_separate_pvs = 0
+}
+log {
+    verbose = 0
+    silent = 0
+    syslog = 1
+    overwrite = 0
+    level = 0
+    indent = 1
+    command_names = 0
+    prefix = "  "
+    debug_classes = [ "memory", "devices", "activation", "allocation",
+		      "lvmetad", "metadata", "cache", "locking" ]
+}
+backup {
+    backup = 1
+    backup_dir = "/etc/lvm/backup"
+    archive = 1
+    archive_dir = "/etc/lvm/archive"
+    retain_min = 10
+    retain_days = 30
+}
+shell {
+    history_size = 100
+}
+global {
+    umask = 077
+    test = 0
+    units = "h"
+    si_unit_consistency = 1
+    suffix = 1
+    activation = 1
+    proc = "/proc"
+    locking_type = 1
+    wait_for_locks = 1
+    fallback_to_clustered_locking = 1
+    fallback_to_local_locking = 1
+    locking_dir = "/var/lock/lvm"
+    prioritise_write_locks = 1
+    abort_on_internal_errors = 0
+    detect_internal_vg_cache_corruption = 0
+    metadata_read_only = 0
+    mirror_segtype_default = "raid1"
+    raid10_segtype_default = "mirror"
+    use_lvmetad = 1
+}
+activation {
+    checks = 0
+    udev_sync = 1
+    udev_rules = 1
+    verify_udev_operations = 0
+    retry_deactivation = 1
+    missing_stripe_filler = "error"
+    use_linear_target = 1
+    reserved_stack = 64
+    reserved_memory = 8192
+    process_priority = -18
+    raid_region_size = 512
+    readahead = "auto"
+    raid_fault_policy = "warn"
+    mirror_log_fault_policy = "allocate"
+    mirror_image_fault_policy = "remove"
+    snapshot_autoextend_threshold = 100
+    snapshot_autoextend_percent = 20
+    thin_pool_autoextend_threshold = 100
+    thin_pool_autoextend_percent = 20
+    use_mlockall = 0
+    monitoring = 1
+    polling_interval = 15
+    activation_mode = "degraded"
+}
+dmeventd {
+    mirror_library = "libdevmapper-event-lvm2mirror.so"
+    snapshot_library = "libdevmapper-event-lvm2snapshot.so"
+    thin_library = "libdevmapper-event-lvm2thin.so"
+}
+
+
+#==[ Command ]======================================#
+# /sbin/dmsetup ls --tree
+No devices found
+
+#==[ Command ]======================================#
+# /sbin/dmsetup table
+No devices found
+
+#==[ Command ]======================================#
+# /sbin/dmsetup info
+No devices found
+
+#==[ Command ]======================================#
+# /bin/ls -l --time-style=long-iso /etc/lvm/backup/
+total 0
+
+#==[ Configuration File ]===========================#
+# /etc/lvm/backup/* - File not found
+
+#==[ Command ]======================================#
+# /bin/ls -l --time-style=long-iso /etc/lvm/archive/
+total 0
+
+#==[ Configuration File ]===========================#
+# /etc/lvm/archive/* - File not found
+
+
+###[ Detail Scans ]###########################################################################
+
+#==[ Command ]======================================#
+# /sbin/pvdisplay -vv
+      Setting activation/monitoring to 1
+      Setting global/locking_type to 1
+      Setting global/wait_for_locks to 1
+      File-based locking selected.
+      Setting global/prioritise_write_locks to 1
+      Setting global/locking_dir to /var/lock/lvm
+    Using physical volume(s) on command line.
+      Setting response to OK
+      Setting response to OK
+      Setting response to OK
+      Setting response to OK
+    Wiping cache of LVM-capable devices
+      /dev/nvme0n1: size is 781422768 sectors
+      /dev/nvme0n1: size is 781422768 sectors
+      /dev/sda: size is 585937500 sectors
+      /dev/nvme0n1p1: size is 319488 sectors
+      /dev/nvme0n1p1: size is 319488 sectors
+      /dev/sda1: size is 575488 sectors
+      /dev/sda1: size is 575488 sectors
+      /dev/root: size is 781101056 sectors
+      /dev/root: size is 781101056 sectors
+      /dev/sda2: size is 8386560 sectors
+      /dev/sda2: size is 8386560 sectors
+      /dev/sda3: size is 125837312 sectors
+      /dev/sda3: size is 125837312 sectors
+      /dev/sda4: size is 58593280 sectors
+      /dev/sda4: size is 58593280 sectors
+      /dev/sda5: size is 56641536 sectors
+      /dev/sda5: size is 56641536 sectors
+      /dev/sda6: size is 58593280 sectors
+      /dev/sda6: size is 58593280 sectors
+      /dev/sda7: size is 58593280 sectors
+      /dev/sda7: size is 58593280 sectors
+      Locking /var/lock/lvm/P_orphans RB
+      Unlocking /var/lock/lvm/P_orphans
+      Locking /var/lock/lvm/P_orphans RB
+      Unlocking /var/lock/lvm/P_orphans
+      Locking /var/lock/lvm/P_orphans RB
+      Unlocking /var/lock/lvm/P_orphans
+
+#==[ Command ]======================================#
+# /sbin/vgdisplay -vv
+      Setting activation/monitoring to 1
+      Setting global/locking_type to 1
+      Setting global/wait_for_locks to 1
+      File-based locking selected.
+      Setting global/prioritise_write_locks to 1
+      Setting global/locking_dir to /var/lock/lvm
+    Using volume group(s) on command line.
+      Setting response to OK
+      Setting response to OK
+    No volume groups found.
+
+#==[ Command ]======================================#
+# /sbin/lvdisplay -vv
+      Setting activation/monitoring to 1
+      Setting global/locking_type to 1
+      Setting global/wait_for_locks to 1
+      File-based locking selected.
+      Setting global/prioritise_write_locks to 1
+      Setting global/locking_dir to /var/lock/lvm
+    Using logical volume(s) on command line.
+      Setting response to OK
+      Setting response to OK
+    No volume groups found.
+
+#==[ Command ]======================================#
+# /sbin/pvs -vvvv
+#lvmcmdline.c:1466         DEGRADED MODE. Incomplete RAID LVs will be processed.
+#libdm-config.c:997       Setting activation/monitoring to 1
+#lvmcmdline.c:1472         Processing: /sbin/pvs -vvvv
+#lvmcmdline.c:1473         system ID: 
+#lvmcmdline.c:1476         O_DIRECT will be used
+#libdm-config.c:933       Setting global/locking_type to 1
+#libdm-config.c:997       Setting global/wait_for_locks to 1
+#locking/locking.c:128       File-based locking selected.
+#libdm-config.c:997       Setting global/prioritise_write_locks to 1
+#libdm-config.c:902       Setting global/locking_dir to /var/lock/lvm
+#libdm-config.c:1010       report/aligned not found in config: defaulting to 1
+#libdm-config.c:1010       report/buffered not found in config: defaulting to 1
+#libdm-config.c:1010       report/headings not found in config: defaulting to 1
+#libdm-config.c:911       report/separator not found in config: defaulting to  
+#libdm-config.c:1010       report/prefixes not found in config: defaulting to 0
+#libdm-config.c:1010       report/quoted not found in config: defaulting to 1
+#libdm-config.c:1010       report/colums_as_rows not found in config: defaulting to 0
+#libdm-config.c:911       report/pvs_sort not found in config: defaulting to pv_name
+#libdm-config.c:911       report/pvs_cols_verbose not found in config: defaulting to pv_name,vg_name,pv_fmt,pv_attr,pv_size,pv_free,dev_size,pv_uuid
+#toollib.c:2314     Using physical volume(s) on command line.
+#cache/lvmetad.c:661         Asking lvmetad for complete list of known PVs
+#libdm-config.c:902       Setting response to OK
+#libdm-config.c:902       Setting response to OK
+#cache/lvmetad.c:686         Asking lvmetad for complete list of known VG ids/names
+#libdm-config.c:902       Setting response to OK
+#libdm-config.c:902       Setting response to OK
+#filters/filter-persistent.c:51     Wiping cache of LVM-capable devices
+#device/dev-cache.c:338         /dev/sda: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683: Aliased to /dev/sda in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH: Aliased to /dev/sda in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683: Aliased to /dev/sda in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0: Aliased to /dev/sda in device cache
+#device/dev-cache.c:338         /dev/sda1: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part1: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part1: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part1: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-partlabel/primary: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/b46fd886-94be-4dc8-8a93-6ec018e092cb: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part1: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-uuid/143B-4935: Aliased to /dev/sda1 in device cache
+#device/dev-cache.c:338         /dev/sda2: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part2: Aliased to /dev/sda2 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part2: Aliased to /dev/sda2 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part2: Aliased to /dev/sda2 in device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/primary: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/6a71d617-aa24-4691-af69-da97ad3b9c6f: Aliased to /dev/sda2 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part2: Aliased to /dev/sda2 in device cache
+#device/dev-cache.c:335         /dev/disk/by-uuid/d03cce05-b791-4fbf-b5f8-64df2b80bc94: Aliased to /dev/sda2 in device cache
+#device/dev-cache.c:338         /dev/sda3: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part3: Aliased to /dev/sda3 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part3: Aliased to /dev/sda3 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part3: Aliased to /dev/sda3 in device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/primary: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/bfb1d9fd-3a1e-42e0-81e7-b8b425237236: Aliased to /dev/sda3 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part3: Aliased to /dev/sda3 in device cache
+#device/dev-cache.c:335         /dev/disk/by-uuid/8e715014-5e7d-4e12-aa04-9bbe05148ae6: Aliased to /dev/sda3 in device cache
+#device/dev-cache.c:338         /dev/sda4: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part4: Aliased to /dev/sda4 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part4: Aliased to /dev/sda4 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part4: Aliased to /dev/sda4 in device cache
+#device/dev-cache.c:338         /dev/disk/by-partlabel/linux: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/ac77f8ff-fa0b-4d99-8877-413d1e1a9532: Aliased to /dev/sda4 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part4: Aliased to /dev/sda4 in device cache
+#device/dev-cache.c:338         /dev/sda5: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part5: Aliased to /dev/sda5 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part5: Aliased to /dev/sda5 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part5: Aliased to /dev/sda5 in device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/linux: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/416ef826-e1d3-4986-951c-486cc873e854: Aliased to /dev/sda5 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part5: Aliased to /dev/sda5 in device cache
+#device/dev-cache.c:335         /dev/sda6: Aliased to /dev/disk/by-partlabel/linux in device cache (preferred name)
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part6: Aliased to /dev/sda6 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part6: Aliased to /dev/sda6 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part6: Aliased to /dev/sda6 in device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/linux: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/02331b6f-b532-423a-b637-bde32e8d80d5: Aliased to /dev/sda6 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part6: Aliased to /dev/sda6 in device cache
+#device/dev-cache.c:338         /dev/sda7: Added to device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-35000c5006810e683-part7: Aliased to /dev/sda7 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part7: Aliased to /dev/sda7 in device cache
+#device/dev-cache.c:335         /dev/disk/by-id/wwn-0x5000c5006810e683-part7: Aliased to /dev/sda7 in device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/linux: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/b2c7e759-ed37-4986-9e5d-b5cf135f67c7: Aliased to /dev/sda7 in device cache
+#device/dev-cache.c:335         /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part7: Aliased to /dev/sda7 in device cache
+#device/dev-cache.c:338         /dev/nvme0n1: Added to device cache
+#device/dev-cache.c:338         /dev/nvme0n1p1: Added to device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/primary: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/bd827cee-76b6-439f-91a0-b6de9e0dd549: Aliased to /dev/nvme0n1p1 in device cache
+#device/dev-cache.c:335         /dev/disk/by-uuid/6540-76FE: Aliased to /dev/nvme0n1p1 in device cache
+#device/dev-cache.c:338         /dev/nvme0n1p2: Added to device cache
+#device/dev-cache.c:324         /dev/disk/by-partlabel/primary: Already in device cache
+#device/dev-cache.c:335         /dev/disk/by-partuuid/96d978fb-a963-47eb-9fed-ba9af63f228d: Aliased to /dev/nvme0n1p2 in device cache
+#device/dev-cache.c:335         /dev/disk/by-uuid/083ae1fb-02e3-46a0-8610-b1c1cafd31b0: Aliased to /dev/nvme0n1p2 in device cache
+#device/dev-cache.c:335         /dev/root: Aliased to /dev/nvme0n1p2 in device cache (preferred name)
+#device/dev-io.c:534         Opened /dev/nvme0n1 RO O_DIRECT
+#device/dev-io.c:311       /dev/nvme0n1: size is 781422768 sectors
+#device/dev-io.c:588         Closed /dev/nvme0n1
+#device/dev-io.c:534         Opened /dev/nvme0n1 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/nvme0n1
+#device/dev-io.c:311       /dev/nvme0n1: size is 781422768 sectors
+#device/dev-io.c:534         Opened /dev/nvme0n1 RO O_DIRECT
+#device/dev-io.c:145         /dev/nvme0n1: block size is 4096 bytes
+#device/dev-io.c:167         /dev/nvme0n1: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/nvme0n1
+#device/dev-cache.c:1072         Using /dev/nvme0n1
+#device/dev-io.c:534         Opened /dev/sda RO O_DIRECT
+#device/dev-io.c:311       /dev/sda: size is 585937500 sectors
+#device/dev-io.c:588         Closed /dev/sda
+#device/dev-io.c:534         Opened /dev/sda RO O_DIRECT
+#device/dev-io.c:145         /dev/sda: block size is 2048 bytes
+#device/dev-io.c:167         /dev/sda: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda
+#filters/filter-partitioned.c:25         /dev/sda: Skipping: Partition table signature found [none:(nil)]
+#device/dev-io.c:534         Opened /dev/nvme0n1p1 RO O_DIRECT
+#device/dev-io.c:311       /dev/nvme0n1p1: size is 319488 sectors
+#device/dev-io.c:588         Closed /dev/nvme0n1p1
+#device/dev-io.c:534         Opened /dev/nvme0n1p1 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/nvme0n1p1
+#device/dev-io.c:311       /dev/nvme0n1p1: size is 319488 sectors
+#device/dev-io.c:534         Opened /dev/nvme0n1p1 RO O_DIRECT
+#device/dev-io.c:145         /dev/nvme0n1p1: block size is 512 bytes
+#device/dev-io.c:167         /dev/nvme0n1p1: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/nvme0n1p1
+#device/dev-cache.c:1072         Using /dev/nvme0n1p1
+#device/dev-io.c:534         Opened /dev/sda1 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda1: size is 575488 sectors
+#device/dev-io.c:588         Closed /dev/sda1
+#filters/filter-mpath.c:196         /dev/sda1: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda1 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda1
+#device/dev-io.c:311       /dev/sda1: size is 575488 sectors
+#device/dev-io.c:534         Opened /dev/sda1 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda1: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda1: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda1
+#device/dev-cache.c:1072         Using /dev/sda1
+#device/dev-io.c:534         Opened /dev/root RO O_DIRECT
+#device/dev-io.c:311       /dev/root: size is 781101056 sectors
+#device/dev-io.c:588         Closed /dev/root
+#device/dev-io.c:534         Opened /dev/root RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/root
+#device/dev-io.c:311       /dev/root: size is 781101056 sectors
+#device/dev-io.c:534         Opened /dev/root RO O_DIRECT
+#device/dev-io.c:145         /dev/root: block size is 4096 bytes
+#device/dev-io.c:167         /dev/root: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/root
+#device/dev-cache.c:1072         Using /dev/root
+#device/dev-io.c:534         Opened /dev/sda2 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda2: size is 8386560 sectors
+#device/dev-io.c:588         Closed /dev/sda2
+#filters/filter-mpath.c:196         /dev/sda2: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda2 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda2
+#device/dev-io.c:311       /dev/sda2: size is 8386560 sectors
+#device/dev-io.c:534         Opened /dev/sda2 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda2: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda2: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda2
+#device/dev-cache.c:1072         Using /dev/sda2
+#device/dev-io.c:534         Opened /dev/sda3 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda3: size is 125837312 sectors
+#device/dev-io.c:588         Closed /dev/sda3
+#filters/filter-mpath.c:196         /dev/sda3: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda3 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda3
+#device/dev-io.c:311       /dev/sda3: size is 125837312 sectors
+#device/dev-io.c:534         Opened /dev/sda3 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda3: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda3: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda3
+#device/dev-cache.c:1072         Using /dev/sda3
+#device/dev-io.c:534         Opened /dev/sda4 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda4: size is 58593280 sectors
+#device/dev-io.c:588         Closed /dev/sda4
+#filters/filter-mpath.c:196         /dev/sda4: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda4 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda4
+#device/dev-io.c:311       /dev/sda4: size is 58593280 sectors
+#device/dev-io.c:534         Opened /dev/sda4 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda4: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda4: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda4
+#device/dev-cache.c:1072         Using /dev/sda4
+#device/dev-io.c:534         Opened /dev/sda5 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda5: size is 56641536 sectors
+#device/dev-io.c:588         Closed /dev/sda5
+#filters/filter-mpath.c:196         /dev/sda5: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda5 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda5
+#device/dev-io.c:311       /dev/sda5: size is 56641536 sectors
+#device/dev-io.c:534         Opened /dev/sda5 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda5: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda5: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda5
+#device/dev-cache.c:1072         Using /dev/sda5
+#device/dev-io.c:534         Opened /dev/sda6 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda6: size is 58593280 sectors
+#device/dev-io.c:588         Closed /dev/sda6
+#filters/filter-mpath.c:196         /dev/sda6: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda6 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda6
+#device/dev-io.c:311       /dev/sda6: size is 58593280 sectors
+#device/dev-io.c:534         Opened /dev/sda6 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda6: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda6: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda6
+#device/dev-cache.c:1072         Using /dev/sda6
+#device/dev-io.c:534         Opened /dev/sda7 RO O_DIRECT
+#device/dev-io.c:311       /dev/sda7: size is 58593280 sectors
+#device/dev-io.c:588         Closed /dev/sda7
+#filters/filter-mpath.c:196         /dev/sda7: Device is a partition, using primary device sda for mpath component detection
+#device/dev-io.c:534         Opened /dev/sda7 RO O_DIRECT
+#device/dev-io.c:588         Closed /dev/sda7
+#device/dev-io.c:311       /dev/sda7: size is 58593280 sectors
+#device/dev-io.c:534         Opened /dev/sda7 RO O_DIRECT
+#device/dev-io.c:145         /dev/sda7: block size is 4096 bytes
+#device/dev-io.c:167         /dev/sda7: physical block size can't be determined, using logical block size of 512 bytes
+#device/dev-io.c:588         Closed /dev/sda7
+#device/dev-cache.c:1072         Using /dev/sda7
+#misc/lvm-flock.c:200       Locking /var/lock/lvm/P_orphans RB
+#misc/lvm-flock.c:101         _do_flock /var/lock/lvm/P_orphans:aux WB
+#misc/lvm-flock.c:48         _undo_flock /var/lock/lvm/P_orphans:aux
+#misc/lvm-flock.c:101         _do_flock /var/lock/lvm/P_orphans RB
+#cache/lvmcache.c:497         Metadata cache has no info for vgname: "#orphans"
+#misc/lvm-flock.c:71       Unlocking /var/lock/lvm/P_orphans
+#misc/lvm-flock.c:48         _undo_flock /var/lock/lvm/P_orphans
+#cache/lvmcache.c:497         Metadata cache has no info for vgname: "#orphans"
+#misc/lvm-flock.c:200       Locking /var/lock/lvm/P_orphans RB
+#misc/lvm-flock.c:101         _do_flock /var/lock/lvm/P_orphans:aux WB
+#misc/lvm-flock.c:48         _undo_flock /var/lock/lvm/P_orphans:aux
+#misc/lvm-flock.c:101         _do_flock /var/lock/lvm/P_orphans RB
+#cache/lvmcache.c:497         Metadata cache has no info for vgname: "#orphans"
+#misc/lvm-flock.c:71       Unlocking /var/lock/lvm/P_orphans
+#misc/lvm-flock.c:48         _undo_flock /var/lock/lvm/P_orphans
+#cache/lvmcache.c:497         Metadata cache has no info for vgname: "#orphans"
+#misc/lvm-flock.c:200       Locking /var/lock/lvm/P_orphans RB
+#misc/lvm-flock.c:101         _do_flock /var/lock/lvm/P_orphans:aux WB
+#misc/lvm-flock.c:48         _undo_flock /var/lock/lvm/P_orphans:aux
+#misc/lvm-flock.c:101         _do_flock /var/lock/lvm/P_orphans RB
+#cache/lvmcache.c:497         Metadata cache has no info for vgname: "#orphans"
+#misc/lvm-flock.c:71       Unlocking /var/lock/lvm/P_orphans
+#misc/lvm-flock.c:48         _undo_flock /var/lock/lvm/P_orphans
+#cache/lvmcache.c:497         Metadata cache has no info for vgname: "#orphans"
+#libdm-config.c:1010       report/compact_output not found in config: defaulting to 0
+#lvmcmdline.c:1547         Completed: /sbin/pvs -vvvv
+
+#==[ Command ]======================================#
+# /sbin/pvscan -vvv
+        DEGRADED MODE. Incomplete RAID LVs will be processed.
+      Setting activation/monitoring to 1
+        Processing: /sbin/pvscan -vvv
+        system ID: 
+        O_DIRECT will be used
+      Setting global/locking_type to 1
+      Setting global/wait_for_locks to 1
+      File-based locking selected.
+      Setting global/prioritise_write_locks to 1
+      Setting global/locking_dir to /var/lock/lvm
+      Locking /var/lock/lvm/P_global WB
+        _do_flock /var/lock/lvm/P_global:aux WB
+        _do_flock /var/lock/lvm/P_global WB
+        _undo_flock /var/lock/lvm/P_global:aux
+    Wiping cache of LVM-capable devices
+        /dev/sda: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683: Aliased to /dev/sda in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH: Aliased to /dev/sda in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683: Aliased to /dev/sda in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0: Aliased to /dev/sda in device cache
+        /dev/sda1: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683-part1: Aliased to /dev/sda1 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part1: Aliased to /dev/sda1 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part1: Aliased to /dev/sda1 in device cache
+        /dev/disk/by-partlabel/primary: Aliased to /dev/sda1 in device cache
+        /dev/disk/by-partuuid/b46fd886-94be-4dc8-8a93-6ec018e092cb: Aliased to /dev/sda1 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part1: Aliased to /dev/sda1 in device cache
+        /dev/disk/by-uuid/143B-4935: Aliased to /dev/sda1 in device cache
+        /dev/sda2: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683-part2: Aliased to /dev/sda2 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part2: Aliased to /dev/sda2 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part2: Aliased to /dev/sda2 in device cache
+        /dev/disk/by-partlabel/primary: Already in device cache
+        /dev/disk/by-partuuid/6a71d617-aa24-4691-af69-da97ad3b9c6f: Aliased to /dev/sda2 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part2: Aliased to /dev/sda2 in device cache
+        /dev/disk/by-uuid/d03cce05-b791-4fbf-b5f8-64df2b80bc94: Aliased to /dev/sda2 in device cache
+        /dev/sda3: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683-part3: Aliased to /dev/sda3 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part3: Aliased to /dev/sda3 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part3: Aliased to /dev/sda3 in device cache
+        /dev/disk/by-partlabel/primary: Already in device cache
+        /dev/disk/by-partuuid/bfb1d9fd-3a1e-42e0-81e7-b8b425237236: Aliased to /dev/sda3 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part3: Aliased to /dev/sda3 in device cache
+        /dev/disk/by-uuid/8e715014-5e7d-4e12-aa04-9bbe05148ae6: Aliased to /dev/sda3 in device cache
+        /dev/sda4: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683-part4: Aliased to /dev/sda4 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part4: Aliased to /dev/sda4 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part4: Aliased to /dev/sda4 in device cache
+        /dev/disk/by-partlabel/linux: Added to device cache
+        /dev/disk/by-partuuid/ac77f8ff-fa0b-4d99-8877-413d1e1a9532: Aliased to /dev/sda4 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part4: Aliased to /dev/sda4 in device cache
+        /dev/sda5: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683-part5: Aliased to /dev/sda5 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part5: Aliased to /dev/sda5 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part5: Aliased to /dev/sda5 in device cache
+        /dev/disk/by-partlabel/linux: Already in device cache
+        /dev/disk/by-partuuid/416ef826-e1d3-4986-951c-486cc873e854: Aliased to /dev/sda5 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part5: Aliased to /dev/sda5 in device cache
+        /dev/sda6: Aliased to /dev/disk/by-partlabel/linux in device cache (preferred name)
+        /dev/disk/by-id/scsi-35000c5006810e683-part6: Aliased to /dev/sda6 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part6: Aliased to /dev/sda6 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part6: Aliased to /dev/sda6 in device cache
+        /dev/disk/by-partlabel/linux: Already in device cache
+        /dev/disk/by-partuuid/02331b6f-b532-423a-b637-bde32e8d80d5: Aliased to /dev/sda6 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part6: Aliased to /dev/sda6 in device cache
+        /dev/sda7: Added to device cache
+        /dev/disk/by-id/scsi-35000c5006810e683-part7: Aliased to /dev/sda7 in device cache
+        /dev/disk/by-id/scsi-SIBM-ESXS_ST300MM0006_S0K0B52T0000B343LQHH-part7: Aliased to /dev/sda7 in device cache
+        /dev/disk/by-id/wwn-0x5000c5006810e683-part7: Aliased to /dev/sda7 in device cache
+        /dev/disk/by-partlabel/linux: Already in device cache
+        /dev/disk/by-partuuid/b2c7e759-ed37-4986-9e5d-b5cf135f67c7: Aliased to /dev/sda7 in device cache
+        /dev/disk/by-path/pci-0000:1a:00.0-scsi-0:0:4:0-part7: Aliased to /dev/sda7 in device cache
+        /dev/nvme0n1: Added to device cache
+        /dev/nvme0n1p1: Added to device cache
+        /dev/disk/by-partlabel/primary: Already in device cache
+        /dev/disk/by-partuuid/bd827cee-76b6-439f-91a0-b6de9e0dd549: Aliased to /dev/nvme0n1p1 in device cache
+        /dev/disk/by-uuid/6540-76FE: Aliased to /dev/nvme0n1p1 in device cache
+        /dev/nvme0n1p2: Added to device cache
+        /dev/disk/by-partlabel/primary: Already in device cache
+        /dev/disk/by-partuuid/96d978fb-a963-47eb-9fed-ba9af63f228d: Aliased to /dev/nvme0n1p2 in device cache
+        /dev/disk/by-uuid/083ae1fb-02e3-46a0-8610-b1c1cafd31b0: Aliased to /dev/nvme0n1p2 in device cache
+        /dev/root: Aliased to /dev/nvme0n1p2 in device cache (preferred name)
+    Wiping internal VG cache
+        Metadata cache has no info for vgname: "#orphans_lvm1"
+        Metadata cache has no info for vgname: "#orphans_lvm1"
+        lvmcache: initialised VG #orphans_lvm1
+        Metadata cache has no info for vgname: "#orphans_pool"
+        Metadata cache has no info for vgname: "#orphans_pool"
+        lvmcache: initialised VG #orphans_pool
+        Metadata cache has no info for vgname: "#orphans_lvm2"
+        Metadata cache has no info for vgname: "#orphans_lvm2"
+        lvmcache: initialised VG #orphans_lvm2
+        Asking lvmetad for complete list of known VGs
+      Setting response to OK
+      Setting response to OK
+    Walking through all physical volumes
+        Asking lvmetad for complete list of known PVs
+      Setting response to OK
+      Setting response to OK
+  No matching physical volumes found
+      Unlocking /var/lock/lvm/P_global
+        _undo_flock /var/lock/lvm/P_global
+        Completed: /sbin/pvscan -vvv
+
+#==[ Command ]======================================#
+#  -vvvv
+ERROR: Command not found or not executible
+
+#==[ Command ]======================================#
+#  -vvvv
+ERROR: Command not found or not executible
+

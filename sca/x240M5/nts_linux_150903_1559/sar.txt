@@ -1,0 +1,4 @@
+#==[ Verification ]=================================#
+# rpm -V sysstat-10.2.1-1.11.x86_64
+# Verification Status: Passed
+

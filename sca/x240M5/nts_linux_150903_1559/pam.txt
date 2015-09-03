@@ -1,0 +1,755 @@
+#==[ Verification ]=================================#
+# rpm -V pam-1.1.8-14.1.x86_64
+....L....  c /etc/pam.d/common-account
+....L....  c /etc/pam.d/common-auth
+....L....  c /etc/pam.d/common-password
+....L....  c /etc/pam.d/common-session
+# Verification Status: Differences Found
+
+#==[ Verification ]=================================#
+# rpm -V pam-modules-12.1-23.12.x86_64
+# Verification Status: Passed
+
+#==[ Configuration File ]===========================#
+# /etc/nsswitch.conf
+passwd: compat
+group:  compat
+hosts:  	files mdns_minimal [NOTFOUND=return] dns
+networks:	files dns
+services:	files
+protocols:	files
+rpc:		files
+ethers:		files
+netmasks:	files
+netgroup:	files nis
+publickey:	files
+bootparams:	files
+automount:	files nis
+aliases:	files
+
+
+#==[ Configuration File ]===========================#
+# /etc/nologin - File not found
+
+#==[ Configuration File ]===========================#
+# /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/bin/bash
+daemon:x:2:2:Daemon:/sbin:/bin/bash
+lp:x:4:7:Printing daemon:/var/spool/lpd:/bin/bash
+mail:x:8:12:Mailer daemon:/var/spool/clientmqueue:/bin/false
+news:x:9:13:News system:/etc/news:/bin/bash
+uucp:x:10:14:Unix-to-Unix CoPy system:/etc/uucp:/bin/bash
+games:x:12:100:Games account:/var/games:/bin/bash
+man:x:13:62:Manual pages viewer:/var/cache/man:/bin/bash
+wwwrun:x:30:8:WWW daemon apache:/var/lib/wwwrun:/bin/false
+ftp:x:40:49:FTP account:/srv/ftp:/bin/bash
+nobody:x:65534:65533:nobody:/var/lib/nobody:/bin/bash
+messagebus:x:499:499:User for D-Bus:/var/run/dbus:/bin/false
+sshd:x:498:498:SSH daemon:/var/lib/sshd:/bin/false
+polkitd:x:497:496:User for polkitd:/var/lib/polkit:/sbin/nologin
+nscd:x:496:495:User for nscd:/run/nscd:/sbin/nologin
+rpc:x:495:65534:user for rpcbind:/var/lib/empty:/sbin/nologin
+openslp:x:494:2:openslp daemon:/var/lib/empty:/sbin/nologin
+usbmux:x:493:65534:usbmuxd daemon:/var/lib/usbmuxd:/sbin/nologin
+ntp:x:74:492:NTP daemon:/var/lib/ntp:/bin/false
+at:x:25:25:Batch jobs daemon:/var/spool/atjobs:/bin/bash
+vnc:x:492:491:user for VNC:/var/lib/empty:/sbin/nologin
+rtkit:x:491:490:RealtimeKit:/proc:/bin/false
+pulse:x:490:489:PulseAudio daemon:/var/lib/pulseaudio:/sbin/nologin
+statd:x:489:65534:NFS statd daemon:/var/lib/nfs:/sbin/nologin
+ftpsecure:x:488:65534:Secure FTP User:/var/lib/empty:/bin/false
+postfix:x:51:51:Postfix Daemon:/var/spool/postfix:/bin/false
+scard:x:487:487:Smart Card Reader:/var/run/pcscd:/usr/sbin/nologin
+gdm:x:486:485:Gnome Display Manager daemon:/var/lib/gdm:/bin/false
+tftp:x:485:484:TFTP account:/srv/tftpboot:/bin/false
+dnsmasq:x:484:65534:dnsmasq:/var/lib/empty:/bin/false
+radvd:x:483:2:Router ADVertisement Daemon for:/var/lib/empty:/bin/false
+avahi:x:482:483:User for Avahi:/run/avahi-daemon:/bin/false
+qemu:x:481:480:qemu user:/:/sbin/nologin
+
+
+#==[ Command ]======================================#
+# /usr/bin/getent passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/bin/bash
+daemon:x:2:2:Daemon:/sbin:/bin/bash
+lp:x:4:7:Printing daemon:/var/spool/lpd:/bin/bash
+mail:x:8:12:Mailer daemon:/var/spool/clientmqueue:/bin/false
+news:x:9:13:News system:/etc/news:/bin/bash
+uucp:x:10:14:Unix-to-Unix CoPy system:/etc/uucp:/bin/bash
+games:x:12:100:Games account:/var/games:/bin/bash
+man:x:13:62:Manual pages viewer:/var/cache/man:/bin/bash
+wwwrun:x:30:8:WWW daemon apache:/var/lib/wwwrun:/bin/false
+ftp:x:40:49:FTP account:/srv/ftp:/bin/bash
+nobody:x:65534:65533:nobody:/var/lib/nobody:/bin/bash
+messagebus:x:499:499:User for D-Bus:/var/run/dbus:/bin/false
+sshd:x:498:498:SSH daemon:/var/lib/sshd:/bin/false
+polkitd:x:497:496:User for polkitd:/var/lib/polkit:/sbin/nologin
+nscd:x:496:495:User for nscd:/run/nscd:/sbin/nologin
+rpc:x:495:65534:user for rpcbind:/var/lib/empty:/sbin/nologin
+openslp:x:494:2:openslp daemon:/var/lib/empty:/sbin/nologin
+usbmux:x:493:65534:usbmuxd daemon:/var/lib/usbmuxd:/sbin/nologin
+ntp:x:74:492:NTP daemon:/var/lib/ntp:/bin/false
+at:x:25:25:Batch jobs daemon:/var/spool/atjobs:/bin/bash
+vnc:x:492:491:user for VNC:/var/lib/empty:/sbin/nologin
+rtkit:x:491:490:RealtimeKit:/proc:/bin/false
+pulse:x:490:489:PulseAudio daemon:/var/lib/pulseaudio:/sbin/nologin
+statd:x:489:65534:NFS statd daemon:/var/lib/nfs:/sbin/nologin
+ftpsecure:x:488:65534:Secure FTP User:/var/lib/empty:/bin/false
+postfix:x:51:51:Postfix Daemon:/var/spool/postfix:/bin/false
+scard:x:487:487:Smart Card Reader:/var/run/pcscd:/usr/sbin/nologin
+gdm:x:486:485:Gnome Display Manager daemon:/var/lib/gdm:/bin/false
+tftp:x:485:484:TFTP account:/srv/tftpboot:/bin/false
+dnsmasq:x:484:65534:dnsmasq:/var/lib/empty:/bin/false
+radvd:x:483:2:Router ADVertisement Daemon for:/var/lib/empty:/bin/false
+avahi:x:482:483:User for Avahi:/run/avahi-daemon:/bin/false
+qemu:x:481:480:qemu user:/:/sbin/nologin
+
+#==[ Configuration File ]===========================#
+# /etc/group
+root:x:0:
+bin:x:1:daemon
+daemon:x:2:
+sys:x:3:
+tty:x:5:
+disk:x:6:
+lp:x:7:
+www:x:8:
+kmem:x:9:
+wheel:x:10:
+mail:x:12:postfix
+news:x:13:
+uucp:x:14:
+shadow:x:15:
+dialout:x:16:
+audio:x:17:
+floppy:x:19:
+cdrom:x:20:
+console:x:21:
+utmp:x:22:
+public:x:32:
+video:x:33:gdm
+games:x:40:
+xok:x:41:
+trusted:x:42:
+modem:x:43:
+ftp:x:49:
+lock:x:54:
+man:x:62:
+users:x:100:
+nobody:x:65533:
+nogroup:x:65534:nobody
+messagebus:x:499:
+sshd:x:498:
+tape:x:497:
+polkitd:x:496:
+nscd:x:495:
+brlapi:x:494:
+systemd-journal:x:493:
+ntp:x:492:
+at:x:25:
+vnc:x:491:
+rtkit:x:490:
+pulse:x:489:
+pulse-access:x:488:
+postfix:x:51:
+maildrop:x:59:postfix
+scard:x:487:
+ntadmin:x:71:
+winbind:x:486:
+gdm:x:485:
+tftp:x:484:tftp,dnsmasq
+avahi:x:483:
+libvirt:x:482:
+kvm:x:481:qemu
+qemu:x:480:
+
+
+#==[ Command ]======================================#
+# /usr/bin/getent group
+root:x:0:
+bin:x:1:daemon
+daemon:x:2:
+sys:x:3:
+tty:x:5:
+disk:x:6:
+lp:x:7:
+www:x:8:
+kmem:x:9:
+wheel:x:10:
+mail:x:12:postfix
+news:x:13:
+uucp:x:14:
+shadow:x:15:
+dialout:x:16:
+audio:x:17:
+floppy:x:19:
+cdrom:x:20:
+console:x:21:
+utmp:x:22:
+public:x:32:
+video:x:33:gdm
+games:x:40:
+xok:x:41:
+trusted:x:42:
+modem:x:43:
+ftp:x:49:
+lock:x:54:
+man:x:62:
+users:x:100:
+nobody:x:65533:
+nogroup:x:65534:nobody
+messagebus:x:499:
+sshd:x:498:
+tape:x:497:
+polkitd:x:496:
+nscd:x:495:
+brlapi:x:494:
+systemd-journal:x:493:
+ntp:x:492:
+at:x:25:
+vnc:x:491:
+rtkit:x:490:
+pulse:x:489:
+pulse-access:x:488:
+postfix:x:51:
+maildrop:x:59:postfix
+scard:x:487:
+ntadmin:x:71:
+winbind:x:486:
+gdm:x:485:
+tftp:x:484:tftp,dnsmasq
+avahi:x:483:
+libvirt:x:482:
+kvm:x:481:qemu
+qemu:x:480:
+
+#==[ Configuration File ]===========================#
+# /etc/sudoers
+Defaults always_set_home
+Defaults secure_path="/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults env_reset
+Defaults env_keep = "LANG LC_ADDRESS LC_CTYPE LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME LC_ALL LANGUAGE LINGUAS XDG_SESSION_COOKIE"
+Defaults !insults
+Defaults targetpw   # ask for the password of the target user i.e. root
+ALL	ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
+root ALL=(ALL) ALL
+
+
+#==[ Command ]======================================#
+# /usr/bin/loginctl --no-pager list-sessions
+   SESSION        UID USER             SEAT            
+         1          0 root             seat0           
+
+1 sessions listed.
+
+#==[ Files in /etc/security ]=======================#
+#==[ Configuration File ]===========================#
+# /etc/security/access.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/time.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/pwquality.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/limits.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/namespace.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/sepermit.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/pam_env.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/group.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/security/pam_winbind.conf
+[global]
+
+
+#==[ Files in /etc/pam.d ]==========================#
+#==[ Configuration File ]===========================#
+# /etc/pam.d/xdm-np
+auth     required       pam_permit.so
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-session-pc
+session	required	pam_limits.so	
+session	required	pam_unix.so	try_first_pass 
+session	optional	pam_umask.so	
+session	optional	pam_systemd.so
+session	optional	pam_gnome_keyring.so	auto_start only_if=gdm,gdm-password,lxdm,lightdm 
+session	optional	pam_env.so	
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/xscreensaver
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-password.pam-config-backup
+password        requisite       pam_cracklib.so
+password        required        pam_unix.so     use_authtok nullok try_first_pass
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-account-pc
+account	required	pam_unix.so	try_first_pass 
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/groupmod
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/samba
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/polkit-1
+auth       include      common-auth
+account    include      common-account
+password   include      common-password
+session    include      common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/groupadd
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/remote
+auth	 requisite	pam_nologin.so
+auth	 [user_unknown=ignore success=ok ignore=ignore auth_err=die default=bad]	pam_securetty.so
+auth	 include	common-auth
+account  include 	common-account
+password include	common-password
+session  required	pam_loginuid.so
+session	 include	common-session
+session  optional       pam_lastlog.so nowtmp showfailed
+session  optional       pam_mail.so standard
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/runuser
+auth     sufficient     pam_rootok.so
+session  include        common-session
+session  optional       pam_xauth.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-auth
+auth	required	pam_env.so	
+auth	optional	pam_gnome_keyring.so
+auth	required	pam_unix.so	try_first_pass 
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/sshd
+auth        requisite   pam_nologin.so
+auth        include     common-auth
+account     requisite   pam_nologin.so
+account     include     common-account
+password    include     common-password
+session     required    pam_loginuid.so
+session     include     common-session
+session  optional       pam_lastlog.so   silent noupdate showfailed
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/xdm
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/userdel
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/gnomesu-pam
+auth     sufficient     pam_rootok.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+session  optional       pam_xauth.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/crond
+auth     sufficient     pam_rootok.so
+account  sufficient     pam_listfile.so item=user sense=allow file=/etc/cron.allow onerr=succeed quiet
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/passwd
+auth	 include	common-auth
+account  include	common-account
+password include	common-password
+session	 include	common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/chsh
+auth     sufficient	pam_rootok.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/cups
+auth	include	common-auth
+account	include	common-account
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-session.pam-config-backup
+session	required	pam_limits.so
+session	required	pam_unix.so	try_first_pass
+session optional	pam_umask.so
+session optional	pam_env.so
+session optional	pam_systemd.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/groupdel
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-session
+session	required	pam_limits.so	
+session	required	pam_unix.so	try_first_pass 
+session	optional	pam_umask.so	
+session	optional	pam_systemd.so
+session	optional	pam_gnome_keyring.so	auto_start only_if=gdm,gdm-password,lxdm,lightdm 
+session	optional	pam_env.so	
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/runuser-l
+auth     sufficient     pam_rootok.so
+session  include        common-session
+session  optional       pam_xauth.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/other
+auth	 required	pam_warn.so
+auth	 required	pam_deny.so
+account  required	pam_warn.so
+account	 required	pam_deny.so
+password required	pam_warn.so
+password required	pam_deny.so
+session  required       pam_warn.so
+session	 required	pam_deny.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/gdm
+auth     requisite      pam_nologin.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-password
+password	requisite	pam_cracklib.so	
+password	optional	pam_gnome_keyring.so	use_authtok
+password	required	pam_unix.so	use_authtok nullok shadow try_first_pass 
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-auth-pc
+auth	required	pam_env.so	
+auth	optional	pam_gnome_keyring.so
+auth	required	pam_unix.so	try_first_pass 
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/su
+auth     sufficient     pam_rootok.so
+auth     include        common-auth
+account  sufficient     pam_rootok.so
+account  include        common-account
+password include        common-password
+session  include        common-session
+session  optional       pam_xauth.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-account
+account	required	pam_unix.so	try_first_pass 
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/login
+auth	 requisite	pam_nologin.so
+auth	 [user_unknown=ignore success=ok ignore=ignore auth_err=die default=bad]	pam_securetty.so
+auth	 include	common-auth
+account  include 	common-account
+password include	common-password
+session  required	pam_loginuid.so
+session	 include	common-session
+session  optional       pam_mail.so standard
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-password-pc
+password	requisite	pam_cracklib.so	
+password	optional	pam_gnome_keyring.so	use_authtok
+password	required	pam_unix.so	use_authtok nullok shadow try_first_pass 
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/chpasswd
+auth     sufficient	pam_rootok.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/atd
+auth		sufficient	pam_rootok.so
+auth    	include		common-auth   
+account		include		common-account
+password	include		common-password
+session		required	pam_loginuid.so
+session		include		common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/newusers
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-auth.pam-config-backup
+auth	required	pam_env.so
+auth	required	pam_unix.so	try_first_pass
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/gdm-launch-environment
+auth     required       pam_permit.so
+account  required       pam_permit.so
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/useradd
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/xlock
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/common-account.pam-config-backup
+account	required	pam_unix.so	try_first_pass
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/gdm-password
+auth     requisite      pam_nologin.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/chfn
+auth     sufficient	pam_rootok.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/xen-api
+auth      required  pam_listfile.so onerr=fail item=user \
+                    sense=allow file=/etc/xen/xenapiusers
+auth      include   common-auth
+account   include   common-account
+password  include   common-password
+session   include   common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/smtp
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/vlock
+auth		include		common-auth
+account		include		common-account
+session		include		common-session
+password	include		common-password
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/gdm-autologin
+auth     requisite      pam_nologin.so
+auth     required       pam_permit.so
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/su-l
+auth     sufficient     pam_rootok.so
+auth     include        common-auth
+account  sufficient     pam_rootok.so
+account  include        common-account
+password include        common-password
+session  include        common-session
+session  optional       pam_xauth.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/usermod
+auth     sufficient	pam_rootok.so
+auth     required	pam_permit.so
+account  required	pam_permit.so
+password required	pam_permit.so
+session  required	pam_permit.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/init
+auth	    sufficient	pam_rootok.so
+account	    include	common-account
+session	    requisite	pam_lastlog.so silent
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/chage
+auth     sufficient	pam_rootok.so
+auth	 include	common-auth
+account	 include	common-account
+password include	common-password
+session	 include	common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/ppp
+auth     required       pam_nologin.so
+auth	 include	common-auth
+account  include 	common-account
+password include	common-password
+session	 include	common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/systemd-user
+account include common-account
+session include common-session
+auth required pam_deny.so
+password required pam_deny.so
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/vsftpd
+auth     required       pam_listfile.so item=user sense=deny file=/etc/ftpusers onerr=succeed
+auth     required       pam_shells.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+
+
+#==[ Configuration File ]===========================#
+# /etc/pam.d/sudo
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
+

@@ -1,0 +1,70 @@
+=============================================================================
+                     Support Utilities - Supportconfig
+                          Script Version: 3.0-62
+                          Script Date: 2015 03 31
+
+ Detailed system information and logs are collected and organized in a
+ manner that helps reduce service request resolution times. Private system
+ information can be disclosed when using this tool. If this is a concern,
+ please prune private data from the log files. Several startup options
+ are available to exclude more sensitive information. Supportconfig data is
+ used only for diagnostic purposes and is considered confidential information.
+ See http://www.novell.com/company/legal/privacy/
+=============================================================================
+
+#==[ Command ]======================================#
+# /bin/date
+Thu Sep  3 15:59:27 MDT 2015
+
+#==[ Command ]======================================#
+# /bin/uname -a
+Linux linux 3.12.46-2-default #1 SMP Mon Aug 17 15:43:07 UTC 2015 (5c597ab) x86_64 x86_64 x86_64 GNU/Linux
+
+#==[ System ]=======================================#
+# Virtualization
+Manufacturer:  IBM
+Hardware:      IBM Flex System x240 M5 -[9532AC1]-
+Hypervisor:    KVM (kvm loaded)
+Identity:      Virtual Machine Server (No QEMU Virtual CPU)
+
+#==[ Configuration File ]===========================#
+# /etc/SuSE-release
+SUSE Linux Enterprise Server 12 (x86_64)
+VERSION = 12
+PATCHLEVEL = 1
+
+
+#==[ Configuration File ]===========================#
+# /etc/os-release
+NAME="SLES"
+VERSION="12.1"
+VERSION_ID="12.1"
+PRETTY_NAME="SUSE Linux Enterprise Server 12 SP1"
+ID="sles"
+ANSI_COLOR="0;32"
+CPE_NAME="cpe:/o:suse:sles:12.1"
+
+
+#==[ Command ]======================================#
+# /bin/rpm -qa --queryformat "%{DISTRIBUTION}\n" | sort | uniq
+(none)
+SUSE Linux Enterprise 12
+SUSE:SLE-12:GA
+home:csalmond:System_Kit / SLE_11_SP3
+
+#==[ Verification ]=================================#
+# rpm -V SuSEfirewall2-3.6.312-1.3.noarch
+S.5....T.  c /etc/sysconfig/SuSEfirewall2
+# Verification Status: Differences Found
+
+#==[ Firewall Services ]============================#
+# Service state
+SuSEfirewall2.service - SuSEfirewall2 phase 2
+   Loaded: loaded (/usr/lib/systemd/system/SuSEfirewall2.service; disabled)
+   Active: inactive (dead)
+SuSEfirewall2_init.service - SuSEfirewall2 phase 1
+   Loaded: loaded (/usr/lib/systemd/system/SuSEfirewall2_init.service; disabled)
+   Active: inactive (dead)
+
+0 Active Firewall Rules
+

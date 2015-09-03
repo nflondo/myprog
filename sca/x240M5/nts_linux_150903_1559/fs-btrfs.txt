@@ -1,0 +1,157 @@
+#==[ Verification ]=================================#
+# rpm -V btrfsprogs-4.1.2-3.2.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /sbin/btrfs filesystem show
+btrfs-progs v4.1.2+20150714
+
+#==[ Configuration File ]===========================#
+# /etc/fstab
+UUID=d03cce05-b791-4fbf-b5f8-64df2b80bc94 swap                 swap       defaults              0 0
+UUID=083ae1fb-02e3-46a0-8610-b1c1cafd31b0 /                    ext4       acl,user_xattr        1 1
+UUID=6540-76FE       /boot/efi            vfat       umask=0002,utf8=true  0 0
+
+
+#==[ Command ]======================================#
+# /bin/findmnt
+TARGET                           SOURCE         FSTYPE          OPTIONS
+/                                /dev/nvme0n1p2 ext4            rw,relatime,data=ordered
+|-/sys                           sysfs          sysfs           rw,nosuid,nodev,noexec,relatime
+| |-/sys/kernel/security         securityfs     securityfs      rw,nosuid,nodev,noexec,relatime
+| |-/sys/fs/cgroup               tmpfs          tmpfs           rw,nosuid,nodev,noexec,mode=755
+| | |-/sys/fs/cgroup/systemd     cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd
+| | |-/sys/fs/cgroup/cpuset      cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,cpuset
+| | |-/sys/fs/cgroup/cpu,cpuacct cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,cpuacct,cpu
+| | |-/sys/fs/cgroup/memory      cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,memory
+| | |-/sys/fs/cgroup/devices     cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,devices
+| | |-/sys/fs/cgroup/freezer     cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,freezer
+| | |-/sys/fs/cgroup/blkio       cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,blkio
+| | |-/sys/fs/cgroup/perf_event  cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,perf_event
+| | `-/sys/fs/cgroup/hugetlb     cgroup         cgroup          rw,nosuid,nodev,noexec,relatime,hugetlb
+| |-/sys/fs/pstore               pstore         pstore          rw,nosuid,nodev,noexec,relatime
+| |-/sys/firmware/efi/efivars    efivarfs       efivarfs        rw,nosuid,nodev,noexec,relatime
+| |-/sys/kernel/debug            debugfs        debugfs         rw,relatime
+| `-/sys/fs/fuse/connections     fusectl        fusectl         rw,relatime
+|-/proc                          proc           proc            rw,nosuid,nodev,noexec,relatime
+| |-/proc/sys/fs/binfmt_misc     systemd-1      autofs          rw,relatime,fd=36,pgrp=1,timeout=300,minproto=5,maxproto=5,direct
+| | `-/proc/sys/fs/binfmt_misc   binfmt_misc    binfmt_misc     rw,relatime
+| `-/proc/fs/nfsd                nfsd           nfsd            rw,relatime
+|-/dev                           devtmpfs       devtmpfs        rw,nosuid,size=86494884k,nr_inodes=21623721,mode=755
+| |-/dev/shm                     tmpfs          tmpfs           rw,nosuid,nodev
+| |-/dev/pts                     devpts         devpts          rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000
+| |-/dev/hugepages               hugetlbfs      hugetlbfs       rw,relatime
+| `-/dev/mqueue                  mqueue         mqueue          rw,relatime
+|-/run                           tmpfs          tmpfs           rw,nosuid,nodev,mode=755
+| `-/run/user/0/gvfs             gvfsd-fuse     fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=0,group_id=0
+|-/boot/efi                      /dev/nvme0n1p1 vfat            rw,relatime,fmask=0002,dmask=0002,allow_utime=0020,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro
+`-/var/lib/nfs/rpc_pipefs        sunrpc         rpc_pipefs      rw,relatime
+
+#==[ Command ]======================================#
+# /bin/df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p2  367G  4.9G  361G   2% /
+devtmpfs         83G  4.0K   83G   1% /dev
+tmpfs            83G   80K   83G   1% /dev/shm
+tmpfs            83G   11M   83G   1% /run
+tmpfs            83G     0   83G   0% /sys/fs/cgroup
+/dev/nvme0n1p1  156M   24M  133M  15% /boot/efi
+
+#==[ Command ]======================================#
+# /sbin/modinfo btrfs
+filename:       /lib/modules/3.12.46-2-default/kernel/fs/btrfs/btrfs.ko
+license:        GPL
+alias:          devname:btrfs-control
+alias:          char-major-10-234
+alias:          fs-btrfs
+srcversion:     E665DBE96030F7ECA237D7C
+depends:        raid6_pq,xor
+supported:      yes
+intree:         Y
+vermagic:       3.12.46-2-default SMP mod_unload modversions 
+signer:         SUSE Linux Enterprise Secure Boot Signkey
+sig_key:        3F:B0:77:B6:CE:BC:6F:F2:52:2E:1C:14:8C:57:C7:77:C7:88:E3:E7
+sig_hashalgo:   sha256
+parm:           allow_unsupported:Allow using features that are out of supported scope
+
+#==[ Log File ]=====================================#
+# grep -i btrfs /var/log/messages - Last 500 Lines
+2015-09-02T09:49:37.351904-06:00 linux btrfsmaintenance-refresh-cron.sh[5028]: Refresh script btrfs-balance.sh for weekly
+2015-09-02T09:49:37.355806-06:00 linux btrfsmaintenance-refresh-cron.sh[5028]: Refresh script btrfs-trim.sh for weekly
+2015-09-02T16:36:50.358469-06:00 linux btrfsmaintenance-refresh-cron.sh[1174]: Refresh script btrfs-trim.sh for weekly
+2015-09-03T15:35:25.865625-06:00 linux btrfsmaintenance-refresh-cron.sh[4932]: Refresh script btrfs-balance.sh for weekly
+2015-09-03T15:35:25.869907-06:00 linux btrfsmaintenance-refresh-cron.sh[4932]: Refresh script btrfs-trim.sh for weekly
+
+
+#==[ Verification ]=================================#
+# rpm -V snapper-0.2.7-2.3.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /usr/bin/snapper list-configs
+Config | Subvolume
+-------+----------
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/snapper
+SNAPPER_CONFIGS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/snapper/configs/* - File not found
+
+#==[ Configuration File ]===========================#
+# /etc/snapper/filters/base.txt
+/etc/adjtime
+/etc/mtab
+/var/lib/logrotate.status
+/var/lib/misc/random-seed
+/var/lib/ntp/drift/ntp.drift
+
+
+#==[ Configuration File ]===========================#
+# /etc/snapper/filters/lvm.txt
+/etc/lvm/archive/*
+/etc/lvm/backup/*
+
+
+#==[ Configuration File ]===========================#
+# /etc/snapper/filters/x11.txt
+*/.Xauthority
+
+
+#==[ Log File ]=====================================#
+# /var/log/snapper.log - Last 500 Lines
+2015-09-02 16:31:22 MIL libsnapper(7828) snapperd.cc(main):270 - Requesting DBus name
+2015-09-02 16:31:22 MIL libsnapper(7828) snapperd.cc(main):274 - Loading snapper configs
+2015-09-02 16:31:22 MIL libsnapper(7828) Snapper.cc(getConfigs):247 - Snapper get-configs
+2015-09-02 16:31:22 MIL libsnapper(7828) Snapper.cc(getConfigs):248 - libsnapper version 0.2.7
+2015-09-02 16:31:22 MIL libsnapper(7828) AsciiFile.cc(reload):114 - loading file /etc/sysconfig/snapper
+2015-09-02 16:31:22 MIL libsnapper(7828) AsciiFile.cc(getValue):235 - key:SNAPPER_CONFIGS value:
+2015-09-02 16:31:22 MIL libsnapper(7828) snapperd.cc(main):278 - Listening for method calls and signals
+2015-09-02 16:33:22 MIL libsnapper(7828) snapperd.cc(main):282 - Exiting
+2015-09-03 11:56:32 MIL libsnapper(9755) snapperd.cc(main):270 - Requesting DBus name
+2015-09-03 11:56:32 MIL libsnapper(9755) snapperd.cc(main):274 - Loading snapper configs
+2015-09-03 11:56:32 MIL libsnapper(9755) Snapper.cc(getConfigs):247 - Snapper get-configs
+2015-09-03 11:56:32 MIL libsnapper(9755) Snapper.cc(getConfigs):248 - libsnapper version 0.2.7
+2015-09-03 11:56:32 MIL libsnapper(9755) AsciiFile.cc(reload):114 - loading file /etc/sysconfig/snapper
+2015-09-03 11:56:32 MIL libsnapper(9755) AsciiFile.cc(getValue):235 - key:SNAPPER_CONFIGS value:
+2015-09-03 11:56:32 MIL libsnapper(9755) snapperd.cc(main):278 - Listening for method calls and signals
+2015-09-03 11:59:27 MIL libsnapper(9755) snapperd.cc(main):282 - Exiting
+2015-09-03 15:25:39 MIL libsnapper(6546) snapperd.cc(main):270 - Requesting DBus name
+2015-09-03 15:25:39 MIL libsnapper(6546) snapperd.cc(main):274 - Loading snapper configs
+2015-09-03 15:25:39 MIL libsnapper(6546) Snapper.cc(getConfigs):247 - Snapper get-configs
+2015-09-03 15:25:39 MIL libsnapper(6546) Snapper.cc(getConfigs):248 - libsnapper version 0.2.7
+2015-09-03 15:25:39 MIL libsnapper(6546) AsciiFile.cc(reload):114 - loading file /etc/sysconfig/snapper
+2015-09-03 15:25:39 MIL libsnapper(6546) AsciiFile.cc(getValue):235 - key:SNAPPER_CONFIGS value:
+2015-09-03 15:25:39 MIL libsnapper(6546) snapperd.cc(main):278 - Listening for method calls and signals
+2015-09-03 15:26:54 MIL libsnapper(6546) snapperd.cc(main):282 - Exiting
+2015-09-03 15:59:43 MIL libsnapper(17178) snapperd.cc(main):270 - Requesting DBus name
+2015-09-03 15:59:43 MIL libsnapper(17178) snapperd.cc(main):274 - Loading snapper configs
+2015-09-03 15:59:43 MIL libsnapper(17178) Snapper.cc(getConfigs):247 - Snapper get-configs
+2015-09-03 15:59:43 MIL libsnapper(17178) Snapper.cc(getConfigs):248 - libsnapper version 0.2.7
+2015-09-03 15:59:43 MIL libsnapper(17178) AsciiFile.cc(reload):114 - loading file /etc/sysconfig/snapper
+2015-09-03 15:59:43 MIL libsnapper(17178) AsciiFile.cc(getValue):235 - key:SNAPPER_CONFIGS value:
+2015-09-03 15:59:43 MIL libsnapper(17178) snapperd.cc(main):278 - Listening for method calls and signals
+
+

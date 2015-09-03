@@ -1,0 +1,6 @@
+#==[ Verification ]=================================#
+# RPM Not Installed: lxc
+
+#==[ Verification ]=================================#
+# RPM Not Installed: libvirt-daemon-driver-lxc
+

@@ -1,0 +1,91 @@
+#==[ Verification ]=================================#
+# rpm -V openslp-server-2.0.0-5.1.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /bin/systemctl status slpd.service
+slpd.service - OpenSLP daemon for the Service Location Protocol
+   Loaded: loaded (/usr/lib/systemd/system/slpd.service; disabled)
+   Active: inactive (dead)
+
+
+#==[ Verification ]=================================#
+# rpm -V openslp-2.0.0-5.1.x86_64
+# Verification Status: Passed
+
+#==[ Configuration File ]===========================#
+# /etc/slp.conf
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.reg
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.spi
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.reg.d/ntp.reg
+service:ntp://$HOSTNAME:123,en,65535
+watch-port-udp=123
+description=Network Time Protocol [ntp]
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.reg.d/dnsmasq.reg
+service:domain://$HOSTNAME:53,en,65535
+watch-port-udp=53
+description=Domain Name Service
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.reg.d/samba.reg
+service:smb://$HOSTNAME,en,65535
+tcp-port=139
+description=Samba file and print server
+service:Samba-Swat:http://$HOSTNAME:901,en,65535
+tcp-port=901
+description=Samba web administration front end
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.reg.d/vnc.reg
+service:remotedesktop.kde:vnc://$HOSTNAME:5901,en,65535
+tcp-port=5901
+description=VNC remote login [1024x768]
+service:remotedesktop.kde:vnc://$HOSTNAME:5902,en,65535
+tcp-port=5902
+description=VNC remote login [1280x1024]
+service:remotedesktop.kde:vnc://$HOSTNAME:5903,en,65535
+tcp-port=5903
+description=VNC remote login [1600x1200]
+service:remotedesktop.java:http://$HOSTNAME:5801,en,65535
+tcp-port=5801
+description=VNC remote login [1024x768]
+service:remotedesktop.java:http://$HOSTNAME:5802,en,65535
+tcp-port=5802
+description=VNC remote login [1280x1024]
+service:remotedesktop.java:http://$HOSTNAME:5803,en,65535
+tcp-port=5803
+description=VNC remote login [1600x1200]
+
+
+#==[ Configuration File ]===========================#
+# /etc/slp.reg.d/ssh.reg
+service:ssh://$HOSTNAME:22,en,65535
+tcp-port=22
+description=Secure Shell Daemon
+service:fish://$HOSTNAME:22,en,65535
+tcp-port=22
+description=KDE file transfer via SSH
+
+
+#==[ Command ]======================================#
+# /usr/bin/slptool findscopes
+DEFAULT
+
+ERROR: Unable to get full SLP service lists, check 'slptool findsrvtypes'
+#==[ Log File ]=====================================#
+# /var/log/slpd.log - File not found
+

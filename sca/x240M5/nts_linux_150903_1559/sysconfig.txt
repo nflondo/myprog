@@ -1,0 +1,2681 @@
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/apache2
+DOC_SERVER="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/autofs
+AUTOFS_OPTIONS=""
+LOCAL_OPTIONS=""
+APPEND_OPTIONS="yes"
+USE_MISC_DEVICE="yes"
+DEFAULT_MASTER_MAP_NAME="auto.master"
+DEFAULT_TIMEOUT=600
+DEFAULT_BROWSE_MODE="yes"
+DEFAULT_LOGGING="none"
+DEFAULT_MAP_OBJECT_CLASS="nisMap"
+DEFAULT_ENTRY_OBJECT_CLASS="nisObject"
+DEFAULT_MAP_ATTRIBUTE="nisMapName"
+DEFAULT_ENTRY_ATTRIBUTE="cn"
+DEFAULT_VALUE_ATTRIBUTE="nisMapEntry"
+DEFAULT_AUTH_CONF_FILE="etc/autofs_ldap_auth.conf"
+MAP_HASH_TABLE_SIZE=1024
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/autoinstall
+REPOSITORY="/var/lib/autoinstall/repository"
+CLASS_DIR="/var/lib/autoinstall/repository/classes"
+XSLT_DONTMERGE="addon,conf"
+FORBID_WRITENOW="add-on,suse_register,partitioning,bootloader,general,report,software"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/avahi
+AVAHI_DAEMON_DETECT_LOCAL="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/backup
+RPMDB_BACKUP_DIR="/var/adm/backup/rpmdb"
+MAX_RPMDB_BACKUPS="5"
+RCCONFIG_BACKUP_DIR="/var/adm/backup/sysconfig"
+MAX_RCCONFIG_BACKUPS="5"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/bootloader
+LOADER_TYPE="grub2-efi"
+SECURE_BOOT="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/btrfsmaintenance
+BTRFS_LOG_OUTPUT="stdout"
+BTRFS_DEFRAG_PATHS=""
+BTRFS_DEFRAG_PERIOD="none"
+BTRFS_DEFRAG_MIN_SIZE="+1m"
+BTRFS_BALANCE_MOUNTPOINTS="/"
+BTRFS_BALANCE_PERIOD="weekly"
+BTRFS_BALANCE_DUSAGE="1 5 10 20 30 40 50"
+BTRFS_BALANCE_MUSAGE="1 5 10 20 30"
+BTRFS_SCRUB_MOUNTPOINTS="/"
+BTRFS_SCRUB_PERIOD="monthly"
+BTRFS_SCRUB_PRIORITY="idle"
+BTRFS_SCRUB_READ_ONLY="false"
+BTRFS_TRIM_PERIOD="weekly"
+BTRFS_TRIM_MOUNTPOINTS="/"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/clock
+TIMEZONE="America/Denver"
+DEFAULT_TIMEZONE="US/Eastern"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/console
+CONSOLE_FONT="lat9w-16.psfu"
+CONSOLE_UNICODEMAP=""
+CONSOLE_SCREENMAP="trivial"
+CONSOLE_MAGIC="(K"
+CONSOLE_ENCODING="UTF-8"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/cron
+REINIT_MANDB=yes
+DELETE_OLD_CATMAN=yes
+CATMAN_ATIME=7
+DAILY_TIME=""
+MAX_NOT_RUN="5"
+SEND_MAIL_ON_NO_ERROR="no"
+SEND_OUTPUT_ON_NO_ERROR="no"
+SYSLOG_ON_NO_ERROR="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/displaymanager
+DISPLAYMANAGER_XSERVER="Xorg"
+DISPLAYMANAGER="gdm"
+DISPLAYMANAGER_REMOTE_ACCESS="no"
+DISPLAYMANAGER_ROOT_LOGIN_REMOTE="no"
+DISPLAYMANAGER_STARTS_XSERVER="yes"
+DISPLAYMANAGER_XSERVER_TCP_PORT_6000_OPEN="no"
+DISPLAYMANAGER_AUTOLOGIN=""
+DISPLAYMANAGER_PASSWORD_LESS_LOGIN="no"
+DISPLAYMANAGER_AD_INTEGRATION="no"
+DISPLAYMANAGER_SHUTDOWN="root"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/dmraid
+DMRAID_DEVICE_TIMEOUT="60"
+DMRAID_START_OPTIONS=""
+DMRAID_STOP_OPTIONS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/fonts-config
+VERBOSITY="0"
+FORCE_HINTSTYLE="none"
+FORCE_AUTOHINT="no"
+FORCE_BW="no"
+FORCE_BW_MONOSPACE="no"
+USE_LCDFILTER="lcdnone"
+USE_RGBA="none"
+USE_EMBEDDED_BITMAPS="yes"
+EMBEDDED_BITMAPS_LANGUAGES="ja:ko:zh-CN:zh-TW:zh-HK:zh-SG"
+PREFER_SANS_FAMILIES=""
+PREFER_SERIF_FAMILIES=""
+PREFER_MONO_FAMILIES=""
+SEARCH_METRIC_COMPATIBLE="yes"
+FORCE_FAMILY_PREFERENCE_LISTS="no"
+GENERATE_TTCAP_ENTRIES="yes"
+GENERATE_JAVA_FONT_SETUP="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/ide
+DEVICES_FORCE_IDE_DMA=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/inputattach
+INPUTATTACH_DRIVERS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/ipmi
+IPMI_SI=yes
+DEV_IPMI=yes
+IPMI_WATCHDOG=no
+IPMI_WATCHDOG_OPTIONS="timeout=60"
+IPMI_POWEROFF=no
+IPMI_POWERCYCLE=no
+IPMI_IMB=no
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/irqbalance
+IRQBALANCE_BANNED_CPUS=""
+IRQBALANCE_BANNED_INTERRUPTS=""
+IRQBALANCE_ARGS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/kdump
+KDUMP_KERNELVER=""
+KDUMP_CPUS="1"
+KDUMP_COMMANDLINE=""
+KDUMP_COMMANDLINE_APPEND=""
+KEXEC_OPTIONS=""
+KDUMP_IMMEDIATE_REBOOT="yes"
+KDUMP_TRANSFER=""
+KDUMP_SAVEDIR="/var/crash"
+KDUMP_KEEP_OLD_DUMPS="5"
+KDUMP_FREE_DISK_SIZE="64"
+KDUMP_VERBOSE="3"
+KDUMP_DUMPLEVEL="31"
+KDUMP_DUMPFORMAT="lzo"
+KDUMP_CONTINUE_ON_ERROR="true"
+KDUMP_REQUIRED_PROGRAMS=""
+KDUMP_PRESCRIPT=""
+KDUMP_POSTSCRIPT=""
+KDUMP_COPY_KERNEL="yes"
+KDUMPTOOL_FLAGS=""
+KDUMP_NETCONFIG="auto"
+KDUMP_SMTP_SERVER=""
+KDUMP_SMTP_USER=""
+*REMOVED BY SUPPORTCONFIG*
+KDUMP_NOTIFICATION_TO=""
+KDUMP_NOTIFICATION_CC=""
+KDUMP_HOST_KEY=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/keyboard
+KEYTABLE=""
+KBD_DELAY=""
+KBD_RATE=""
+KBD_NUMLOCK="bios"
+KBD_SCRLOCK="no"
+KBD_CAPSLOCK="no"
+KBD_DISABLE_CAPS_LOCK="no"
+KBD_TTY=""
+COMPOSETABLE="clear latin1.add"
+YAST_KEYBOARD="english-us,pc104"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/language
+INPUT_METHOD=""
+RC_LANG="en_US.UTF-8"
+RC_LC_ALL=""
+RC_LC_MESSAGES=""
+RC_LC_CTYPE=""
+RC_LC_COLLATE=""
+RC_LC_TIME=""
+RC_LC_NUMERIC=""
+RC_LC_MONETARY=""
+RC_LC_PAPER=""
+ROOT_USES_LANG="ctype"
+AUTO_DETECT_UTF8="no"
+INSTALLED_LANGUAGES=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/libvirt-guests
+URIS=default
+ON_BOOT=start
+START_DELAY=0
+ON_SHUTDOWN=suspend
+PARALLEL_SHUTDOWN=0
+BYPASS_CACHE=0
+SYNC_TIME=0
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/libvirtd
+LIBVIRTD_CONFIG=/etc/libvirt/libvirtd.conf
+LIBVIRTD_ARGS="--listen"
+LIBVIRTD_NOFILES_LIMIT=2048
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/mail
+MAIL_CREATE_CONFIG="yes"
+FROM_HEADER=""
+SMTPD_LISTEN_REMOTE="no"
+SKIP_ASK="no"
+CONFIG_TYPE="undef"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/mcelog
+MCELOG_ADMIN_EMAIL=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/mdadm
+MDADM_DELAY=60
+MDADM_MAIL="root@localhost"
+MDADM_PROGRAM=""
+MDADM_RAIDDEVICES=""
+MDADM_SCAN=yes
+MDADM_CONFIG="/etc/mdadm.conf"
+MDADM_SEND_MAIL_ON_START=no
+MDADM_DEVICE_TIMEOUT="60"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/mouse
+MOUSEDEVICE="/dev/input/mice"
+MOUSETYPE="imps2"
+GPM_PARAM=""
+GPM_REPEAT=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/net-snmp
+SNMPD_LOGLEVEL="n"
+SNMPD_USE_SMUX="yes"
+SNMPD_LOG_SUCCESSFUL_CONNECTIONS="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/news
+ORGANIZATION=""
+NNTPSERVER="news"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/nfs
+USE_KERNEL_NFSD_NUMBER="4"
+MOUNTD_PORT=""
+NFS_SECURITY_GSS="no"
+NFS3_SERVER_SUPPORT="yes"
+NFS4_SUPPORT="yes"
+NFS4_SERVER_MINOR_VERSION="0"
+SM_NOTIFY_OPTIONS=""
+NFS_START_SERVICES="yes"
+STATD_PORT=""
+STATD_HOSTNAME=""
+LOCKD_TCPPORT=""
+LOCKD_UDPPORT=""
+STATD_OPTIONS=""
+NFSV4LEASETIME=""
+RPC_PIPEFS_DIR=""
+SVCGSSD_OPTIONS=""
+NFSD_OPTIONS=""
+GSSD_OPTIONS=""
+MOUNTD_OPTIONS=""
+NFS_GSSD_AVOID_DNS="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/ntp
+NTPD_OPTIONS="-g -u ntp:ntp"
+NTPD_RUN_CHROOTED="no"
+NTPD_CHROOT_FILES=""
+NTP_PARSE_LINK=""
+NTP_PARSE_DEVICE=""
+NTPD_FORCE_SYNC_ON_STARTUP="no"
+NTPD_FORCE_SYNC_HWCLOCK_ON_STARTUP="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/packagekit-background
+ENABLED=no
+CHECK_ONLY=no
+MAILTO=""
+SYSTEM_NAME=""
+SLEEP_MAX=3600
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/pcscd
+PCSCD_OPTIONS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/postfix
+POSTFIX_RELAYHOST=""
+POSTFIX_LISTEN=""
+POSTFIX_INET_PROTO=""
+POSTFIX_MYHOSTNAME=""
+POSTFIX_MASQUERADE_DOMAIN=""
+POSTFIX_LOCALDOMAINS=""
+POSTFIX_NULLCLIENT="no"
+POSTFIX_DIALUP="no"
+POSTFIX_NODNS="no"
+POSTFIX_CHROOT="no"
+POSTFIX_UPDATE_CHROOT_JAIL="no"
+POSTFIX_WITH_LDAP="no"
+POSTFIX_WITH_MYSQL="no"
+POSTFIX_MYSQL_CONN="socket"
+POSTFIX_LAPTOP="no"
+POSTFIX_UPDATE_MAPS="yes"
+POSTFIX_MAP_LIST="virtual transport access canonical sender_canonical relocated sasl_passwd:600 relay_ccerts helo_access relay"
+POSTFIX_TRANSPORT_MAPS=""
+POSTFIX_RBL_HOSTS=""
+POSTFIX_BASIC_SPAM_PREVENTION="off"
+POSTFIX_SMTPD_CLIENT_RESTRICTIONS=""
+POSTFIX_SMTPD_HELO_RESTRICTIONS=""
+POSTFIX_SMTPD_SENDER_RESTRICTIONS=""
+POSTFIX_SMTPD_RECIPIENT_RESTRICTIONS=""
+POSTFIX_MDA="local"
+POSTFIX_SMTP_AUTH_SERVER="no"
+POSTFIX_SMTP_AUTH="no"
+POSTFIX_SMTP_AUTH_OPTIONS=""
+POSTFIX_SMTP_TLS_SERVER="no"
+POSTFIX_SMTP_TLS_SERVER_LEGACY_SUPPORT="no"
+POSTFIX_SMTP_TLS_CLIENT="no"
+POSTFIX_SSL_PATH="/etc/ssl"
+POSTFIX_TLS_CAFILE=""
+POSTFIX_TLS_CERTFILE=""
+POSTFIX_TLS_KEYFILE=""
+POSTFIX_SSL_COUNTRY=""
+POSTFIX_SSL_STATE=""
+POSTFIX_SSL_LOCALITY=""
+POSTFIX_SSL_ORGANIZATION=""
+POSTFIX_SSL_ORGANIZATIONAL_UNIT=""
+POSTFIX_SSL_COMMON_NAME=""
+POSTFIX_SSL_EMAIL_ADDRESS=""
+POSTFIX_ADD_MAILBOX_SIZE_LIMIT="0"
+POSTFIX_ADD_MESSAGE_SIZE_LIMIT="0"
+POSTFIX_REGISTER_SLP="yes"
+POSTFIX_ADD_MYNETWORKS_STYLE="subnet"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/proxy
+PROXY_ENABLED="no"
+HTTP_PROXY=""
+HTTPS_PROXY=""
+FTP_PROXY=""
+GOPHER_PROXY=""
+NO_PROXY="localhost, 127.0.0.1"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/radvd
+RADVD_OPTIONS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/rpcbind
+RPCBIND_OPTIONS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/samba
+WINBINDOPTIONS="-D"
+NMBDOPTIONS="-D"
+SMBDOPTIONS="-D"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/saslauthd
+SASLAUTHD_AUTHMECH=pam
+SASLAUTHD_THREADS=5
+SASLAUTHD_PARAMS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/security
+PERMISSION_SECURITY="easy local"
+PERMISSION_FSCAPS=""
+CHECK_POLKIT_PRIVS=""
+POLKIT_DEFAULT_PRIVS="restrictive"
+CHECK_SIGNATURES="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/services
+DISABLE_RESTART_ON_UPDATE="no"
+DISABLE_STOP_ON_REMOVAL="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/smartmontools
+SMARTD_CHECK_INTERVAL="1800"
+SMARTD_LOG_FACILITY="daemon"
+SMARTD_DRIVEDB=""
+SMARTD_SAVESTATES="yes"
+SMARTD_ATTRLOG="yes"
+SMARTD_EXTRA_OPTS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/snapper
+SNAPPER_CONFIGS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/sound
+LOAD_SEQUENCER="no"
+SOUNDFONT_FILES=""
+LOAD_OSS_EMUL_MODULES="no"
+LOAD_OSS_SEQ_MODULE="no"
+PULSEAUDIO_ENABLE="yes"
+PULSEAUDIO_SYSTEM="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/ssh
+SSHD_OPTS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/storage
+DEVICE_NAMES="uuid"
+DEFAULT_FS="btrfs"
+PARTITION_ALIGN="optimal"
+USED_FS_LIST="ext3 ext4 vfat swap"
+WARN_EXPERT="1"
+DISPLAY_NAME="device"
+HIDDEN_FIELDS="bios_id fc_fcp_lun fc_port_id fc_wwpn mount_by used_by uuid"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2
+FW_DEV_EXT=""
+FW_DEV_INT=""
+FW_DEV_DMZ=""
+FW_ROUTE="no"
+FW_MASQUERADE="no"
+FW_MASQ_DEV=""
+FW_MASQ_NETS=""
+FW_NOMASQ_NETS=""
+FW_PROTECT_FROM_INT="no"
+FW_SERVICES_EXT_TCP=""
+FW_SERVICES_EXT_UDP=""
+FW_SERVICES_EXT_IP=""
+FW_SERVICES_EXT_RPC=""
+FW_CONFIGURATIONS_EXT=""
+FW_SERVICES_DMZ_TCP=""
+FW_SERVICES_DMZ_UDP=""
+FW_SERVICES_DMZ_IP=""
+FW_SERVICES_DMZ_RPC=""
+FW_CONFIGURATIONS_DMZ=""
+FW_SERVICES_INT_TCP=""
+FW_SERVICES_INT_UDP=""
+FW_SERVICES_INT_IP=""
+FW_SERVICES_INT_RPC=""
+FW_CONFIGURATIONS_INT=""
+FW_SERVICES_DROP_EXT=""
+FW_SERVICES_DROP_DMZ=""
+FW_SERVICES_DROP_INT=""
+FW_SERVICES_REJECT_EXT=""
+FW_SERVICES_REJECT_DMZ=""
+FW_SERVICES_REJECT_INT=""
+FW_SERVICES_ACCEPT_EXT=""
+FW_SERVICES_ACCEPT_DMZ=""
+FW_SERVICES_ACCEPT_INT=""
+FW_SERVICES_ACCEPT_RELATED_EXT=""
+FW_SERVICES_ACCEPT_RELATED_DMZ=""
+FW_SERVICES_ACCEPT_RELATED_INT=""
+FW_TRUSTED_NETS=""
+FW_FORWARD=""
+FW_FORWARD_REJECT=""
+FW_FORWARD_DROP=""
+FW_FORWARD_MASQ=""
+FW_REDIRECT=""
+FW_LOG_DROP_CRIT="yes"
+FW_LOG_DROP_ALL="no"
+FW_LOG_ACCEPT_CRIT="yes"
+FW_LOG_ACCEPT_ALL="no"
+FW_LOG_LIMIT=""
+FW_LOG=""
+FW_KERNEL_SECURITY=""
+FW_STOP_KEEP_ROUTING_STATE="no"
+FW_ALLOW_PING_FW=""
+FW_ALLOW_PING_DMZ=""
+FW_ALLOW_PING_EXT=""
+FW_ALLOW_FW_SOURCEQUENCH=""
+FW_ALLOW_FW_BROADCAST_EXT="no"
+FW_ALLOW_FW_BROADCAST_INT="no"
+FW_ALLOW_FW_BROADCAST_DMZ="no"
+FW_IGNORE_FW_BROADCAST_EXT="yes"
+FW_IGNORE_FW_BROADCAST_INT="no"
+FW_IGNORE_FW_BROADCAST_DMZ="no"
+FW_ALLOW_CLASS_ROUTING=""
+FW_CUSTOMRULES=""
+FW_REJECT=""
+FW_REJECT_INT=""
+FW_HTB_TUNE_DEV=""
+FW_IPv6=""
+FW_IPv6_REJECT_OUTGOING=""
+FW_IPSEC_TRUST="no"
+FW_ZONES=""
+FW_ZONE_DEFAULT=''
+FW_USE_IPTABLES_BATCH=""
+FW_LOAD_MODULES="nf_conntrack_netbios_ns"
+FW_FORWARD_ALWAYS_INOUT_DEV=""
+FW_FORWARD_ALLOW_BRIDGING=""
+FW_WRITE_STATUS=""
+FW_RUNTIME_OVERRIDE=""
+FW_LO_NOTRACK=""
+FW_BOOT_FULL_INIT=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/susehelp
+DOC_HOST="localhost"
+DOC_ALLOW="localhost"
+DOC_AUTOINDEX="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/syslog
+RSYSLOGD_PARAMS=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/virtlockd
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/windowmanager
+DEFAULT_WM="sle-classic"
+INSTALL_DESKTOP_EXTENSIONS="yes"
+X_MOUSE_CURSOR="DMZ"
+KDE_USE_IPV6="yes"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/xencommons
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/xendomains
+XENDOMAINS_SYSRQ=""
+XENDOMAINS_USLEEP=100000
+XENDOMAINS_CREATE_USLEEP=5000000
+XENDOMAINS_MIGRATE=""
+XENDOMAINS_SAVE=/var/lib/xen/save
+XENDOMAINS_SHUTDOWN="--wait"
+XENDOMAINS_SHUTDOWN_ALL="--all --wait"
+XENDOMAINS_RESTORE=true
+XENDOMAINS_AUTO=/etc/xen/auto
+XENDOMAINS_AUTO_ONLY=true
+XENDOMAINS_STOP_MAXWAIT=300
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/yast2
+WANTED_SHELL="auto"
+WANTED_GUI="auto"
+Y2NCURSES_COLOR_THEME=""
+STORE_CONFIG_IN_SUBVERSION="no"
+SUBVERSION_ADD_DIRS_RECURSIVE="no"
+PKGMGR_ACTION_AT_EXIT="summary"
+PKGMGR_AUTO_CHECK="yes"
+PKGMGR_VERIFY_SYSTEM="no"
+PKGMGR_RECOMMENDED="yes"
+USE_SNAPPER="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/ypbind
+YPBIND_OPTIONS=""
+YPBIND_LOCAL_ONLY="no"
+YPBIND_BROADCAST="no"
+YPBIND_BROKEN_SERVER="no"
+YPBIND_VERBOSE="no"
+YPBIND_DBUS="no"
+YPBIND_PING_INTERVAL=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/TEMPLATE
+TCP=""
+UDP=""
+RPC=""
+IP=""
+BROADCAST=""
+RELATED=""
+ACCEPT=""
+MODULES=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/avahi
+UDP="mdns"
+BROADCAST="mdns"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/dhcp-server
+TCP=""
+UDP="bootps"
+RPC=""
+IP=""
+BROADCAST="bootps"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/dhcp6-server
+TCP=""
+UDP="dhcpv6-server"
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/dnsmasq-dhcp
+TCP=""
+UDP="bootps"
+RPC=""
+IP=""
+BROADCAST="bootps"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/dnsmasq-dns
+TCP=""
+UDP="domain"
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/libvirtd-relocation-server
+TCP="49152:49215"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/netbios-server
+TCP=""
+UDP="netbios-ns netbios-dgm"
+RPC=""
+IP=""
+BROADCAST="netbios-ns netbios-dgm"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/nfs-client
+TCP=""
+UDP=""
+RPC="portmap status nlockmgr"
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/nfs-kernel-server
+TCP=""
+UDP=""
+RPC="portmap status nlockmgr mountd nfs nfs_acl"
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/ntp
+TCP=""
+UDP="ntp"
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/openslp
+TCP="427"
+UDP="427"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/pulseaudio-server
+TCP="4713"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/rsync-server
+TCP="rsync"
+UDP=""
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/samba-client
+RELATED="0/0,udp,137"
+MODULES="nf_conntrack_netbios_ns"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/samba-server
+TCP="netbios-ssn microsoft-ds"
+UDP=""
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/smtp
+TCP="25 465 587"
+UDP=""
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/squid
+TCP=""
+UDP=""
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/sshd
+TCP="ssh"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/tftp
+UDP="tftp"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/vnc-httpd
+TCP="5800:5899"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/vnc-server
+TCP="5900:5999"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/vsftpd
+TCP="ftp 30000:30100"
+UDP=""
+RPC=""
+IP=""
+BROADCAST=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/xdmcp
+TCP="6000:6005"
+UDP="xdmcp"
+RPC=""
+IP=""
+BROADCAST="xdmcp"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/SuSEfirewall2.d/services/ypbind
+RPC="rpcbind portmap ypbind"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/config
+CHECK_DUPLICATE_IP="yes"
+SEND_GRATUITOUS_ARP="auto"
+DEBUG="no"
+WAIT_FOR_INTERFACES="30"
+FIREWALL="yes"
+NM_ONLINE_TIMEOUT="30"
+NETCONFIG_MODULES_ORDER="dns-resolver dns-bind dns-dnsmasq nis ntp-runtime"
+NETCONFIG_VERBOSE="no"
+NETCONFIG_FORCE_REPLACE="no"
+NETCONFIG_DNS_POLICY="auto"
+NETCONFIG_DNS_FORWARDER="resolver"
+NETCONFIG_DNS_FORWARDER_FALLBACK="yes"
+NETCONFIG_DNS_STATIC_SEARCHLIST=""
+NETCONFIG_DNS_STATIC_SERVERS=""
+NETCONFIG_DNS_RANKING="auto"
+NETCONFIG_DNS_RESOLVER_OPTIONS=""
+NETCONFIG_DNS_RESOLVER_SORTLIST=""
+NETCONFIG_NTP_POLICY="auto"
+NETCONFIG_NTP_STATIC_SERVERS=""
+NETCONFIG_NIS_POLICY="auto"
+NETCONFIG_NIS_SETDOMAINNAME="yes"
+NETCONFIG_NIS_STATIC_DOMAIN=""
+NETCONFIG_NIS_STATIC_SERVERS=""
+WIRELESS_REGULATORY_DOMAIN=''
+WICKED_DEBUG=""
+WICKED_LOG_LEVEL=""
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/dhcp
+DHCLIENT_SET_HOSTNAME="yes"
+DHCLIENT_HOSTNAME_OPTION="AUTO"
+DHCLIENT_SET_DEFAULT_ROUTE="yes"
+DHCLIENT_ROUTE_PRIORITY="0"
+DHCLIENT_CLIENT_ID=""
+DHCLIENT_VENDOR_CLASS_ID=""
+DHCLIENT_USER_CLASS_FORMAT=""
+DHCLIENT_USER_CLASS_ID=""
+DHCLIENT_LEASE_TIME=""
+DHCLIENT_USE_LAST_LEASE="yes"
+DHCLIENT_RELEASE_BEFORE_QUIT="no"
+DHCLIENT_SLEEP="0"
+DHCLIENT_WAIT_AT_BOOT="15"
+DHCLIENT_TIMEOUT="0"
+DHCLIENT6_MODE="auto"
+DHCLIENT6_RAPID_COMMIT="yes"
+DHCLIENT6_SET_HOSTNAME="no"
+DHCLIENT6_HOSTNAME_OPTION="AUTO"
+DHCLIENT6_LEASE_TIME=""
+DHCLIENT6_USE_LAST_LEASE="yes"
+DHCLIENT6_RELEASE_BEFORE_QUIT="no"
+DHCLIENT6_SLEEP="0"
+DHCLIENT6_WAIT_AT_BOOT="15"
+DHCLIENT6_TIMEOUT="0"
+DHCLIENT_MODIFY_SMB_CONF="yes"
+WRITE_HOSTNAME_TO_HOSTS="no"
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/if-down.d/21-dhcpcd-hook-samba
+unset ${!LC_*} LANGUAGE
+export LANG="POSIX"
+export PATH="/sbin:/usr/sbin:/bin/:/usr/bin"
+numArgs=$#
+configname="$1"
+shift
+interface="$1"
+if [ "${interface}" = "lo" ]; then
+  exit 0
+fi
+shift
+shift
+options="$@"
+function log_dbg()
+{
+  	case "${options}" in
+		*debug*)
+			logger -t $0 -p daemon.debug "$1"
+	esac
+}
+function log_err()
+{
+	logger -t $0 -p daemon.err "$1"
+	exit 1
+}
+SYSCONFIG_FILE="/etc/sysconfig/network/dhcp"
+if [ -r "${SYSCONFIG_FILE}" ]; then
+	source "${SYSCONFIG_FILE}"
+	if [ "${DHCLIENT_MODIFY_SMB_CONF}" = "no" ]; then
+		exit 0
+	fi
+fi
+INTEFACE_CONFIG_FILE="/etc/sysconfig/network/ifcfg-${configname}"
+case "${options}" in
+	*nm*)
+		log_dbg "NetworkManager Mode"
+	*)
+		log_dbg "Traditional mode with DHCP"
+		if [ -r "${INTEFACE_CONFIG_FILE}" ]; then
+			source "${INTEFACE_CONFIG_FILE}"
+			IfBootprotoAuto="no"
+			for CurrBootproto in ${BOOTPROTO//+/ } ; do
+				case "${CurrBootproto}" in autoip|dhcp|dhcp4|dhcp6)
+					IfBootprotoAuto="yes" ;;
+				esac
+			done
+			test "${IfBootprotoAuto}" = "no" && exit 0
+		fi
+esac
+if [ $numArgs -lt 2 ]; then
+	log_err "At least configuration and interface name are needed as arguments."
+fi
+HOOK_FUNCTIONS_FILE="/etc/sysconfig/network/scripts/dhcpcd-hook-samba-functions"
+if [ -r "${HOOK_FUNCTIONS_FILE}" ]; then
+	log_dbg "Source ${HOOK_FUNCTIONS_FILE}"
+	source ${HOOK_FUNCTIONS_FILE}
+else
+	log_err "${HOOK_FUNCTIONS_FILE} not found."
+fi
+function getNetConfig()
+{
+	HostInfoFiles="/var/lib/dhcpcd/dhcpcd-${interface}.info"
+	HostLeaseFiles="/var/lib/dhcp/dhclient-${interface}.lease /var/run/dhclient-${interface}.lease /var/lib/dhcp/dhclient-${interface}.leases"
+	unset new_netbios_name_servers WINSSERVERS NETBIOSSCOPE
+	for HostInfo in ${HostInfoFiles}; do
+		if test -r ${HostInfo}; then
+			break
+		fi
+	done
+	log_dbg "HostInfo: ${HostInfo}"
+	for HostLease in ${HostLeaseFiles}; do
+		if test -r ${HostLease}; then
+			break
+		fi
+	done
+	log_dbg "HostLease: ${HostLease}"
+	if [ -n "${HostInfo}" -o -n "${HostLease}" ]; then
+		if test "${HostInfo}" -nt "${HostLease}"; then
+			source "${HostInfo}"
+			OLD_IFS=${IFS}
+			IFS=','
+			for server in "${WINSSERVERS} ${NETBIOSNAMESERVER}"; do
+				new_netbios_name_servers="${new_netbios_name_servers} ${server}"
+			done
+			IFS=${OLD_IFS}
+		elif test "${HostLease}" -nt "${HostInfo}"; then
+			eval $( awk 'BEGIN { FS="[[:blank:];]*" } /netbios-name-servers/ { netbios_name_servers=$4 }; /netbios-scope/ { netbios_scope=$4 } END { print "new_netbios_name_servers=\"" netbios_name_servers "\"\nNETBIOSSCOPE=" netbios_scope}' "${HostLease}")
+		else
+			log_err "No dhcpcd info nor dhclient leases file found for ${interface}."
+		fi
+	fi
+	export new_netbios_name_servers
+	export new_netbios_scope="${NETBIOSSCOPE}"
+	log_dbg "new_netbios_name_servers: ${new_netbios_name_servers}"
+}
+function getOldConfig()
+{
+	OldHostInfoFiles="/var/lib/dhcpcd/dhcpcd-${interface}.info.old"
+	OldHostLeasesFiles="/var/lib/dhcp/dhclient-${interface}.lease /var/run/dhclient-${interface}.lease /var/lib/dhcp/dhclient-${interface}.leases"
+	unset old_netbios_name_servers old_netbios_scope WINSSERVERS NETBIOSSCOPE
+	for OldHostInfo in ${OldHostInfoFiles}; do
+		if test -r ${OldHostInfo}; then
+			break
+		fi
+	done
+	log_dbg "OldHostInfo: ${OldHostInfo}"
+	for OldHostLease in ${OldHostLeaseFiles}; do
+		if test -r ${OldHostLease}; then
+			break
+		fi
+	done
+	log_dbg "OldHostLease: ${OldHostLease}"
+	if [ -n "${OldHostInfo}" -o -n "${OldHostLease}" ]; then
+		if test "${OldHostInfo}" -nt "${OldHostLease}"; then
+			source "${OldHostInfo}"
+			OLD_IFS=${IFS}
+			IFS=','
+			for server in "${WINSSERVERS} ${NETBIOSNAMESERVER}"; do
+				old_netbios_name_servers="${old_netbios_name_servers} ${server}"
+			done
+			IFS=${OLD_IFS}
+		elif test "${OldHostLease}" -nt "${OldHostInfo}"; then
+			eval $(awk 'BEGIN { FS="[[:blank:];]*" } /netbios-name-servers/ { old_netbios_name_servers=netbios_name_servers; netbios_name_servers=$4 }; /netbios-scope/ { old_netbios_scope=netbios_scope; netbios_scope=$4 } END { print "old_netbios_name_servers=\"" old_netbios_name_servers "\"\nNETBIOSSCOPE=" old_netbios_scope}' "${OldHostLease}")
+		else
+			log_dbg "No old dhcpcd info nor dhclient leases file found for ${interface}."
+		fi
+	fi
+	export old_netbios_name_servers
+	export old_netbios_scope="${NETBIOSSCOPE}"
+	log_dbg "old_netbios_name_servers: ${old_netbios_name_servers}"
+}
+function ifUp()
+{
+	export reason="RENEW"
+	export SAMBA_DHCP_CONF_INFO_FILE="/var/adm/fillup-templates/samba-client-dhcp.conf"
+	netbios_setup
+	if test -n "${new_netbios_name_servers}"; then
+		if test "${new_netbios_name_servers}" != "${old_netbios_name_servers}" -o \
+			"${new_netbios_scope}" != "${old_netbios_scope}"; then
+			servicesToReload="nmb winbind smb"
+			grep -q -E ':name=systemd:/system/' /proc/$$/cgroup 2>/dev/null
+			not_in_systemd=$?
+			for service in ${servicesToReload}; do
+				if test ${not_in_systemd} -ne 0; then
+					test -x /etc/init.d/${service} && /etc/init.d/${service} force-reload
+				else
+					systemctl --ignore-dependencies force-reload ${service}.service
+				fi
+			done
+			log_dbg "Got new settings.  Services ${servicesToReload} reloaded."
+		fi
+	fi
+}
+case "$0" in
+	*if-up.d*)
+		getNetConfig
+		getOldConfig
+		ifUp
+	*if-down.d*) ;;
+	*)
+		log_err "Don't know what to do.  This script used to be called from dir if-{up,down}.d/."
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/if-down.d/55-samba-winbindd
+unset ${!LC_*} LANGUAGE
+export LANG="POSIX"
+export PATH="/sbin:/usr/sbin:/bin/:/usr/bin"
+numArgs=$#
+configname="$1"
+shift
+interface="$1"
+if [ $interface = "lo" ]; then
+  exit 0
+fi
+shift
+shift
+options="$@"
+function log_dbg()
+{
+  	case "${options}" in
+		*debug*)
+			logger -t $0 -p daemon.debug "$1"
+	esac
+}
+function log_err()
+{
+	logger -t $0 -p daemon.err "$1"
+	exit 1
+}
+winbind_offline_logon=$( testparm -s --parameter-name "winbind offline logon" 2>/dev/null)
+test "${winbind_offline_logon}" = "Yes" || exit 0
+source /etc/rc.status
+case "$0" in
+	*if-up.d*)
+		if rc_active nmb; then
+			log_msg=$( rcnmb start 2>&1)
+			log_dbg "${log_msg}"
+		fi
+		log_msg=$( smbcontrol winbindd online 2>&1)
+		log_dbg "${log_msg}"
+	*if-down.d*)
+		log_msg=$( smbcontrol winbindd offline 2>&1)
+		log_dbg "${log_msg}"
+	*)
+		log_err "Don't know what to do.  This script used to be called from dir if-{up,down}.d/."
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/if-up.d/21-dhcpcd-hook-samba
+unset ${!LC_*} LANGUAGE
+export LANG="POSIX"
+export PATH="/sbin:/usr/sbin:/bin/:/usr/bin"
+numArgs=$#
+configname="$1"
+shift
+interface="$1"
+if [ "${interface}" = "lo" ]; then
+  exit 0
+fi
+shift
+shift
+options="$@"
+function log_dbg()
+{
+  	case "${options}" in
+		*debug*)
+			logger -t $0 -p daemon.debug "$1"
+	esac
+}
+function log_err()
+{
+	logger -t $0 -p daemon.err "$1"
+	exit 1
+}
+SYSCONFIG_FILE="/etc/sysconfig/network/dhcp"
+if [ -r "${SYSCONFIG_FILE}" ]; then
+	source "${SYSCONFIG_FILE}"
+	if [ "${DHCLIENT_MODIFY_SMB_CONF}" = "no" ]; then
+		exit 0
+	fi
+fi
+INTEFACE_CONFIG_FILE="/etc/sysconfig/network/ifcfg-${configname}"
+case "${options}" in
+	*nm*)
+		log_dbg "NetworkManager Mode"
+	*)
+		log_dbg "Traditional mode with DHCP"
+		if [ -r "${INTEFACE_CONFIG_FILE}" ]; then
+			source "${INTEFACE_CONFIG_FILE}"
+			IfBootprotoAuto="no"
+			for CurrBootproto in ${BOOTPROTO//+/ } ; do
+				case "${CurrBootproto}" in autoip|dhcp|dhcp4|dhcp6)
+					IfBootprotoAuto="yes" ;;
+				esac
+			done
+			test "${IfBootprotoAuto}" = "no" && exit 0
+		fi
+esac
+if [ $numArgs -lt 2 ]; then
+	log_err "At least configuration and interface name are needed as arguments."
+fi
+HOOK_FUNCTIONS_FILE="/etc/sysconfig/network/scripts/dhcpcd-hook-samba-functions"
+if [ -r "${HOOK_FUNCTIONS_FILE}" ]; then
+	log_dbg "Source ${HOOK_FUNCTIONS_FILE}"
+	source ${HOOK_FUNCTIONS_FILE}
+else
+	log_err "${HOOK_FUNCTIONS_FILE} not found."
+fi
+function getNetConfig()
+{
+	HostInfoFiles="/var/lib/dhcpcd/dhcpcd-${interface}.info"
+	HostLeaseFiles="/var/lib/dhcp/dhclient-${interface}.lease /var/run/dhclient-${interface}.lease /var/lib/dhcp/dhclient-${interface}.leases"
+	unset new_netbios_name_servers WINSSERVERS NETBIOSSCOPE
+	for HostInfo in ${HostInfoFiles}; do
+		if test -r ${HostInfo}; then
+			break
+		fi
+	done
+	log_dbg "HostInfo: ${HostInfo}"
+	for HostLease in ${HostLeaseFiles}; do
+		if test -r ${HostLease}; then
+			break
+		fi
+	done
+	log_dbg "HostLease: ${HostLease}"
+	if [ -n "${HostInfo}" -o -n "${HostLease}" ]; then
+		if test "${HostInfo}" -nt "${HostLease}"; then
+			source "${HostInfo}"
+			OLD_IFS=${IFS}
+			IFS=','
+			for server in "${WINSSERVERS} ${NETBIOSNAMESERVER}"; do
+				new_netbios_name_servers="${new_netbios_name_servers} ${server}"
+			done
+			IFS=${OLD_IFS}
+		elif test "${HostLease}" -nt "${HostInfo}"; then
+			eval $( awk 'BEGIN { FS="[[:blank:];]*" } /netbios-name-servers/ { netbios_name_servers=$4 }; /netbios-scope/ { netbios_scope=$4 } END { print "new_netbios_name_servers=\"" netbios_name_servers "\"\nNETBIOSSCOPE=" netbios_scope}' "${HostLease}")
+		else
+			log_err "No dhcpcd info nor dhclient leases file found for ${interface}."
+		fi
+	fi
+	export new_netbios_name_servers
+	export new_netbios_scope="${NETBIOSSCOPE}"
+	log_dbg "new_netbios_name_servers: ${new_netbios_name_servers}"
+}
+function getOldConfig()
+{
+	OldHostInfoFiles="/var/lib/dhcpcd/dhcpcd-${interface}.info.old"
+	OldHostLeasesFiles="/var/lib/dhcp/dhclient-${interface}.lease /var/run/dhclient-${interface}.lease /var/lib/dhcp/dhclient-${interface}.leases"
+	unset old_netbios_name_servers old_netbios_scope WINSSERVERS NETBIOSSCOPE
+	for OldHostInfo in ${OldHostInfoFiles}; do
+		if test -r ${OldHostInfo}; then
+			break
+		fi
+	done
+	log_dbg "OldHostInfo: ${OldHostInfo}"
+	for OldHostLease in ${OldHostLeaseFiles}; do
+		if test -r ${OldHostLease}; then
+			break
+		fi
+	done
+	log_dbg "OldHostLease: ${OldHostLease}"
+	if [ -n "${OldHostInfo}" -o -n "${OldHostLease}" ]; then
+		if test "${OldHostInfo}" -nt "${OldHostLease}"; then
+			source "${OldHostInfo}"
+			OLD_IFS=${IFS}
+			IFS=','
+			for server in "${WINSSERVERS} ${NETBIOSNAMESERVER}"; do
+				old_netbios_name_servers="${old_netbios_name_servers} ${server}"
+			done
+			IFS=${OLD_IFS}
+		elif test "${OldHostLease}" -nt "${OldHostInfo}"; then
+			eval $(awk 'BEGIN { FS="[[:blank:];]*" } /netbios-name-servers/ { old_netbios_name_servers=netbios_name_servers; netbios_name_servers=$4 }; /netbios-scope/ { old_netbios_scope=netbios_scope; netbios_scope=$4 } END { print "old_netbios_name_servers=\"" old_netbios_name_servers "\"\nNETBIOSSCOPE=" old_netbios_scope}' "${OldHostLease}")
+		else
+			log_dbg "No old dhcpcd info nor dhclient leases file found for ${interface}."
+		fi
+	fi
+	export old_netbios_name_servers
+	export old_netbios_scope="${NETBIOSSCOPE}"
+	log_dbg "old_netbios_name_servers: ${old_netbios_name_servers}"
+}
+function ifUp()
+{
+	export reason="RENEW"
+	export SAMBA_DHCP_CONF_INFO_FILE="/var/adm/fillup-templates/samba-client-dhcp.conf"
+	netbios_setup
+	if test -n "${new_netbios_name_servers}"; then
+		if test "${new_netbios_name_servers}" != "${old_netbios_name_servers}" -o \
+			"${new_netbios_scope}" != "${old_netbios_scope}"; then
+			servicesToReload="nmb winbind smb"
+			grep -q -E ':name=systemd:/system/' /proc/$$/cgroup 2>/dev/null
+			not_in_systemd=$?
+			for service in ${servicesToReload}; do
+				if test ${not_in_systemd} -ne 0; then
+					test -x /etc/init.d/${service} && /etc/init.d/${service} force-reload
+				else
+					systemctl --ignore-dependencies force-reload ${service}.service
+				fi
+			done
+			log_dbg "Got new settings.  Services ${servicesToReload} reloaded."
+		fi
+	fi
+}
+case "$0" in
+	*if-up.d*)
+		getNetConfig
+		getOldConfig
+		ifUp
+	*if-down.d*) ;;
+	*)
+		log_err "Don't know what to do.  This script used to be called from dir if-{up,down}.d/."
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/if-up.d/55-samba-winbindd
+unset ${!LC_*} LANGUAGE
+export LANG="POSIX"
+export PATH="/sbin:/usr/sbin:/bin/:/usr/bin"
+numArgs=$#
+configname="$1"
+shift
+interface="$1"
+if [ $interface = "lo" ]; then
+  exit 0
+fi
+shift
+shift
+options="$@"
+function log_dbg()
+{
+  	case "${options}" in
+		*debug*)
+			logger -t $0 -p daemon.debug "$1"
+	esac
+}
+function log_err()
+{
+	logger -t $0 -p daemon.err "$1"
+	exit 1
+}
+winbind_offline_logon=$( testparm -s --parameter-name "winbind offline logon" 2>/dev/null)
+test "${winbind_offline_logon}" = "Yes" || exit 0
+source /etc/rc.status
+case "$0" in
+	*if-up.d*)
+		if rc_active nmb; then
+			log_msg=$( rcnmb start 2>&1)
+			log_dbg "${log_msg}"
+		fi
+		log_msg=$( smbcontrol winbindd online 2>&1)
+		log_dbg "${log_msg}"
+	*if-down.d*)
+		log_msg=$( smbcontrol winbindd offline 2>&1)
+		log_dbg "${log_msg}"
+	*)
+		log_err "Don't know what to do.  This script used to be called from dir if-{up,down}.d/."
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/if-up.d/SuSEfirewall2
+set -e
+unset ${!LC_*} LANGUAGE
+export LANG=POSIX
+export PATH=/sbin:/usr/sbin:/usr/bin:/bin
+. /etc/sysconfig/network/config
+sfw2_active()
+{
+	{ test -e /proc/net/ip_tables_names && iptables -nL reject_func >/dev/null 2>&1; } || return 1
+}
+case "$0" in
+	*scripts/firewall)
+		case $1 in
+		net-reconfig-init)
+			[ "$FIREWALL" = 'yes' ] || exit 2
+			sfw2_active || exit 3
+			/sbin/SuSEfirewall2 bootlock
+		net-reconfig-done)
+			[ "$FIREWALL" = 'yes' ] || exit 2
+			sfw2_active || exit 3
+			/sbin/SuSEfirewall2 --bootunlock start
+		running)
+			test -f /var/lock/SuSEfirewall2.pid
+		status)
+			sfw2_active
+		try-restart)
+			if sfw2_active; then
+				/sbin/SuSEfirewall2 start
+			fi
+		esac
+	(*if-up.d*|*if-down.d*)
+		config="$1"
+		iface="$2"
+		. /etc/sysconfig/network/ifcfg-"$config" 2>/dev/null || true
+		[ "$FIREWALL" = 'yes' ] || exit 0
+		if sfw2_active; then
+			/sbin/SuSEfirewall2 -q start
+		fi
+	*) echo "don't know what to do" >&2 ;;
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/if-up.d/avahi-daemon
+[ "$2" != "lo" ] || exit 0
+if [ -x /usr/lib/avahi/avahi-daemon-check-dns.sh ] ; then
+  exec /usr/lib/avahi/avahi-daemon-check-dns.sh
+fi
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/ifcfg-br0
+BOOTPROTO='static'
+BRIDGE='yes'
+BRIDGE_FORWARDDELAY='0'
+BRIDGE_PORTS='eth0'
+BRIDGE_STP='off'
+BROADCAST=''
+ETHTOOL_OPTIONS=''
+IPADDR='10.1.60.15/24'
+MTU=''
+NETWORK=''
+PREFIXLEN='24'
+REMOTE_IPADDR=''
+STARTMODE='auto'
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/ifcfg-br1
+BOOTPROTO='static'
+BRIDGE='yes'
+BRIDGE_FORWARDDELAY='0'
+BRIDGE_PORTS='eth1'
+BRIDGE_STP='off'
+BROADCAST=''
+ETHTOOL_OPTIONS=''
+IPADDR='10.2.60.15/24'
+MTU=''
+NETWORK=''
+PREFIXLEN='24'
+REMOTE_IPADDR=''
+STARTMODE='auto'
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/ifcfg-eth0
+BOOTPROTO='none'
+STARTMODE='auto'
+IPADDR=''
+NETMASK=''
+PREFIXLEN=''
+BROADCAST=''
+ETHTOOL_OPTIONS=''
+MTU=''
+NAME=''
+NETWORK=''
+REMOTE_IPADDR=''
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/ifcfg-eth1
+BOOTPROTO='none'
+BROADCAST=''
+ETHTOOL_OPTIONS=''
+IPADDR=''
+MTU=''
+NAME='OneConnect NIC (Skyhawk)'
+NETWORK=''
+REMOTE_IPADDR=''
+STARTMODE='auto'
+NETMASK=''
+PREFIXLEN=''
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/ifcfg-lo
+IPADDR=127.0.0.1/8
+NETMASK=255.0.0.0
+NETWORK=127.0.0.0
+BROADCAST=127.255.255.255
+STARTMODE=nfsroot
+BOOTPROTO=static
+USERCONTROL=no
+FIREWALL=no
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/ifcfg.template
+STARTMODE=
+IFPLUGD_PRIORITY=
+BOOTPROTO=
+IPADDR=
+NETMASK=
+PREFIXLEN=
+BROADCAST=
+REMOTE_IPADDR=
+LABEL=
+MTU=
+LLADDR=
+ETHTOOL_OPTIONS=
+RUN_POLL_TCPIP=
+USERCONTROL=
+NAME=
+UNIQUE=
+DHCLIENT_SET_HOSTNAME=
+DHCLIENT_HOSTNAME_OPTION=
+DHCLIENT_SET_DEFAULT_ROUTE=
+DHCLIENT_ROUTE_PRIORITY
+DHCLIENT6_MODE=
+DHCLIENT6_RAPID_COMMIT=
+DHCLIENT6_SET_HOSTNAME=
+DHCLIENT6_HOSTNAME_OPTION=
+BRIDGE=
+BRIDGE_PORTS=
+BRIDGE_AGEINGTIME=
+BRIDGE_FORWARDDELAY=
+BRIDGE_HELLOTIME=
+BRIDGE_MAXAGE=
+BRIDGE_PATHCOSTS=
+BRIDGE_PORTPRIORITIES=
+BRIDGE_PRIORITY=
+BRIDGE_STP=
+WIRELESS=
+WIRELESS_MODE=
+WIRELESS_ESSID=
+WIRELESS_AUTH_MODE=
+WIRELESS_WPA_PSK=
+WIRELESS_EAP_AUTH=
+WIRELESS_WPA_PROTO=
+WIRELESS_WPA_IDENTITY=
+*REMOVED BY SUPPORTCONFIG*
+WIRELESS_WPA_ANONID=
+WIRELESS_CA_CERT=
+WIRELESS_CLIENT_CERT=
+WIRELESS_CLIENT_KEY=
+*REMOVED BY SUPPORTCONFIG*
+WIRELESS_HIDDEN_SSID=
+WIRELESS_PRIORITY=
+WIRELESS_AP_SCANMODE=
+WIRELESS_WPA_DRIVER=
+WIRELESS_AP=
+WIRELESS_NICK=
+WIRELESS_NWID=
+WIRELESS_CHANNEL=
+WIRELESS_SENS=
+WIRELESS_RATE=
+WIRELESS_KEY=
+WIRELESS_KEY_LENGTH=
+WIRELESS_DEFAULT_KEY=
+WIRELESS_RTS=
+WIRELESS_FRAG=
+WIRELESS_CIPHER_PAIRWISE=
+WIRELESS_CIPHER_GROUP=
+WIRELESS_PEAP_VERSION=
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/SuSEfirewall2
+set -e
+unset ${!LC_*} LANGUAGE
+export LANG=POSIX
+export PATH=/sbin:/usr/sbin:/usr/bin:/bin
+. /etc/sysconfig/network/config
+sfw2_active()
+{
+	{ test -e /proc/net/ip_tables_names && iptables -nL reject_func >/dev/null 2>&1; } || return 1
+}
+case "$0" in
+	*scripts/firewall)
+		case $1 in
+		net-reconfig-init)
+			[ "$FIREWALL" = 'yes' ] || exit 2
+			sfw2_active || exit 3
+			/sbin/SuSEfirewall2 bootlock
+		net-reconfig-done)
+			[ "$FIREWALL" = 'yes' ] || exit 2
+			sfw2_active || exit 3
+			/sbin/SuSEfirewall2 --bootunlock start
+		running)
+			test -f /var/lock/SuSEfirewall2.pid
+		status)
+			sfw2_active
+		try-restart)
+			if sfw2_active; then
+				/sbin/SuSEfirewall2 start
+			fi
+		esac
+	(*if-up.d*|*if-down.d*)
+		config="$1"
+		iface="$2"
+		. /etc/sysconfig/network/ifcfg-"$config" 2>/dev/null || true
+		[ "$FIREWALL" = 'yes' ] || exit 0
+		if sfw2_active; then
+			/sbin/SuSEfirewall2 -q start
+		fi
+	*) echo "don't know what to do" >&2 ;;
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/dhcpcd-hook-samba
+unset ${!LC_*} LANGUAGE
+export LANG="POSIX"
+export PATH="/sbin:/usr/sbin:/bin/:/usr/bin"
+numArgs=$#
+configname="$1"
+shift
+interface="$1"
+if [ "${interface}" = "lo" ]; then
+  exit 0
+fi
+shift
+shift
+options="$@"
+function log_dbg()
+{
+  	case "${options}" in
+		*debug*)
+			logger -t $0 -p daemon.debug "$1"
+	esac
+}
+function log_err()
+{
+	logger -t $0 -p daemon.err "$1"
+	exit 1
+}
+SYSCONFIG_FILE="/etc/sysconfig/network/dhcp"
+if [ -r "${SYSCONFIG_FILE}" ]; then
+	source "${SYSCONFIG_FILE}"
+	if [ "${DHCLIENT_MODIFY_SMB_CONF}" = "no" ]; then
+		exit 0
+	fi
+fi
+INTEFACE_CONFIG_FILE="/etc/sysconfig/network/ifcfg-${configname}"
+case "${options}" in
+	*nm*)
+		log_dbg "NetworkManager Mode"
+	*)
+		log_dbg "Traditional mode with DHCP"
+		if [ -r "${INTEFACE_CONFIG_FILE}" ]; then
+			source "${INTEFACE_CONFIG_FILE}"
+			IfBootprotoAuto="no"
+			for CurrBootproto in ${BOOTPROTO//+/ } ; do
+				case "${CurrBootproto}" in autoip|dhcp|dhcp4|dhcp6)
+					IfBootprotoAuto="yes" ;;
+				esac
+			done
+			test "${IfBootprotoAuto}" = "no" && exit 0
+		fi
+esac
+if [ $numArgs -lt 2 ]; then
+	log_err "At least configuration and interface name are needed as arguments."
+fi
+HOOK_FUNCTIONS_FILE="/etc/sysconfig/network/scripts/dhcpcd-hook-samba-functions"
+if [ -r "${HOOK_FUNCTIONS_FILE}" ]; then
+	log_dbg "Source ${HOOK_FUNCTIONS_FILE}"
+	source ${HOOK_FUNCTIONS_FILE}
+else
+	log_err "${HOOK_FUNCTIONS_FILE} not found."
+fi
+function getNetConfig()
+{
+	HostInfoFiles="/var/lib/dhcpcd/dhcpcd-${interface}.info"
+	HostLeaseFiles="/var/lib/dhcp/dhclient-${interface}.lease /var/run/dhclient-${interface}.lease /var/lib/dhcp/dhclient-${interface}.leases"
+	unset new_netbios_name_servers WINSSERVERS NETBIOSSCOPE
+	for HostInfo in ${HostInfoFiles}; do
+		if test -r ${HostInfo}; then
+			break
+		fi
+	done
+	log_dbg "HostInfo: ${HostInfo}"
+	for HostLease in ${HostLeaseFiles}; do
+		if test -r ${HostLease}; then
+			break
+		fi
+	done
+	log_dbg "HostLease: ${HostLease}"
+	if [ -n "${HostInfo}" -o -n "${HostLease}" ]; then
+		if test "${HostInfo}" -nt "${HostLease}"; then
+			source "${HostInfo}"
+			OLD_IFS=${IFS}
+			IFS=','
+			for server in "${WINSSERVERS} ${NETBIOSNAMESERVER}"; do
+				new_netbios_name_servers="${new_netbios_name_servers} ${server}"
+			done
+			IFS=${OLD_IFS}
+		elif test "${HostLease}" -nt "${HostInfo}"; then
+			eval $( awk 'BEGIN { FS="[[:blank:];]*" } /netbios-name-servers/ { netbios_name_servers=$4 }; /netbios-scope/ { netbios_scope=$4 } END { print "new_netbios_name_servers=\"" netbios_name_servers "\"\nNETBIOSSCOPE=" netbios_scope}' "${HostLease}")
+		else
+			log_err "No dhcpcd info nor dhclient leases file found for ${interface}."
+		fi
+	fi
+	export new_netbios_name_servers
+	export new_netbios_scope="${NETBIOSSCOPE}"
+	log_dbg "new_netbios_name_servers: ${new_netbios_name_servers}"
+}
+function getOldConfig()
+{
+	OldHostInfoFiles="/var/lib/dhcpcd/dhcpcd-${interface}.info.old"
+	OldHostLeasesFiles="/var/lib/dhcp/dhclient-${interface}.lease /var/run/dhclient-${interface}.lease /var/lib/dhcp/dhclient-${interface}.leases"
+	unset old_netbios_name_servers old_netbios_scope WINSSERVERS NETBIOSSCOPE
+	for OldHostInfo in ${OldHostInfoFiles}; do
+		if test -r ${OldHostInfo}; then
+			break
+		fi
+	done
+	log_dbg "OldHostInfo: ${OldHostInfo}"
+	for OldHostLease in ${OldHostLeaseFiles}; do
+		if test -r ${OldHostLease}; then
+			break
+		fi
+	done
+	log_dbg "OldHostLease: ${OldHostLease}"
+	if [ -n "${OldHostInfo}" -o -n "${OldHostLease}" ]; then
+		if test "${OldHostInfo}" -nt "${OldHostLease}"; then
+			source "${OldHostInfo}"
+			OLD_IFS=${IFS}
+			IFS=','
+			for server in "${WINSSERVERS} ${NETBIOSNAMESERVER}"; do
+				old_netbios_name_servers="${old_netbios_name_servers} ${server}"
+			done
+			IFS=${OLD_IFS}
+		elif test "${OldHostLease}" -nt "${OldHostInfo}"; then
+			eval $(awk 'BEGIN { FS="[[:blank:];]*" } /netbios-name-servers/ { old_netbios_name_servers=netbios_name_servers; netbios_name_servers=$4 }; /netbios-scope/ { old_netbios_scope=netbios_scope; netbios_scope=$4 } END { print "old_netbios_name_servers=\"" old_netbios_name_servers "\"\nNETBIOSSCOPE=" old_netbios_scope}' "${OldHostLease}")
+		else
+			log_dbg "No old dhcpcd info nor dhclient leases file found for ${interface}."
+		fi
+	fi
+	export old_netbios_name_servers
+	export old_netbios_scope="${NETBIOSSCOPE}"
+	log_dbg "old_netbios_name_servers: ${old_netbios_name_servers}"
+}
+function ifUp()
+{
+	export reason="RENEW"
+	export SAMBA_DHCP_CONF_INFO_FILE="/var/adm/fillup-templates/samba-client-dhcp.conf"
+	netbios_setup
+	if test -n "${new_netbios_name_servers}"; then
+		if test "${new_netbios_name_servers}" != "${old_netbios_name_servers}" -o \
+			"${new_netbios_scope}" != "${old_netbios_scope}"; then
+			servicesToReload="nmb winbind smb"
+			grep -q -E ':name=systemd:/system/' /proc/$$/cgroup 2>/dev/null
+			not_in_systemd=$?
+			for service in ${servicesToReload}; do
+				if test ${not_in_systemd} -ne 0; then
+					test -x /etc/init.d/${service} && /etc/init.d/${service} force-reload
+				else
+					systemctl --ignore-dependencies force-reload ${service}.service
+				fi
+			done
+			log_dbg "Got new settings.  Services ${servicesToReload} reloaded."
+		fi
+	fi
+}
+case "$0" in
+	*if-up.d*)
+		getNetConfig
+		getOldConfig
+		ifUp
+	*if-down.d*) ;;
+	*)
+		log_err "Don't know what to do.  This script used to be called from dir if-{up,down}.d/."
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/dhcpcd-hook-samba-functions
+SAMBA_DHCP_CONF=/etc/samba/dhcp.conf
+SAMBA_DHCP_CONF_INFO_FILE=""
+netbios_setup() {
+	if [ "$reason" != BOUND ] && [ "$reason" != RENEW ] \
+	   && [ "$reason" != REBIND ] && [ "$reason" != REBOOT ] \
+	   && [ "$reason" != EXPIRE ] && [ "$reason" != FAIL ]
+	then
+		return
+	fi
+	if [ "$new_netbios_name_servers" = "$old_netbios_name_servers" ] \
+	   && [ "$new_netbios_scope" = "$old_netbios_scope" ] \
+	   && [ -f $SAMBA_DHCP_CONF ]
+	then
+		return
+	fi
+	local other_servers=`sed -n -e"s/[[:space:]]$interface:[^[:space:]]*//g; \
+		s/^[[:space:]]*wins server[[:space:]]*=[[:space:]]*//pi" \
+		$SAMBA_DHCP_CONF`
+	umask 022
+	local serverlist="$other_servers"
+	for server in $new_netbios_name_servers
+	do
+		serverlist="$serverlist $interface:$server"
+	done
+	echo -n > $SAMBA_DHCP_CONF
+	test -n "$SAMBA_DHCP_CONF_INFO_FILE" -a -f "$SAMBA_DHCP_CONF_INFO_FILE" && \
+		cat "$SAMBA_DHCP_CONF_INFO_FILE" >> $SAMBA_DHCP_CONF
+	if [ -z "$other_servers" ]
+	then
+		if [ "$reason" = FAIL ] || [ "$reason" = EXPIRE ]
+		then
+			return
+		fi
+	fi
+	if [ -n "$serverlist" ]
+	then
+		echo "   wins server =$serverlist" >> $SAMBA_DHCP_CONF
+	fi
+	if [ -n "$new_netbios_scope" ]
+	then
+		echo "   netbios scope = $new_netbios_scope" >> $SAMBA_DHCP_CONF
+	fi
+}
+case "$0" in
+	*bin/sh|*bin/bash) : ;;
+	*) netbios_setup ;;
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/firewall
+set -e
+unset ${!LC_*} LANGUAGE
+export LANG=POSIX
+export PATH=/sbin:/usr/sbin:/usr/bin:/bin
+. /etc/sysconfig/network/config
+sfw2_active()
+{
+	{ test -e /proc/net/ip_tables_names && iptables -nL reject_func >/dev/null 2>&1; } || return 1
+}
+case "$0" in
+	*scripts/firewall)
+		case $1 in
+		net-reconfig-init)
+			[ "$FIREWALL" = 'yes' ] || exit 2
+			sfw2_active || exit 3
+			/sbin/SuSEfirewall2 bootlock
+		net-reconfig-done)
+			[ "$FIREWALL" = 'yes' ] || exit 2
+			sfw2_active || exit 3
+			/sbin/SuSEfirewall2 --bootunlock start
+		running)
+			test -f /var/lock/SuSEfirewall2.pid
+		status)
+			sfw2_active
+		try-restart)
+			if sfw2_active; then
+				/sbin/SuSEfirewall2 start
+			fi
+		esac
+	(*if-up.d*|*if-down.d*)
+		config="$1"
+		iface="$2"
+		. /etc/sysconfig/network/ifcfg-"$config" 2>/dev/null || true
+		[ "$FIREWALL" = 'yes' ] || exit 0
+		if sfw2_active; then
+			/sbin/SuSEfirewall2 -q start
+		fi
+	*) echo "don't know what to do" >&2 ;;
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/functions.netconfig
+r=$ROOT
+NETCONFIG_DNS_RANKING_DEFAULT="+/vpn/ -/auto/ +strongswan +openswan +racoon -avahi"
+test -z "$MD5DIR" && {
+    MD5DIR=$r/var/adm/netconfig/md5
+}
+debug () {
+    test "$QUIET"   = "yes" && return
+    test "$VERBOSE" = "yes" || return
+    echo -e "debug: $*" >&2
+}
+warn () {
+    test "$QUIET" = "yes" && return
+    logger -s -p warn -t "$PROGNAME" "$*"
+}
+log () {
+    test "$QUIET" = "yes" && return
+    logger -s -t "$PROGNAME" "$*"
+}
+find_current_service()
+{
+    local name=$1
+    local pfx file link
+    for pfx in /etc/systemd /var/run/systemd /run/systemd ; do
+        file="$pfx/system/$name"
+        test -f "$file" || continue
+        link=`readlink -f "$file" 2>/dev/null`
+        test "X$link" = "X" -o "X$link" = "X$name" && continue
+        echo "${link##*/}"
+        return 0
+    done
+    echo "$name"
+    return 1
+}
+netconfig_policy()
+{
+    local policy="$1"
+    local hint="${2:+$2-}"
+    local Id=`systemctl --no-pager -p Id show network.service 2>/dev/null`
+    local service=${Id#Id=}
+    service=${service%.service}
+    if test "X$service" = "X" ; then
+        debug "Systemd did not reported any enabled network service"
+        service=`find_current_service "network.service" 2>/dev/null`
+        service=${service%.service}
+        debug "Using '$service' as network service"
+    fi
+    case ${service} in
+    NetworkManager)
+        test "x$policy" = "xauto" && \
+            policy='STATIC_FALLBACK NetworkManager'
+    network.service|*)
+        test "x$policy" = "xauto" && \
+            policy='STATIC *'
+    esac
+    debug "Resolved ${hint}policy '$1' for service '${service}' to '$policy'"
+    echo "$policy"
+}
+function get_variable()
+{
+    local line
+    while read line; do
+        eval $line
+    done < <(grep "^[[:space:]]*$1=" $2 2>/dev/null)
+}
+get_ranking_idx()
+{
+    test $# -le 1 && return 1
+    local s="$1" ; shift
+    local g=1
+    shopt -o -q noglob || g=0
+    [ $g ] && shopt -o -s noglob
+    for r in $@ ; do
+      case $r in
+      +\/*\/)
+            r=${r:2:$((${#r}-3))}
+            if [[ ${s} =~ ${r} ]] ; then
+                echo "0" ; return 0
+            fi
+      -\/*\/)
+            r=${r:2:$((${#r}-3))}
+            if [[ ${s} =~ ${r} ]] ; then
+                echo "2" ; return 0
+            fi
+      +*)
+            r=${r:1}
+            if [ "x${s}" = "x${r}" ] ; then
+                echo "0" ; return 0
+            fi
+      -*)
+            r=${r:1}
+            if [ "x${s}" = "x${r}" ] ; then
+                echo "2" ; return 0
+            fi
+      *)
+      esac
+    done
+    [ $g ] && shopt -o -u noglob
+    echo "1" ; return 0
+}
+function read_symlink()
+{
+    local name="$1"
+    local dest=""
+    if test "x$name" != x ; then
+        dest=`readlink -f "$name" 2>/dev/null`
+    fi
+    test "x$dest" != x && echo "$dest" || echo "$name"
+}
+netconfig_check_md5_and_move()
+{
+    local SRCFILE=${1}
+    local DSTFILE=${2}
+    local OSUFFIX=${3}
+    local ERR_VAR=${4}
+    local NEW_ERX=${5:-"^###"}
+    local MD5FILE="$MD5DIR/$DSTFILE"
+    local OUTFILE=`read_symlink "${DSTFILE}"`
+    test -f "$SRCFILE" || return 3
+    mkdir -p "${MD5FILE%/*}" || return 3
+    local RET=0
+    local NEWMD5SUM SRCMD5SUM DSTMD5SUM OLDMD5SUM DATE BAKFILE OLD_ERX
+    _read_erx_data()
+    {
+        test "x${1}" = x && return 1
+        gawk -v erx="${2}" '
+            { if(length(erx) && match($0, erx) > 0) { print $0; next; } }
+            !/^#|^[[:space:]]*$/     { print $0; }
+            ' "$1"
+    }
+    OLD_ERX="${NEW_ERX}"
+    if test -s "$MD5FILE" ; then
+        OLD_ERX=`gawk -- '/^#/ { if(NR==1) print substr($0,2); }' \
+            "$MD5FILE" 2>/dev/null`
+    fi
+    SRCMD5SUM=`_read_erx_data "$SRCFILE" "$OLD_ERX" | md5sum`
+    test "x${OLD_ERX}" = "x${NEW_ERX}" && NEWMD5SUM="$SRCMD5SUM" || \
+    NEWMD5SUM=`_read_erx_data "$SRCFILE" "$NEW_ERX" | md5sum`
+    if test ! -s "$OUTFILE" ; then
+        touch "$OUTFILE"   || return 3
+        test -e "$DSTFILE" || return 3
+        DSTMD5SUM=`echo "" |  md5sum`
+        OLDMD5SUM="$DSTMD5SUM"
+        rm -f "$MD5FILE"
+        { echo "#$OLD_ERX"; echo "$DSTMD5SUM"; } > "$MD5FILE"
+    else
+        DSTMD5SUM=`_read_erx_data "$DSTFILE" "$OLD_ERX" | md5sum`
+        OLDMD5SUM=`grep -Ev "^#" "$MD5FILE" 2>/dev/null`
+    fi
+    if test "$FORCE_REPLACE" = true ; then
+        if [ -s "$OUTFILE" -a \
+                "$DSTMD5SUM" != "$OLDMD5SUM" -a \
+                "$DSTMD5SUM" != "$SRCMD5SUM" ]; then
+            DATE=$(date +%Y%m%d-%H%M%S)
+            BAKFILE="${OUTFILE}.${DATE}"
+            cp -p --backup=existing "$OUTFILE" "$BAKFILE"
+            log "force replace set: backup created as $BAKFILE"
+        fi
+        cp -p "$SRCFILE" "$OUTFILE" # redundant, but...
+        DSTMD5SUM="$SRCMD5SUM"
+        OLDMD5SUM="$SRCMD5SUM"
+    fi
+    if test "$DSTMD5SUM" != "$OLDMD5SUM" -a \
+            "$DSTMD5SUM" != "$SRCMD5SUM" ; then
+        log "ATTENTION: You have modified $DSTFILE. Leaving it untouched..."
+        if test "x$OSUFFIX" != x -a \
+                "x$SRCFILE" != "${OUTFILE}${OSUFFIX}" && \
+           mv -f "$SRCFILE" "${OUTFILE}${OSUFFIX}" &>/dev/null ; then
+            log "You can find my version in ${OUTFILE}${OSUFFIX}"
+            test "x$ERR_VAR" != x && eval "$ERR_VAR='${OUTFILE}${OSUFFIX}'"
+        else
+            log "You can find my version in $SRCFILE ..."
+            test "x$ERR_VAR" != x && eval "$ERR_VAR='${SRCFILE}'"
+        fi
+        RET=2
+    else
+        if test "$DSTMD5SUM" != "$SRCMD5SUM" -o \
+                "$SRCMD5SUM" != "$NEWMD5SUM" -o \
+                "$FORCE_REPLACE" = "true" ; then
+            debug "Installing new $DSTFILE"
+            cp -p "$SRCFILE" "$OUTFILE"
+        else
+            debug "No changes for $DSTFILE"
+            RET=1
+        fi
+        rm -f "$SRCFILE"
+    fi
+    rm -f "$MD5FILE"
+    {
+        test "x${NEW_ERX}" != x && \
+            echo "#${NEW_ERX}"
+        echo "$NEWMD5SUM"
+    } > "$MD5FILE"
+    return $RET
+}
+netconfig_kv_filter()
+{
+    LANG=C LC_ALL=C gawk -- '/^[[:space:]]*$/ { next; }
+    /^[[:space:]]*[a-zA-Z_][a-zA-Z0-9_]*='"'"'[^'"'"']*'"'"'[[:space:]]*$/ && \
+    !/^[[:space:]]*_+=/ {
+    	sub("^[[:space:]]+", "", $0);
+    	sub("[[:space:]]+$", "", $0);
+    	equ=index($0, "=");
+    	key=substr($0, 1, equ - 1);
+    	val=substr($0, equ + 2, length($0) - equ - 2)
+    	print key"="val;
+    	next;
+    }
+    { print "="NR; exit(NR); }' "$@"
+}
+function openLockWait() {
+    test -z "$1" && return 1
+    test -z "$2" && return 1
+    for i in {0..3}; do
+        openLock "$1"
+        if [ "$?" = "0" ]; then
+            debug "lockfile created"
+            return 0;
+        fi
+        debug "sleep $2 (try $i)"
+        sleep $2
+    done
+    return 1;
+}
+function openLock() {
+    test -z "$1" && return 1
+    PRGNAME=$1
+    PID=$$
+    PIDPATH="/var/run/$PRGNAME.pid"
+    if [ -e $PIDPATH ]; then
+        OLDPID=`cat $PIDPATH`
+        if [ ! -e "/proc/$OLDPID/cmdline" ]; then
+            debug "pid does not exists; remove lock"
+            rm $PIDPATH
+        else
+            if grep "$PRGNAME" /proc/$OLDPID/cmdline >/dev/null 2>&1 ; then
+                debug "process still running"
+                return 1;
+            else
+                debug "this pid is a different process; remove the lock"
+                rm $PIDPATH
+            fi
+        fi
+    fi
+    echo -n "$PID" > $PIDPATH
+    debug "lockfile created ($PIDPATH) for PID $PID"
+    return 0
+}
+function unLock() {
+    test -z "$1" && return 1
+    PRGNAME=$1
+    PID=$$
+    PIDPATH="/var/run/$PRGNAME.pid"
+    if [ ! -e $PIDPATH ]; then
+        return 0
+    fi
+    OLDPID=`cat $PIDPATH`
+    if [ "$OLDPID" != "$PID" ]; then
+        log "cannot remove the lockfile. PIDs do not match."
+        return 1
+    fi
+    msg=`rm $PIDPATH`
+    if [ "$?" != "0" ]; then
+        log "removing the lock file ($PIDPATH) failed: $msg"
+        return 0
+    fi
+    return 1
+}
+function find_first_provides() {
+    test -z "$1" && return 1
+    test -z "$2" && return 1
+    REQVAR="$1"
+    STATEDIR="$2"
+    if [ -n "$3" ]; then
+        INTERFACE="$3"
+    fi
+    VALUE=""
+    CFG_TIME=0
+    for dir in `ls $STATEDIR/`; do 
+        if [ ! -d $STATEDIR/$dir ]; then
+            debug "not a dir ... skip"
+            continue
+        fi
+        if [ -n "$INTERFACE" -a "$INTERFACE" != "$dir" ]; then
+            debug "we are searching for a different dir ... skip"
+            continue
+        fi
+	test -d "/sys/class/net/${dir}" || continue
+        for file in `ls $STATEDIR/$dir/netconfig* 2>/dev/null`; do
+            debug "searching in $file"
+            get_variable "CREATETIME" $file
+            get_variable "$REQVAR" $file
+            debug "got CREATETIME=$CREATETIME and $REQVAR=${!REQVAR}"
+            if [ "x$VALUE" = "x" -a "x${!REQVAR}" != "x" ]; then
+                CFG_TIME=$CREATETIME
+                VALUE=${!REQVAR}
+            elif [ -n "$CREATETIME" -a $CREATETIME -ne 0 -a \
+                   $CREATETIME -lt $CFG_TIME -a "x$REQVAR" != "x" ]; then
+                CFG_TIME=$CREATETIME
+                VALUE=${!REQVAR}
+            fi
+            eval "$REQVAR=\"\""
+            CREATETIME=0
+        done
+    done
+    eval "$REQVAR=\"$VALUE\""
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/functions.rpm-utils
+unset POSIXLY_CORRECT ; set +o posix # we're using non-posix bash features
+sysconfig_remove_and_set()
+{
+    local root=''
+    local base='etc/sysconfig'
+    local fill='bin/fillup'
+    local dflt=''
+    while [ $# -gt 0 ]; do
+        case $1 in
+            (-r) shift ; root="${1%/}/" ; shift ;;
+            (-b) shift ; base="$1"      ; shift ;;
+	    (-d) shift ; dflt="$1"      ; shift ;;
+	    (-f) shift ; flup="$1"      ; shift ;;
+            (*)                           break ;;
+        esac
+    done
+    local file=${1} ; shift
+    local var val f
+    if test -n "$1" -a -n "$file" -a -f "${root}${base}/${file}" -a -x "${root}${fill}" ; then
+        rm -f "${root}${base}/${file}.del.$$"
+        for var in ${1:+"$@"} ; do
+	    val="${!var}"
+            echo "$var='${val:-$dflt}'"
+        done > "${root}${base}/${file}.del.$$"
+        if test -s "${root}${base}/${file}.del.$$" ; then
+	    rm -f "${root}${base}/${file}.new"
+            "${root}${fill}" -q -t -r -i -d "=" "${root}${base}/${file}" \
+            "${root}${base}/${file}.del.$$" "${root}${base}/${file}.deleted.$$"
+            if test -f "${root}${base}/${file}.new" ; then
+                mv -f "${root}${base}/${file}.new" "${root}${base}/${file}"
+            fi
+            for f in "${root}${base}/${file}.del.$$" "${root}${base}/${file}.deleted.$$" ; do
+                if test -f "$f" ; then
+                    . "$f"
+                    rm -f "$f"
+                fi
+            done
+        fi
+        rm -f "${root}${base}/${file}.del.$$"
+    fi
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/network/scripts/samba-winbindd
+unset ${!LC_*} LANGUAGE
+export LANG="POSIX"
+export PATH="/sbin:/usr/sbin:/bin/:/usr/bin"
+numArgs=$#
+configname="$1"
+shift
+interface="$1"
+if [ $interface = "lo" ]; then
+  exit 0
+fi
+shift
+shift
+options="$@"
+function log_dbg()
+{
+  	case "${options}" in
+		*debug*)
+			logger -t $0 -p daemon.debug "$1"
+	esac
+}
+function log_err()
+{
+	logger -t $0 -p daemon.err "$1"
+	exit 1
+}
+winbind_offline_logon=$( testparm -s --parameter-name "winbind offline logon" 2>/dev/null)
+test "${winbind_offline_logon}" = "Yes" || exit 0
+source /etc/rc.status
+case "$0" in
+	*if-up.d*)
+		if rc_active nmb; then
+			log_msg=$( rcnmb start 2>&1)
+			log_dbg "${log_msg}"
+		fi
+		log_msg=$( smbcontrol winbindd online 2>&1)
+		log_dbg "${log_msg}"
+	*if-down.d*)
+		log_msg=$( smbcontrol winbindd offline 2>&1)
+		log_dbg "${log_msg}"
+	*)
+		log_err "Don't know what to do.  This script used to be called from dir if-{up,down}.d/."
+esac
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-batch
+check_iptables_batch()
+{
+    if [ -n "$USE_IPTABLES_BATCH" ]; then
+	    IPTABLES_BATCH=/usr/sbin/iptables-batch
+	    IP6TABLES_BATCH=/usr/sbin/ip6tables-batch
+	    if [ ! -x "$IPTABLES_BATCH" ]; then
+		    [ "$USE_IPTABLES_BATCH" != 'auto' ] && echo "iptables-batch missing, batch support disabled."
+		    USE_IPTABLES_BATCH=""
+	    elif [ ! -x "$IP6TABLES_BATCH" ]; then
+		    [ "$USE_IPTABLES_BATCH" != 'auto' ] && echo "ip6tables-batch missing, batch support disabled."
+		    USE_IPTABLES_BATCH=""
+	    fi
+    fi
+    if [ -n "$USE_IPTABLES_BATCH" ]; then
+	    iptables_batchfile=`mktemp -t SuSEfirewall2_iptables.XXXXXXXX` || exit 1
+	    removeonexit "$iptables_batchfile"
+	    exec 4> "$iptables_batchfile"
+	    echo "#!$IPTABLES_BATCH" >&4
+	    iptables()
+	    {
+		    local i
+		    echo -n "iptables" >&4
+		    for i in "$@"; do echo -n " \"$i\""; done >&4
+		    echo >&4
+	    }
+	    ip6tables_batchfile=`mktemp -t SuSEfirewall2_ip6tables.XXXXXXXX` || exit 1
+	    removeonexit "$ip6tables_batchfile"
+	    exec 6> "$ip6tables_batchfile"
+	    echo "#!$IP6TABLES_BATCH" >&6
+	    ip6tables()
+	    {
+		    local i
+		    echo -n "ip6tables" >&6
+		    for i in "$@"; do echo -n " \"$i\""; done >&6
+		    echo >&6
+	    }
+    fi
+}
+iptables_batch_commitpoint()
+{
+    echo commit >&4
+    echo commit >&6
+}
+commit_iptables_batch()
+{
+    if [ -n "$USE_IPTABLES_BATCH" ]; then
+	if ! $IPTABLES_BATCH "$iptables_batchfile"; then
+	    error "iptables-batch failed, re-running using iptables"
+	    iptables() { $IPTABLES_BIN "$@"; }
+	    commit() { :; }
+	    . $iptables_batchfile
+	fi
+	if ! $IP6TABLES_BATCH "$ip6tables_batchfile"; then
+	    error "ip6tables-batch failed, re-running using ip6tables"
+	    ip6tables() { $IP6TABLES_BIN "$@"; }
+	    commit() { :; }
+	    . $ip6tables_batchfile
+	fi
+    fi
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-custom
+fw_custom_after_chain_creation() {
+    true
+}
+fw_custom_before_port_handling() { 
+    true
+}
+fw_custom_before_masq() { # could also be named "after_port_handling()"
+    true
+}
+fw_custom_before_denyall() { # could also be named "after_forwardmasq()"
+    true
+}
+fw_custom_after_finished() {
+    true
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-oldbroadcast
+convert_old_broadcast()
+{
+    local i zone
+    for i in $FW_ALLOW_FW_BROADCAST; do
+	case "$i" in
+	    no) ;;
+	    yes)
+		warning "FW_ALLOW_FW_BROADCAST=yes is obsolete, use FW_ALLOW_FW_BROADCAST_{INT,EXT,DMZ}=yes instead"
+		for zone in INT EXT DMZ; do
+		    eval FW_ALLOW_FW_BROADCAST_$zone=yes
+		done
+	    int)
+		    warning "FW_ALLOW_FW_BROADCAST=$i is obsolete, use FW_ALLOW_FW_BROADCAST_INT=yes instead"
+		    FW_ALLOW_FW_BROADCAST_INT=yes
+	    ext)
+		    warning "FW_ALLOW_FW_BROADCAST=$i is obsolete, use FW_ALLOW_FW_BROADCAST_EXT=yes instead"
+		    FW_ALLOW_FW_BROADCAST_EXT=yes
+	    dmz)
+		    warning "FW_ALLOW_FW_BROADCAST=$i is obsolete, use FW_ALLOW_FW_BROADCAST_DMZ=yes instead"
+		    FW_ALLOW_FW_BROADCAST_DMZ=yes
+	    *)
+		warning "FW_ALLOW_FW_BROADCAST=$i is obsolete, use FW_ALLOW_FW_BROADCAST_{INT,EXT,DMZ}=$i instead"
+		for zone in INT EXT DMZ; do
+		    eval FW_ALLOW_FW_BROADCAST_$zone="$i"
+		done
+	esac
+    done
+    unset FW_ALLOW_FW_BROADCAST
+    for i in $FW_IGNORE_FW_BROADCAST; do
+	case "$i" in
+	    no) ;;
+	    yes)
+		warning "FW_IGNORE_FW_BROADCAST=yes is obsolete, use FW_IGNORE_FW_BROADCAST_{INT,EXT,DMZ}=yes instead"
+		for zone in INT EXT DMZ; do
+		    eval FW_IGNORE_FW_BROADCAST_$zone=yes
+		done
+	    int)
+		    warning "FW_IGNORE_FW_BROADCAST=$i is obsolete, use FW_IGNORE_FW_BROADCAST_INT=yes instead"
+		    FW_IGNORE_FW_BROADCAST_INT=yes
+	    ext)
+		    warning "FW_IGNORE_FW_BROADCAST=$i is obsolete, use FW_IGNORE_FW_BROADCAST_EXT=yes instead"
+		    FW_IGNORE_FW_BROADCAST_EXT=yes
+	    dmz)
+		    warning "FW_IGNORE_FW_BROADCAST=$i is obsolete, use FW_IGNORE_FW_BROADCAST_DMZ=yes instead"
+		    FW_IGNORE_FW_BROADCAST_DMZ=yes
+	    *)
+		warning "FW_IGNORE_FW_BROADCAST=$i is obsolete, use FW_IGNORE_FW_BROADCAST_{INT,EXT,DMZ}=$i instead"
+		for zone in INT EXT DMZ; do
+		    eval FW_IGNORE_FW_BROADCAST_$zone="$i"
+		done
+	esac
+    done
+    unset FW_IGNORE_FW_BROADCAST
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-open
+use strict;
+my $config = '/etc/sysconfig/SuSEfirewall2';
+my $tmpconfig = $config.'.new';
+my %zones = map { $_ => 1} ( 'INT', 'EXT', 'DMZ' );
+my %types = map { $_ => 1} ( 'TCP', 'UDP', 'IP', 'RPC' );
+if($#ARGV < 2)
+{
+	print "USAGE: $0 <ZONE> <TYPE> <services...>\n\n";
+	print "where ZONE is one of ".join(' ', keys %zones)."\n";
+	print "and TYPE is one of ".join(' ', keys %types)."\n";
+	exit 1
+}
+my ($zone, $type);
+$zone = shift;
+$type = shift;
+if(!exists $zones{$zone})
+{
+	print "$zone is not a valid zone, must be one of ".join(' ', keys %zones)."\n";
+	exit 1
+}
+if(!exists $types{$type})
+{
+	print "$type is not a valid type, must be one of ".join(' ', keys %types)."\n";
+	exit 1
+}
+my $var = 'FW_SERVICES_'.$zone.'_'.$type;
+open(CONF,"<$config") or die "Unable to open file $config";
+open(OUT,">$tmpconfig") or die "Unable to open file $tmpconfig";
+while(<CONF>)
+{
+	if(/^$var=(['"])?([^'"]*)(['"])?/)
+	{
+		my @val = split(/\s+/, $2);
+		my $fc = $1 || '"';
+		if ($fc ne ($3 || '"'))
+		{
+			unlink $tmpconfig;
+			die "invalid line $.\n";
+		}
+		my %new = map { $_ => 1 } @val;
+		for my $service (@ARGV)
+		{
+			next if $new{$service};
+			$new{$service} = 1;
+			push @val, $service;
+		}
+		print OUT "$var=$fc",join(' ',  @val), $fc, "\n";
+	}
+	else
+	{
+		print OUT;
+	}
+}
+close OUT;
+close CONF;
+rename $tmpconfig, $config or die "can't rename file $tmpconfig to $config";
+exit 0
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-qdisc
+do_qdisc_settings()
+{
+    if [ -n "$FW_HTB_TUNE_DEV" ]; then
+	modprobe sch_htb 2> /dev/null
+    fi
+    clear_qdisc_settings
+    for DEVICE_DATA in $FW_HTB_TUNE_DEV; do
+        IFS="," read DEV BANDWIDTH < <(echo "$DEVICE_DATA")
+        if [ -n "$DEV" -a -n "$BANDWIDTH" ]; then
+            test -e "/sys/class/net/$DEV" || continue
+            SMALL_PACKET_BW=$(( $BANDWIDTH / 7 ))
+            if [ "$SMALL_PACKET_BW" -eq 0 ]; then
+                warning "illegal bandwidth settings for $DEV in FW_HTB_TUNE_DEV"
+            fi
+            VPN_BW=$(( $BANDWIDTH / 4 ))
+            if [ "$VPN_BW" -eq 0 ];then
+                warning "illegal bandwidth settings for $DEV in FW_HTB_TUNE_DEV"
+            fi
+            REST_BW=$(( ${BANDWIDTH}-${SMALL_PACKET_BW}-${VPN_BW} ))
+            $TC qdisc add dev $DEV root handle 1:0 htb default 20       # adding the queing discipline
+            $TC class add dev $DEV parent 1:0 classid 1:1 htb \
+                rate ${BANDWIDTH}kbit ceil ${BANDWIDTH}kbit
+            $TC class add dev $DEV parent 1:1 classid 1:10 htb \
+                rate ${SMALL_PACKET_BW}kbit ceil ${BANDWIDTH}kbit prio 0 quantum 3000 # and interactive SSH
+            $TC class add dev $DEV parent 1:1 classid 1:11 htb \
+                rate ${VPN_BW}kbit ceil ${BANDWIDTH}kbit prio 1 quantum 3000
+            $TC class add dev $DEV parent 1:1 classid 1:20 htb \
+                rate ${REST_BW}kbit ceil ${BANDWIDTH}kbit prio 2 quantum 3000
+            $TC filter add dev $DEV parent 1:0 prio 0 protocol ip \
+                handle 10 fw flowid 1:10
+            $TC filter add dev $DEV parent 1:0 prio 1 protocol ip \
+                handle 11 fw flowid 1:11
+            $IPTABLES -A POSTROUTING -t mangle -o $DEV -p tcp \
+                      -m length --length :64 -j MARK --set-mark 10
+            $IPTABLES -A POSTROUTING -t mangle -o $DEV -p tcp \
+                      -m tos --tos Minimize-Delay \
+                      -m tcp --dport 22 -j MARK --set-mark 10
+            $IPTABLES -A POSTROUTING -t mangle -o $DEV -p tcp \
+                      -m tos --tos Minimize-Delay \
+                      -m tcp --sport 22 -j MARK --set-mark 10 
+            $IPTABLES -A POSTROUTING -t mangle -o $DEV -p udp \
+                      -m udp --dport 53 -j MARK --set-mark 10
+            $IPTABLES -A POSTROUTING -t mangle -o $DEV -p tcp \
+                      -m tcp --dport 53 -j MARK --set-mark 10
+            $IPTABLES -A POSTROUTING -t mangle -o $DEV -p 50 \
+                      -j MARK --set-mark 11
+        else
+            warning "illegal settings in FW_HTB_TUNE_DEV=\"$FW_HTB_TUNE_DEV\", skipped device \"$DEV\""
+        fi
+    done
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-rpcinfo
+use strict;
+if ($#ARGV < 0)
+{
+    print STDERR "Usage: $0 <service ...>\n\n";
+    exit 1;
+}
+my %services;
+foreach my $service (@ARGV)
+{
+    my @a = split(/,/,$service);
+    if( $#a == 0)
+    {
+	push @{$services{$service}}, {};
+    }
+    elsif ($#a >= 2 && $a[1] eq '_rpc_')
+    {
+	my %h = ();
+	$h{'net'} = $a[0] if($a[0] && length($a[0]));
+	$h{'sport'} = $a[3] if($a[3] && length($a[3]));
+	push @{$services{$a[2]}}, \%h;
+    }
+}
+my %rpcusers;
+for my $file (qw(/usr/share/SuSEfirewall2/rpcusers /etc/sysconfig/SuSEfirewall2.d/rpcusers)) {
+    next unless open(F, '<', $file);
+    while (<F>) {
+	chomp;
+	s/#.*//;
+	next if /^ *$/;
+	my $uid;
+	my ($service, $user) = split(/\s+/, $_, 2);
+	unless (defined $service && defined $user) {
+	    print STDERR "$file:$. syntax error\n";
+	    next;
+	}
+	$uid = getpwnam($user);
+	unless (defined $uid) {
+	    print STDERR "$file:$. invalid user name: $user\n";
+	    next;
+	}
+	$rpcusers{$service} = $uid;
+    }
+}
+my %udpports = ();
+my %tcpports = ();
+open (RPCINFO, '/sbin/rpcinfo -p localhost|') or die;
+<RPCINFO>; # header line
+while(<RPCINFO>)
+{
+    chomp;
+    my @line = split;
+    next if($#line < 4);
+    next unless (exists $services{$line[4]});
+    if($line[2] eq 'udp')
+    {
+	$udpports{$line[3]} = $line[4];
+    }
+    elsif($line[2] eq 'tcp')
+    {
+	$tcpports{$line[3]} = $line[4];
+    }
+}
+close RPCINFO;
+sub getportsfor($$)
+{
+    my ($proto, $href) = @_;
+    open (FILE, '<', "/proc/net/$proto") or die;
+    <FILE>; # header line
+    my $ret = 0;
+    while(<FILE>)
+    {
+	chomp;
+	my @line = split;
+	my ($addr, $port) = split(/:/, $line[1], 2);
+	$port = pack('H*', $port); # "007B" => "\x00\x7B"
+	$port = unpack('n', $port); # "\x00\x7B" => 0x007B
+	my $service = $href->{$port} || undef;
+	next unless $service;
+	my $uid = $line[7];
+	if ($uid && !($rpcusers{$service} && $uid == $rpcusers{$service})) {
+	    print STDERR "$service/$proto doesn't run as root, ignored.\n";
+	    next;
+	}
+	++$ret;
+	foreach my $h (@{$services{$service}})
+	{
+	    push @{$h->{$proto}}, $port;
+	}
+    }
+    close FILE;
+    if($ret && !exists $services{'portmapper'})
+    {
+	push @{$services{'portmapper'}}, { tcp => [111], udp => [111] };
+    }
+}
+getportsfor('udp', \%udpports);
+getportsfor('tcp', \%tcpports);
+foreach my $l (values %services)
+{
+    foreach my $h (@$l)
+    {
+	foreach my $proto (('udp', 'tcp'))
+	{
+	    if(exists($h->{$proto}))
+	    {
+		foreach my $port (@{$h->{$proto}})
+		{
+		    print "-p $proto --dport $port";
+		    print " --sport ".$h->{'sport'} if exists $h->{'sport'};
+		    print " -s ".$h->{'net'} if exists $h->{'net'};
+		    print "\n";
+		}
+	    }
+	}
+    }
+}
+
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/scripts/SuSEfirewall2-showlog
+use strict;
+use Sys::Hostname;
+use Net::DNS;
+my $res;
+if($#ARGV >= 0 && $ARGV[0] eq '-N')
+{
+    $res = Net::DNS::Resolver->new;
+    $res->tcp_timeout(10);
+    $res->udp_timeout(10);
+    $res->persistent_tcp(1);
+    $res->persistent_udp(1);
+    shift @ARGV;
+}
+if($#ARGV < 0)
+{
+    $ARGV[0] = '/var/log/firewall';
+}
+elsif($ARGV[0] eq '--help' || $ARGV[0] eq '-h')
+{
+    print "Usage: $0 FILES\n";
+    print "    /var/log/firewall will be used if no file is specified\n";
+    print "    specify - as file to read from STDIN\n";
+    exit 0;
+}
+elsif($ARGV[0] eq '-')
+{
+    shift @ARGV;
+}
+my %dnscache;
+sub dnsresolve($)
+{
+    my $ip = shift;
+    return $dnscache{$ip} if(exists $dnscache{$ip});
+    my $query = $res->search($ip);
+    if ($query)
+    {
+	my $a;
+	foreach my $rr (grep { $_->type eq 'PTR' } $query->answer)
+	{
+	    $a = $rr->ptrdname;
+	}
+	if($a)
+	{
+	    $dnscache{$ip} = $a;
+	    return $a;
+	}
+    }
+    return $ip;
+}
+my $hostname = hostname;
+my ($dir, $zone, $sflog,$src,$dst,$spt,$dpt,$interface,$proto);
+format STDOUT =
+@< @<<<< @<<<<<<<<< @<<<<<< @>>>>>>>>>>>>>>>>>>>>>>>>>>>@<<<<< @|||||| @>>>>>>>>>>>>>>>>>>>>>>>>>>>@<<<<<
+$dir, $zone, $sflog,         $proto, $src,                        $spt,  $interface, $dst,$dpt
+.
+while(<>)
+{
+    next unless s/^.*$hostname kernel: (?:\[.*\] )?//;
+    chomp;
+    s/OPT \((.*)\)/OPT=$1/;
+    my @arr = split(/ /);
+    if ($arr[0] =~ s/^SFW2-//) {
+	$sflog = shift @arr;
+	if ($sflog =~ /(IN|OUT)([^-]*)-(.*)/) {
+	    $dir = ($1 eq 'IN')?'i':(($1 eq 'OUT')?'o':'?');
+	    $zone = $2;
+	    $sflog = $3;
+	}
+    } else {
+	$sflog = $dir = '?';
+    }
+    my %tags = map { my @a = split(/=/,$_,2); $a[0] => $a[1]; } @arr;
+    $src = $tags{SRC};
+    $dst = $tags{DST};
+    $src = dnsresolve($src) if($res && $src);
+    $dst = dnsresolve($dst) if($res && $dst);
+    $src = '['.$src.']' if($src =~ /:/);
+    $dst = '['.$dst.']' if($dst =~ /:/);
+    $spt = ':'.$tags{SPT} if($tags{SPT});
+    $dpt = ':'.$tags{DPT} if($tags{DPT});
+    $proto = lc $tags{PROTO};
+    if($tags{IN})
+    {
+	$interface = '> '.$tags{IN};
+    }
+    else
+    {
+	$interface = $tags{OUT}.' >';
+    }
+    $spt = ' '.$tags{TYPE} if ($proto =~ /ICMP.*/);
+    $src =~ s/:(0000:)+/::/;
+    $dst =~ s/:(0000:)+/::/;
+    write;
+}
+
+

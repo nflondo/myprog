@@ -1,0 +1,105 @@
+#==[ Verification ]=================================#
+# rpm -V kdump-0.8.15-14.1.x86_64
+# Verification Status: Passed
+
+#==[ Verification ]=================================#
+# rpm -V kexec-tools-2.0.5-12.30.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /bin/uname -r
+3.12.46-2-default
+
+#==[ Command ]======================================#
+# /bin/systemctl status kdump.service
+kdump.service - Load kdump kernel on startup
+   Loaded: loaded (/usr/lib/systemd/system/kdump.service; enabled)
+   Active: active (exited) since Thu 2015-09-03 15:35:26 MDT; 24min ago
+  Process: 4931 ExecStart=/etc/init.d/boot.kdump start (code=exited, status=0/SUCCESS)
+ Main PID: 4931 (code=exited, status=0/SUCCESS)
+   CGroup: /system.slice/kdump.service
+
+Sep 03 15:35:25 linux boot.kdump[4931]: Loading kdump
+Sep 03 15:35:26 linux boot.kdump[4931]: ..done
+
+#==[ Command ]======================================#
+# /usr/sbin/kdumptool dump_config
+KDUMP_KERNELVER=
+KDUMP_CPUS=1
+KDUMP_COMMANDLINE=
+KDUMP_COMMANDLINE_APPEND=
+KEXEC_OPTIONS=
+MAKEDUMPFILE_OPTIONS=
+KDUMP_IMMEDIATE_REBOOT=yes
+KDUMP_TRANSFER=
+KDUMP_SAVEDIR=/var/crash
+KDUMP_KEEP_OLD_DUMPS=5
+KDUMP_FREE_DISK_SIZE=64
+KDUMP_VERBOSE=3
+KDUMP_DUMPLEVEL=31
+KDUMP_DUMPFORMAT=lzo
+KDUMP_CONTINUE_ON_ERROR=yes
+KDUMP_REQUIRED_PROGRAMS=
+KDUMP_PRESCRIPT=
+KDUMP_POSTSCRIPT=
+KDUMP_COPY_KERNEL=yes
+KDUMPTOOL_FLAGS=
+KDUMP_NETCONFIG=auto
+KDUMP_SMTP_SERVER=
+KDUMP_SMTP_USER=
+KDUMP_SMTP_PASSWORD=
+KDUMP_NOTIFICATION_TO=
+KDUMP_NOTIFICATION_CC=
+KDUMP_HOST_KEY=
+
+#==[ Configuration File ]===========================#
+# /proc/cmdline
+BOOT_IMAGE=/boot/vmlinuz-3.12.46-2-default root=UUID=083ae1fb-02e3-46a0-8610-b1c1cafd31b0 ro resume=/dev/disk/by-uuid/d03cce05-b791-4fbf-b5f8-64df2b80bc94 splash=silent quiet showopts crashkernel=252M-:126M intel_iommu=on
+
+
+#==[ Command ]======================================#
+# /bin/find -L /var/crash/
+/var/crash/
+
+#==[ Command ]======================================#
+# /sbin/sysctl kernel.sysrq
+kernel.sysrq = 176
+
+#==[ Command ]======================================#
+# /sbin/sysctl kernel 2>/dev/null | grep panic
+kernel.hung_task_panic = 0
+kernel.panic = 0
+kernel.panic_on_io_nmi = 0
+kernel.panic_on_oops = 1
+kernel.panic_on_unrecovered_nmi = 0
+kernel.panic_on_warn = 0
+kernel.softlockup_panic = 0
+kernel.unknown_nmi_panic = 0
+
+#==[ Application Crash Info ]==========================#
+
+#==[ Command ]======================================#
+# ulimit -c
+0
+
+#==[ Command ]======================================#
+# /sbin/sysctl kernel.core_uses_pid
+kernel.core_uses_pid = 0
+
+#==[ Command ]======================================#
+# /sbin/sysctl kernel.core_pattern
+kernel.core_pattern = core
+
+#==[ Configuration File ]===========================#
+# /etc/sysconfig/ulimit - File not found
+
+#==[ Configuration File ]===========================#
+# /etc/security/limits.conf
+
+
+#==[ Command ]======================================#
+# /bin/grep -n 'ulimit -c' /etc/init.d/after.local /etc/init.d/avahi-daemon /etc/init.d/avahi-dnsconfd /etc/init.d/boot.apparmor /etc/init.d/boot.d /etc/init.d/boot.kdump /etc/init.d/boot.local /etc/init.d/boot.udev /etc/init.d/cifs /etc/init.d/dbus /etc/init.d/ebtables /etc/init.d/halt.local /etc/init.d/inputattach /etc/init.d/ipmi /etc/init.d/openct /etc/init.d/pcscd /etc/init.d/postfix /etc/init.d/radvd /etc/init.d/raw /etc/init.d/rc0.d /etc/init.d/rc1.d /etc/init.d/rc2.d /etc/init.d/rc3.d /etc/init.d/rc4.d /etc/init.d/rc5.d /etc/init.d/rc6.d /etc/init.d/rcS.d /etc/init.d/rpmconfigcheck /etc/init.d/slpd /etc/init.d/snmpd /etc/init.d/snmptrapd /etc/init.d/tclinkd 2>/dev/null
+
+#==[ Application Core Files ]==========================#
+# Core File List in lsof-cwd, $PATH, ld.so.conf
+

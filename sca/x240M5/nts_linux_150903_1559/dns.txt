@@ -1,0 +1,8 @@
+#-----[ Novell DNS ]--------------------------------#
+#==[ Verification ]=================================#
+# RPM Not Installed: novell-bind
+
+#-----[ System DNS ]--------------------------------#
+#==[ Verification ]=================================#
+# RPM Not Installed: bind
+

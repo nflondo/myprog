@@ -1,0 +1,19 @@
+#==[ Configuration File ]===========================#
+# /proc/mdstat - File not found
+
+#==[ Verification ]=================================#
+# rpm -V mdadm-3.3.1-10.1.x86_64
+# Verification Status: Passed
+
+#==[ Command ]======================================#
+# /sbin/mdadm --detail --scan
+
+#==[ Verification ]=================================#
+# RPM Not Installed: raidtools
+
+#==[ Configuration File ]===========================#
+# /etc/mdadm.conf - File not found
+
+#==[ Configuration File ]===========================#
+# /etc/raidtab - File not found
+
