@@ -19,7 +19,7 @@ class InventoryItem( object):
 
     def change_description( self, description =""): 
         if not description: 
-            description = raw_input(" Please give me a description: ") 
+            description = raw_input(" Please give me a new description: ") 
             self.description = description 
 
     def change_price( self, price =-1): 
@@ -69,29 +69,30 @@ class Book(InventoryItem):
 # Sub Class for any software bookstore may sell.
 # Requirements: OS, ERSB Rating (C,E,T,M), A function to change OS, Function to change rating
 class Software(InventoryItem):
-    def __init__(self, title, description, price, store_id, ope_sys, rating):
+    def __init__(self, title, description, price, store_id, ope_sys, rating, version):
         super(Software, self).__init__(title=title, description=description,price=price, store_id=store_id)
         self.ope_sys = ope_sys
         self.rating = rating
+        self.version = version
 
     def __str__(self):
-        software_line = "{title} ; {author} ; {ope_sys} ; {rating}".format(title=self.title,author=self.author, ope_sys=self.ope_sys, rating=self.rating)
+        software_line = "Title: {title} ; Version: {version} ; OS: {ope_sys} ; Rating: {rating}".format(title=self.title,version=self.version, ope_sys=self.ope_sys, rating=self.rating)
         return software_line    
 
     def  __eq__(self, other):
-        if self.title == other.title and self.author ==  other.author:
+        if self.title == other.title and self.version ==  other.version:
             print "True"
             return True        
         else:
             print "False"
             return False
 
-    def change_os(self, ope_sys):
+    def change_os(self, ope_sys=""):
         if not ope_sys:
             ope_sys = raw_input("Please give me the new Operating System: ")
         self.ope_sys = ope_sys
 
-    def change_rating(self, rating):
+    def change_rating(self, rating=""):
         if not rating:
             rating = raw_input("Please give me the new rating: ")
         self.rating = rating
@@ -119,8 +120,12 @@ def main():
     print "macbeth.format: {0}".format(macbeth.format)
     #print macbeth.format
 
-    halo = Software(title="Halo 3", description="Guns", price=199, store_id="13", ope_sys="Win 98", rating="T") 
-    print "halo: {0}".format(halo)
+    halo = Software(title="Halo 3", description="Guns", price=199, store_id="13", ope_sys="Win 98", rating="T", version=3) 
+    print halo
+    halo.change_os()
+    print halo
+    halo.change_rating()
+    print halo
 
 if __name__ == "__main__": 
     main()    
