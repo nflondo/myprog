@@ -7,14 +7,16 @@ from random import random
 zero =0
 one =0
 othernum =0
-for i in range(10): 
+counter = 0
+for i in range(50): 
     num = random() 
-  
+    counter = counter +1
     if num == 0:
         zero = zero +1
     elif num ==1:
         one = one +1
     else:
         othernum = othernum +1
+        print num
 
-print "Zero: {0}; One: {1}; Other: {2}".format(zero, one, othernum)
+print "Zero: {0}; One: {1}; Other: {2} Counter: {3}".format(zero, one, othernum, counter)
