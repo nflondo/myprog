@@ -7,7 +7,7 @@ class Inventory( object):
 
 	def add( self, item): 
 		if self.items.haskey( item): 
-			self.items[ item] + = 1 
+			self.items[ item] += 1 
 		else: 
 			self.items[ item] = 1 
 
@@ -20,11 +20,10 @@ class Inventory( object):
 
 	def check( self, item): 
 		if self.items.haskey( item): 
-			return True 
-		else 
-			return False 
+		    return True 
+		else: 
+		    return False 
 
 	def print_inventory( self): 
 		for item in self.items: 
-		print item, "-", 
-		self.items[item]
+		    print item, "-", self.items[item]

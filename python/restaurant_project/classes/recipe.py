@@ -8,10 +8,10 @@ class Recipe( object):
 		self.directions = directions 
 		self.note = note 
 
-	def __str__( self): 
+	def __str__(self): 
 		return self.title 
 
-	def print_recipe( self): 
+	def print_recipe(self):
 		print self.title 
 		print "Ingredients:" 
 		for ingredient in self.ingredients: 
@@ -22,6 +22,7 @@ class Recipe( object):
 		for direction in self.directions: 
 			print n, "-", direction 
 			n += 1 
+		print "---------------"
 		if self.note: 
 			print "Special note:" 
 			print self.note
