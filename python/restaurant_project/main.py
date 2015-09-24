@@ -26,5 +26,9 @@ def main():
         item1.remove(item="eggs")
 	item1.print_inventory()	
 
+        help(i)
+        help(oatmeal)
+        help(item1)
+
 if __name__ == "__main__": 
 	main()

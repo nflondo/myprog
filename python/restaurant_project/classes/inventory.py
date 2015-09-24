@@ -1,7 +1,11 @@
 #!/usr/bin/python
 # Inventory class
 
-class Inventory( object): 
+class Inventory( object):
+	'''Inventory class stores objects in a dictionary
+       	To instantiate an Inventory object, pass a dictionary
+       	with item as key and a number of items
+    	''' 
 	def __init__( self, items): 
 		self.items = items 
 

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # class Inheritance
-
+'''Class InventoryItem and class Book.  Demonstrate Inheritance
+'''
 class InventoryItem( object): 
     def __init__( self, title, description, price, store_id): 
         self.title = title 
@@ -39,8 +40,14 @@ class InventoryItem( object):
     
 # Sub class
 class Book(InventoryItem):
+    ''' This is the Book sub-class.
+    '''
     def __init__(self, title, description, price, format, author, store_id):
+        '''This calls the parent class which is InventoryItem
+        '''        
         super(Book, self).__init__(title=title, description=description,price=price, store_id=store_id)
+        '''This comment is ignored...
+        '''
         self.format = format
         self.author = author
         
@@ -126,6 +133,8 @@ def main():
     print halo
     halo.change_rating()
     print halo
+    # this help is to call the Docstrings
+    help(hamlet)
 
 if __name__ == "__main__": 
     main()    

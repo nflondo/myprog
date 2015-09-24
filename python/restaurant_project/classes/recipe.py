@@ -2,6 +2,9 @@
 # Recipe class
 
 class Recipe( object): 
+	'''Recipe class allows to add ingredients and directios as lists
+       	and print the recipe.
+    	'''
 	def __init__( self, title, ingredients =[], directions =[], note =""): 
 		self.title = title 
 		self.ingredients = ingredients 
