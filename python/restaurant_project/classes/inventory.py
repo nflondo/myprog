@@ -20,10 +20,10 @@ class Inventory( object):
 
 	def check( self, item): 
 		if self.items.has_key(item): 
-            print "Item: {0} is on inventory".format(item)
+	            print "Item: {0} is on inventory".format(item)
 		    return True 
 		else: 
-            print "Item: {0} is NOT on inventory".format(item)
+        	    print "Item: {0} is NOT on inventory".format(item)
 		    return False 
 
 	def print_inventory(self): 

@@ -23,6 +23,8 @@ def main():
 	
 	item1.check(item="salt")
 	item1.check(item="onions")
-	 
+        item1.remove(item="eggs")
+	item1.print_inventory()	
+
 if __name__ == "__main__": 
 	main()
