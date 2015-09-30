@@ -1,0 +1,24 @@
+overwriting it at beginning of filere
+
+Animal class
+- price - float | change price
+- size - str  | get size
+Functions would change price, change size.
+
+food class
+- weight - float
+- name - str
+Functions would remove and add items and change existing attributes
+
+book class
+- title - str
+- isbn - int
+- author - str
+
+toy class
+- name - str
+
+cat class
+- race - str
+- gender - str
+New line in file
