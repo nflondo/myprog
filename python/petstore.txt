@@ -21,3 +21,4 @@ toy class
 cat class
 - race - str
 - gender - str
+New line in file
