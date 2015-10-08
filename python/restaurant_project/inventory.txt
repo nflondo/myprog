@@ -1,0 +1,5 @@
+eggs	48
+flour(lb)	25
+tomate sauce (cans)	20
+mozz cheese (lb)	10
+mil (gal)	10
