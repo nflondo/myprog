@@ -1,5 +1,2 @@
-eggs	48
-flour(lb)	25
-tomate sauce (cans)	20
-mozz cheese (lb)	10
+<classes.inventory.Inventory object at 0x7fa9571e8550>e (lb)	10
 mil (gal)	10
