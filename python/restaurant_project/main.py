@@ -38,14 +38,15 @@ def main():
     inventory.print_inventory()
     f.close()
     #Let user add items to inventory
-    f = open('inventory.txt','a')
+    #f = open('inventory.txt','a')
     
-    inv_name = raw_input("New inventory item: ")
-    inv_qty = raw_input("New amount: ")
+    inv_name = raw_input("New inventory item followed by amount: ")
+    #inv_qty = raw_input("New amount: ")
+    #f.write(inv_name)
+    #f.close
+    inventory.add(item=inv_name)
     
-    f.write(inv_name,inv_qty)
-    f.close
-    #inventory.print_inventory()
+    inventory.print_inventory()
 
         #help(i)
         #help(oatmeal)
