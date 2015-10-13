@@ -32,24 +32,33 @@ def main():
     for l in lines:
         l = l.strip('\n')
         l = l.split('\t')
-        i = Ingredient(title = l[0])
+        i = Ingredient(title=l[0])
         items[i]= int(l[1])
+    
     inventory = Inventory(items)
+
     inventory.print_inventory()
-    f.close()
+    
     #Let user add items to inventory
     
     
-    inv_name = raw_input("New inventory item: ")
+    inv_add = raw_input("New inventory item: ")
 
     #inv_qty = raw_input("New amount: ")
     
-
-    inventory.add(item=inv_name)
-    f = open('inventory.txt','r+w')
-    f.write(str(inventory))
+    inventory.add(item=inv_add)
+    
+    #f = open('inventory.txt','r+w')
+    #f.write(str(inventory))
     inventory.print_inventory()
-    f.close
+    inv_add2 = raw_input("New inventory item: ")
+    inventory.add(item=inv_add2)
+    inventory.print_inventory()
+
+    inv_remove = raw_input("Inventory item to remove: ")
+    inventory.remove(item=inv_remove)
+    inventory.print_inventory()
+    #f.close
         #help(i)
         #help(oatmeal)
         #help(item1)

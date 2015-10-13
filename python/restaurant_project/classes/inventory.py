@@ -10,10 +10,10 @@ class Inventory( object):
 		self.items = items 
 
 	def add( self, item): 
-		if self.items.has_key( item): 
-			self.items[ item] += 1 
+		if self.items.has_key(item): 
+			self.items[item] += 1 
 		else: 
-			self.items[ item] = 1 
+			self.items[item] = 1 
 
 	def remove( self, item): 
 		if self.items.has_key( item): 
