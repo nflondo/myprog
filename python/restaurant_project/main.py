@@ -32,9 +32,10 @@ def main():
     for l in lines:
         l = l.strip('\n')
         l = l.split('\t')
-        i = Ingredient(title=l[0])
-        print i
-        items[i]= int(l[1])
+        items[l[0]]=int(l[1])        
+#i = Ingredient(title=l[0])
+#      print i
+#       items[i]= int(l[1])
     for a in items:
         print a,items[a]
     

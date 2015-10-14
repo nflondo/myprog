@@ -1,2 +1,2 @@
-'eggs':	48
-'flour':	25
+eggs	48
+flour	25
