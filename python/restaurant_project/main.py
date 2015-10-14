@@ -33,18 +33,23 @@ def main():
         l = l.strip('\n')
         l = l.split('\t')
         i = Ingredient(title=l[0])
+        print i
         items[i]= int(l[1])
+    for a in items:
+        print a,items[a]
     
-    inventory = Inventory(items)
-
-    inventory.print_inventory()
+     
+    #inventory = Inventory(items)
+    
+    #inventory.print_inventory()
     
     #Let user add items to inventory
-    
-    
+    inv_remove = raw_input("Inventory remove: ")
+    inventory.remove(item=inv_remove)
     inv_add = raw_input("New inventory item: ")
-
+    #inv_add = inv_add.strip('\n')
     #inv_qty = raw_input("New amount: ")
+    inventory.check(item=inv_add)
     
     inventory.add(item=inv_add)
     
