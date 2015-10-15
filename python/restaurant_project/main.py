@@ -1,11 +1,14 @@
 #!/usr/bin/python
 # Main
+# Recipe and Inventory program.  The inventory part reads inventory from a file 'inventory.txt' and sticks that information into
+# a dictionary where more items can be added or remove.  Still have to add a way to save the modified inventory back into a file.
 
 from classes.ingredient import Ingredient 
 from classes.recipe import Recipe 
 from classes.inventory import Inventory
 
 def main(): 
+    #Recipe instantiation and printing
     i = Ingredient( title =" egg") 
     r = Recipe( title ="Scrambled eggs", ingredients =[ i], directions =['Break egg', 'Beat egg', 'Cook egg']) 
     r.print_recipe()
@@ -26,6 +29,7 @@ def main():
     item1.remove(item="eggs")
     item1.print_inventory()	
     '''
+    #Inventory part.  Open file and put it in a dictionary
     f = open('inventory.txt')
     lines = f.readlines()
     items = {}
@@ -33,41 +37,48 @@ def main():
         l = l.strip('\n')
         l = l.split('\t')
         items[l[0]]=int(l[1])        
+#These were the original lines from book(didn't work)
 #i = Ingredient(title=l[0])
-#      print i
 #       items[i]= int(l[1])
-    for a in items:
-        print a,items[a]
+    
+    #For debugging could print the items in the dictionary    
+    #for a in items:
+    #    print a,items[a]
     
      
-    #inventory = Inventory(items)
+    inventory = Inventory(items)
     
-    #inventory.print_inventory()
+
+    while True:
+        choice=raw_input( "\t1- Add items\n\t2- Remove Items\n\t3- Print Inventory\n\tq - Quit\n\t Please choose: ")
+        if choice.lower() in ['q','quit']:
+            break    
+
+
+    inventory.print_inventory()
     
-    #Let user add items to inventory
+    #Let user add/remove items to inventory
     inv_remove = raw_input("Inventory remove: ")
     inventory.remove(item=inv_remove)
+    
+    inventory.print_inventory()    
+    
     inv_add = raw_input("New inventory item: ")
     #inv_add = inv_add.strip('\n')
     #inv_qty = raw_input("New amount: ")
     inventory.check(item=inv_add)
-    
+   
     inventory.add(item=inv_add)
     
-    #f = open('inventory.txt','r+w')
-    #f.write(str(inventory))
     inventory.print_inventory()
-    inv_add2 = raw_input("New inventory item: ")
-    inventory.add(item=inv_add2)
-    inventory.print_inventory()
-
-    inv_remove = raw_input("Inventory item to remove: ")
-    inventory.remove(item=inv_remove)
-    inventory.print_inventory()
-    #f.close
+'''
+    f = open('inventory.txt','r+w')
+    for a in items:
+        f.write(a,items[a])
+    f.close
         #help(i)
         #help(oatmeal)
         #help(item1)
-
+'''
 if __name__ == "__main__": 
 	main()
