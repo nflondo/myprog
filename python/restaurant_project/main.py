@@ -44,33 +44,32 @@ def main():
     #For debugging could print the items in the dictionary    
     #for a in items:
     #    print a,items[a]
-    
      
     inventory = Inventory(items)
-    
-
+  
+    # User Menu
     while True:
         choice=raw_input( "\t1- Add items\n\t2- Remove Items\n\t3- Print Inventory\n\tq - Quit\n\t Please choose: ")
         if choice.lower() in ['q','quit']:
-            break    
-
-
-    inventory.print_inventory()
-    
-    #Let user add/remove items to inventory
-    inv_remove = raw_input("Inventory remove: ")
-    inventory.remove(item=inv_remove)
-    
-    inventory.print_inventory()    
-    
-    inv_add = raw_input("New inventory item: ")
+            print "Good Bye"
+            break
+        #int(choice)
+        if choice == '1':    
+            inv_add = raw_input("New inventory item: ")
     #inv_add = inv_add.strip('\n')
     #inv_qty = raw_input("New amount: ")
-    inventory.check(item=inv_add)
+            inventory.check(item=inv_add)
    
-    inventory.add(item=inv_add)
-    
-    inventory.print_inventory()
+            inventory.add(item=inv_add)    
+            
+        elif choice == '2':
+            inv_remove = raw_input("Inventory remove: ")
+            inventory.check(item=inv_remove)
+            inventory.remove(item=inv_remove)
+                   
+        elif choice == '3':
+            inventory.print_inventory() 
+
 '''
     f = open('inventory.txt','r+w')
     for a in items:
