@@ -41,18 +41,16 @@ Requirements:
         - TestKit installed on SUT
         - This script will use existing partitions or lvm volumes for VM storage.  
           Hence, those should already be set up.  This script can create a local file image 
-          for VM storage is that option is selected.
+          for VM storage if that option is selected.
         - Prior to running this script, SLES 11/12 ISOs should be added to TC via configinstserver.sh.  
           Only one ISO per OS release should be added.  For example, only have:
           \"SLES-11-SP4-DVD-i586-GM-DVD1\" 
-          \"SLE-12-Server-DVD-x86_64-GM-DVD1\"
             and not 
           \"SLES-11-SP4-DVD-i586-Beta3-DVD1\" 
           \"SLES-11-SP4-DVD-i586-GM-DVD1\"
-          \"SLE-12-Server-DVD-x86_64-GM-DVD1\"
         - This script will leverage existing SLES 11/12 autoyast files in TC at /opt/suse/testKits/system/autoyast.  
-          It will not create autoyast files for you.
-        - This script version will only look for SLES 11 SP4 and 12 ISOs and install them. (it won't look for 11 SP3)
+          It will not create autoyast files for you.  It will also use PXE and DHCP server running on TC.
+        - Installation of SLES 11 SP3, SP4 and 12 VMs on SLES 11 SP4 and 12 KVM and XEN hypervisors has been tested.
            
 Options:
 	-h	Print this help text and exit.
@@ -96,8 +94,8 @@ function numbersOnly(){
 #
 function oneToSix(){
    
-   if [[ ! $1 =~ ^[1-6]+$ ]]; then
-    echo -e "Invalid Entry: Choose 1 - 6." | ${TEE} -a ${LOG}
+   if [[ ! $1 =~ ^[1-7]+$ ]]; then
+    echo -e "Invalid Entry: Choose 1 - 7." | ${TEE} -a ${LOG}
     return 1
    fi
      return 0
@@ -215,9 +213,10 @@ else
 fi
 
 
-echo -e "\tInstall Guest VMs?(y/n): \c"
+echo -e "\tInstall Guest VMs?(Y/n): \c"
 read instVms
-if [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; then
+#if  [ "${instVms}" = "n" -o  "${instVms}" = "N" ] ; then
+if [[ ! ${instVms} =~ [nN]  ]] ; then
 	
    rc=1
    while [ ${rc} -ne 0 ] ;do	
@@ -228,8 +227,8 @@ if [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; then
    done
 
 fi
-while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
-
+#while [ ! "${instVms}" = "n" -o  "${instVms}" = "N" ] ; do
+while [[ ! ${instVms} =~ [nN]  ]] ;do
    rc=1	
    while [ ${rc} -ne 0 ] ;do
 
@@ -239,8 +238,9 @@ while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
 	3) sles12 
 	4) Win Server(Manual)
 	5) sles11-SP3-X86_64
-	6) sles11-SP3-i586"
-	echo -en "\n\tChoose VM OS (1-6): "
+	6) sles11-SP3-i586
+        7) SLES 12 SP1"
+	echo -en "\n\tChoose VM OS (1-7): "
 	read vmVariant
       	oneToSix "${vmVariant}"
       	rc=$?
@@ -295,7 +295,7 @@ while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
       read vmDisk
     if [[ "${vmDisk}" =~ ^[0-9]+$ ]] ; then
       local tempDisk="size=${vmDisk}"
-      ${vmDisk}="${tempDisk}"
+      vmDisk="${tempDisk}"
         rc=0    
     else    
       diskExists "${vmDisk}"
@@ -334,7 +334,7 @@ while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
    3)
        GetIsoName "${tcIp}" ".*12.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
-       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
 
       osVariant="sles12"
@@ -366,6 +366,18 @@ while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
          echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
 			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
 	;;
+    7)
+       GetIsoName "${tcIp}" ".*12.*SP1.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
+       GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
+       instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+
+      osVariant="sles12"
+
+      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
+		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+
+		;;
 
 	 *) echo "invalid OS Variant" | ${TEE} -a ${LOG}
 		;;
@@ -373,13 +385,13 @@ while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
 	
 	sleep 15
 	
-	rc=1
-    while [ ${rc} -ne 0 ] ;do
-        echo -e "\n\tInstall another VMs?(y/n): \c"
+#	rc=1
+ #   while [ ${rc} -ne 0 ] ;do
+        echo -e "\n\tInstall another VMs?(Y/n): \c"
         read instVms
-        checkYyNn "${instVms}"
-        rc=$?
-    done
+  #      checkYyNn "${instVms}"
+   #     rc=$?
+    #done
 done
 
 }  #End of function
@@ -414,9 +426,10 @@ else
 fi
 
 
-echo -e "\tInstall VMs?(y/n): \c"
+echo -e "\tInstall VMs?(Y/n): \c"
 read instVms
-if [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; then
+#if [  "${instVms}" != "n" -o "${instVms}" != "N" ] ; then
+if [[ ! ${instVms} =~ [nN]  ]] ; then
    
    rc=1
    while [ ${rc} -ne 0 ] ;do	
@@ -426,7 +439,9 @@ if [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; then
       rc=$?
    done
 fi
-while [ "${instVms}" = "y" -o "${instVms}" = "Y" ] ; do
+
+#while [ ! "${instVms}" = "n" -o "${instVms}" = "N" ] ; do
+while [[ ! ${instVms} =~ [nN]  ]] ;do
 
 rc=1	
 while [ ${rc} -ne 0 ] ;do
@@ -437,8 +452,9 @@ while [ ${rc} -ne 0 ] ;do
 	3) sles12 
 	4) Win Server(Manual)
 	5) sles11-SP3-X86_64
-	6) sles11-SP3-i586"
-	echo -en "\n\tChoose VM OS (1-6): "
+	6) sles11-SP3-i586
+    7) SLES 12 SP1"
+	echo -en "\n\tChoose VM OS (1-7): "
 	read vmFlavor
       	oneToSix "${vmFlavor}"
       	rc=$?
@@ -541,7 +557,7 @@ while [ ${rc} -ne 0 ] ;do
         GetIsoName "${tcIp}" ".*12.*" "instSourceIso"
         GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName"
 		
-        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
+        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
 		
         instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"		
     
@@ -584,14 +600,27 @@ if [ "${vmFlavor}" -eq 6 ] ; then
 	    
 	fi
 
+if [ "${vmFlavor}" -eq 7 ] ; then
+       GetIsoName "${tcIp}" ".*12.*SP1.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
+       GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
+       instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
+
+      osVariant="sles12"
+
+      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
+		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+fi
+		
+
 sleep 5
-    rc=1
-    while [ ${rc} -ne 0 ] ;do
+    #rc=1
+    #while [ ${rc} -ne 0 ] ;do
         echo -e "\n\tInstall another VMs?(y/n): \c"
         read instVms
-        checkYyNn "${instVms}"
-        rc=$?
-    done
+    #    checkYyNn "${instVms}"
+    #    rc=$?
+    #done
 done
 } #function vmInstall
 #==============================================================================
