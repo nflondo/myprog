@@ -6,6 +6,10 @@ class Classroom(object):
         self.room_number = room_number
         self.students = students
 
+    def get_JSON_dict(self):
+        d = vars(self)
+        student_list
+
 class Student(object):
     def __init__(self, name, grade):
         self.name = name
