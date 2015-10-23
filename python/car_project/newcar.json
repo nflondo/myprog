@@ -1,0 +1,10 @@
+{
+  "features": {
+    "stowaway_seats": false
+  }, 
+  "transmission": "automatic", 
+  "make": "Mazda", 
+  "color": "blue", 
+  "doors": 4, 
+  "model": "6"
+}
