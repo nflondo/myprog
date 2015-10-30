@@ -8,7 +8,11 @@ class Classroom(object):
 
     def get_JSON_dict(self):
         d = vars(self)
-        student_list
+        student_list = []
+        for s in self.students:
+            student_list.append(vars(s))
+        d['students'] = student_list
+        return d
 
 class Student(object):
     def __init__(self, name, grade):
