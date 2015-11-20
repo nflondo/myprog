@@ -29,12 +29,33 @@ def add_ingredients(cursor):
             print "OK, quitting."
             break
 
+def find_ingredient(cursor, item):
+    sql = '''select title,amount from ingredients where title="{item}"'''
+    sql = sql.format(item=item)
+    results = cursor.execute(sql)
+    items = cursor.fetchall()
+    if len(items) == 0:
+        print "Sorry, that ingredient wasn't found"
+    else:
+        for item in items:
+            print item[0], "-", item[1]
+
 def print_inventory(cursor):
-    sql = '''select * from ingredients'''
+    sql = '''select title,amount from ingredients'''
     results = cursor.execute(sql)
     all_results = results.fetchall()
     for item in all_results:
-        print item
+        print item[0], '-', item[1]
+
+def menu():
+    print
+    print "What do you want to do?"
+    print "A - Add an ingredient"
+    print "S - Search for ingredient"
+    print "L - List all ingredients"
+    print "Q - Quit"
+    choice = raw_input ("Choice [A/S/L/Q]: ")
+    return choice[0].lower()
 
 def search_item(cursor):
     findme = raw_input("Item to search: ")
