@@ -29,9 +29,9 @@ def add_ingredients(cursor):
             print "OK, quitting."
             break
 
-def find_ingredient(cursor, item):
+def find_ingredient(cursor,ingredient):
     sql = '''select title,amount from ingredients where title="{item}"'''
-    sql = sql.format(item=item)
+    sql = sql.format(item=ingredient)
     results = cursor.execute(sql)
     items = cursor.fetchall()
     if len(items) == 0:
@@ -40,10 +40,11 @@ def find_ingredient(cursor, item):
         for item in items:
             print item[0], "-", item[1]
 
-def print_inventory(cursor):
+def list_ingredients(cursor):
     sql = '''select title,amount from ingredients'''
     results = cursor.execute(sql)
-    all_results = results.fetchall()
+    all_results = cursor.fetchall()
+    print "Items in the inventory"
     for item in all_results:
         print item[0], '-', item[1]
 
@@ -53,8 +54,9 @@ def menu():
     print "A - Add an ingredient"
     print "S - Search for ingredient"
     print "L - List all ingredients"
+    print "U - Update an ingredient"
     print "Q - Quit"
-    choice = raw_input ("Choice [A/S/L/Q]: ")
+    choice = raw_input ("Choice [A/S/L/U/Q]: ")
     return choice[0].lower()
 
 def search_item(cursor):
@@ -68,14 +70,44 @@ def search_item(cursor):
     else:
         print "Item:",findme,"not found."
             
-
+def update_ingredient(cursor):
+    item = raw_input("Which item? ")
+    column = raw_input("What column (title, amount, description)? ")
+    value = raw_input("To what value? ")
+    if column[0].lower() == 't':
+        sql = '''UPDATE ingredients SET title="{value}" WHERE title="{title}"'''
+    elif column[0].lower() == 'a':
+        sql = '''UPDATE ingredients SET amount="{value}" WHERE title="{title}"'''        
+    elif column[0].lower() == 'd':
+        sql = '''UPDATE ingredients SET description="{value}" WHERE title="{title}"'''
+    else:
+        print "Sorry, that's not valid."
+        return
+    sql = sql.format(value=value, title=item)
+    cursor.execute(sql)
 def main():
     conn = open_database('inventory.db')
     cursor = conn.cursor()
-    create_table(cursor)
+    while True:    
+        choice = menu()
+        if choice == 'a':
+            add_ingredients(cursor)
+        elif choice == 's':
+            item = raw_input("What ingredient? ")
+            find_ingredient(cursor=cursor, ingredient=item)
+        elif choice == 'l':
+            list_ingredients(cursor)
+        elif choice == 'u':
+            update_ingredient(cursor) 
+        elif choice == 'q':  
+            print "Goodbye"
+            break
+        else:
+            print "Sorry, that's not valid"
+    #create_table(cursor)
     #add_ingredients(cursor)
-    print_inventory(cursor)
-    search_item(cursor)
+    #print_inventory(cursor)
+    #search_item(cursor)
     conn.commit()
     conn.close()
 
