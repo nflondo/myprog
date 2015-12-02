@@ -55,8 +55,9 @@ def menu():
     print "S - Search for ingredient"
     print "L - List all ingredients"
     print "U - Update an ingredient"
+    print "D - Delete an ingredient"
     print "Q - Quit"
-    choice = raw_input ("Choice [A/S/L/U/Q]: ")
+    choice = raw_input ("Choice [A/S/L/U/D/Q]: ")
     return choice[0].lower()
 
 def search_item(cursor):
@@ -85,6 +86,23 @@ def update_ingredient(cursor):
         return
     sql = sql.format(value=value, title=item)
     cursor.execute(sql)
+
+def delete_ingredient(cursor):
+    item = raw_input("Which item to delete? (title)")
+    
+    sql = '''select title from ingredients where title="{title}"'''
+    sql = sql.format(title=item)
+    results = cursor.execute(sql)
+    items = cursor.fetchall()
+    if len(items) == 0:
+        print "Sorry, that ingredient wasn't found"
+    else:
+    
+        sql = '''DELETE from ingredients WHERE title="{title}" '''
+        sql = sql.format(title=item)
+        print "Item:", item, "deleted."
+        cursor.execute(sql)
+        
 def main():
     conn = open_database('inventory.db')
     cursor = conn.cursor()
@@ -99,6 +117,8 @@ def main():
             list_ingredients(cursor)
         elif choice == 'u':
             update_ingredient(cursor) 
+        elif choice == 'd':
+            delete_ingredient(cursor) 
         elif choice == 'q':  
             print "Goodbye"
             break
