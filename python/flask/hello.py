@@ -15,5 +15,13 @@ def hello_world():
 def test_page():
     return "This is a test page !!"
 
+@app.route('/longer/path/to/page')
+def deep_page():
+    return "Another page in longer path !!"
+# The variable <name> is replaced with whatever the user types in path
+@app.route('/<name>/')
+def name_page(name):
+    return "Hello, {name}".format(name=name)
+
 if __name__=='__main__':
     app.run()
