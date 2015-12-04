@@ -1,14 +1,12 @@
 <html>
     <body>
-        <p>
-        Hello there, new user
-        </p>
-        <p>
-        Here is your lucky number:
-        </p>
-        <p>
-        5
-        </p>
+        <p>        Hello there, new user        </p>
+        <p>        Here is your lucky number:        </p>
+        <p>    {{ lucky_num }}  </p>
+        
+        {% if lucky_num == 8 %}
+        <p> Wow ! That's super lucky !!</p>  
+        {% endif %}
 
 
     </body>
