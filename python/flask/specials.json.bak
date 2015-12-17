@@ -1,0 +1,17 @@
+{
+	"monday": {
+		"Special": "Hamburgers"
+	},
+	"tuesday": {
+		"Special": "Chicken"
+	},
+	"wednesday": {
+		"Special": "Lasagna"
+	},
+	"thursday": {
+		"Special": "Meatballs"
+	},
+	"friday": {
+		"Special": "Rice"
+	}
+}
