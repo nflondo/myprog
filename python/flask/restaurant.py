@@ -26,6 +26,13 @@ def get_special():
 @app.route('/')
 def main_page():
     return render_template('base.html', special= get_special())
+    
+@app.route('/bios/')
+def bios_page():
+    f = open('bio.json')
+    bios = json.load(f)
+    f.close
+    return render_template('bios_page.html', bios=bios['bios'])
 
 if __name__=='__main__':
     app.run()
