@@ -217,15 +217,23 @@ echo -e "\tInstall Guest VMs?(Y/n): \c"
 read instVms
 #if  [ "${instVms}" = "n" -o  "${instVms}" = "N" ] ; then
 if [[ ! ${instVms} =~ [nN]  ]] ; then
-	
-   rc=1
-   while [ ${rc} -ne 0 ] ;do	
-      echo -e "\tTest Console IP: \c"
-	   read tcIp
-      checkIpAddr "${tcIp}"
-      rc=$?
-   done
+    
+    ${STAT} /opt/suse/testKits/system/configs/tc-ipaddr >> ${LOG} 2>&1
+    rc=$?
+    if [ ${rc} -eq 0 ];then
+        tcIp=$(${CAT} /opt/suse/testKits/system/configs/tc-ipaddr)
+        echo -e "\tUsing Test Console IP: ${tcIp}" | ${TEE} -a ${LOG}
 
+    else
+        
+       rc=1
+       while [ ${rc} -ne 0 ] ;do	
+          echo -e "\tTest Console IP: \c"
+	       read tcIp
+          checkIpAddr "${tcIp}"
+          rc=$?
+       done
+    fi
 fi
 #while [ ! "${instVms}" = "n" -o  "${instVms}" = "N" ] ; do
 while [[ ! ${instVms} =~ [nN]  ]] ;do
@@ -252,7 +260,7 @@ while [[ ! ${instVms} =~ [nN]  ]] ;do
 		${VM_INSTALL} &
         
         sleep 2
-        echo -e "\n\tInstall another VMs?(y/n): \c"
+        echo -e "\n\tInstall another VMs?(Y/n): \c"
         read instVms
         continue
 	fi
@@ -314,8 +322,8 @@ while [[ ! ${instVms} =~ [nN]  ]] ;do
         instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
       osVariant="sles11"
 
-         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc >> ${LOG} &
+         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" >> ${LOG} &
 	 ;;
    # sles11-sp4-i586  
    2)
@@ -327,20 +335,20 @@ while [[ ! ${instVms} =~ [nN]  ]] ;do
 
       osVariant="sles11"
    
-         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}"  >> ${LOG} &
 	;;
    # sles12	
    3)
        GetIsoName "${tcIp}" ".*12.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
-       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
 
       osVariant="sles12"
 
-      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}"  >> ${LOG} &
 
 		;;
    5)   # sles 11 sp3 64  
@@ -350,8 +358,8 @@ while [[ ! ${instVms} =~ [nN]  ]] ;do
         instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
       osVariant="sles11"
 
-         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc >> ${LOG} &
+         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" >> ${LOG} &
 	 ;;
    # sles11-sp3-i586 
 	6)  # sles 11 sp3 i586
@@ -363,19 +371,19 @@ while [[ ! ${instVms} =~ [nN]  ]] ;do
 
       osVariant="sles11"
    
-         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+         echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+			${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}"  >> ${LOG} &
 	;;
     7)
        GetIsoName "${tcIp}" ".*12.*SP1.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
-       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
 
       osVariant="sles12"
 
-      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}"  >> ${LOG} &
 
 		;;
 
@@ -467,7 +475,7 @@ while [ ${rc} -ne 0 ] ;do
 		${VM_INSTALL} &
         
         sleep 2
-        echo -e "\n\tInstall another VMs?(y/n): \c"
+        echo -e "\n\tInstall another VMs?(Y/n): \c"
         read instVms
         continue
 	fi
@@ -557,7 +565,7 @@ while [ ${rc} -ne 0 ] ;do
         GetIsoName "${tcIp}" ".*12.*" "instSourceIso"
         GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName"
 		
-        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
+        autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
 		
         instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"		
     
@@ -603,20 +611,20 @@ if [ "${vmFlavor}" -eq 6 ] ; then
 if [ "${vmFlavor}" -eq 7 ] ; then
        GetIsoName "${tcIp}" ".*12.*SP1.*" "instSourceIso"  # var instSourceIso is empty now, but it gets populated by GetIsoName function.
        GetAutoYastFileNameFromIso "nfs://${tcIp}/data/${instSourceIso}.iso" "getAutoYastName" #var getAutoYastName is empty now, but it gets populated by GetAutoYastFileNameFromIso function
-       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-vm-GRUB.xml"
+       autoYast="nfs://"${tcIp}"/opt/suse/testKits/system/autoyast/${getAutoYastName}-single_disk-GRUB.xml"
        instSource="nfs://"${tcIp}"/home/InstSource/${instSourceIso}"
 
       osVariant="sles12"
 
-      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc" >> ${LOG}
-		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" --graphics vnc  >> ${LOG} &
+      echo "${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}" " >> ${LOG}
+		${VIRT_INSTALL} --virt-type "${vmHyper}" --"${vmType}" --name "${vmName}" --memory "${vmMem}" --vcpus="${vmCpu}" --disk "${vmDisk}" --os-variant "${osVariant}" --network=bridge=br0 --location="${instSource}" --extra-args=autoyast="${autoYast}"  >> ${LOG} &
 fi
 		
 
 sleep 5
     #rc=1
     #while [ ${rc} -ne 0 ] ;do
-        echo -e "\n\tInstall another VMs?(y/n): \c"
+        echo -e "\n\tInstall another VMs?(Y/n): \c"
         read instVms
     #    checkYyNn "${instVms}"
     #    rc=$?
@@ -680,14 +688,19 @@ local tMemGb
     else
       #echo "No kvm/xen hypervisor found\n"
       HYPER=3
-      echo "No KVM or XEN hypervisor found. Run Yast to install hypervisor now? (y/n)\c" | ${TEE} -a ${LOG}
+      echo -e "No KVM or XEN hypervisor found. Run Yast to install hypervisor now? (y/n): \c" | ${TEE} -a ${LOG}
       read runYast
       if [ "${runYast}" = "y" -o "${runYast}" = "Y" ] && [ "${osVer}" = "11" ] ; then
          yast2 xen
+         echo "May need to reboot, so quitting.  Good bye" 
+         exit
       elif [ "${runYast}" = "y" -o "${runYast}" = "Y" ] && [ "${osVer}" = "12" ] ;  then
          yast2 virtualization
+         echo "May need to reboot, so quitting.  Good bye" 
+         exit
       else
-       echo "Quitting.  Good bye"   
+       echo "Quitting.  Good bye"  
+       exit 
       fi
       
    fi
