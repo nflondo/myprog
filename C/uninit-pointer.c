@@ -3,18 +3,23 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
+//typedef struct {
 struct msg {
-	char p1[30];
 	char *p2; // uninitalized
+	char p1[30];
+//}msg;
 }myptrs;
-
-	//char name;	
-	myptrs.p2 = "some text";	
+//msg myptrs;
+    	
+	
 
 int main(void)
 {
-	
+	//myptrs.p2 = malloc(20);	// This initilizes *p2 inside msg structure
+	char name[]="some text"; //this two lines initilize 
+	myptrs.p2=name;          //   *p2 inside msg structure as well
 	strcpy(myptrs.p1, "Teach yourself in 31 days");
 	strcpy(myptrs.p2, "By SAMs publishing");
 
