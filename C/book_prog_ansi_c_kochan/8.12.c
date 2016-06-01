@@ -1,18 +1,35 @@
 #include <stdio.h>
 /* Sort an array of int into ascending order*/
 
-void sort(int a[], int n){
+void sort(int a[], int n, char order){
 	int i,j,temp;
 
-	for (i=0; i < n - 1; ++i)
-		for (j = i + 1; j < n; ++j)
-			if (a[i] > a[j])
-			{
-				temp = a[i];
-				a[i] = a[j];
-				a[j] = temp;
-			}
-	
+    switch (order)
+    {
+        case 'a':
+	        for (i=0; i < n - 1; ++i)
+		        for (j = i + 1; j < n; ++j)
+			        if (a[i] > a[j])
+			        {
+				        temp = a[i];
+				        a[i] = a[j];
+				        a[j] = temp;
+			        }
+	    break;
+	    case 'd':
+	        for (i=0; i < n - 1; ++i)
+		        for (j = i + 1; j < n; ++j)
+			        if (a[i] < a[j])
+			        {
+				        temp = a[i];
+				        a[i] = a[j];
+				        a[j] = temp;
+			        }
+	    break;
+	    default:
+	        printf ("Invalid case\n");
+	    break;
+	 }
 } // sort
 
 main(){
@@ -23,7 +40,7 @@ main(){
 	for (i =0; i< 16; ++i )
 		printf("%i ", array[i]);
 
-	sort (array, 16);
+	sort (array, 16, 'd');
 
 	printf ("\n\nThe array after the sort:\n");
 
