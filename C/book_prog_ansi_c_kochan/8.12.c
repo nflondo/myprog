@@ -1,35 +1,17 @@
 #include <stdio.h>
 /* Sort an array of int into ascending order*/
 
-void sort(int a[], int n, char order){
+void sort(int a[], int n, int order){
 	int i,j,temp;
 
-    switch (order)
-    {
-        case 'a':
 	        for (i=0; i < n - 1; ++i)
 		        for (j = i + 1; j < n; ++j)
-			        if (a[i] > a[j])
+			        if ( order == 1 && a[i] > a[j] || order == -1 && a[i] < a[j])
 			        {
 				        temp = a[i];
 				        a[i] = a[j];
 				        a[j] = temp;
 			        }
-	    break;
-	    case 'd':
-	        for (i=0; i < n - 1; ++i)
-		        for (j = i + 1; j < n; ++j)
-			        if (a[i] < a[j])
-			        {
-				        temp = a[i];
-				        a[i] = a[j];
-				        a[j] = temp;
-			        }
-	    break;
-	    default:
-	        printf ("Invalid case\n");
-	    break;
-	 }
 } // sort
 
 main(){
@@ -40,9 +22,17 @@ main(){
 	for (i =0; i< 16; ++i )
 		printf("%i ", array[i]);
 
-	sort (array, 16, 'd');
+	sort (array, 16, 1);
 
-	printf ("\n\nThe array after the sort:\n");
+	printf ("\n\nThe array after the sort (ascending):\n");
+
+	for (i =0; i< 16; ++i )
+		printf("%i ", array[i]);
+
+	printf ("\n");
+	
+	sort (array, 16, -1);
+	printf ("\n\nThe array after the sort (descending):\n");
 
 	for (i =0; i< 16; ++i )
 		printf("%i ", array[i]);
