@@ -1,8 +1,8 @@
 #include <stdio.h>
-/*Function determines if a character is alphanumeric*/
+/*Function determines if a character is alphanumeric, number, or aposthrophe*/
 int alphabetic (char c)
 {
-	if ( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || ((c >= '0' && c <= '9') || ( c >= '+' && c <= '.'))  )
+	if ( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || ((c >= '0' && c <= '9') || ( c >= '+' && c <= '.'))|| c=='\'')
 		return (1);
 	else
 		return (0);
