@@ -13,3 +13,21 @@ char substring (char source[], start, count, char result[]){
     
     return (result);
 }
+
+/* Determine if one character string exists inside another string*/
+char find_string (char source[], char findme[]){
+
+    int i, location;
+    
+    while ( source[i] != '\0' )
+    {
+        if (source[i] == findme[i])
+        {
+            location = i;
+            if (findme[i] == '\0')
+                return 1;  // complete string found
+            else 
+                return 0; // not complete string found
+         }       
+    ++i;
+    }
