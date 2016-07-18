@@ -31,3 +31,21 @@ char find_string (char source[], char findme[]){
          }       
     ++i;
     }
+    
+/*remove_string removes a specified number of characters from a char string*/
+char remove_string (char source[], int start, int count){
+
+    int i, j;
+    for ( i = start, j = 0; j <= count; ++i, ++j )
+    {
+        if (source[i] == '\0')
+            break;
+        else
+            source[i]='\0';  // Deleting array element    
+    
+    } 
+    result[ j+1 ]= '\0';
+    
+    return (result);
+
+}
