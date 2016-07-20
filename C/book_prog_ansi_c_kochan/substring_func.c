@@ -49,3 +49,15 @@ char remove_string (char source[], int start, int count){
     return (result);
 
 }
+
+/*insert one char string into another*/
+char insert_string (char source[], char stringtoinsert[], int position){
+    int j=0;
+    while ( source[position] != '\0' ){
+        source[position]=stringtoinsert[j]
+        ++position;
+        ++j;
+    }
+    return (source);
+}
+
