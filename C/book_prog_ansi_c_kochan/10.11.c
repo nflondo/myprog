@@ -1,23 +1,25 @@
 #include <stdio.h>
 /*Function to convert string to an integer*/
 int string_to_integer (char string[]){
-    int i, integer_value, result = 0;
+    int i=0, integer_value, result = 0;
+    int flag = 0;
     
-    for ( i = 0; string[i] >= '0' && string[i] <= '9'; ++i ){
+    if ( string[i] == '-' ){
+        flag = 1;
+        i = 1;
+    }
+        
+    while ( string[i] >= '0' && string[i] <= '9'){
     
-        if ( string[i] == '-' ){
         integer_value = string[i] - '0';
-        integer_value = integer_value * (-1);
         result = result * 10 + integer_value;
-        //result = result * (-1);
-        }
-        else  {  
-        integer_value = string[i] - '0';
-        result = result * 10 + integer_value;
-
-        }
-    } // for
+        ++i;
+        
+    } 
     
+    if ( flag )
+        result = -result;
+        
     return (result);
 } // string_to_integer
 
