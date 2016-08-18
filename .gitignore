@@ -3,5 +3,5 @@ __pycache__/
 *.py[cod]
 *$py.class
 C/**/*.o
-C/book_prog_ansi_c_kochan/*
-! C/book_prog_ansi_c_kochan/*.*
+
+
