@@ -7,7 +7,7 @@ struct entry{
     };
     
 /* Insert  new entry into link list*/
-struct entry insert_entry (struct entry new, struct entry place){
+struct entry insert_entry (struct entry *new, struct entry *place){
 
     //struct entry *list_start = &n1;
 
@@ -15,7 +15,7 @@ struct entry insert_entry (struct entry new, struct entry place){
      place.next = &new;
 }
 main(){    
-    
+    struct entry insert_entry (struct entry *new, struct entry *place);
     struct entry n1,n2,n3;
     struct entry *list_pointer;
     
@@ -42,9 +42,12 @@ main(){
     printf("\n");
     // Insert new element
     struct entry n2_a;
+    struct entry *p_n2_a = &n2_a;
+    struct entry *p_n2 = &n2;
+    
     n2_a.value = 250;
     
-    insert_entry (n2_a, n2);    
+    insert_entry (*p_n2_a, *p_n2);    
     
     //Forward 
     list_pointer=&n1;
