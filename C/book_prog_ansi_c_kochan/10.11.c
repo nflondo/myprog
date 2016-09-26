@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 /*Function to convert string to an integer*/
 int string_to_integer (char string[]){
     int i=0, integer_value, result = 0;
