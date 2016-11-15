@@ -30,7 +30,7 @@ def main():
     item1.print_inventory()	
     '''
     #Inventory part.  Open file and put it in a dictionary
-    f = open('inventory.txt')
+    f = open('/home/myprog/python/restaurant_project/inventory.txt')
     lines = f.readlines()
     items = {}
     for l in lines:
@@ -64,8 +64,11 @@ def main():
             
         elif choice == '2':
             inv_remove = raw_input("Inventory remove: ")
-            inventory.check(item=inv_remove)
-            inventory.remove(item=inv_remove)
+            exists=inventory.check(item=inv_remove)
+            print "exists:", exists
+            if exists:
+                inventory.remove(item=inv_remove)
+                print "DEBUG: Ran inventory.remove"
                    
         elif choice == '3':
             inventory.print_inventory() 
