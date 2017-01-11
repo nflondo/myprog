@@ -9,7 +9,10 @@ public class SimpleFrame extends JFrame{
     public SimpleFrame(){
         super ("Frame Title");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ExitWindow exit = new ExitWindow();
+		addWindowListener(exit);
+
         //setVisible(true);
     
     }
