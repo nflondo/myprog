@@ -1,4 +1,7 @@
 import com.prefect.ecommerce.*;
+/*
+ * This program uses the classes in ecommerce package
+ */
 
 public class GiftShop {
 	
@@ -10,6 +13,9 @@ public class GiftShop {
 		store.addItem("C02", "LG MUG", "12.99", "82");
 		store.addItem("C03", "MOUSEPAD", "10.49", "800");
 		store.addItem("D01", "T SHIRT", "16.99", "90");
+		store.sort();
+		
+		for (int i = 0; i < store.getSize())
 		
 	}
 }
