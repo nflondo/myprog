@@ -21,7 +21,7 @@ public class Item implements Comparable {
 		else
 			price = retail * .70;
 		
-		price = Math.floor(price * 100 + .5) / 100;
+		price = Math.floor(price * 100 + .5) / 100; // rounds off to two or fewer decimal points
 					
 	}
 	
