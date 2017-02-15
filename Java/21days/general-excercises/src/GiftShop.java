@@ -15,7 +15,15 @@ public class GiftShop {
 		store.addItem("D01", "T SHIRT", "16.99", "90");
 		store.sort();
 		
-		//for (int i = 0; i < store.getSize())
+		for (int i = 0; i < store.getSize(); i++){
+			Item show = (Item)store.getItem(i);
+			System.out.println("\nItem ID: " + show.getId() + 
+					"\nName: " + show.getName() +
+					"\nRetail Price: $" + show.getRetail() +
+					"\nPrice: $" + show.getPrice() +
+					"\nQuantity: " + show.getQuantity());
+			
+		} // end for
 		
 	}
 }
