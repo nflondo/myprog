@@ -15,11 +15,11 @@ public class Item implements Comparable {
 		quantity = Integer.parseInt(quanIn);
 		
 		if (quantity > 400)
-			price = retail * .50;
+			price = retail * .5D;
 		else if (quantity > 200)
-			price = retail * .60;
+			price = retail * .6D;
 		else
-			price = retail * .70;
+			price = retail * .7D;
 		
 		price = Math.floor(price * 100 + .5) / 100; // rounds off to two or fewer decimal points
 					
