@@ -9,9 +9,9 @@ import java.util.*;
 public class Storefront {
 	private LinkedList catalog = new LinkedList();
 	
-	public void addItem(String id, String name, String price, String quant){
+	public void addItem(String id, String name, String price, String quant, boolean discount){
 		
-		Item it = new Item(id, name, price, quant);
+		Item it = new Item(id, name, price, quant, discount);
 		catalog.add(it);  // linkedlist add method
 	}
 	
