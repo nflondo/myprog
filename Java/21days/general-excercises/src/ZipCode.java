@@ -10,7 +10,7 @@ public class ZipCode {
 	}
 	public void setZipCode(String zipCodeIn){
 		// enforce 5 digits
-		 Pattern pattern = Pattern.compile("\\d{7}");
+		 Pattern pattern = Pattern.compile("\\d{5}");
 		 Matcher matcher = pattern.matcher(zipCodeIn);
 
 	      if (matcher.matches()) {
@@ -28,7 +28,7 @@ public class ZipCode {
 		return zipCode;
 		
 	}
-	public static void main(String args){
+	public static void main(String[] args){
 		ZipCode entry = new ZipCode("84097");
 		System.out.println("entry: " + entry.getZipCode());
 		
