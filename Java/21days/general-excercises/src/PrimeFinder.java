@@ -23,7 +23,7 @@ public class PrimeFinder implements Runnable {
 				prime = candidate;
 				
 			} // if
-			
+			candidate++;
 		} // while
 		finished = true;		
 	} // run
