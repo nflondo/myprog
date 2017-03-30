@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/PrimeFinder.java</name>
+			<type>1</type>
+			<location>/home/myprog/Java/21days/general-excercises/src/PrimeFinder.java</location>
+		</link>
+	</linkedResources>
 </projectDescription>
