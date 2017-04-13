@@ -27,8 +27,15 @@ public class ComicBooks {
 		Float price6 = new Float(0.25F);
 		quality.put("poor", price6);
 		
+		Float price7 = new Float(5.00F);
+		quality.put("pristine mint", price7);
+		
+		Float price8 = new Float(0.10F);
+		quality.put("coverless", price8);
+		
+		
 		// set up collection
-		Comic[] comix = new Comic[3];
+		Comic[] comix = new Comic[4];
 		comix[0] = new Comic("Amazing Spider-Man", "1A", "very fine", 5400.00F);
 		// quality.get return a Float object with a value of 1.50 in this case
 		comix[0].setPrice( (Float)quality.get(comix[0].condition) );
@@ -36,6 +43,8 @@ public class ComicBooks {
 		comix[1].setPrice( (Float)quality.get(comix[1].condition) );
 		comix[2] = new Comic("Cerebus", "1A", "good", 260.00F);
 		comix[2].setPrice( (Float)quality.get(comix[2].condition) );
+		comix[3] = new Comic("Kaliman", "34", "coverless", 100.00F);
+		comix[3].setPrice( (Float)quality.get(comix[3].condition) );
 		for (int i = 0; i < comix.length; i++){
 			System.out.println("Title: " + comix[i].title);
 			System.out.println("Issue: " + comix[i].issueNumber);
