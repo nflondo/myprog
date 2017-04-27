@@ -6,7 +6,7 @@ public class Expiration extends JFrame {
 	
 	public Expiration(){
 		super("Expiration Date");
-		setSize(220, 90);
+		setSize(340, 90);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = new JPanel();
@@ -14,12 +14,18 @@ public class Expiration extends JFrame {
 		pane.add(exp);
 		for (int i = 1; i < 13; i++)
 			monthBox.addItem("" + i);
-		for (int i = 2000; i < 2010; i++)	
+		for (int i = 2000; i < 2010; i++)
+			yearBox.addItem("" + i);
+		monthBox.setEditable(true);  // This makes mothBox a combo box
+		pane.add(monthBox);
+		pane.add(yearBox);
+		setContentPane(pane);
+		setVisible(true);
 		
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Expiration ct = new Expiration();
 
 	}
 
