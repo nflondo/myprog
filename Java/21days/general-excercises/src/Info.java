@@ -43,12 +43,33 @@ public class Info extends JFrame {
 		type = new JTextField(choices[response3], 20);
 		
 		JPanel pane = new JPanel();
-				
+		pane.setLayout(new GridLayout(3,2));
+		pane.add(titleLabel);
+		pane.add(title);
+		pane.add(addressLabel);
+		pane.add(address);
+		pane.add(typeLabel);
+		pane.add(type);
+		setContentPane(pane);
+		pack();
+		setLookAndFeel();
+		setVisible(true);
 				
 	}
 	
+	private void setLookAndFeel(){
+		try{
+			UIManager.setLookAndFeel(
+					UIManager.getSystemLookAndFeelClassName());
+			SwingUtilities.updateComponentTreeUI(this);
+		}catch (Exception e){
+			System.err.println("Couldn't use the system "
+					+ "look and feel: " + e);
+		}
+	}
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Info frame = new Info();
 
 	}
 
