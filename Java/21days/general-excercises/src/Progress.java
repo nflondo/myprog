@@ -17,7 +17,7 @@ public class Progress extends JFrame {
 		pane.setLayout(new FlowLayout());
 		current = new JProgressBar(0, 2000);
 		current.setValue(0);
-		current.setStringPainted(true);
+		//current.setStringPainted(true);
 		pane.add(current);
 		setContentPane(pane);		
 	}
@@ -34,5 +34,8 @@ public class Progress extends JFrame {
 	
 	public static void main(String[] args){
 		Progress frame = new Progress();
+		frame.pack();
+		frame.setVisible(true);
+		frame.iterate();
 	}
 }
