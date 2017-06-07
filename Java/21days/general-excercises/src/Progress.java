@@ -7,6 +7,7 @@ public class Progress extends JFrame {
 	JTextArea out;
 	JButton find;
 	Thread runner;
+	private JTextArea numTextArea;
 	int num = 0;
 	
 	public Progress(){
@@ -17,14 +18,19 @@ public class Progress extends JFrame {
 		pane.setLayout(new FlowLayout());
 		current = new JProgressBar(0, 2000);
 		current.setValue(0);
-		//current.setStringPainted(true);
+		current.setStringPainted(true);
 		pane.add(current);
+		
+		numTextArea = new JTextArea("0",1,5);
+		pane.add(numTextArea);
+		
 		setContentPane(pane);		
 	}
 	
 	public void iterate(){
 		while(num < 2000){
 			current.setValue(num);
+			numTextArea.setText(String.valueOf(num));
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e){}
