@@ -4,6 +4,7 @@ import javax.swing.*;
 public class NewForm extends JFrame{
 		
 	public NewForm(){
+		super("Initial Title Frame");
 		setSize(260, 160);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
