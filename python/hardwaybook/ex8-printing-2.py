@@ -8,8 +8,8 @@ print formatter % (formatter, formatter, formatter, formatter)
 # the raw formatter automatically selects double quotes for display
 #if there are single quotes in the string
 print formatter % (
-    "I had this thing.",
-    "That you could've type up right.",
+    "I had this \nthing.",
+    "\tThat you could've type up right.",
     "But it didn't sing.",
     "So I said goodnight."
     )
