@@ -32,7 +32,8 @@ public class NamePass extends JFrame {
 		buildConstraints(constraints, 0, 0, 1, 1, 10, 40);
 		constraints.fill = GridBagConstraints.NONE;
 		constraints.anchor = GridBagConstraints.EAST;
-		JLabel label1 = new JLabel("Name", JLabel.LEFT);
+		//JLabel label1 = new JLabel("Name:", JLabel.LEFT);
+		JLabel label1 = new JLabel("Name:");
 		gridbag.setConstraints(label1, constraints);
 		pane.add(label1);
 		
@@ -44,6 +45,40 @@ public class NamePass extends JFrame {
 		gridbag.setConstraints(tfname, constraints);
 		pane.add(tfname);
 		
+		// password label
+		buildConstraints(constraints, 0, 1, 1, 1, 0, 40);
+		//constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.fill = GridBagConstraints.NONE;
+		constraints.anchor = GridBagConstraints.EAST;
+		//JLabel label2 = new JLabel("Password:", JLabel.LEFT);
+		JLabel label2 = new JLabel("Password:");
+		gridbag.setConstraints(label2, constraints);
+		pane.add(label2);
+		
+		// password text field
+		buildConstraints(constraints, 1, 1, 1, 1, 0, 0);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		JPasswordField tfpass = new JPasswordField();
+		tfpass.setEchoChar('*');
+		gridbag.setConstraints(tfpass, constraints);
+		pane.add(tfpass);
+		
+		// OK Button
+		buildConstraints(constraints, 0, 2, 2, 1, 0, 20);
+		constraints.fill = GridBagConstraints.NONE;
+		constraints.anchor = GridBagConstraints.CENTER;
+		JButton okb = new JButton("OK");
+		gridbag.setConstraints(okb, constraints);
+		pane.add(okb);
+		
+		// Content Pane
+		setContentPane(pane);
+		setVisible(true);	
+		
+		
+	}
+	public static void main(String[]args){
+		NamePass frame = new NamePass();
 	}
 
 } // public class NamePass
