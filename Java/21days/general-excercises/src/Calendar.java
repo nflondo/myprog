@@ -13,7 +13,7 @@ public class Calendar extends JFrame{
 		GridLayout masterGrid = new GridLayout(2,1);
 		masterPanel.setLayout(masterGrid);
 		
-		// Month Panel
+		// Month Title Panel
 		JPanel pane = new JPanel();
 		FlowLayout monthTitle = new FlowLayout();
 		pane.setLayout(monthTitle);
@@ -22,9 +22,9 @@ public class Calendar extends JFrame{
 		//setContentPane(pane);
 		masterPanel.add(pane);
 	
-		// Weekdays Panel
+		// Weekdays Title Panel
 		JPanel daysPanel = new JPanel();
-		GridLayout days_week = new GridLayout(1, 2, 5, 5);
+		GridLayout days_week = new GridLayout(1, 7, 5, 5);
 		daysPanel.setLayout(days_week);
 		JLabel SunLabel = new JLabel("Sunday");
 		JLabel MonLabel = new JLabel("Monday");
@@ -43,9 +43,17 @@ public class Calendar extends JFrame{
 		//setContentPane(pane2);
 		masterPanel.add(daysPanel);
 		
-		//masterPanel.add(pane);
-		//masterPanel.add(pane2);
-		setSize(600, 100);
+		// Weekdays Numbers
+		JPanel dayNumberPanel = new JPanel();
+		GridLayout dayNumberLayout = new GridLayout(6, 7, 5, 5);
+		dayNumberPanel.setLayout(dayNumberLayout);
+		
+		// create labels for each day of July 1 -31
+		String daysNumber[] = {"1","2","3","4","5","6","7", "8", "9","10"};
+		JLabel[] labels = new JLabel[daysNumber.length]; 
+		
+		
+		setSize(600, 600);
 		setVisible(true);
 		setContentPane(masterPanel);
 		
