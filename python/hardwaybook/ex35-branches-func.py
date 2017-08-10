@@ -1,21 +1,30 @@
 from sys import exit
 
 def gold_room():
+    """"Checks if 0 or 1 are in the number"""
     print "This room is full of gold.  How much do you take?"
     
     next = raw_input("> ")
-    if "0" in next or "1" in next:
+    try:
         how_much = int(next)
-    else:
-        dead("Man, learn to type a number.")
+        if how_much < 50:
+            print "Nice, you're not greedy, you win!"
+            # This exits with rc = 0 which is good exit
+            exit(0)
+        else:
+            dead("You greedy bastard!")
+    except ValueError:
+        print("That's not an integer")
+        exit(1)
+#    if "0" in next or "1" in next:
+#        how_much = int(next)
+#    else:
+#        dead("Man, learn to type a number.")
         
-    if how_much < 50:
-        print "Nice, you're not greedy, you win!"
-        exit(0)
-    else:
-        dead("You greedy bastard!")
+ 
         
 def bear_room():
+    """Valid answers: 'take honey', 'taunt bear', and 'open door'"""
     print "There is a bear here."
     print "The bear has a bunch of honey."
     print "The fat bear is in front of another door."
@@ -56,6 +65,7 @@ def dead(why):
     exit(0)
     
 def start():
+    """ Valid answers are 'left' and 'right'"""
     print "You are in a dark room."
     print "There is a door to your right and left."
     print "Which one do you take?"
