@@ -131,7 +131,10 @@ class Map(object):
         return self.next_scene(self.start_scene)                                                
 
 # Main 
+# Creates a Map object which takes a Scene 
 a_map = Map('central_corridor')
+
+# Creates an Engine object which takes a Map object
 a_game = Engine(a_map)
 a_game.play()                                                                                                
             
