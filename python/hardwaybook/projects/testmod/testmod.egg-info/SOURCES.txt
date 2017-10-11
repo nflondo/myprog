@@ -1,0 +1,8 @@
+setup.py
+TESTMOD/__init__.py
+bin/ex40-first-class.py
+testmod.egg-info/PKG-INFO
+testmod.egg-info/SOURCES.txt
+testmod.egg-info/dependency_links.txt
+testmod.egg-info/requires.txt
+testmod.egg-info/top_level.txt
