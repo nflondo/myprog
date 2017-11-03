@@ -8,8 +8,47 @@
 # Race car room: Run fast, did you win? Penalty: You get a pinch
 
 from sys import exit
-from Pirate import Pirate
-from dayofdead import DayOfDead
+#from Pirate import Pirate
+#from dayofdead import DayOfDead
+
+class Pirate(object):
+    def enter(self):
+        print "A big scary woman pirate with one eye receives you."
+        print "She has a parrotkid in her shoulder and is surrounded by a coffin"
+        print "full of gold.  She asks: What does a pirate say?"
+        
+        answer = raw_input("> ")
+        if answer == "arrg":
+            print "You know pirates !!"
+            return 'day_of_dead'
+            
+#        elif action == "dodge!":
+#            print "nice try, Gothon gets you"            
+#            return 'death'
+            
+#        elif action == "tell a joke":
+#            print "Gothon laughs and can't control himself"
+#            return 'laser_weapon_armory'
+            
+        else:
+            print "Wrong !, you die.  Bye !"
+            exit(1)   
+#            return 'central_corridor' 
+
+class DayOfDead(object): 
+
+    def enter(self):
+        print "A nice looking skeleton woman with a big dress is standing in"
+        print "Front of you. You can see food offerings on a table, and "
+        print "Grandma and grandpa's bones sitting on chairs"
+        print "How do you say \"dead\" in spanish?" 
+        answer = raw_input("> ")
+        if answer == "muerto":
+            print "Good Job !!"
+            return 'dance'
+        else:
+           print "Wrong !, you die.  Bye !"
+           exit(1)  
 
 class Room(object):
     
