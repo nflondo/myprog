@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from nose.tools import *
-from fright.scary import Map
-#import fright
+#from fright.scary import Map
+import fright
 
 def setup():
     print "SETUP!"
@@ -14,6 +14,6 @@ def test_basic():
     
 def test_map():
 #    pass
-    myroom = Map('pirate')
+    myroom = fright.Map('pirate')
     
     assert_equal(myroom.start_scene, "pirate")    
