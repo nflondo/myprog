@@ -3,8 +3,12 @@
 def scan(sentence=[]): 
     direction=['north', 'south', 'east', 'west']
     verb=['go', 'stop', 'kill', 'eat']
+    # Empty list to store result
     result=[]
+    # Takes input and separates it into words in a list
     words = sentence.split()
+    # Converts each word in the list to lower case
+    words = [element.lower() for element in words]
     for item in words:
         if item  in direction:
             direction_word=('direction',item)
@@ -20,6 +24,6 @@ def scan(sentence=[]):
                  
     return result                
 
-   
+    
             
       
