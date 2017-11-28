@@ -6,7 +6,7 @@ public class FeedBar2 extends JFrame {
 	public FeedBar2(){
 		super("FeedBar 2");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setLookAndFeel();
+		setLookAndFeel();
 		// create icons
 		ImageIcon loadIcon = new ImageIcon("load.gif");
 		ImageIcon saveIcon = new ImageIcon("save.gif");
@@ -34,6 +34,17 @@ public class FeedBar2 extends JFrame {
 		menu.add(j2);
 		menu.add(j3);
 		menu.add(j4);
+		
+		JMenuItem j5 = new JMenuItem("New");
+		JMenuItem j6 = new JMenuItem("Open");
+		JMenuItem j7 = new JMenuItem("Properties");
+		JMenu menu2 = new JMenu("File");
+		menu2.add(j5);
+		menu2.add(j6);
+		menu2.add(j7);
+			
+		
+		menubar.add(menu2);
 		menubar.add(menu);
 		// prepare user interface
 		JTextArea edit = new JTextArea(8, 40);
@@ -49,9 +60,36 @@ public class FeedBar2 extends JFrame {
 	}
 	
 	private void setLookAndFeel(){
+		
+		// print look and feel available
+		UIManager.LookAndFeelInfo[] laf = UIManager.getInstalledLookAndFeels();
+		for (int i = 0; i < laf.length; i++){
+			System.out.println("Class name: " + laf[i].getClassName());
+			System.out.println("Name: " + laf[i].getName() + "\n");
+		}
+		
+		String systemLaf = UIManager.getSystemLookAndFeelClassName();
+		System.out.println("System Laf: " + systemLaf + "\n");
+		// set look and feel
+		// this gets java cross-platform metal look and feel
 		try{
 			UIManager.setLookAndFeel(
-					"com.sun.java.swing.plaf.nimbus.NimbusLookAndfeel"
+//					UIManager.getCrossPlatformLookAndFeelClassName()
+					UIManager.getSystemLookAndFeelClassName()
+					);
+			SwingUtilities.updateComponentTreeUI(this);			
+		} catch (Exception e){
+			System.err.println("Can't set look and feel: " + e);
+		}
+		
+/*				
+		try{
+			UIManager.setLookAndFeel(
+//					"com.sun.java.swing.plaf.nimbus.NimbusLookAndfeel"
+//					"javax.swing.plaf.nimbus.NimbusLookAndFeel"
+//					"javax.swing.plaf.metal.MetalLookAndFeel"
+//					"com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+					"com.sun.java.swing.plaf.motif.MotifLookAndFeel"
 					);
 			SwingUtilities.updateComponentTreeUI(this);
 		}catch (Exception e){
@@ -59,6 +97,7 @@ public class FeedBar2 extends JFrame {
 					+ "look and feel: " + e);
 			
 		}
+*/	
 		
 	}
 	
