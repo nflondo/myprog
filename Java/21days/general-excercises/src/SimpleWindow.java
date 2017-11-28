@@ -11,7 +11,7 @@ public class SimpleWindow extends JWindow{
 	public static void main(String[] args) {
 		SimpleWindow sw = new SimpleWindow();
 		sw.setVisible(true);
-		for (int i = 0; i < 100000000; i++)
+		for (int i = 0; i < 1000000; i++)
 			System.out.println(i + " ");
 		
 		sw.setVisible(false);
