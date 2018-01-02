@@ -6,21 +6,18 @@ public class Calendar extends JFrame{
 		
 	
 	public Calendar(){
+
 		super("Calendar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// Master Panel
-		JPanel masterPanel = new JPanel();
-		GridLayout masterGrid = new GridLayout(2,1);
-		masterPanel.setLayout(masterGrid);
 		
 		// Month Title Panel
-		JPanel pane = new JPanel();
+		JPanel monthPane = new JPanel();
 		FlowLayout monthTitle = new FlowLayout();
-		pane.setLayout(monthTitle);
+		monthPane.setLayout(monthTitle);
 		JLabel monthLabel = new JLabel("JULY");
-		pane.add(monthLabel);
-		//setContentPane(pane);
-		masterPanel.add(pane);
+		monthPane.add(monthLabel);
+//		setContentPane(monthPane);
+//		masterPanel.add(monthPane);
 	
 		// Weekdays Title Panel
 		JPanel daysPanel = new JPanel();
@@ -41,7 +38,7 @@ public class Calendar extends JFrame{
 		daysPanel.add(FriLabel);
 		daysPanel.add(SatLabel);
 		//setContentPane(pane2);
-		masterPanel.add(daysPanel);
+//		masterPanel.add(daysPanel);
 		
 		// Weekdays Numbers
 		JPanel dayNumberPanel = new JPanel();
@@ -52,15 +49,25 @@ public class Calendar extends JFrame{
 		String daysNumber[] = {"1","2","3","4","5","6","7", "8", "9","10"};
 		JLabel[] labels = new JLabel[daysNumber.length]; 
 		
-		
+
+		// Master Panel (set user interface)
+		// I want to change to border layout and use pack, see page 299 or feedbar2 program
+//		JPanel masterPanel = new JPanel();
+		GridLayout masterGrid = new GridLayout(2,1);
+//		masterPanel.setLayout(masterGrid);
+		setLayout(masterGrid);
+		add(monthPane);
+		add(daysPanel);
+//		add(dayNumberPanel);
 		setSize(600, 600);
 		setVisible(true);
-		setContentPane(masterPanel);
+//		setContentPane(masterPanel);
 		
 		
 	}
 	public static void main(String[] args) {
 		Calendar july = new Calendar();
+		
 
 	}
 }
