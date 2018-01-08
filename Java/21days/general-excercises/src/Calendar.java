@@ -47,19 +47,32 @@ public class Calendar extends JFrame{
 		
 		// create labels for each day of July 1 -31
 		String daysNumber[] = {"1","2","3","4","5","6","7", "8", "9","10"};
-		JLabel[] labels = new JLabel[daysNumber.length]; 
+		JLabel[] labels = new JLabel[daysNumber.length];
+		for (int i=0; i < daysNumber.length; i++)
+			labels[i]= new JLabel("label"+i);
+
+		
+		for (int i=0; i < labels.length; i ++)
+			dayNumberPanel.add(labels[i]);
 		
 
 		// Master Panel (set user interface)
 		// I want to change to border layout and use pack, see page 299 or feedbar2 program
 //		JPanel masterPanel = new JPanel();
-		GridLayout masterGrid = new GridLayout(2,1);
+//		GridLayout masterGrid = new GridLayout(2,1);
 //		masterPanel.setLayout(masterGrid);
-		setLayout(masterGrid);
-		add(monthPane);
-		add(daysPanel);
+//		setLayout(masterGrid);
+		
+		BorderLayout bord = new BorderLayout();
+		setLayout(bord);
+		add("North", monthPane);
+		add("Center", daysPanel);
+		add("South", dayNumberPanel);
+//		add(monthPane);
+//		add(daysPanel);
 //		add(dayNumberPanel);
-		setSize(600, 600);
+//		setSize(300, 300);
+		pack();
 		setVisible(true);
 //		setContentPane(masterPanel);
 		
