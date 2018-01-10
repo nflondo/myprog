@@ -14,7 +14,7 @@ public class Calendar extends JFrame{
 		JPanel monthPane = new JPanel();
 		FlowLayout monthTitle = new FlowLayout();
 		monthPane.setLayout(monthTitle);
-		JLabel monthLabel = new JLabel("JULY");
+		JLabel monthLabel = new JLabel("February");
 		monthPane.add(monthLabel);
 //		setContentPane(monthPane);
 //		masterPanel.add(monthPane);
@@ -23,36 +23,28 @@ public class Calendar extends JFrame{
 		JPanel daysPanel = new JPanel();
 		GridLayout days_week = new GridLayout(1, 7, 5, 5);
 		daysPanel.setLayout(days_week);
-		JLabel SunLabel = new JLabel("Sunday");
-		JLabel MonLabel = new JLabel("Monday");
-		JLabel TueLabel = new JLabel("Tuesday");
-		JLabel WedLabel = new JLabel("Wednesday");
-		JLabel ThuLabel = new JLabel("Thursday");
-		JLabel FriLabel = new JLabel("Friday");
-		JLabel SatLabel = new JLabel("Saturday");
-		daysPanel.add(SunLabel);
-		daysPanel.add(MonLabel);
-		daysPanel.add(TueLabel);
-		daysPanel.add(WedLabel);
-		daysPanel.add(ThuLabel);
-		daysPanel.add(FriLabel);
-		daysPanel.add(SatLabel);
+		String[] dayNames = {"S", "M", "T", "W", "T", "F", "S"};
+		JLabel[] dayCal = new JLabel[7];
+		for (int i=0; i < 7; i++){
+			dayCal[i] = new JLabel(dayNames[i]);
+			daysPanel.add(dayCal[i]);
+		}
 		//setContentPane(pane2);
 //		masterPanel.add(daysPanel);
 		
 		// Weekdays Numbers
 		JPanel dayNumberPanel = new JPanel();
-		GridLayout dayNumberLayout = new GridLayout(6, 7, 5, 5);
+		GridLayout dayNumberLayout = new GridLayout(4, 7, 5, 5);
 		dayNumberPanel.setLayout(dayNumberLayout);
 		
 		// create labels for each day of July 1 -31
-		String daysNumber[] = {"1","2","3","4","5","6","7", "8", "9","10"};
-		JLabel[] labels = new JLabel[daysNumber.length];
-		for (int i=0; i < daysNumber.length; i++)
-			labels[i]= new JLabel("label"+i);
+//		String daysNumber[] = {"1","2","3","4","5","6","7"};
+		JLabel[] labels = new JLabel[29];
+		for (int i=0; i < labels.length; i++)
+			labels[i]= new JLabel(""+i);
 
 		
-		for (int i=0; i < labels.length; i ++)
+		for (int i=1; i < labels.length; i ++)
 			dayNumberPanel.add(labels[i]);
 		
 
