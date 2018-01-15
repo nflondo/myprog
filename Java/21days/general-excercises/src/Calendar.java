@@ -1,3 +1,7 @@
+/*
+ * One month calendar is made with a Main frame that has a borderlayout.  
+ * Inside each border there is a panel with its own layout
+ */
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,8 +20,6 @@ public class Calendar extends JFrame{
 		monthPane.setLayout(monthTitle);
 		JLabel monthLabel = new JLabel("February");
 		monthPane.add(monthLabel);
-//		setContentPane(monthPane);
-//		masterPanel.add(monthPane);
 	
 		// Weekdays Title Panel
 		JPanel daysPanel = new JPanel();
@@ -29,8 +31,6 @@ public class Calendar extends JFrame{
 			dayCal[i] = new JLabel(dayNames[i]);
 			daysPanel.add(dayCal[i]);
 		}
-		//setContentPane(pane2);
-//		masterPanel.add(daysPanel);
 		
 		// Weekdays Numbers
 		JPanel dayNumberPanel = new JPanel();
@@ -39,35 +39,22 @@ public class Calendar extends JFrame{
 		
 		// create labels for each day of July 1 -31
 //		String daysNumber[] = {"1","2","3","4","5","6","7"};
-		JLabel[] labels = new JLabel[29];
-		for (int i=0; i < labels.length; i++)
-			labels[i]= new JLabel(""+i);
-
-		
-		for (int i=1; i < labels.length; i ++)
+		JLabel[] labels = new JLabel[28];
+		for (int i=0; i < labels.length; i++){
+			labels[i]= new JLabel(""+ (i+1));
 			dayNumberPanel.add(labels[i]);
+		}
 		
-
-		// Master Panel (set user interface)
-		// I want to change to border layout and use pack, see page 299 or feedbar2 program
-//		JPanel masterPanel = new JPanel();
-//		GridLayout masterGrid = new GridLayout(2,1);
-//		masterPanel.setLayout(masterGrid);
-//		setLayout(masterGrid);
-		
+		// Master Panel (set user interface of current frame)
+		// border layout and using pack, see page 299 or feedbar2 program		
 		BorderLayout bord = new BorderLayout();
 		setLayout(bord);
 		add("North", monthPane);
 		add("Center", daysPanel);
 		add("South", dayNumberPanel);
-//		add(monthPane);
-//		add(daysPanel);
-//		add(dayNumberPanel);
-//		setSize(300, 300);
-		pack();
+		pack();  // with pack() I don't need to set a size()
 		setVisible(true);
-//		setContentPane(masterPanel);
-		
+	
 		
 	}
 	public static void main(String[] args) {
