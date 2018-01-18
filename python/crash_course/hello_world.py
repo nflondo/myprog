@@ -6,8 +6,16 @@ print(name.title())
 print(name.lower())
 print(name.upper())
 
-# String concatenation
+# String concatenation and tabs \t
 first_name = "John"
 last_name = "doe"
 full_name = first_name + " " + last_name
-print("Hello" + " " + full_name.title() + "!")
+print("\tHello" + " " + full_name.title() + "!")
+
+#Stripping whitespace
+favorite_language = 'python ' 
+print(favorite_language)
+favorite_language = favorite_language.rstrip() # from  right of string
+print(favorite_language)
+# lstrip() from left
+# strip() from both sides at once
