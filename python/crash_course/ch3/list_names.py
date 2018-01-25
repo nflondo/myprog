@@ -34,4 +34,23 @@ print(second_item)
 # it removes only one  occurrence
 friends.remove('raul')
 print(friends)
+
+cars = ['bmw', 'audi', 'toyota', 'subaru' ]
+# Sorting a list permanently with sort()
+#cars.sort()
+
+# Sorting temporarily with sorted()
+print("Here is the original list:")
+print(cars)
+print("\nHere is the sorted list:")
+print(sorted(cars))
+print("\nHere is the original list again:")
+print(cars)
+# Sort in reverse
+#friends.sort(reverse = True)
+#print(friends)
+
+# Printing a list in reverse order (permanent, but can apply reverse again)
+#cars.reverse()
+
 	
