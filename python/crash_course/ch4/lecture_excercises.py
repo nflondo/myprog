@@ -35,3 +35,20 @@ print (squares)
 # Combines the for loop and creating list into one line
 squares = [value**2 for value in range(1,11)]
 print(squares)
+
+# Slice in a list
+players = ['charles', 'martina', 'michael', 'florence', 'eli']
+print(players[0:3]) # first element to third element
+print(players[:2]) # default is beginning  to second element
+print(players[2:]) # third element to the end
+print(players[-2:]) # 2 elements starting from the end of the list
+
+print("*" * 10)
+# printing with slice
+for player in players[:3]:
+	print(player)
+
+# Copying a list
+print("*" * 10)
+new_players = players[:]  # this creates a separate new list
+print(new_players)
