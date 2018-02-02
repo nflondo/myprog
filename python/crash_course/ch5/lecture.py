@@ -19,6 +19,17 @@ if 'mushroom' in toppings:
     print("yes, mushroom is in toppings list")
 else:
     print("not found in list")
+
+# Using if in a list    
+#toppings = []
+if len(toppings) == 0:
+    print("toppings is empty")
+else:
+    for topping in toppings:
+        if topping == 'onions':
+            print("Special ingredient: " + topping)
+        else:
+            print("Adding: " + topping)
     
 # checking whether a value is NOT in a list with "not"
 banned_users = ['andrew', 'carolina', 'david']
@@ -46,4 +57,6 @@ elif age < 18:
 else:
     price = 10    
     
-print("Your admission cost is $" + str(price) + ".")    
+print("Your admission cost is $" + str(price) + ".")
+
+    
