@@ -63,20 +63,23 @@ public class FeedBar2 extends JFrame {
 		
 		// print look and feel available
 		UIManager.LookAndFeelInfo[] laf = UIManager.getInstalledLookAndFeels();
-		for (int i = 0; i < laf.length; i++){
-			System.out.println("Class name: " + laf[i].getClassName());
+		System.out.println("Will print all available look and"
+                                + " feel on this machine: ");
+                for (int i = 0; i < laf.length; i++){
+                        System.out.println("Class name: " + laf[i].getClassName());
 			System.out.println("Name: " + laf[i].getName() + "\n");
 		}
 		
 		String systemLaf = UIManager.getSystemLookAndFeelClassName();
-		System.out.println("System Laf: " + systemLaf + "\n");
+		System.out.println("System LaF: " + systemLaf + "\n");
 		// set look and feel
 		// this gets java cross-platform metal look and feel
 		try{
-			UIManager.setLookAndFeel(
-//					UIManager.getCrossPlatformLookAndFeelClassName()
-					UIManager.getSystemLookAndFeelClassName()
-					);
+        		UIManager.setLookAndFeel(
+			// UIManager.getCrossPlatformLookAndFeelClassName()
+			// This sets look and feel to that of the system
+                        UIManager.getSystemLookAndFeelClassName()
+					);  
 			SwingUtilities.updateComponentTreeUI(this);			
 		} catch (Exception e){
 			System.err.println("Can't set look and feel: " + e);
