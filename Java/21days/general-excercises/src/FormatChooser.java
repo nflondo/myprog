@@ -21,8 +21,9 @@ public class FormatChooser extends JFrame implements ItemListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		for (int i = 0; i < formats.length; i++){
-			formatBox.addItemListener(this);
+			formatBox.addItem(formats[i]);
 		}
+                formatBox.addItemListener(this);
 		add(BorderLayout.NORTH, formatBox);
 		add(BorderLayout.CENTER, descriptionLabel);
 		setVisible(true);
@@ -42,7 +43,7 @@ public class FormatChooser extends JFrame implements ItemListener {
 	private static void setLookAndFeel() {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
