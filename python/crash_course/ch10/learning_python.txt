@@ -1,0 +1,5 @@
+In Python you can read files from disk
+In Python you can get user input
+In Python you can do math
+In Python you can create objects and classes
+In Python you can import modules
