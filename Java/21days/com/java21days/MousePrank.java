@@ -81,4 +81,24 @@ class PrankPanel extends JPanel implements MouseMotionListener{
     public void mouseDragged(MouseEvent event){
         // ignore this event
     }
+    
+    private int moveButton(int mouseAt, int buttonAt, int bord){
+        if (buttonAt < mouseAt){
+            buttonAt--;
+        } else {
+            buttonAt++;
+        }
+        if (buttonAt > (bord - 20)){
+            buttonAt = 10;
+        }
+        if (buttonAt < 0){
+            buttonAt = bord - 80;
+        }
+        return buttonAt;
+    }
+    
+    public void paintComponent(Graphics comp){
+        super.paintComponent(comp);
+        ok.setBounds(buttonX, buttonY, 70, 20);
+    }
 }
