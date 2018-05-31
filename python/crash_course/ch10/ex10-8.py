@@ -9,4 +9,12 @@ def print_file(filename):
 		print(msg)
 	else:
 		# print file to screen
+		print(contents)
+		
+filename_list=['cats.txt','dogs2.txt']
+
+for filedoc in filename_list:
+	print_file(filedoc)
+
+
 		
