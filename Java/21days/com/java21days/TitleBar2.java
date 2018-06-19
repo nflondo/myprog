@@ -10,8 +10,10 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class TitleBar2 {
-    public TitleBar(){
+public class TitleBar2 extends JFrame implements ActionListener {
+    JButton b1;
+    JButton b2;
+    public TitleBar2(){
             super("Title Bar");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setLookAndFeel();
