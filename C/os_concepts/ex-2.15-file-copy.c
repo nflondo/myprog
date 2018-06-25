@@ -1,41 +1,53 @@
-#include <stdlib.h>
+/* ex2.15 copies contents of one file to another file */
+
 #include <stdio.h>
 
-#define BUFSIZE 100
+int file_copy(char *oldname, char *newname);
 
-int main(void)
-{
-	char buf[BUFSIZE];
-    char file_source[60];
-    /*char target_file[81];*/
-    FILE *fp;
+int main(void){
+	char source[80], destination[80];
 	
-	printf("Name of source file: ");
-    fgets(file_source,60,stdin);
-    file_source[strlen(file_source)-1] = 0;
+	/* Get the source and destination names */
+	printf("\nEnter source file: ");
+	scanf("%80s", source);
+	printf("\nEnter destination file: ");
+	scanf("%80s", destination);
 	
-    puts("Made it to pass fgets");
-    /* open the file for readin */
-    if ( (fp = fopen(file_source, "r")) == NULL )
-    {
-        fprintf(stderr, "Error opening the file.\n");
-        exit(1);
-    }
-    
-    /* if end of file not reached, read a line and display it. */
-    while ( !feof(fp))
-    {
-        fgets(buf, BUFSIZE, fp);
-        printf("%s", buf);
-    }
-    
-    fclose(fp);      
-        
-/*    
-    printf("Name of target file: ");
-    scanf("%s", target_file);
-    
-    printf("You entered: %s and %s\n", source_file, target_file);
-*/	
-    return 0;
+	if (file_copy(source, destination) == 0 )
+		puts("Copy operation successful");
+	else
+		fprintf(stderr, "Error during copy operation");
+	return(0);
 }
+
+int file_copy(char *oldname, char *newname){
+	FILE *fold, *fnew;
+	int c;
+	/* Open the source file for reading in binary mode */
+	if (( fold = fopen( oldname, "rb" )) == NULL )
+		printf("\n *** File %s doesn't exists ***", oldname);
+		return -1;
+		
+	/* Open the destination file for writing in binary mode. */
+	if (( fnew = fopen( newname, "wb" )) == NULL )
+	{
+		fclose (fold);
+		return -1;
+	}
+	
+	/*Read one byte at a time from the source; if end of file has not been
+	 * reached, write the byte to the destination. */	
+	 while (1)
+	 {
+		c = fgetc( fold );
+		if ( !feof( fold ) )
+			fputc( c, fnew );
+		else
+			break;
+	 }
+	 fclose( fnew );
+	 fclose( fold );
+	 
+	 return 0;
+}
+	
