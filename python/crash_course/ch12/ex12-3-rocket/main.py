@@ -1,12 +1,16 @@
 import sys
 import pygame
 from controller import Controller
+from settings import Settings
 
 def run_game():
 	#Initialize and create screen project
 	pygame.init()
-	screen = pygame.display.set_mode((1200,800))
-	pygame.display.set_caption("Blue background")
+	game_settings = Settings()
+#	screen = pygame.display.set_mode((1200,800))
+	screen = pygame.display.set_mode(
+		(game_settings.screen_width, game_settings.screen_height))
+	pygame.display.set_caption("Rocket game")
 	
 	# set bg color
 	bg_color = (0, 0, 255)
