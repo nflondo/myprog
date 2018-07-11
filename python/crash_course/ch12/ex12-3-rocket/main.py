@@ -1,7 +1,9 @@
-import sys
 import pygame
-from controller import Controller
+
 from settings import Settings
+from rocket import Rocket
+import functions as fn
+
 
 def run_game():
 	#Initialize and create screen project
@@ -12,25 +14,14 @@ def run_game():
 		(game_settings.screen_width, game_settings.screen_height))
 	pygame.display.set_caption("Rocket game")
 	
-	# set bg color
-	bg_color = (0, 0, 255)
-	
-	# make a ship
-	controller = Controller(screen)
+	# make a rocket
+	rocket = Rocket(game_settings, screen)
 	
 	# Main loop
 	while True:
-		
-		# What for keyboard and mouse events
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				sys.exit()
-				
-		# Redraw the screen during each pass through the loop
-		screen.fill(bg_color)
-		controller.blitme()
-				
-		# Make the most of recently drawn screen visible
-		pygame.display.flip()
+		# Watch for keyboard and mouse events
+		fn.check_events(rocket)
+		rocket.update()
+		fn.update_screen(game_settings, screen, rocket)
 		
 run_game()
