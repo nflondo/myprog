@@ -1,5 +1,5 @@
 import pygame
-
+from pygame.sprite import Group
 from settings import Settings
 from rocket import Rocket
 import functions as fn
@@ -16,12 +16,14 @@ def run_game():
 	
 	# make a rocket
 	rocket = Rocket(game_settings, screen)
-	
+	# Make a group to store bullets in.
+	bullets = Group()	
 	# Main loop
 	while True:
 		# Watch for keyboard and mouse events
-		fn.check_events(rocket)
+		fn.check_events(game_settings, screen, rocket, bullets)
 		rocket.update()
-		fn.update_screen(game_settings, screen, rocket)
+		fn.update_bullets(bullets)				
+		fn.update_screen(game_settings, screen, rocket, bullets)
 		
 run_game()
