@@ -9,7 +9,7 @@ class Rocket():
 		self.screen = screen
 		self.game_settings = game_settings
 		# Load the rocket image and get its rect.
-		self.image = pygame.image.load('images/controller3.png')
+		self.image = pygame.image.load('images/ship.bmp')
 		self.rect = self.image.get_rect()
 		self.screen_rect = screen.get_rect()
 		

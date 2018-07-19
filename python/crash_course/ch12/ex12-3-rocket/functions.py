@@ -67,4 +67,4 @@ def update_bullets(bullets):
 	#	if bullet.rect.bottom <= 0:
 		if bullet.rect.right > 1200:
 			bullets.remove(bullet)
-	print(len(bullets))
+	#print(len(bullets))
