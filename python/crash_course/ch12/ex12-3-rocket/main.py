@@ -18,12 +18,15 @@ def run_game():
 	rocket = Rocket(game_settings, screen)
 	# Make a group to store bullets in.
 	bullets = Group()	
+	aliens = Group()
+	
+	fn.create_fleet(game_settings, screen, rocket, aliens)
 	# Main loop
 	while True:
 		# Watch for keyboard and mouse events
 		fn.check_events(game_settings, screen, rocket, bullets)
 		rocket.update()
 		fn.update_bullets(bullets)				
-		fn.update_screen(game_settings, screen, rocket, bullets)
+		fn.update_screen(game_settings, screen, rocket, aliens, bullets)
 		
 run_game()
