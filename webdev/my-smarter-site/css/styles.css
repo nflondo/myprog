@@ -19,3 +19,8 @@ p.important {
 .redcolor{
     color: #cc0000;
 }
+p.spacing{
+    letter-spacing: .1em;
+    word-spacing: 1em;
+    line-height: 1.8em;
+}
