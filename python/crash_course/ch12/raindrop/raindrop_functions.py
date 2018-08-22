@@ -24,13 +24,13 @@ def create_drop(game_settings, screen, drops, drop_number, row_number):
 	drop.rect.y = drop.rect.height + 2 * drop.rect.height * row_number
 	drops.add(drop)	
 
-def create_fleet(game_settings, screen, ship, drops):
+def create_fleet(game_settings, screen, drops):
 	"""Create a full fleet of aliens."""
 	drop = Drop(game_settings, screen)
 	# Create an alien and find the number of aliens in a row.
 	# Spacing between each alien is equal to one alien width.
 	number_drops_x = get_number_drops_x(game_settings, drop.rect.width)	
-	number_rows = get_number_rows(game_settings, ship.rect.height, alien.rect.height)
+	number_rows = get_number_rows(game_settings, drop.rect.height)
 	
 	# Create the fleet of aliens.
 	for row_number in range(number_rows):

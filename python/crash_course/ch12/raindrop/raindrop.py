@@ -2,6 +2,7 @@
 import pygame
 from raindrop_settings import Settings
 from pygame.sprite import Group
+import raindrop_functions as rf
 
 def run_game():
 	# Initialize game and create a screen object.
@@ -15,6 +16,6 @@ def run_game():
 	drops = Group()
 	
 	# Create the fleet of raindrops
-	gf.create_fleet(ai_settings, screen, ship, aliens)
+	rf.create_fleet(game_settings, screen, drops)
 	
 run_game()
