@@ -37,3 +37,7 @@ blockquote {
     font-size: .5em;
     color: gray;
 }
+p.whitespace {
+    margin-right: 2em;
+    margin-left: 2em;
+}
