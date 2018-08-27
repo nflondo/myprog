@@ -17,5 +17,13 @@ def run_game():
 	
 	# Create the fleet of raindrops
 	rf.create_fleet(game_settings, screen, drops)
+	# Start the main loop for the game.
+	while True:
+		#gf.check_events(ship)
+		#rf.check_events(ai_settings, screen, ship, bullets)
+		#ship.update()
+		#gf.update_bullets(bullets)
+		rf.update_drops(game_settings, drops)		
+		rf.update_screen(game_settings, screen, drops)
 	
 run_game()

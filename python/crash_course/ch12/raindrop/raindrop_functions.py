@@ -38,3 +38,28 @@ def create_fleet(game_settings, screen, drops):
 		for drop_number in range(number_drops_x):
 			# Create an alien and place it in the row.
 			create_drop(game_settings, screen, drops, drop_number, row_number)
+			
+def update_drops(game_settings, drops):
+	"""Check if the fleet is at an edge and then update the positions of all
+	aliens in the fleet"""
+	#check_fleet_edges(ai_settings, aliens)
+	drops.update()		
+	
+def update_screen(game_settings, screen, drops):
+	"""Updates imges on the screen and flip to the new screen."""
+	# Redraw the screen during each pass through the loop.
+	screen.fill(game_settings.bg_color)
+	# Redraw all bullets behind ship and aliens.
+#	for bullet in bullets.sprites():
+#		bullet.draw_bullet()
+#	ship.blitme()	
+#	alien.blitme()	
+	drops.draw(screen)
+	# Make the most recently drawn screen visible.
+	pygame.display.flip()	
+	
+def change_fleet_direction(ai_settings, aliens):
+	"""Drop the entire fleet and change the fleet's direction."""
+	for alien in aliens.sprites():
+		alien.rect.y += ai_settings.fleet_drop_speed
+	ai_settings.fleet_direction *= -1

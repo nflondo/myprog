@@ -21,7 +21,7 @@ class Settings():
 		#self.bullets_allowed = 12
 
 		# Alien Settings
-		#self.alien_speed_factor = 1
-		#self.fleet_drop_speed = 10
+		self.drop_speed_factor = 1
+		self.fleet_drop_speed = 10
 		# fleet_direction of 1 represents right; -1 represents left.
-		#self.fleet_direction = 1
+		self.fleet_direction = 1

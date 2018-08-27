@@ -41,3 +41,9 @@ p.whitespace {
     margin-right: 2em;
     margin-left: 2em;
 }
+p.allfourmargin{
+    margin: 2em;
+}
+.myborder {
+    border: 5px solid red;
+}
