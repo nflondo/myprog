@@ -39,11 +39,24 @@ def create_fleet(game_settings, screen, drops):
 			# Create an alien and place it in the row.
 			create_drop(game_settings, screen, drops, drop_number, row_number)
 			
-def update_drops(game_settings, drops):
+def update_drops(game_settings, screen, drops):
 	"""Check if the fleet is at an edge and then update the positions of all
 	aliens in the fleet"""
-	#check_fleet_edges(ai_settings, aliens)
+	check_fleet_edges(game_settings, screen, drops)
 	drops.update()		
+	
+def check_fleet_edges(game_settings, screen, drops):
+	"""Respond appropriately if any aliens have reached an edge."""
+	for drop in drops.sprites():
+		if drop.check_edges():
+			create_fleet(game_settings, screen, drops)	
+			break	
+			
+def change_fleet_direction(game_settings, drops):
+	"""Drop the entire fleet and change the fleet's direction."""
+	for drop in drops.sprites():
+		drop.rect.y += game_settings.fleet_drop_speed
+	game_settings.fleet_direction *= -1
 	
 def update_screen(game_settings, screen, drops):
 	"""Updates imges on the screen and flip to the new screen."""
@@ -58,8 +71,4 @@ def update_screen(game_settings, screen, drops):
 	# Make the most recently drawn screen visible.
 	pygame.display.flip()	
 	
-def change_fleet_direction(ai_settings, aliens):
-	"""Drop the entire fleet and change the fleet's direction."""
-	for alien in aliens.sprites():
-		alien.rect.y += ai_settings.fleet_drop_speed
-	ai_settings.fleet_direction *= -1
+

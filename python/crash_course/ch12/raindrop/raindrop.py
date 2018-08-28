@@ -23,7 +23,7 @@ def run_game():
 		#rf.check_events(ai_settings, screen, ship, bullets)
 		#ship.update()
 		#gf.update_bullets(bullets)
-		rf.update_drops(game_settings, drops)		
+		rf.update_drops(game_settings, screen, drops)		
 		rf.update_screen(game_settings, screen, drops)
 	
 run_game()
