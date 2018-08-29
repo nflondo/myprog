@@ -47,11 +47,27 @@ def update_drops(game_settings, screen, drops):
 	
 def check_fleet_edges(game_settings, screen, drops):
 	"""Respond appropriately if any aliens have reached an edge."""
+	# Get rid of bullets that have disappeared.
+	for drop in drops.copy():
+		if drop.rect.bottom >= 800:
+			drops.remove(drop)
+	
+	print(len(drops))
+	if len(drops) == 0:
+		# Destroy existing bullets and create new fleet.
+#		drops.empty()
+		create_fleet(game_settings, screen, drops)	
+'''
 	for drop in drops.sprites():
 		if drop.check_edges():
-			create_fleet(game_settings, screen, drops)	
+			# Get rid of bullets that have disappeared.
+			for bullet in bullets.copy():
+				if bullet.rect.bottom <= 0:
+					bullets.remove(bullet)
+			#print(len(bullets))
 			break	
-			
+			create_fleet(game_settings, screen, drops)	
+'''
 def change_fleet_direction(game_settings, drops):
 	"""Drop the entire fleet and change the fleet's direction."""
 	for drop in drops.sprites():
