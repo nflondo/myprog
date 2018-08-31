@@ -44,5 +44,11 @@ class TextFramePanel extends JPanel{
         Graphics2D comp2D = (Graphics2D) comp;
         comp2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
+        Font font = new Font(fontName, Font.BOLD, 18);
+        FontMetrics metrics = getFontMetrics(font);
+        comp2D.setFont(font);
+        int x = (getSize().width - metrics.stringWidth(text)) /2;
+        int y = getSize().height / 2;
+        comp2D.drawString(text, x, y);
     }
 }
