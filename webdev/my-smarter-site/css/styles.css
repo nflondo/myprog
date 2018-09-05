@@ -48,3 +48,6 @@ p.allfourmargin{
     border: 5px solid red;
     padding: .3em;
 }
+h4, p.pcenter{
+    text-align: center;
+}
