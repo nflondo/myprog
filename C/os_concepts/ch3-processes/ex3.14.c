@@ -13,8 +13,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "No number typed on the command line.\n");
 		return (EXIT_FAILURE);
 	}
-	pid_t pid;
-	int result=0;
+	pid_t pid;	
 	int number = atoi(argv[1]);  // converts string to int
 	if (number < 0){
 		fprintf(stderr, "***Error, negative number.\n");
