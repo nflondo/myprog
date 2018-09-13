@@ -54,3 +54,8 @@ h4, p.pcenter{
 h2#iorange {
     color: orange;
 }
+div#tdiv{
+    margin-left: 3em;
+    margin-right: 3em;
+    font-family: Arial, Helvetica, sans-serif;
+}
