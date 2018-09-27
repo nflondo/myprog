@@ -1,3 +1,8 @@
+/**
+ * SwingWorker is a class that's designed to run time-consuming tasks in their 
+ * own worker thread and report the results. 
+ * @author nmunoz
+ */
 package com.java21days;
 
 import javax.swing.*;
