@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Rolls three six-sided dice a user-selected number of times and tabulates the
+ * results. 
  */
 package com.java21days;
 
@@ -77,8 +76,42 @@ public class DiceRoller extends JFrame implements ActionListener,
             // set up the worker that will roll the dice
             worker = new DiceWorker(timesToRoll);
             // add a listener that monitors the worker
-            woker.addPropertyChangeListener(this);
+            worker.addPropertyChangeListener(this);
+            // start the worker
+            worker.execute();
+        } catch (Exception exc){
+            System.out.println(exc.getMessage());
+            exc.printStackTrace();
         }
+    }
+    
+    // respond when the worker's task is complete
+    public void propertyChange(PropertyChangeEvent event){
+        try {
+            // get the worker's dice-roll results
+            int[] result = (int[]) worker.get();
+            // store the results in text fields
+            for (int i =0; i < result.length; i++){
+                total[i].setText("" + result[i]);
+            } 
+        } catch (Exception exc){
+            System.out.println(exc.getMessage());
+            exc.printStackTrace();
+        }
+    }
+    
+    private static void setLookAndFeel(){
+        try{
+            UIManager.setLookAndFeel(
+                    "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"
+            );
+        } catch (Exception exc){
+            // ignore error
+        }
+    }
+    
+    public static void main(String[] args){
+        new DiceRoller();
     }
     
 }
