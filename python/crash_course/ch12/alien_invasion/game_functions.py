@@ -103,8 +103,9 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
 	collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 	# Repopulating the fleet of aliens
 	if len(aliens) == 0:
-		# Destroy existing bullets and create new fleet.
+		# Destroy existing bullets, speed up game, and create new fleet.
 		bullets.empty()
+		ai_settings.increase_speed()
 		create_fleet(ai_settings, screen, ship, aliens)
 
 def get_number_rows(ai_settings, ship_height, alien_height):
