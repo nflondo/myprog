@@ -62,3 +62,6 @@ div#tdiv{
 img.display-block {
     display: block;
 }
+img.move-right{
+    margin-left: 5em;
+}

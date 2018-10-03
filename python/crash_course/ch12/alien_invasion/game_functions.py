@@ -38,6 +38,9 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens,
 		# Create a new fleet and center the ship
 		create_fleet(ai_settings, screen, ship, aliens)
 		ship.center_ship
+		
+		# Hide the mouse cursor.
+		pygame.mouse.set_visible(False)
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
 	"""Respond to keypresses."""
@@ -158,6 +161,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
 		sleep(0.5)
 	else:
 		stats.game_active = False
+		pygame.mouse.set_visible(True)
 
 def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
 	"""Check if the fleet is at an edge and then update the positions of all
