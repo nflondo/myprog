@@ -69,3 +69,9 @@ img.center-img {
     display: block;
     margin: 0 auto 0 auto;
 }
+img.float-img {
+    float: left;
+}
+p.clear-wrap{
+    clear: both;
+}

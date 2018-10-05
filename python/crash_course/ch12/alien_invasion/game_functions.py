@@ -31,6 +31,9 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens,
 		stats.reset_stats()
 		stats.game_active = True
 		
+		# Reset the game settings
+		ai_settings.initialize_dynamic_settings()
+		
 		#Empty the list of aliens and bullets
 		aliens.empty()
 		bullets.empty()
