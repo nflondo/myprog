@@ -1,7 +1,7 @@
 #scoreboard.py
 import pygame.font
 
-class Scoreboard();
+class Scoreboard():
 	"""A class to report scoring information."""
 	
 	def __init__(self, ai_settings, screen, stats):
@@ -20,7 +20,13 @@ class Scoreboard();
 		
 	def prep_score(self):
 		"""Turn the score into a rendered image."""
-		score_str = str(self.stats.score)
+#		score_str = str(self.stats.score)
+		# -1 rounds it up to the nearest 10
+		# int is to make sure the result is an integer instead of decimal (python 2.7)
+		rounded_score = int(round(self.stats.score, -1))
+		# string formatting directive tells pythong to insert commas into numbers
+		# when converting a numerical value to a string.
+		score_str = "{:,}".format(rounded_score)
 		self.score_image = self.font.render(score_str, True, self.text_color,
 			self.ai_settings.bg_color)
 			
@@ -28,3 +34,7 @@ class Scoreboard();
 		self.score_rect = self.score_image.get_rect()
 		self.score_rect.right = self.screen_rect.right - 20
 		self.score_rect.top = 20
+		
+	def show_score(self):
+		"""Draw score to the screen."""
+		self.screen.blit(self.score_image, self.score_rect)
