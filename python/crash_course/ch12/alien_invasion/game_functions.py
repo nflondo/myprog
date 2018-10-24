@@ -114,11 +114,18 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
 		for aliens in collisions.values():
 			stats.score += ai_settings.alien_points * len(aliens)
 			sb.prep_score()
+		check_high_score(stats, sb)
 	# Repopulating the fleet of aliens
 	if len(aliens) == 0:
 		# Destroy existing bullets, speed up game, and create new fleet.
+		# If the entire fleet is destroyed, start a new level.
 		bullets.empty()
 		ai_settings.increase_speed()
+		
+		# Increase level.
+		stats.level += 1
+		sb.prep_level()
+		
 		create_fleet(ai_settings, screen, ship, aliens)
 
 def get_number_rows(ai_settings, ship_height, alien_height):
@@ -210,3 +217,9 @@ def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
 			# Treat this the same as if the ship got hit.
 			ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
 			break
+
+def check_high_score(stats, sb):
+	"""Check to see if there's a new high score."""
+	if stats.score > stats.high_score:
+		stats.high_score = stats.score
+		sb.prep_high_score()
