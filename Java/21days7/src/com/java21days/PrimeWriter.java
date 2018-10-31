@@ -1,7 +1,6 @@
 /*
  * Sams TeachYourself Java in 21 days all rights reserved.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Writes the first 400 prime numbers as integers to a file called 400primes.dat
  */
 package com.java21days;
 
@@ -20,5 +19,25 @@ public class PrimeWriter {
             }
             candidate++;
         }
+            // Write output to disk
+        try (FileOutputStream file = new FileOutputStream("400primes.dat");
+                BufferedOutputStream buff = new BufferedOutputStream(file);
+                DataOutputStream data = new DataOutputStream(buff);
+                ){
+                
+                for (int i = 0; i < 400; i++)
+                    data.writeInt(primes[i]);
+                data.close();
+                }catch (IOException e){
+                    System.out.println("Error --" + e.toString());
+                }
+    }
+    public static boolean isPrime(int checkNumber){
+        double root = Math.sqrt(checkNumber);
+        for (int i = 2; i <= root; i++){
+            if (checkNumber % i == 0)
+                return false;
+        }
+        return true;
     }
 }
