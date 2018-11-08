@@ -75,3 +75,9 @@ img.float-img {
 p.clear-wrap{
     clear: both;
 }
+a {
+    color: gray;
+}
+a:hover {
+    color: orange;
+}
