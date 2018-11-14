@@ -2,6 +2,7 @@
  * Sams TeachYourself Java in 21 days all rights reserved.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * Read own source file through a buffered character stream
  */
 package com.java21days;
 
@@ -14,7 +15,17 @@ public class SourceReader {
                 ){
                  
                 boolean eof = false;
-            
-            }
+                while (!eof){
+                    String line = buff.readLine();
+                    if (line == null){
+                        eof = true;
+                    } else {
+                        System.out.println(line);
+                    }
+                }
+                buff.close();            
+        } catch (IOException e) {
+            System.out.println("Error -- " + e.toString());
+        }
     }
 }
