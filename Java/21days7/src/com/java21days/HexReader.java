@@ -16,7 +16,7 @@ public class HexReader {
     
     void readLine(String code){
         try {
-            for (int j = 0; j + 1 < code.length(); j+= 2){
+            for (int j = 0; j + 1 < code.length(); j += 2){
                 String sub = code.substring(j, j + 2);
                 int num = Integer.parseInt(sub, 16);
                 if (num == 255) {
