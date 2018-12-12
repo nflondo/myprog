@@ -1,0 +1,32 @@
+/*
+ * SAMS TEACHYOURSELF JAVA IN 21 DAYS ALL RIGHTS RESERVED.
+ * TO CHANGE THIS TEMPLATE FILE, CHOOSE TOOLS | TEMPLATES
+ * AND OPEN THE TEMPLATE IN THE EDITOR.
+ * READ OWN SOURCE FILE THROUGH A BUFFERED CHARACTER STREAM
+ */
+PACKAGE COM.JAVA21DAYS;
+
+IMPORT JAVA.IO.*;
+
+PUBLIC CLASS SOURCEREADER {
+    PUBLIC STATIC VOID MAIN(STRING[] ARGS){
+        TRY (FILEREADER FILE = NEW 
+        FILEREADER("/HOME/NMUNOZ/MYPROG/JAVA/21DAYS7/SRC/COM/JAVA21DAYS/SOURCEREADER.JAVA");
+                BUFFEREDREADER BUFF = NEW BUFFEREDREADER(FILE)
+                ){
+                 
+                BOOLEAN EOF = FALSE;
+                WHILE (!EOF){
+                    STRING LINE = BUFF.READLINE();
+                    IF (LINE == NULL){
+                        EOF = TRUE;
+                    } ELSE {
+                        SYSTEM.OUT.PRINTLN(LINE);
+                    }
+                }
+                BUFF.CLOSE();            
+        } CATCH (IOEXCEPTION E) {
+            SYSTEM.OUT.PRINTLN("ERROR -- " + E.TOSTRING());
+        }
+    }
+}
