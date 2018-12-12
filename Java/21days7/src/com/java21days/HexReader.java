@@ -24,8 +24,8 @@ public class HexReader {
                 }
                 System.out.print(num + " ");
             }
-        } finally {
-            System.out.println("**");
+        } finally {                 // finaly causes 
+            System.out.println("**"); // this to execute before the return
         }
         return;
     }
