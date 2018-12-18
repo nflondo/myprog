@@ -81,3 +81,6 @@ a {
 a:hover {
     color: orange;
 }
+li {
+    margin: .75em;
+}
