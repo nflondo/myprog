@@ -3,6 +3,7 @@
  */
 package com.java21days;
 
+import java.util.*;
 /**
  *
  * @author nmunoz
@@ -24,7 +25,7 @@ public class ComicBox {
        }
        
        void setPrice(float factor){
-           price = basePrice * factor
+           price = basePrice * factor;
        }
    } // innerComic class
    
@@ -35,7 +36,7 @@ public class ComicBox {
        float price2 = 2.00F;
        quality.put("near mint", price2);
        float price3 = 1.50F;
-       quality.put("Very fine", price3);
+       quality.put("very fine", price3);
        float price4 = 1.00F;
        quality.put("fine", price4);
        float price5 = 0.50F;
@@ -43,12 +44,22 @@ public class ComicBox {
        float price6 = 0.25F;
        quality.put("poor", price6);
        InnerComic[] comix = new InnerComic[3];
-       comix[0] = new InnerComic("Amazing Spider-Man", "1A", "very fine,"
-               + "12_000.00F");
+       comix[0] = new InnerComic("Amazing Spider-Man", "1A", "very fine", 
+               12_000.00F);
        comix[0].setPrice(quality.get(comix[0].condition));
        comix[1] = new InnerComic("Incredible Hulk", "181", "near mint", 680.00F);
-       comix[1].setPrice(quality.get(comix[1].condition
+       comix[1].setPrice(quality.get(comix[1].condition));
        comix[2] = new InnerComic("Cerebus", "1A", "good", 190.00F);
        comix[2].setPrice(quality.get(comix[2].condition));
+       for (InnerComic comix1 : comix){
+           System.out.println("Title: " + comix1.title);
+           System.out.println("Issue: " + comix1.issueNumber);
+           System.out.println("Condition: " + comix1.condition);
+           System.out.println("Price: $" + comix1.price + "\n");
+       }
+   }
+   
+   public static void main(String[] arguments){
+       new ComicBox();
    }
 }
