@@ -8,6 +8,7 @@ C/**/*.o
 *.properties
 *.svg
 *~
+*.xml
 Java/21days/.recommenders
 /Java/21days/PageData/nbproject/private/
 /Java/21days/PageData/build/
