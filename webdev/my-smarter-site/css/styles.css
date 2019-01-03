@@ -84,3 +84,6 @@ a:hover {
 li {
     margin: .75em;
 }
+ul {
+    list-style-type: square;
+}
