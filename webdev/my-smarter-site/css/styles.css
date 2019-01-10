@@ -54,10 +54,11 @@ h4, p.pcenter{
 h2#iorange {
     color: orange;
 }
-div#tdiv{
+div#tdiv p{
     margin-left: 3em;
     margin-right: 3em;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
 }
 img.display-block {
     display: block;
