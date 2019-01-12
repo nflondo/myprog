@@ -1,8 +1,12 @@
 #python_repos.py
 # Make an API call and store the response.
 import requests
+# Based on Schema from Github REST API V3 Documentation at 
+# https://developer.github.com/v3/ All API access is over HTTPS, user-agent
+# is required
 url = 'https://api.github.com/search/repositories?q=language:python&sort=stars'
 headers = {'user-agent':'Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0 nflondo'}
+# Found example online of how to pass auth in requests.get
 r = requests.get(url, headers=headers, auth=('nflondo', 'wllalMD2'))
 # status code=200 is success
 print("Status code:", r.status_code)
