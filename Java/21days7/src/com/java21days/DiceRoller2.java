@@ -10,7 +10,7 @@ import java.beans.*;
 import javax.swing.*;
 /**
  * Presents a graphical user interface that can display dice-roll results and 
- * begin a set of rolls.  This one uses inner class DiceWorker
+ * begin a set of rolls.  This one uses in  ner class DiceWorker
  * @author nmunoz
  */
 public class DiceRoller2 extends JFrame implements ActionListener, 
