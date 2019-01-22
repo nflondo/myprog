@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Uses 4-step technique to open a connection to a website and read a text
+ * document from it. 
  */
 package com.java21days;
 
@@ -32,6 +31,26 @@ public class WebReader extends JFrame {
             HttpURLConnection conn = (HttpURLConnection)
                     page.openConnection();
             conn.connect();
+            // display headers
+            String key;
+            String header;
+            int i = 0;
+            do {
+                key = conn.getHeaderFieldKey(i);
+                header = conn.getHeaderField(i);
+                if (key == null) {
+                    key = "";
+                } else {
+                    key = i + "-" + key + ": ";
+                }
+                if (header != null){
+                    text.append(key);
+                    text.append(header);
+                    text.append("\n");
+                }
+                i++;
+            } while (header != null);
+            text.append("\n");
             InputStreamReader in = new InputStreamReader(
                     (InputStream) conn.getContent());                      
             BufferedReader buff = new BufferedReader(in);
