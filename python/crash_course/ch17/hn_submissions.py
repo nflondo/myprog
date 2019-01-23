@@ -1,3 +1,5 @@
+# Returns the IDs of the current top articles on Hacker News, and then examine
+# each of the top articles.
 import requests
 
 from operator import itemgetter
