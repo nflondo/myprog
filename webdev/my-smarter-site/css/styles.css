@@ -91,10 +91,12 @@ ul {
 
 table {
     border-collapse: collapse;
+    width: 75%
 #   border-spacing: .25em;
 }
 
 th, td {
     border: 1px solid black;
-    padding: 2em;
+    width: 50%;
+#    padding: 2em;
 }
