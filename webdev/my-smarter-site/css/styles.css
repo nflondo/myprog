@@ -103,3 +103,6 @@ th, td {
 table#reducing{
     width: 50%
 }
+tr.even-row {
+    background-color: lightgray;
+}
