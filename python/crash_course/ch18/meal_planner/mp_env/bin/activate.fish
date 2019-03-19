@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/root/myprog/python/crash_course/ch18/meal_planner/mp_env"
+set -gx VIRTUAL_ENV "/home/nmunoz/myprog/python/crash_course/ch18/meal_planner/mp_env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
@@ -52,7 +52,7 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
         set -l old_status $status
 
         # Prompt override?
-        if test -n "(mp_env) "            
+        if test -n "(mp_env) "
             printf "%s%s" "(mp_env) " (set_color normal)
         else
             # ...Otherwise, prepend env
