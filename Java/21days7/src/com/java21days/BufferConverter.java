@@ -25,7 +25,20 @@ public class BufferConverter {
                 System.out.print(source.get() + " ");
             }
             // convert byte data into character data
+            source.position(0);
+            Charset ascii = Charset.forName("US-ASCII");
+            CharsetDecoder toAscii = ascii.newDecoder();
+            CharBuffer destination = toAscii.decode(source);
+            destination.position(0);
+            System.out.println("\n\nNew Character data:");
+            for (int i = 0; destination.remaining() > 0; i++) {
+                System.out.print(destination.get());
+            }
+            System.out.println();
+        } catch (FileNotFoundException fne) {
+            System.out.println(fne.getMessage());
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
         }
-    }
-    
-}
+    }    
+} 
