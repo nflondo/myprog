@@ -9,7 +9,9 @@ app_name = 'pizzas'
 urlpatterns = [ 
 
     # Home page. 
-
-    path('', views.index, name='index'), 
-
+    path('', views.index, name='index'),     
+    # Show all pizzas
+	path('pizzas/', views.pizzas, name='pizzas'), 
+	# Details page for a single pizza
+	path('pizzas/<int:pizza_id>', views.pizza, name='pizza'),   
 ] 
