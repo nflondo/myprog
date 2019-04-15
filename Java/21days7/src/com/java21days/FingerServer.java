@@ -61,4 +61,31 @@ public class FingerServer {
         }
     } // FingerServer const
     
+    private void handleRequest(Socket connection) throws IOException{
+        
+        // Set up input and output
+        InputStreamReader isr = new InputStreamReader(connection.getInputStream());
+        BufferedReader is = new BufferedReader(isr);
+        PrintWriter pw = new PrintWriter(
+                new BufferedOutputStream(connection.getOutputStream()),false);
+        
+        // Output server greeting
+        pw.println("Nio Finger Server");
+        pw.flush();
+        
+        // Handle user input
+        String outLine = null;
+        String inLine = is.readLine();
+        
+        if (inLine.length() > 0) {
+            outLine = inLine;
+        }
+        readPlan(outLine, pw);
+        
+        // Clean up
+        pw.flush();
+        pw.close();
+        is.close();
+    }
+    
 } // FingerServer class
