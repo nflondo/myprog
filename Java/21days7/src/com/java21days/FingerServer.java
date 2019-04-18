@@ -88,4 +88,31 @@ public class FingerServer {
         is.close();
     }
     
+    private void readPlan(String userName, PrintWriter pw){
+        try {
+            FileReader file = new FileReader(userName + ".plan");
+            BufferedReader buff = new BufferedReader(file);
+            boolean eof = false;
+            
+            pw.println("\nUser name: " + userName + "\n");
+            
+            while (!eof){
+                String line = buff.readLine();
+                
+                if (line == null){
+                    eof = true;
+                } else {
+                    pw.println(line);
+                }
+            }
+            
+            buff.close();
+        } catch (IOException e){
+            pw.println("User " + userName + " not found.");
+        }
+    }
+    
+    public static void main(String[] arguments){
+        FingerServer nio = new FingerServer();
+    }
 } // FingerServer class
