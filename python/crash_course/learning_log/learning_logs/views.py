@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+#from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from .models import Topic
-from .forms import Topicform
+from .forms import TopicForm
 
 # Create your views here.
 def index(request):
@@ -27,11 +28,11 @@ def new_topic(request):
 	"""Add a new topic."""
 	if request.method != 'POST':
 		# No data submitted; create a blank form.
-		form = Topicform()
+		form = TopicForm()
 	else:
 		# POST data submitted; process data.
 		form = TopicForm(data=request.POST)
-		if form.is_valid()
+		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(reverse('leaning_logs:topics'))
 			
