@@ -34,7 +34,7 @@ def new_topic(request):
 		form = TopicForm(data=request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect(reverse('leaning_logs:topics'))
+			return HttpResponseRedirect(reverse('learning_logs:topics'))
 			
 	context = {'form':form}
 	return render(request, 'learning_logs/new_topic.html', context)
