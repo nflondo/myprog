@@ -10,6 +10,6 @@ urlpatterns = [
 	path('', views.index, name='index'),
 	
 	# Show all posts.
-	path('', views.posts, name='posts'),
+	path('posts/', views.posts, name='posts'),
 ]	
 	
