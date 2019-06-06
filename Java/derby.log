@@ -1,7 +1,7 @@
-Tue Jun 04 05:28:04 MDT 2019 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Thu Jun 06 05:39:26 MDT 2019 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue Jun 04 05:28:10 MDT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016b-223f-0771-000063787e40 
+Thu Jun 06 05:39:31 MDT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016b-2c96-2878-000063787e40 
 on database directory /home/nmunoz/myprog/Java/sample with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@55054057 
 Loaded from file:/home/nmunoz/db-derby-10.14.2.0-bin/lib/derby.jar
 java.vendor=N/A
@@ -12,5 +12,3 @@ os.arch=amd64
 os.version=4.19.10-300.fc29.x86_64
 derby.system.home=/home/nmunoz/myprog/Java
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Jun 04 05:58:04 MDT 2019: Shutting down Derby engine
