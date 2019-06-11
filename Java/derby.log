@@ -12,3 +12,5 @@ os.arch=amd64
 os.version=4.19.10-300.fc29.x86_64
 derby.system.home=/home/nmunoz/myprog/Java
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Jun 06 05:54:21 MDT 2019: Shutting down Derby engine
