@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+const (
+	greet = "Greetings %d\n"
+	number = 1
+)
+
 func main() {
 	var message string
 	var pi float64 = 3.14
@@ -18,4 +23,5 @@ func main() {
 	fmt.Printf(message3, answer)
 	fmt.Printf("Value: %.4f\n", pi)
 	fmt.Printf("Boolean Value: %t\n", isTrue)
+	fmt.Printf(greet, number)
 }
