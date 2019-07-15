@@ -18,5 +18,5 @@ func greeting() [] string {
 
 func main() {
 	g := greeting()
-	fmt.Prinf("%s (%s)\n", g[0], g[1])
+	fmt.Printf("%s (%s)\n", g[0], g[1])
 }
