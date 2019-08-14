@@ -13,7 +13,7 @@
 #define STACKSIZE (1024 * 1024)
 static char stack[STACKSIZE];
 
-void print_err(char const * conts reason)
+void print_err(char const * const reason)
 {
 	fprintf(stderr, "Error %s: %s\n", reason, strerror(errno));		
 }
@@ -26,7 +26,7 @@ int exec(void * args)
 		return 1;
 	}
 	// Set a new hostname
-	chat const * const hostname = "new-hostname";
+	char const * const hostname = "new-hostname";
 	if (sethostname(hostname, strlen(hostname)) != 0){
 		print_err("setting hostname");
 		return 1;
