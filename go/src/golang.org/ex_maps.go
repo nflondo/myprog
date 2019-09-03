@@ -9,17 +9,26 @@ import (
 	"fmt"
 	)
 	
-func WordCount(s string) map[string]string {
+//func WordCount(s string) map[string]string {
+//	swords := strings.Fields(s)
+//	wordMap := make(map[string]string)
+//	for i := 0 ; i < len(swords); i += 2 {
+//		wordMap[swords[i]] = swords[i +1]
+//	}
+//	fmt.Println(wordMap)	
+//	return wordMap
+//}
+
+func WordCount(s string) map[string]int {
 	swords := strings.Fields(s)
-	wordMap := make(map[string]string)
-	for i := 0 ; i < len(swords); i += 2 {
-		wordMap[swords[i]] = swords[i +1]
-	}
-	fmt.Println(wordMap)	
+	wordMap := make(map[string]int)
+	for _, v := range swords { 
+			wordMap[v]++
+	}	
 	return wordMap
 }
 
 func main() {
-	//wc.Test(WordCount)
-	WordCount("this is a palabra")
+//	wc.Test(WordCount)
+	fmt.Println(WordCount("this is a palabra this is"))
 }
