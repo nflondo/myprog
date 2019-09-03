@@ -20,8 +20,11 @@ import (
 //}
 
 func WordCount(s string) map[string]int {
+	// this returns a slice
 	swords := strings.Fields(s)
+	// create the map
 	wordMap := make(map[string]int)
+	// iterate over the slice, and for each element add to value in map
 	for _, v := range swords { 
 			wordMap[v]++
 	}	
