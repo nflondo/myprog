@@ -6,6 +6,7 @@ type Vertex struct {
 	X, Y float64
 }
 
+// this is a function with a receiver argument
 func (v *Vertex) Scale(f float64) {
 	v.X = v.X * f
 	v.Y = v.Y * f
