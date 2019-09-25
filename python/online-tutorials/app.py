@@ -5,8 +5,9 @@ import signal
 import re
 import string
 import commands
+
 program = 'python'
-arguments = ['mod.py']
+arguments = ['mod2.sh']
 studentlist = ['one','two','three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen']
 #print(os.execvp(program, (program,) + tuple(arguments)))
 print("Executed: "+program + " " + " ".join(arguments))
