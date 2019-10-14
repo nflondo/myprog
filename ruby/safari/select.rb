@@ -25,5 +25,5 @@ p Hash[[1, 2.1, 3.33, 0.9].map { |x| [x,x.to_i] }]
 # convert array of strings into a Hash
 p Hash[%w(A dynamic open source programming language).map { |x| [x,x.length] }]
 
-# Has values and convert them url safe
+# Hash values and convert them url safe
 {:a => "foo", :b => "bar"}.map{|a, b| "#{a}=#{b}"}.join('&') 
