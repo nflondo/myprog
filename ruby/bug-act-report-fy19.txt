@@ -1,0 +1,63 @@
+1150234 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	FIXE 	sck 8.4 b4-2 with sles12sp5beta4 Verify Setup NIC does not work with management port 	15:08:36
+1153952 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	NIC IN test Fails on KVM Virtualization FULL Project. 	Thu 17:37
+1152051 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	REOP 	--- 	sck8.4rc1-4 - error running configure_sut when installing on VMs 	Wed 14:22
+1133179 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	SOC test kit needs to use latest cert_tests.lib 	Tue 14:58
+1138323 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	WONT 	Rally Test Logs Showed One Task Crashed, but Manually Checking Shows All Tasks Crashed 	Tue 14:57
+1153972 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	WORK 	sck 8.4 rc2-7 Cancel All does not cancel the Windows tests 	2019-10-25
+1153973 	Certification Test Kits 	System Testkit - Software - Linux 	daryl.stokes@suse.com 	IN_P 	--- 	sck 8.4 rc2-7 Copy Kit to VMs fails when system is setup with PCI Pass-through 	2019-10-25
+1152947 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	sck 8.3 rc2-2 mv: cannot stat '/tmp/sck_install-20191003.093711.log' : No such file or directory 	2019-10-14
+1150960 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	sck 8.4 rc1-2 Install Kit on SUT fails with Error encountered while running configure_sut 	2019-10-10
+1151746 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	new Virtualization Reduced - Verify SR-IOV or PCI Pass-through reports error on non-sr-iov-passthrough VMs 	2019-10-02
+1149260 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	CONF 	--- 	SCK 8.4 TC Backup not backing up test data 	2019-09-30
+1138994 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.3 gm on a SUT with Optane configured as AppDirect the configure_sut stops, wanting a partition 	2019-09-27
+1112498 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.2 rc2-2 install_kit fails to complete on xen sles 15 guest w/sles12sp4 host 	2019-09-27
+1092032 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	configure sut pop-up terminal on sles 12 sp3 guest occurs on VM instead of TC 	2019-09-27
+1078926 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.1 beta4-4 Install SLES VMs installs SLES 11 SP4 guests with the rtl8139 network adapter instead of virtio 	2019-09-27
+1115299 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SLES 12 SP4 Xen fully virtualized guests read in to SBS as PV 	2019-09-27
+1151693 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FEAT 	sck8.4rc1-2 Virtualization project SUT Component Check test fails with cannot access /mnt/ipaddress (Updated 593) 	2019-09-26
+1150967 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	fwts rpm not getting installed on TC - preventing Test Kit installation 	2019-09-23
+1151088 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	Test Kit install fails with TC=8.4_RC1 and SUT=SLE15_SP1 	2019-09-23
+1142410 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	Time Sync Test Fails Immediately and no Time Sync Log is Created. 	2019-07-29
+1139643 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	SES test kit needs to use latest cert_tests.lib 	2019-07-22
+1132554 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	DUPL 	Verify librbd test case : assumes all available VMs should use rbd 	2019-06-10
+1107715 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	Verify librbd fails because TC and Admin are on same host as client VMs 	2019-06-10
+1128075 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	When running Fio test dmesg shows rbd: image sesck_0: image uses unsupported features: 0x3c 	2019-06-10
+1108352 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	NEW 	--- 	Edit Product/Report is pre-populating exceptions in blank fields 	2019-06-10
+1107864 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	NEW 	--- 	Certification Submission Review 4.16 tool fails to find script file checksums. 	2019-06-10
+1126365 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.3 beta3-4 Install 4 SLES VMs works but reports FAIL on TC 	2019-06-03
+853757 	Certification Test Kits 	System Testkit - Software - Linux 	acarter@suse.com 	VERI 	FIXE 	SCK 7.2 - netcat stops running on SUT during "Sleep Test" and causes test to fail 	2019-06-03
+1081858 	Certification Test Kits 	System Testkit - Software - Linux 	acarter@suse.com 	VERI 	FIXE 	optional method of installing sck is the only available - manual option has been removed 	2019-06-03
+1134509 	Certification Test Kits 	Storage Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	socck.sh Uninstall Script Doesn't Remove All the Necessary Files and Directories 	2019-05-23
+1124537 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.3 beta3-2 the xpclient.bat file to start tclink on windows is missing file for jre8 	2019-03-05
+1113239 	Certification Test Kits 	System Testkit - Software - Linux 	acarter@suse.com 	RESO 	FIXE 	SLES 15 - [HWCert] [Certification Test Kit] Watchdog Timer Test fails because no watchdog is installed or configured 	2019-02-28
+1126323 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.3 beta3-4 virtualization project checksums have not been updated 	2019-02-21
+1111211 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	SLES 15 - [HWCert] HW Certification Test Kit tries to install unavailable 32bit pattern 	2019-02-07
+1115887 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	FIXE 	SLES 15 - [HWCert] [Certification Test Kit] Video Test fails but should be not applicable instead 	2019-02-05
+1122817 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	FIXE 	Automatic VM install fails on SLES 15 SP1 KVM/XEN 	2019-01-31
+1115790 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	FIXE 	SLES15 - [HWCert] [Certification Test Kit] CPU hot plug test is not able to count online cpus properly for IBM System z 	2019-01-30
+1115789 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	SLES 15 - [HWCert] [Certification Test Kit] Memory hot plug test falsely not supported because it relies on acpi in sys-fs 	2019-01-30
+1090244 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	INVA 	sck 8.1: Incorrect test icon in some tests 	2018-12-27
+1116932 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	FIXE 	PXE boot fails before menu appears - copy of vesamenu.c32 file doesn't happen. 	2018-12-04
+1118010 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	cpuHotPlugTest.sh detecting more CPUs than are present on x86_64 Server with SLE15 	2018-12-04
+1115872 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	RESO 	FIXE 	CPU Hot Plug tests fails on IBM's Power Architecture 	2018-11-16
+1115909 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	Test kit 8.2 GMC1: During the test kit install the yast window no longer opens to configure a second hard disk drive. 	2018-11-15
+1075846 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	sck 8.1 beta4-3 fails option 4 Remove the Current System Test Kit and then Quit - on TC 	2018-11-14
+1111877 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	sck 8.2 rc2-1 - ls: cannot access '/etc/NetworkManager/system-connections/*' message 	2018-11-14
+1112949 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	VERI 	FIXE 	SLES 15 - [HWCert] [Certification Test Kit] CPU hot plug test fails because numactl package is missing 	2018-11-13
+937446 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SCK 7.4 GM - Hung hibernate test is not marked as failed by TC 	2018-11-08
+934013 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	[Enhancement] Add VM NIC device removal capabilities to sriov_setup script 	2018-11-08
+1087160 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	Test kit 8.1: The Optical Verify/Write Test fails very quickly. 	2018-11-07
+949596 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SCK 7.5 RC1 - TestKit install on SUT unable to restart ntpd due to Apparmor 	2018-11-07
+949283 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SCK 7.5 RC1 - Autoyast install of SLES 12 SP1 VM fails with "No mountpoint for / " 	2018-11-07
+954541 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SCK 7.5 RC3 - If pop ups are not closed in SUT, test runs indefinitely 	2018-11-07
+956323 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SCK 7.5 RC3 - Testkit fails to configure IP in XEN HVM guests 	2018-11-07
+945507 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	SCK 7.5 Beta3 - kdump test fails due to no memory reserved for it (crashkernel=0M-:0M) 	2018-11-07
+936138 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	Incorrect pxe and configinstserver menus when isos are manually deleted from TC by user 	2018-11-07
+963309 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	Time Sync Test fails because TC IPs are in a different order in TestConsole 	2018-11-07
+966951 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	VM drivers listed in new combined KVM virtualization project 	2018-11-07
+966361 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	Verify PCI Pass Through test in new combined Virtualization project fails 	2018-11-07
+970388 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	Testkit does not test kdump in SLES 12 SP1 with secure boot 	2018-11-07
+989045 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	sck 7.6 - SLES 12 SP2 Autoyast files missing in Beta4 Testkit 	2018-11-07
+988762 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	sck 7.6 - Unattended autoyast stops when trying to update installer 	2018-11-07
+1045385 	Certification Test Kits 	System Testkit - Software - Linux 	csalmond@suse.com 	VERI 	FIXE 	Prompted to add ISOs when no DHCP/PXE is installed 	2018-11-07
+1114559 	Certification Test Kits 	System Testkit - Software - Linux 	nmunoz@suse.com 	RESO 	FIXE 	Optical tests fail when they should return Not Applicable. 	2018-11-05 

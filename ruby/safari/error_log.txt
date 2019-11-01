@@ -1,0 +1,2 @@
+Error: undefined method `+' for nil:NilClass
+Error: undefined method `*' for nil:NilClass
