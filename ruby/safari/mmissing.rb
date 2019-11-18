@@ -14,6 +14,10 @@ class Author
 			super
 		end
 	end	
+	
+	def respond_to_missing?(method_name, includ_private = false)
+		method_name.to_s.start_with?('author_') || super
+	end
 end
 
 author = Author.new
