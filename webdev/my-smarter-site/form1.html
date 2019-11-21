@@ -6,7 +6,7 @@
     <!-- This is a test form -->
   <body>
     <form>
-    <fieldset>
+    <fieldset><!-- groups the elements -->
       <legend>Fill out this first</legend>
       Name:
       <input type="text" name="myname" size="30" maxlength="50">
@@ -15,14 +15,15 @@
     </fieldset>    
     <br>
     <fieldset>
-      <label><input type="radio" name="rgroup1" value="Yes">Yes
-      <input type="radio" name="rgroup1" value="No">No</label>
+	  <!-- label: for screen readers and makes text clickable too -->
+      <label><input type="radio" name="rgroup1" value="Yes">Yes</label>
+      <label><input type="radio" name="rgroup1" value="No">No</label>
       <p><input type="submit" value="Send"></p>
       <br>
       <input type="checkbox" name="c1" id="cblue" value="Blue"><label for="cblue">Blue</label>
       <input type="checkbox" name="c1" id="cred" value="Red"><label for="cred">Red</label>
         <br>
-      <select name="select-state">
+      <select name="select-state"><!-- drop down menu -->
         <option value="UT">Utah</option>
         <option value="NV">Nevada</option>
         <option value="CA">California</option>
