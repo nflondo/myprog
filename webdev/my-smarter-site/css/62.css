@@ -1,0 +1,5 @@
+/** Div 20% wide and centered */
+div#my20 {
+	width: 20%;
+	margin: 0 auto 0 auto;
+}

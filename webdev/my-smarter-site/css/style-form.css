@@ -1,13 +1,27 @@
 /* This is a test css sheet for the form */
+/*Font styling for the form affects only the labels and legends.*/
 form {
     width: 50%;
     margin: 0 auto 0 auto;
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 1.5em;
+    font-size: 1.5em; 
 }
 
+/* This will give a larger font size to user inputs*/
 input[type="text"], textarea{
     margin: auto auto auto auto;
     padding: .25em;
     font-size: 1em;
 }
+
+/* Format submit button*/
+input[type="submit"] {
+	font-size: 1.25em;
+}
+
+/*Bold the legends (Fill out this first)*/
+legend {
+	font-weight: 700;
+}
+
+
