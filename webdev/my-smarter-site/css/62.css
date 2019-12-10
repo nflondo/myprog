@@ -1,5 +1,31 @@
 /** Div 20% wide and centered */
+body {
+	width: 100%; /*This is the default in browsers, take all space*/
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 1em; /*This is the browser's default font size*/
+	background-color: white;
+	color: black;
+}
 div#my20 {
 	width: 20%;
+	margin: 0 auto 0 auto;
+}
+div#myheader {
+	font-size: 2em;
+	color: lawngreen;
+	margin: 0 auto 0 auto;
+	width: 90%;
+}
+div#mynavbar {
+	font-size: 1em;
+	color: blue;
+}
+div#main {
+	width: 90%; /* this should create whitespace in left and right */
+	margin: 1.5em auto 1% auto; /* auto will split the 10% evenly left and right */
+}
+div#content { /* same as parent div.  values are relative to outer div */
+	color: red;
+	width: 90%;	
 	margin: 0 auto 0 auto;
 }

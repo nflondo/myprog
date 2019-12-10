@@ -24,4 +24,12 @@ legend {
 	font-weight: 700;
 }
 
+/* main div  An id can be used only once.  A class can be used multiple times. */
+div#main{
+    width: 90%;
+}
+div#content {
+    color: red
+}
+
 
