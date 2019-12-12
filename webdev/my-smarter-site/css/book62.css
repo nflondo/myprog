@@ -118,3 +118,37 @@ div#narrow {
 width: 20%;
 margin: 0 auto 0 auto;
 } 
+div#content {
+  width: 68%;
+  float: left;
+}
+div#sidebar {
+  width: 29%;
+  float: right;
+}
+div#banner {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ccff33;
+}
+div#banner img, div#spacer img {
+  float: left;
+  margin: 1em;
+}
+div#banner h2, div#spacer h2 {
+}
+div#spacer {
+  width: 100%;
+  visibility: hidden;
+}
+p.clearFloat {
+  clear: both;
+}
+div#navbar {
+  clear: both;
+}
+div#navbar ul {
+  list-style-type: none;
+}

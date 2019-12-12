@@ -10,27 +10,37 @@ div#my20 {
 	width: 20%;
 	margin: 0 auto 0 auto;
 }
+div#invisible-header {
+	width: 100%;
+	visibility: hidden;
+}
 div#myheader { 
-	font-size: 2em;
-	color: lawngreen;
-	margin-left: 2%;
-	padding: 0;
-	margin: 0 auto 0 auto;
+	/*font-size: 2em; */
+	/*color: lawngreen; */
+	/* margin-left: 2%; */
+	/* padding: 0; *?
+	/* margin: 0 auto 0 auto; */
 	/* width: 90%; /*old style*/
 	width: 100%;
-	position: absolute; /*this will remove space in left and right margins*/
+	/*position: absolute; /*this will remove space in left and right margins*/
+	position: fixed; /*keep header immobilized as everything else scrolls*/
 	left: 0;  /*this will remove space in left and right margins*/
 	top: 0; /*will remove space from top*/
-	background-color: #990000;
+	background-color: #990000;	
+	
 }
-div#myheader h2{ /*This will appy to h2 inside/whose id is "myheader"*/
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	font-weight: 900;
-	color: white;
-	padding: 0;
-	margin-left: 2%;
+div#myheader h2, div#invisible-header h2{ /*This will appy to h2 inside/whose id is "myheader"*/
+	/* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+	/* font-weight: 900; */
+	/* color: white; */
+	/* padding: 0; */
+	/* margin-left: 2%;	*/
 }
-div#mynavbar {
+div#myheader img, div#invisible-header img {
+	float:left;
+	margin: .9em .6em 0 .75em;
+}
+div#mynavbar{
 	font-size: 1em;
 	color: blue;
 }
@@ -41,13 +51,23 @@ div#main {
 div#content { /* same as parent div.  values are relative to outer div */
 	color: red;
 	width: 68%;	
-	margin: 0 auto 0 auto;
+	/* margin: 0 auto 0 auto; */
 	float: left; /*place div in left sife*/
 }
 div#sidebar {
 	width: 29%; /*Leaves gutter of 3% between content and sidebar divs*/
-	float: right;
+	float: right;	
+}
+p.clearFloat{
+	clear: both;
 }
 .no-wrap {
 	clear: both;
+}
+div#leftbar{	
+	clear: both; /*Prevnts wrap from the div above*/
+}
+div#leftbar ul{
+	list-style-type: none;
+	clear: both; /*Prevnts wrap from the div above*/
 }
