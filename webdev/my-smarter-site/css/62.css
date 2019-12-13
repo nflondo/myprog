@@ -67,7 +67,11 @@ p.clearFloat{
 div#leftbar{	
 	clear: both; /*Prevnts wrap from the div above*/
 }
-div#leftbar ul{
+div#leftbar ul, li, a{
 	list-style-type: none;
-	clear: both; /*Prevnts wrap from the div above*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	font-weight: 900;
+	text-decoration: none; /*Removes the underline*/		
+	/*clear: both; /*Prevnts wrap from the div above*/
 }
