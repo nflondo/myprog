@@ -1,123 +1,123 @@
 p {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 1.2em;
-  }
-p.important { /* this is a class for paragraphs*/
-font-size: 1.5em;
-font-weight: 900;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.2em;
 }
-h1 { /*this applies to all h1 headers*/
-font-family: "Trebuchet MS", Helvetica, sans-serif;
-font-size: 2em;
+p.important {
+  font-size: 1.5em;
+  font-weight: 900;
 }
-.typewriter { /* class that can be applied to any html element*/
-font-family: "Courier New", Courier, monospace;
+h1 {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 2em;
 }
+.typewriter {
+  font-family: "Courier New", Courier, monospace;
+ }
 .emphasized {
-font-style: italic;
+  font-style: italic;
 }
 .standout {
-color: red;
+  color: red;
 }
 p.spacey {
-letter-spacing: 1em;
-word-spacing: 1em;
-line-height: 2.4em;
+  letter-spacing: 1em;
+  word-spacing: 1em;
+  line-height: 2.4em;
 }
 h3 {
-text-align: center;
+  text-align: center;
 }
 p.pretty {
-text-align: justify;
+  text-align: justify;
 }
 p.tabbed {
-text-indent: 1.5em;
+  text-indent: 1.5em;
 }
 blockquote {
-color: grey;
+  color: grey;
 }
 p.offset {
-margin: 2em;
+  margin: 2em;
 }
 .enclosed {
-border: 4px solid pink;
-padding: .5em;
+  border: 4px solid pink;
+  padding: .5em;
 }
 h4, p.mid {
-text-align: center;
+  text-align: center;
 }
-h2#warm { /*This is a header id*/
-color: orange;
+h2#warm {
+  color: orange;
 }
-div#midpage { /*this is a div id*/
-margin: 0 3em 0 3em;
-font-family: Arial, Helvetica, sans-serif;
+div#midpage {
+  margin: 0 3em 0 3em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 img.has-own-line {
-display: block;
+  display: block;
 }
 img.inset {
-margin-left: 5em;
+  margin-left: 5em;
 }
 img.mid {
-display: block;
-margin: 0 auto 0 auto;
+  display: block;
+  margin: 0 auto 0 auto;
 }
 img.fl {
-float: left;
-margin-right: .5em;
+  float: left;
+  margin-right: .5em;
 }
 p.clr {
-clear: both;
+  clear: both;
 }
 a {
-color: grey;
+  color: grey;
 }
 a:hover {
-color: orange;
+  color: orange;
 }
 li {
-margin: .75em;
+  margin: .75em;
 }
 ul {
-list-style-type: square;
+  list-style-type: square;
 }
 div#midpage p {
-font-size: 2em;
+  font-size: 2em;
 }
 th, td {
-border: 1px solid black;
+  border: 1px solid black;
 }
 table {
-border-collapse: collapse;
+  border-collapse: collapse;
 }
 th, td {
-padding: .25em;
+  padding: .25em;
 }
 table#t4 {
-width: 25%;
+  width: 25%;
 }
 table#t4 td {
-width: 50%
+  width: 50%
 }
 table#t4 td {
-text-align: center;
+  text-align: center;
 }
 tr.even {
-background-color: lavender;
+  background-color: lavender;
 }
 input[type="text"], textarea {
-font-size: 2em;
-padding: .25em;
+  font-size: 2em;
+  padding: .25em;
 }
 /*
 This is a comment that the browser will ignore.
 It's for humans only.
 */ 
 div#narrow {
-width: 20%;
-margin: 0 auto 0 auto;
-} 
+  width: 20%;
+  margin: 0 auto 0 auto;
+}
 div#content {
   width: 68%;
   float: left;
@@ -147,8 +147,21 @@ p.clearFloat {
   clear: both;
 }
 div#navbar {
-  clear: both;
+    clear: both;
+    background-color: blue;
+    display: inline-block;
 }
 div#navbar ul {
   list-style-type: none;
+  padding-left: 0;
 }
+div#navbar ul li a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+}
+div#navbar ul li {
+  padding: 0 1em .3em 1em;
+} 

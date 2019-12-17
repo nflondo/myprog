@@ -10,10 +10,7 @@ div#my20 {
 	width: 20%;
 	margin: 0 auto 0 auto;
 }
-div#invisible-header {
-	width: 100%;
-	visibility: hidden;
-}
+
 div#myheader { 
 	/*font-size: 2em; */
 	/*color: lawngreen; */
@@ -36,6 +33,13 @@ div#myheader h2, div#invisible-header h2{ /*This will appy to h2 inside/whose id
 	/* padding: 0; */
 	/* margin-left: 2%;	*/
 }
+div#invisible-header {
+	width: 100%;
+	visibility: hidden;
+}
+p.clearFloat{
+	clear: both;
+}
 div#myheader img, div#invisible-header img {
 	float:left;
 	margin: .9em .6em 0 .75em;
@@ -54,24 +58,29 @@ div#content { /* same as parent div.  values are relative to outer div */
 	/* margin: 0 auto 0 auto; */
 	float: left; /*place div in left sife*/
 }
+
 div#sidebar {
 	width: 29%; /*Leaves gutter of 3% between content and sidebar divs*/
 	float: right;	
 }
-p.clearFloat{
-	clear: both;
-}
-.no-wrap {
-	clear: both;
-}
 div#leftbar{	
 	clear: both; /*Prevnts wrap from the div above*/
+	background-color: blue;
+	display: inline-block;  /*Makes it just wide enough to accommodate the list items*/
+	float: left;
 }
-div#leftbar ul, li, a{
+div#leftbar ul {
 	list-style-type: none;
+	padding-left: 0;	
+}
+div#leftbar ul li {
+	padding: 0 1em .3em 1em; /* this centered the links and added space below each*/
+}
+div#leftbar ul, li, a{	
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.1em;
 	font-weight: 900;
 	text-decoration: none; /*Removes the underline*/		
 	/*clear: both; /*Prevnts wrap from the div above*/
+	color: white;	
 }
