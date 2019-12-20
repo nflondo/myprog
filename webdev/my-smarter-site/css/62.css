@@ -65,16 +65,20 @@ div#sidebar {
 }
 div#leftbar{	
 	clear: both; /*Prevnts wrap from the div above*/
-	background-color: blue;
+	/* background-color: blue;  Will do each li individually */
 	display: inline-block;  /*Makes it just wide enough to accommodate the list items*/
-	float: left;
+	/* clear: both; */
+	float: left; 
 }
 div#leftbar ul {
 	list-style-type: none;
 	padding-left: 0;	
 }
 div#leftbar ul li {
-	padding: 0 1em .3em 1em; /* this centered the links and added space below each*/
+	/* padding: 0 1em .3em 1em; /* this centered the links and added space below each.
+	Will do padding inside the <a element*/
+	background-color: blue;
+	margin: 0 0 .10em 0;
 }
 div#leftbar ul, li, a{	
 	font-family: Arial, Helvetica, sans-serif;
@@ -83,4 +87,32 @@ div#leftbar ul, li, a{
 	text-decoration: none; /*Removes the underline*/		
 	/*clear: both; /*Prevnts wrap from the div above*/
 	color: white;	
+	display: block; /* enlarges each li element and pad it out */
+	padding: .35em;
+}
+div#horizontalnav {
+	clear: both; /*Prevents wrap from the div above.  Meaning it puts this in a new line.*/
+	width: 100%;		
+}
+div#horizontalnav ul {
+	list-style-type: none;
+	padding-left: 0; /*This removes an apparent margin in the left side where the bullets are*/
+}
+div#horizontalnav ul li a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	font-weight: 900;
+	text-decoration: none; /*Removes the underline*/		
+	/*clear: both; /*Prevnts wrap from the div above*/
+	color: white;	
+	display: block; /* enlarges each li element and pad it out */
+	padding: .10em;
+}
+div#horizontalnav ul li {
+	background-color: blue;
+	text-align: center;
+	display: inline; /*Tell browser not to arrange list items vertically*/
+	width: 19%; /*each block will be 19% of the width of the div*/
+	float: left;
+	margin-right: .5em;
 }
