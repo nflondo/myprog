@@ -6,9 +6,11 @@ body {
 	background-color: white;
 	color: black;
 }
-div#my20 {
+div#my20 { /*the image is 1-pixel-wide and the browser repeats it for faster load*/
 	width: 20%;
 	margin: 0 auto 0 auto;
+	background-image: url("http://www.asmarterwaytolearn.com/gray-gradient-slice.png");
+	background-repeat: repeat-x;
 }
 
 div#myheader { 
@@ -109,10 +111,18 @@ div#horizontalnav ul li a {
 	padding: .10em;
 }
 div#horizontalnav ul li {
-	background-color: blue;
+	/* background-color: blue; Removing for light blue when hovering */
 	text-align: center;
 	display: inline; /*Tell browser not to arrange list items vertically*/
 	width: 19%; /*each block will be 19% of the width of the div*/
 	float: left;
 	margin-right: .5em;
+}
+li.changeBackground {
+	background-color: blue;
+}li.changeBackground:hover {
+	background-color:lightblue;
+}
+li.changeBackground:active {
+	background-color:darkblue;
 }
