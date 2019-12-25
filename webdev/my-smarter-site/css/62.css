@@ -5,6 +5,10 @@ body {
 	font-size: 1em; /*This is the browser's default font size*/
 	background-color: white;
 	color: black;
+	/*fixed background at the top right hand corner*/
+	background-image:url("http://www.asmarterwaytolearn.com/monarch.jpg") ;
+	background-repeat: no-repeat;
+	background-position: right top;
 }
 div#my20 { /*the image is 1-pixel-wide and the browser repeats it for faster load*/
 	width: 20%;
@@ -125,4 +129,8 @@ li.changeBackground {
 }
 li.changeBackground:active {
 	background-color:darkblue;
+}
+iframe{
+	float: left;
+	margin: 0 2em 0 0 ;
 }
