@@ -106,3 +106,10 @@ table#reducing{
 tr.even-row {
     background-color: lightgray;
 }
+div.lessthan{
+    width: 90%;
+}
+p.lessthan{
+    width: 90%;
+    text-align: center; /* Will center all text */
+}
