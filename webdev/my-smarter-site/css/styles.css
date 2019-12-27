@@ -108,8 +108,17 @@ tr.even-row {
 }
 div.lessthan{
     width: 90%;
+    position: relative;
+    left: 25%;
+    bottom: 20%;
 }
 p.lessthan{
     width: 90%;
     text-align: center; /* Will center all text */
+}
+div#z_index {
+    position: fixed;
+    right: 80%;
+    bottom: 5px;
+    z-index: 1;
 }

@@ -135,6 +135,9 @@ iframe{
 	margin: 0 2em 0 0 ;
 }
 div#myaudio{	
-	clear: both; /*Prevnts wrap from the div above*/
-	float: left;
+	/*clear: both; /*Prevnts wrap from the div above*/
+	/*float: left;*/
+	position: relative;
+	right: 5%;
+	bottom: 25%;
 }
