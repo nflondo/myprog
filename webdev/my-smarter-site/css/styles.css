@@ -122,3 +122,13 @@ div#z_index {
     bottom: 5px;
     z-index: 1;
 }
+@media only screen and (min-device-width: 800px) {
+    p.screen_class {
+        font-family: "Comic Sans MS", cursive, "sans serif";
+    }    
+}
+p.max_width {
+    max-width: 100px;
+    max-height: 100px;
+    overflow: scroll;
+}
