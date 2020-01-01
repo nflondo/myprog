@@ -7,10 +7,10 @@
     <!--Title appears in the browser toolbar, bookmar list, and in search 
     engine results.  Give each page a unique title that describes its particular
     contents-->
-        <title>nmc Payson, UT Nice, quiet, town.</title>
+        <title>Payson, UT Nice, quiet, town.</title>
         <!--Search engines display meta name description in search results, so 
         use only about 160 characaters-->
-        <meta name="description" content="nmc Big adventures in a small town">
+        <meta name="description" content="Big adventures in a small town">
         <link rel="stylesheet" type="text/css" href="css/payson_ut.css">
     </head>
     <body>
@@ -20,7 +20,7 @@
         <div id="banner">
             <img src="images/rsz_peteetnet.jpg" alt="welcome to payson" width="200" 
             height="141">
-            <h1>Small town with big adventures</h1>
+            <h1>Payson, Utah. Small town with big adventures</h1>
         </div>
         <!--Next comes and invisible duplicate of the header.  Since the visible
         header is in fixed position, the elements that come after it ignores it,
@@ -29,17 +29,17 @@
         <div id="spacer">
             <img src="images/rsz_peteetnet.jpg"  alt="welcome to payson" width="200" 
             height="141">
-            <h1>Small town with big adventures</h1>
+            <h1>Payson, Utah. Small town with big adventures</h1>
         </div>
         <!--The header and footer stretch all the way across the window.  But I
         want the rest of the page to be narrower.  So I put everything inside a div
-    with a reduced width.-->
+        with a reduced width.-->
         <div id="main">
             <div id="navbar">
                 <ul>
                     <li class="changeBackground"><a href="payson_ut.html">Home</a></li>
                     <li class="changeBackground"><a href="camping.html">Camping</a></li>
-                    <li class="changeBackground"><a href="camping.html">Hiking</a></li>
+                    <li class="changeBackground"><a href="hiking.html">Hiking</a></li>
                 </ul>
             </div>
             <!--The rest of the page (except for the footer) comprises two side-by-side
@@ -78,6 +78,17 @@
                 </p>
             </div>
         </div>
-
+        <!--I'm using normal(i.e. static) positioning for the footer, because
+        I"m not concerned about the browser adding a little extra space around it
+        as I am in the header.  Otherwise, it works like the header.-->
+        <div id="footer">
+            <ul>
+                <li><a href="http://paysonutah.maps.arcgis.com/apps/webappviewer/index.html?id=a6c7b9025e0f4f868b3e4f29a3f9a479" 
+                    target="_blank">Map</a></li>
+                <li><a href="https://weather.com/weather/tenday/l/Payson+UT?canonicalCityId=e39a80a42a65da1eb5251560f0c02336f012c72585f17ead02ffdab5e721fad5" 
+                    target="_blank">Weather</a></li>
+                <li><a href="https://paysonutah.org/events/calendar" target="_blank">Events</a></li>
+            </ul>
+        </div>
     </body>
 </html>

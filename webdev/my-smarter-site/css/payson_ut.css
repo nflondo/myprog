@@ -10,7 +10,7 @@ div#banner {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: lightsalmon;
+    background-color: #cc6600;
 }
 /*The image will float left, displacing the leftmost part of the banner's background
 color (ch 28)*/
@@ -128,4 +128,42 @@ div#sidebar h3 {
     font-family: Georgia, Times, serif;
     color: #cc6600;
     margin-bottom: -5%;
+}
+/*The footer is just a regular div with its height specified.  I clear any floats
+that may occur above it.*/
+div#footer {
+    clear: both;
+    width: 100%;
+    height: 75px;
+    background-color: black;
+}
+/*Same idea as the navbar items*/
+div#footer ul {
+    list-style-type: none;
+    padding-left: 20%;
+}
+div#footer ul li {
+    display: inline;
+    float: left;
+    margin: 0 .75em 0 0;
+}
+div#footer ul li a {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 1.2em .3em .3em .3em;
+}
+/*I want to wrap paragraph text around an image on the hiking and skiing pages.
+The margins add whitespace between the images and the text.  ch 28*/
+img.forWrap {
+    float: left;
+    margin: 0 1em .5em 0;
+}
+/*This is an afterthought.  After building the pages, I found that I wanted to
+separate the list items on the skiing page with a little whitespace ch38*/
+ul li {
+    margin-bottom: .25em;
 }
