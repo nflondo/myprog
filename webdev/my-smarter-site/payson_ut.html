@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--The head section contains information that does not appear on the page
+    But it has to be here.-->
+    <head>
+        <meta charset="utf-8">
+    <!--Title appears in the browser toolbar, bookmar list, and in search 
+    engine results.  Give each page a unique title that describes its particular
+    contents-->
+        <title>nmc Payson, UT Nice, quiet, town.</title>
+        <!--Search engines display meta name description in search results, so 
+        use only about 160 characaters-->
+        <meta name="description" content="nmc Big adventures in a small town">
+        <link rel="stylesheet" type="text/css" href="css/payson_ut.css">
+    </head>
+    <body>
+
+        <!--Put the header at the top of the page.  It comprises a div and 
+        inside the div, and image and a heading.-->
+        <div id="banner">
+            <img src="images/rsz_peteetnet.jpg" alt="welcome to payson" width="200" 
+            height="141">
+            <h1>Small town with big adventures</h1>
+        </div>
+        <!--Next comes and invisible duplicate of the header.  Since the visible
+        header is in fixed position, the elements that come after it ignores it,
+        and occupy the same real state under it.  A normally-positioned duplicate
+        pushes the other elements down where you want them (ch68)-->
+        <div id="spacer">
+            <img src="images/rsz_peteetnet.jpg"  alt="welcome to payson" width="200" 
+            height="141">
+            <h1>Small town with big adventures</h1>
+        </div>
+        <!--The header and footer stretch all the way across the window.  But I
+        want the rest of the page to be narrower.  So I put everything inside a div
+    with a reduced width.-->
+        <div id="main">
+            <div id="navbar">
+                <ul>
+                    <li class="changeBackground"><a href="payson_ut.html">Home</a></li>
+                    <li class="changeBackground"><a href="camping.html">Camping</a></li>
+                    <li class="changeBackground"><a href="camping.html">Hiking</a></li>
+                </ul>
+            </div>
+            <!--The rest of the page (except for the footer) comprises two side-by-side
+            divs, a princial content section and a sidebar. ch 61-63-->
+            <div id="content">
+                <!--Each div has a big heading.  I went with an h1 heading for the
+                header.  A site should have only one of these, so it's logical to step
+                down to h2.-->
+                <h2>Entrance to Nebo loop scenic drive !</h2>
+                <p>The Latter-day Saints first settled in Payson in 1850. It was 
+                    originally named Peteetneet Creek, after Chief Peteetneet, a 
+                    Timpanogos Indian chief who lived near Payson's current location. 
+                    It was later renamed Payson by Brigham Young.</p>
+                <p>Mount Nebo Scenic Byway crosses the Uinta National Forest between the cities 
+                    of Nephi and Payson. It climbs to over 9,000 feet in elevation 
+                    and provides breathtaking views of Utah valley, the Wasatch 
+                    Mountains and 11,928-foot Mount Nebo, the tallest mountain in 
+                    the Wasatch Range.</p>             
+            </div>
+            <!--The secondary content div is narrower and sits on the right.-->
+            <div id="sidebar">
+                <h2>Related Links</h2>
+            <!--A third style of heading.  I styled it so it's about the same size
+            as the h2 heading, but in a different color and font-family.-->
+                <h3>Golf Course</h3>
+                <p><a href="http://gladstan.com/">Gladstan Golf Course</a>
+                <!--Using breaks rather than separate paragraphs because I don't
+                want a ot of space between these lines-->
+                <br>
+                Conveniently located in Payson
+                </p>
+                <h3> Nebo loop scenic drive</h3>
+                <p><a href="https://utah.com/scenic-drive/nebo-loop">Mount Nebo Scenic Byway
+                </a><br>
+                Take 800 S eastbound to find the entrace to the scenic drive.
+                </p>
+            </div>
+        </div>
+
+    </body>
+</html>

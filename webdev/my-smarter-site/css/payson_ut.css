@@ -1,0 +1,131 @@
+/*First make the browser default explicit.*/
+body{
+    width: 100%;
+    font-size: 1em;
+}
+/*The banner will strech all the way across, with no whitespace separating it
+from the top of the window.  Also, it will be fixed in place, it won't scroll*/
+div#banner {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: lightsalmon;
+}
+/*The image will float left, displacing the leftmost part of the banner's background
+color (ch 28)*/
+div#banner img, div#spacer img {
+    float:left;
+}
+/*Since elements below the fixed-position banner ignore it, hiding underneath it
+I need a spacer that pushes them away from it.  I code a almost duplicate of the visible
+banner, but this one is invisible.  Since the browser insists on adding some 
+whitespace above a static div, I give it a little negative margin to move it up to
+where the fixed-position banner sits.  (ch 68)*/
+div#spacer {
+    width: 100%;
+   /* margin-top: -1.5%; */
+    visibility: hidden;    
+}
+/*Except for visibility, the visible and invisible headings from the two banner divs
+are identical.  I want a big, bold sans-serif heading in white.  I pad it to move
+it away from the image.  (ch 68)*/
+div#banner h1, div#spacer h1{
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 2em;
+    color: white;
+    padding-left: 20%;
+}
+/*The header and footer will strecth all the way across the window.  But with only
+two side-by-side content sections, the full width is more than I want.  The content
+will occupy 75% of the width.  I want it centered, so I give it a left and right
+margins of auto. (chs 22 and 62)*/
+div#main{
+    width: 75%;
+    margin: 0 auto 0 auto;
+}
+/*Place the navbar inside the main div which is already narrower than the window
+I make the navbar div just 60% of that width.  Then I nudge it to the right a little
+with a left-margin.  I clear the div.  Otherwise, it will try to wrap its contents
+around the left-floated image in the banner ch 69 -75*/
+div#navbar {
+    clear:both;
+    width: 60%;
+    margin-left: 6%;
+}
+/*No bullets or indentation*/
+div#navbar ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+/*Override the default block display of list items, float them left so they line up
+horizontally, and add a bit of margin on the right of each one so they're separated
+by a little whitespace.  I center the text in each one (ch 69-75)*/
+div#navbar ul li {
+    text-align: center;
+    display: inline;
+    width: 15%;
+    float: left;
+    margin: 0 .2em 0 0;
+}
+/*I want the anchors to be pretty chunky.  I eliminate the underline that's a default
+for achors. Block display and padding enlarge the color blocks.*/
+div#navbar ul li a {
+    font-weight: Tahoma, Geneva, sans-serif;
+    font-size: 1.1em;
+    font-weight: 900;
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: .3em;
+}
+/*The menu item color blocks are red.*/
+li.changeBackground {
+    background-color:#cc0000;
+}
+/*When the user hovers over one, it turns dark brown (ch 75)*/
+li.changeBackground:hover {
+    background-color: #663333;
+}
+/*This is the principal section of the content.  It'll float left and occupy 68%
+of the width of the main section.  ch 61-62*/
+div#content {
+    width: 68%;
+    float: left;
+}
+/*The sidebar will be float right.  If you add the 68% width of the content section
+to the 29% of this section, it totals only 97%  This leaves 3% for a gutter of
+whitespace to separate them.  ch 61-62*/
+div#sidebar {
+    width: 29%;
+    float: right;
+}
+/*This will be my largest heading besides the h1 heading in the header at the top
+I chose very dark grey for headings and paragraphs because I feel that dead black
+can be a little jarring.*/
+h2 {
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #333333;
+}
+/*I make standard paragraphs and list text the same*/
+p, ul {
+    font-family: Georgia, Times, serif;
+    font-size: 1.3em;
+    color:#333333;
+}
+/*Sidebar text will be sans-serif and a little smaller than standard text to set
+it apart.  Here's where you can see I'm using some redundant styling rather than
+grouping selectors.*/
+div#sidebar p {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 1em;
+    color: #333333;
+}
+/*Third-level headings are the same color as the header color block. I've given
+them some negative margin because I felt the browser was putting too much whitespace
+between them and the paragraph text below them.*/
+div#sidebar h3 {
+    font-family: Georgia, Times, serif;
+    color: #cc6600;
+    margin-bottom: -5%;
+}
