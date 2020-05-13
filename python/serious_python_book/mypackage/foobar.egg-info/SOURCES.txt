@@ -1,0 +1,6 @@
+setup.cfg
+setup.py
+foobar.egg-info/PKG-INFO
+foobar.egg-info/SOURCES.txt
+foobar.egg-info/dependency_links.txt
+foobar.egg-info/top_level.txt
