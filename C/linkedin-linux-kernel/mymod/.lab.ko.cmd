@@ -1,0 +1,1 @@
+cmd_/home/mymod/lab.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -T /usr/src/linux-4.12.14-120/scripts/module-common.lds --build-id  -o /home/mymod/lab.ko /home/mymod/lab.o /home/mymod/lab.mod.o ;  true
