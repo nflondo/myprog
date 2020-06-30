@@ -10,17 +10,16 @@ MODULE_AUTHOR("Nefi Munoz-Calderon");
 static int number = 35;
 static char *myword = "initial";
 
-module_param(number, int, 0);
+module_param(number, int, S_IRUGO);
 MODULE_PARM_DESC(number, "An integer variable");
-module_param(myword, charp, 0); /* charp here defines a string in the module parameter*/
+module_param(myword, charp, S_IRUGO); /* charp here defines a string in the module parameter*/
 MODULE_PARM_DESC(myword, "A character variable");
 
 
 int my_init_module(void)
 {
 	printk("lab.c: my_init_module()\n");
-	printk("number:%d", number);
-	printk("myword:%s", myword);
+	printk("number=%d myword=%s\n", number, myword);
 	return 0;
 }
 void my_cleanup_module(void)
