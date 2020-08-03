@@ -12,17 +12,20 @@ def draw_menu(stdscr):
 
     # Start colors in curses
     curses.start_color()
+    # curses.init_pair(pair_number, fg, bg)
     curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
     # Loop where k is the last character pressed
+    # ord() returns the unicode code point for a one-character string
     while (k != ord('q')):
 
         # Initialization
         stdscr.clear()
+        # getmaxyx() provides the window dimensions
         height, width = stdscr.getmaxyx()
-
+        # move the cursor any direction
         if k == curses.KEY_DOWN:
             cursor_y = cursor_y + 1
         elif k == curses.KEY_UP:
@@ -86,6 +89,7 @@ def draw_menu(stdscr):
         k = stdscr.getch()
 
 def main():
+    # Initializes curses (stdscr = curses.initscr(), curses.noecho(), curses.cbreak(), stdscr.keypad(1))
     curses.wrapper(draw_menu)
 
 if __name__ == "__main__":
