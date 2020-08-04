@@ -35,8 +35,8 @@ def draw_menu(stdscr):
         elif k == curses.KEY_LEFT:
             cursor_x = cursor_x - 1
 
-        cursor_x = max(0, cursor_x)
-        cursor_x = min(width-1, cursor_x)
+        cursor_x = max(0, cursor_x) # with two or more args, return the biggest arg
+        cursor_x = min(width-1, cursor_x) # with to or more args, return smallest arg
 
         cursor_y = max(0, cursor_y)
         cursor_y = min(height-1, cursor_y)
@@ -50,6 +50,7 @@ def draw_menu(stdscr):
             keystr = "No key press detected..."[:width-1]
 
         # Centering calculations
+        # // is floor division (rounds down to the nearest whole number)
         start_x_title = int((width // 2) - (len(title) // 2) - len(title) % 2)
         start_x_subtitle = int((width // 2) - (len(subtitle) // 2) - len(subtitle) % 2)
         start_x_keystr = int((width // 2) - (len(keystr) // 2) - len(keystr) % 2)
@@ -57,9 +58,12 @@ def draw_menu(stdscr):
 
         # Rendering some text
         whstr = "Width: {}, Height: {}".format(width, height)
+        # Move to position y,x, display string, attribute
         stdscr.addstr(0, 0, whstr, curses.color_pair(1))
 
         # Render status bar
+        # attron() adds attribute from the "background" set applied to all writes
+        # to the current window. attroff() removes it.
         stdscr.attron(curses.color_pair(3))
         stdscr.addstr(height-1, 0, statusbarstr)
         stdscr.addstr(height-1, len(statusbarstr), " " * (width - len(statusbarstr) - 1))
@@ -80,7 +84,7 @@ def draw_menu(stdscr):
         stdscr.addstr(start_y + 1, start_x_subtitle, subtitle)
         stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
         stdscr.addstr(start_y + 5, start_x_keystr, keystr)
-        stdscr.move(cursor_y, cursor_x)
+        stdscr.move(cursor_y, cursor_x) # Moves the cursor
 
         # Refresh the screen
         stdscr.refresh()
