@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys,os
 import curses, subprocess
+import cmd_library
 
 def execute_cmd(cmd_string):
     subprocess.call('clear')
@@ -14,7 +15,7 @@ def execute_cmd(cmd_string):
     print ("")    
 
 # Loop where k is the last character pressed
-# ord() returns the unicode code point for a one-character string
+# ord() returns the unicode code point for a one-character string #
 k = 0
 while (k != ord('q')):
     # Initialize curses
@@ -49,12 +50,17 @@ while (k != ord('q')):
 #        cursor_x = cursor_x - 1
     if (k == ord('1')):
         curses.endwin()
-        execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq_'])
-        
+        execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq-'])      
     elif (k == ord('2')):
         curses.endwin()
-        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'Mem_Hot_Plug_'])
-        
+        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', cmd_library.get_sut_ip_address(), 
+            '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
+#        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
+    elif (k == ord('3')):
+        curses.endwin()
+        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', cmd_library.get_sut_ip_address(), 
+            '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])
+#        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])    
     cursor_x = max(0, cursor_x) # with two or more args, return the biggest arg
     cursor_x = min(width-1, cursor_x) # with to or more args, return smallest arg
 
@@ -65,6 +71,7 @@ while (k != ord('q')):
     title = "Please select a test:"[:width-1]
     title_test1 = "1 - CPU Frequency Test"[:width-1]
     title_test2 = "2 - Memory Hot Plug Test"[:width-1]
+    title_test3 = "3 - CPU Hot Plug Test"[:width-1]
 #    keystr = "Last key pressed: {}".format(k)[:width-1]
     #statusbarstr = "Press 'q' to exit | STATUS BAR | Pos: {}, {}".format(cursor_x, cursor_y)
     statusbarstr = "Press 'q' to exit | STATUS BAR" 
@@ -105,6 +112,7 @@ while (k != ord('q')):
     # Print rest of text
     stdscr.addstr(start_y + 2, start_x_test, title_test1)
     stdscr.addstr(start_y + 3, start_x_test, title_test2)
+    stdscr.addstr(start_y + 4, start_x_test, title_test3)
     #stdscr.addstr(start_y + 3, (width - (width - 2)), '-' * 4)
 #    stdscr.addstr(start_y + 5, start_x_keystr, keystr)
 #    stdscr.move(cursor_y, cursor_x) # Moves the cursor
