@@ -16,7 +16,7 @@ def execute_cmd(cmd_string):
 # Loop where k is the last character pressed
 # ord() returns the unicode code point for a one-character string
 k = 0
-while (k != ord('q')):./
+while (k != ord('q')):
     # Initialize curses
     stdscr = curses.initscr()
     curses.noecho()
