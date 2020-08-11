@@ -14,6 +14,13 @@ def execute_cmd(cmd_string):
     input("Press enter")
     print ("")    
 
+def sut_ip_address():
+    sutIpAddress = cmd_library.get_tsf_data() 
+    if not sutIpAddress: # no tsf file found
+        sutIpAddress = cmd_library.get_sut_ip_address() # get info without tsf
+        return sutIpAddress
+    return sutIpAddress
+    
 # Loop where k is the last character pressed
 # ord() returns the unicode code point for a one-character string #
 k = 0
@@ -37,28 +44,19 @@ while (k != ord('q')):
     cursor_y = 0
     # Clear and refresh the screen for a blank canvas
     stdscr.clear()
-    stdscr.refresh()
+    stdscr.refresh()    
 
-#     move the cursor any direction
-#    if k == curses.KEY_DOWN:
-#        cursor_y = cursor_y + 1
-#    elif k == curses.KEY_UP:
-#        cursor_y = cursor_y - 1
-#    elif k == curses.KEY_RIGHT:
-#        cursor_x = cursor_x + 1
-#    elif k == curses.KEY_LEFT:
-#        cursor_x = cursor_x - 1
     if (k == ord('1')):
         curses.endwin()
         execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq-'])      
     elif (k == ord('2')):
         curses.endwin()
-        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', cmd_library.get_sut_ip_address(), 
+        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sut_ip_address(), 
             '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
 #        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
     elif (k == ord('3')):
         curses.endwin()
-        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', cmd_library.get_sut_ip_address(), 
+        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sut_ip_address(), 
             '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])
 #        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])    
     cursor_x = max(0, cursor_x) # with two or more args, return the biggest arg
@@ -84,11 +82,6 @@ while (k != ord('q')):
     start_x_test = int(width - (width- 2 ))
 #    start_x_keystr = int(width - (width- 2 ))
     start_y = int(height - (height -2))
-
-    # Rendering some text
-#    whstr = "Width: {}, Height: {}".format(width, height)
-#     Move to position y,x, display string, attribute
-#    stdscr.addstr(0, 0, whstr, curses.color_pair(1))
 
     # Render status bar
     # attron() adds attribute from the "background" set applied to all writes
