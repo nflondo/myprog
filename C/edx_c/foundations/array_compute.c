@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 int main(void) {
     //! showArray(ages, cursors=[i])
     int ages[10];
