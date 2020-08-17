@@ -2,7 +2,7 @@
 import sys,os
 import curses, subprocess
 import cmd_library
-
+'''
 def execute_cmd(cmd_string):
     subprocess.call('clear')
     ret = subprocess.call(cmd_string)
@@ -13,7 +13,7 @@ def execute_cmd(cmd_string):
         print ("Command terminated with status other than zero :-(")
     input("Press enter")
     print ("")    
-
+'''
 def sut_ip_address():
     sutIpAddress = cmd_library.get_tsf_data() 
     if not sutIpAddress: # no tsf file found
@@ -48,17 +48,26 @@ while (k != ord('q')):
 
     if (k == ord('1')):
         curses.endwin()
-        execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq'])      
+        subprocess.call('clear')
+        cmd_library.execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq'])
+        input("Press enter to continue...")
+        print ("")          
     elif (k == ord('2')):
         curses.endwin()
-        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sut_ip_address(), 
+        subprocess.call('clear')
+        cmd_library.execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sut_ip_address(), 
             '-d','/tmp/', '-p', 'mem_Hot_Plug'])
-#        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
+        input("Press enter to continue...")
+        print ("")          
+#        cmd_library.execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
     elif (k == ord('3')):
         curses.endwin()
-        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sut_ip_address(), 
+        subprocess.call('clear')
+        cmd_library.execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sut_ip_address(), 
             '-d','/tmp/', '-p', 'cpu_Hot_Plug'])
-#        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])    
+        input("Press enter to continue...")
+        print ("")          
+#        cmd_library.execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])    
     cursor_x = max(0, cursor_x) # with two or more args, return the biggest arg
     cursor_x = min(width-1, cursor_x) # with to or more args, return smallest arg
 

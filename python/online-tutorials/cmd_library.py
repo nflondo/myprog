@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-import json, glob
+import json, glob, subprocess
 
 # Get stored data if exists
 project_data = 'project_data.json'
-
+#=============================================================================#
+# Get IP address from tsf file.
+# 
 def get_tsf_data():
     """Get IP address from tsf file"""
     tsfFile = glob.glob("*.tsf") # tsfFile is a list
@@ -33,7 +35,9 @@ def get_tsf_data():
     sutIpAddr = listData[1][equalSignPosition + 1:] # get second part of the string
 
     return sutIpAddr
-
+#=============================================================================#
+#  Get stored IP address, project name, etc. from user json file if available
+#
 def get_stored_data():
     """Get stored IP address, project name, etc. from user json file if available"""
     try:
@@ -43,8 +47,9 @@ def get_stored_data():
         return None
     else:
         return sut_ip_address
-
-# Get user information (Server IP, log directory name/project name?)
+#=============================================================================#
+# Get IP address, from user and into json file if first time running test
+#
 def get_sut_ip_address():
     """Get IP address, from user and into json file if first time running test"""
     stored_data = get_stored_data()
@@ -55,3 +60,25 @@ def get_sut_ip_address():
         with open(project_data, 'w') as f_obj:
             json.dump(sut_ip_address, f_obj)
         return sut_ip_address
+#=============================================================================#
+# Function uses a dictionary to simulate a switch statement in python (since
+# switch does not exists in python ATM)
+#  
+def switch_func(return_value):
+    switcher = {
+        0: "PASS",
+        1: "FAIL",
+        2: "PASS_W_WARNING",
+        3: "NOT_APPLICABLE",
+        4: "NOT_SUPPORTED",
+        5: "NOT_TESTABLE"
+    }
+    print (switcher.get(return_value, "Invalid Return Value"))
+#=============================================================================#
+# Executes commands in linux shell
+#
+def execute_cmd(cmd_string):
+#    subprocess.call('clear')
+    return_code = subprocess.call(cmd_string)
+    # Translates return code into string
+    switch_func(return_code)
