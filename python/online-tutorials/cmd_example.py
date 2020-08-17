@@ -17,7 +17,7 @@ def execute_cmd(cmd_string):
 def sut_ip_address():
     sutIpAddress = cmd_library.get_tsf_data() 
     if not sutIpAddress: # no tsf file found
-        sutIpAddress = cmd_library.get_sut_ip_address() # get info without tsf
+        sutIpAddress = cmd_library.get_sut_ip_address() # get info from user
         return sutIpAddress
     return sutIpAddress
     
@@ -48,16 +48,16 @@ while (k != ord('q')):
 
     if (k == ord('1')):
         curses.endwin()
-        execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq-'])      
+        execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq'])      
     elif (k == ord('2')):
         curses.endwin()
         execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sut_ip_address(), 
-            '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
+            '-d','/tmp/', '-p', 'mem_Hot_Plug'])
 #        execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
     elif (k == ord('3')):
         curses.endwin()
         execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sut_ip_address(), 
-            '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])
+            '-d','/tmp/', '-p', 'cpu_Hot_Plug'])
 #        execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', '10.1.1.3', '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])    
     cursor_x = max(0, cursor_x) # with two or more args, return the biggest arg
     cursor_x = min(width-1, cursor_x) # with to or more args, return smallest arg
@@ -66,7 +66,7 @@ while (k != ord('q')):
     cursor_y = min(height-1, cursor_y)
 
     # Declaration of strings
-    title = "Please select a test:"[:width-1]
+    title = "Please select a test:"[:width-1] #Display string up to width-1 of screen
     title_test1 = "1 - CPU Frequency Test"[:width-1]
     title_test2 = "2 - Memory Hot Plug Test"[:width-1]
     title_test3 = "3 - CPU Hot Plug Test"[:width-1]

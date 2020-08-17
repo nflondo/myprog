@@ -5,6 +5,7 @@ import json, glob
 project_data = 'project_data.json'
 
 def get_tsf_data():
+    """Get IP address from tsf file"""
     tsfFile = glob.glob("*.tsf") # tsfFile is a list
 #Debug    print("tstFile: ", tsfFile)
     listData = []
@@ -29,12 +30,12 @@ def get_tsf_data():
         return None
 
     equalSignPosition = listData[1].find("=") # find position of equal sign
-    sutIpAddr = listData[1][equalSignPosition + 1:] # get part of the string
+    sutIpAddr = listData[1][equalSignPosition + 1:] # get second part of the string
 
     return sutIpAddr
 
 def get_stored_data():
-    """Get stored IP address, project name, etc. if available"""
+    """Get stored IP address, project name, etc. from user json file if available"""
     try:
         with open(project_data) as f_obj:
             sut_ip_address = json.load(f_obj)
@@ -45,7 +46,7 @@ def get_stored_data():
 
 # Get user information (Server IP, log directory name/project name?)
 def get_sut_ip_address():
-    """Get IP address, project name, etc. if first time running test"""
+    """Get IP address, from user and into json file if first time running test"""
     stored_data = get_stored_data()
     if (stored_data):
         return stored_data

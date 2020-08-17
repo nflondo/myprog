@@ -17,12 +17,12 @@ def execute_cmd(cmd_string):
 
 sutIpAddress = cmd_library.get_tsf_data() 
 if not sutIpAddress: # no tsf file found
-    sutIpAddress = cmd_library.get_sut_ip_address() # get info without tsf
+    sutIpAddress = cmd_library.get_sut_ip_address() # get info directly from user
 
 subprocess.call('clear')
-execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sutIpAddress, '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])
-execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sutIpAddress, '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
-execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq-'])
+execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sutIpAddress, '-d','/tmp/', '-p', 'cpu_Hot_Plug'])
+execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sutIpAddress, '-d','/tmp/', '-p', 'mem_Hot_Plug'])
+execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq'])
 #execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', get_sut_ip_address(), '-d','/tmp/', '-p', 'cpu_Hot_Plug-'])
 #execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sut_ip_address, '-d','/tmp/', '-p', 'mem_Hot_Plug-'])
 #execute_cmd(['sh','./CPU_Frequency_Test', '-d', '/tmp/', '-p', 'CPU_Freq-'])
