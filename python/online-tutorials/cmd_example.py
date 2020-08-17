@@ -14,13 +14,10 @@ def execute_cmd(cmd_string):
     input("Press enter")
     print ("")    
 '''
-def sut_ip_address():
-    sutIpAddress = cmd_library.get_tsf_data() 
-    if not sutIpAddress: # no tsf file found
-        sutIpAddress = cmd_library.get_sut_ip_address() # get info from user
-        return sutIpAddress
-    return sutIpAddress
-    
+sutIpAddress = cmd_library.get_tsf_data() 
+if not sutIpAddress: # no tsf file found
+    sutIpAddress = cmd_library.get_sut_ip_address() # get info directly from user
+
 # Loop where k is the last character pressed
 # ord() returns the unicode code point for a one-character string #
 k = 0
@@ -55,7 +52,7 @@ while (k != ord('q')):
     elif (k == ord('2')):
         curses.endwin()
         subprocess.call('clear')
-        cmd_library.execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sut_ip_address(), 
+        cmd_library.execute_cmd(['sh','./memoryHotPlugTest.sh', '-i', sutIpAddress, 
             '-d','/tmp/', '-p', 'mem_Hot_Plug'])
         input("Press enter to continue...")
         print ("")          
@@ -63,7 +60,7 @@ while (k != ord('q')):
     elif (k == ord('3')):
         curses.endwin()
         subprocess.call('clear')
-        cmd_library.execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sut_ip_address(), 
+        cmd_library.execute_cmd(['sh','./cpuHotPlugTest.sh', '-i', sutIpAddress, 
             '-d','/tmp/', '-p', 'cpu_Hot_Plug'])
         input("Press enter to continue...")
         print ("")          
