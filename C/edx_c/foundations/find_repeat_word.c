@@ -12,7 +12,7 @@ int main(void) {
         j++;
     }
     wordSize = j;
-    
+    // bubble sort letters in word alphabetically
     for (index = 0; index < wordSize -1; index++){
         for(i = 0; i < wordSize - 1; i++){
             if (myWord[i] > myWord[i + 1]){
