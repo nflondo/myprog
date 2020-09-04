@@ -1,17 +1,20 @@
-# Byte-compiled / optimized / DLL files
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+# Ignore these specific dirs and extensions
 __pycache__/
 *.py[cod]
 *$py.class
-C/**/*.o
+*.o
 *.class
 *.metadata
 *.properties
 *.svg
 *~
 *.xml
-Java/21days/.recommenders
-/Java/21days/PageData/nbproject/private/
-/Java/21days/PageData/build/
-/Java/21days/PageData/dist/
-/Java/21days7/nbproject/private/
-/Java/21days7/build/
