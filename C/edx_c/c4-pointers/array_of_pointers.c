@@ -28,5 +28,15 @@ int main(void){
 
     * (arrays[1] + 1) = 4;
     arrays[1][1] = 0;
+
+    * arrays[2] = 99;
+    * (arrays[2] + 1) = 100;
+    * (arrays[2] + 2) = 101;
+    * (arrays[2] + 3) = 102;
+    
+    arrays[2][0] = 0;
+    arrays[2][1] = 0;
+    arrays[2][2] = 0;
+
     return 0;
 }
