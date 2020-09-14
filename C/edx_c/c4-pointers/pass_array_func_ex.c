@@ -15,7 +15,7 @@ int main(void) {
 void squareArray(int * ptr, int size) {
     int i;
     for (i=0; i<size; i++) {
-        ptr[i] = ptr[i]*ptr[i];
+        ptr[i] = ptr[i] * ptr[i];
         // *(ptr+i) = (*(ptr+i))*(*(ptr+i));
     }
 }
