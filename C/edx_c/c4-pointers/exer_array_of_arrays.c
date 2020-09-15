@@ -43,8 +43,23 @@ int main(void) {
        totalWet/2 to both the water and the oil entry. When addressing the array cookie,
        do not use any brackets at all this time.
     */
-    
+    *(*cookie) = totalWet/2;
+    *(*cookie + 1) = totalWet/2;
+
     printf("New water amount: %.2lf grams, new oil amount: %.2lf grams.\n", wet[0], wet[1]);
     
     return 0;
 }
+
+/*
+    *(*t) = 0; //t[0][0]  OR  *(t[0] + 0)
+    *((*t) + 1) = 0;//t[0][1]  OR *(t[0] + 1)
+    *((*t) + 2) = 0;//t[0][2]  OR *(t[0] + 2)
+    *(*(t+1)) = 0;//t[1][0]  OR *(t[1] + 0)
+    *(*(t+1)+1) = 0;//t[1][1]  OR *(t[1] + 1)
+OR
+*array = 3; // this assign value to array[0]
+    *(array + 1) = 10; // this assign value to array[1]
+    *(array + 2) = 99; // this assign value to array[2]
+    
+*/
