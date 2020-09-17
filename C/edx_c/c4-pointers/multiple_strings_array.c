@@ -13,7 +13,7 @@ int main(void){
     }
     printf("\nFirst letters: \n");
     for (i=0; i<3; i++) {
-        // words[1][0] give specific letter from each string array 
+        // words[i][0] give specific letter from each string array 
         printf("\"%s\" starts with the letter '%c'.\n", words[i], words[i][0]);
     }
     return 0;
