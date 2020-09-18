@@ -1,2 +1,0 @@
-vm-install --os-type sles11 -c 1 -d file:/var/lib/libvirt/images/sles11-3,7000 -m 768 -V --name sles11-3 --os-settings nfs://10.1.1.2/opt/suse/testKits/system/autoyast/SLES11_SP3-x86_64-single_disk-GRUB.xml --source nfs://10.1.1.2/home/InstSource/SLES-11-SP3-DVD-x86_64-GM-DVD1
-
