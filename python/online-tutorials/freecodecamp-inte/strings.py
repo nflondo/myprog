@@ -118,5 +118,8 @@ my_string = f"the variable is {var3} and {var2}"
 my_string = f"the variable is {var3*2} and {var2}"
 print(my_string)
 
+list2 = ['zorro']
+print('list2' + ''.join(list2))
+
 
 
