@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # Collections: Counter, namedtuple, orderedDict, defaultdict, deque
 # container that stores elements as keys and values
-from collections import Counter 
-a = "aaaaabbbcccccc"
-my_counter = Counter(a)
-print(my_counter)
+#from collections import Counter 
+#a = "aaaaabbbcccccc"
+#my_counter = Counter(a)
+#print(my_counter)
 #print (dir(collections)) # View all functions of the module
 #print (dir(timeit)) # View all functions of the module
 
