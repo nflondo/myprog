@@ -114,8 +114,8 @@ my_string = "the variable is {:.2f} and {}".format(var3, var4) # 2 digits
 print(my_string)
 
 # new formatting since python 3.6
-my_string = f"the variable is {var3} and {var2}"
-my_string = f"the variable is {var3*2} and {var2}"
+my_string = f"new format - the variable is {var3} and {var2}"
+my_string = f"new format - the variable is {var3*2} and {var2}"
 print(my_string)
 
 list2 = ['zorro']
