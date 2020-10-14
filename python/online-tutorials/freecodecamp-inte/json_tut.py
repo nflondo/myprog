@@ -7,14 +7,16 @@
 import json
 # convert python dict into json format
 person = {"name":"john", "age": 30, "city":"New York", "hasChildren": False,
-    "titles": ["engineer", "programmer"]}
+    "titles": ["engineer", "programmer", "father"]}
 
-personJSON = json.dumps(person, indent=4)#json.dumps as a string
+#json.dumps as a json string
+personJSON = json.dumps(person, indent=4)
 #personJSON = json.dumps(person, indent=4, separators=('; ', '= '))
 #personJSON = json.dumps(person, indent=4, sort_keys=True)
-#print(personJSON)
+print(personJSON)
 
 # dump dictionary into a file
+# From python to json is Serialization, encoding
 with open('person.json', 'w') as file:
     #json.dump(person, file ) #no s, so for a file
     json.dump(person, file, indent=4)
