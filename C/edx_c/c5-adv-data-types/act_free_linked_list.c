@@ -18,6 +18,7 @@ that holds the address of the start of a linked list of students. Your function 
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> //for strCpy
 
 struct student {
       char name[50];
@@ -78,5 +79,11 @@ void printStudents(struct student *start){
     }
 }
 void freeStudents(struct student *start){
-    
+    struct student *ptr = start;
+    struct student *tmp;
+    while(ptr != NULL){
+        tmp = ptr->next;
+        free(ptr);
+        ptr = tmp;
+    }    
 }
