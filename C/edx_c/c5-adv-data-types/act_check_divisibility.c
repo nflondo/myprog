@@ -25,6 +25,7 @@ struct digit * append(struct digit * end, struct digit * newDigptr);
 void printNumber(struct digit *start);
 void freeNumber(struct digit *start);
 struct digit *readNumber(void);
+int divisibleByThree(struct digit *start);
 
 int main(void) {
     struct digit *start;
@@ -93,5 +94,19 @@ struct digit *readNumber(void) {
 
 // Write your divisibleByThree() function here
 int divisibleByThree(struct digit *start){
-    
+    struct digit * ptr = start;
+    int sum = 0;
+    while (ptr!=NULL) {
+        //printf("%d", ptr->num);
+        sum += ptr->num;
+        ptr = ptr->next;
+    }
+    //printf("sum %d:", sum);
+    //result = sum % 3;
+    //printf("result: %d\n", result);
+    if ( sum % 3 == 0 ){
+        return 1;
+    } else {
+        return 0;
+    }
 }
