@@ -120,17 +120,21 @@ struct digit * reverseNumber(struct digit * start) {
 }
 
 struct digit * insertIntoSorted(struct digit *start, struct digit *newDig) {
+    // break the list, so need to keep track of two successive elements
+    // this always returns the smallest number as the start of the list
     struct digit *ptr = start;
     struct digit *prev = NULL;
+    // haven't reached end and number pointed by ptr is smaller than newDigit
+    // terminates when end of the list or ptr->num is bigger
     while ((ptr!=NULL) && (ptr->num < newDig->num)) {
-        prev = ptr;
-        ptr = ptr->next;
+        prev = ptr; // save current pointer
+        ptr = ptr->next; 
     }
     if (prev == NULL) {
-        start = insertAtFront(start, newDig);
+        start = insertAtFront(start, newDig);  // new start of list
     } else {
-        prev->next = newDig;
-        newDig->next = ptr;
+        prev->next = newDig; // break the connection here
+        newDig->next = ptr; // works if in middle or end of linked list
     }
     return(start);
 }
@@ -146,7 +150,7 @@ struct digit * sortedCopy(struct digit * start) {
         sortedStart = createDigit(start->num);
         ptr = ptr->next;
     }
-    while (ptr!=NULL) {
+    while (ptr!=NULL) { // go through list and sort each element
         newDigit = createDigit(ptr->num);
         sortedStart = insertIntoSorted(sortedStart, newDigit);
         ptr = ptr->next;
