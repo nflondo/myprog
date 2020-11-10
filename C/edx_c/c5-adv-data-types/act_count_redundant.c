@@ -5,6 +5,15 @@ should count how many redundancies can be observed in the number stored in this
 list and return this count of redundancies. A redundancy is a digit which has 
 previously already occurred in the number. For example, in the number 39534, 
 the second '3' is a redundancy.
+
+This task offers 2 hints :
+Hint 1 :
+One way to solve this problem is to create a sorted copy of the linked list and 
+count redundancies in this copy - it's easier in a sorted list. Just remember to
+ free your sorted copy after its use.
+Hint 2 :
+In a sorted linked list of digits, a redundancy occurrs for each digit that 
+equals the previous digit.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +33,9 @@ struct digit *readNumber(void);
 int divisibleByThree(struct digit * start);
 int changeThrees(struct digit * start);
 int countRedun(struct digit * start);
+struct digit * insertAtFront(struct digit * start, struct digit * newptr);
+struct digit * sortedCopy(struct digit * start);
+struct digit * insertIntoSorted(struct digit *start, struct digit *newDig);
 
 // Do not modify this main() function
 int main(void) {
@@ -114,10 +126,67 @@ int changeThrees(struct digit * start) {
     }
     return(sum);
 }
+struct digit * insertAtFront(struct digit * start, struct digit * newptr) {
+    newptr->next = start;
+    return(newptr);
+}
+struct digit * insertIntoSorted(struct digit *start, struct digit *newDig) {
+    // break the list, so need to keep track of two successive elements
+    // this always returns the smallest number as the start of the list
+    struct digit *ptr = start;
+    struct digit *prev = NULL;
+    // haven't reached end and number pointed by ptr is smaller than newDigit
+    // terminates when end of the list or ptr->num is bigger
+    while ((ptr!=NULL) && (ptr->num < newDig->num)) {
+        prev = ptr; // save current pointer
+        ptr = ptr->next; 
+    }
+    if (prev == NULL) {
+        start = insertAtFront(start, newDig);  // new start of list
+    } else {
+        prev->next = newDig; // break the connection here
+        newDig->next = ptr; // works if in middle or end of linked list
+    }
+    return(start);
+}
 
+struct digit * sortedCopy(struct digit * start) {
+    //! heap1=showMemory(start=348, cursors=[start, ptr, sortedStart, newDigit])
+    //! heap2=showMemory(start=519, cursors=[start, newDigit, ptr, prev])
+    struct digit *ptr = start;
+    struct digit *sortedStart = NULL;
+    struct digit *newDigit;
+    
+    if (start!=NULL) {
+        sortedStart = createDigit(start->num);
+        ptr = ptr->next;
+    }
+    while (ptr!=NULL) { // go through list and sort each element
+        newDigit = createDigit(ptr->num);
+        sortedStart = insertIntoSorted(sortedStart, newDigit);
+        ptr = ptr->next;
+    }
+    return(sortedStart);
+}
 // Write your countRedun() function here
 int countRedun(struct digit * start){
-
+    struct digit *ptr = start;
+    struct digit *sorted;
+    struct digit *prev = NULL;
+    sorted = sortedCopy(ptr);
+    
+    int sum = 0;
+    while (sorted->next != NULL){ // check if next element in list is null otherwise
+                                // get segmentation fault
+        prev = sorted; // save current element
+        sorted = sorted->next;
+        //    ptr->num = 9;
+        //printf("prev->next: %d sorted->next %d: \n",prev->num, sorted->num);
+        if(sorted->num==prev->num)sum ++;            
+        //}        
+    }
+    freeNumber(sorted);
+    return(sum);
 }
 
 
