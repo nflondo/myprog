@@ -1,0 +1,34 @@
+Solution answered `Betelgeuse is a  !!! Warning: '' not a valid classification code!!!
+Temp = 3500 Kelvin, Lum = 135000.0000 Sol, Rad = 367.42 * R_Sun
+
+Vega is a Main Sequence Star
+Temp = 9600 Kelvin, Lum = 50.0000 Sol, Rad = 0.94 * R_Sun
+
+Polaris is a  !!! Warning: '' not a valid classification code!!!
+Temp = 6900 Kelvin, Lum = 2200.0000 Sol, Rad = 12.07 * R_Sun
+
+Sun is a Main Sequence Star
+Temp = 5800 Kelvin, Lum = 1.0000 Sol, Rad = 0.36 * R_Sun
+
+Sirius is a Main Sequence Star
+Temp = 9900 Kelvin, Lum = 25.0000 Sol, Rad = 0.62 * R_Sun
+
+Sirius_B is a  !!! Warning: '' not a valid classification code!!!
+Temp = 25000 Kelvin, Lum = 0.0295 Sol, Rad = 0.00 * R_Sun`, expected answer was `Betelgeuse is a Supergiant
+Temp = 3500 Kelvin, Lum = 135000.0000 Sol, Rad = 367.42 * R_Sun
+
+Vega is a Main Sequence Star
+Temp = 9600 Kelvin, Lum = 50.0000 Sol, Rad = 0.94 * R_Sun
+
+Polaris is a Giant
+Temp = 6900 Kelvin, Lum = 2200.0000 Sol, Rad = 12.07 * R_Sun
+
+Sun is a Main Sequence Star
+Temp = 5800 Kelvin, Lum = 1.0000 Sol, Rad = 0.36 * R_Sun
+
+Sirius is a Main Sequence Star
+Temp = 9900 Kelvin, Lum = 25.0000 Sol, Rad = 0.62 * R_Sun
+
+Sirius_B is a White Dwarf
+Temp = 25000 Kelvin, Lum = 0.0295 Sol, Rad = 0.00 * R_Sun`.
+
