@@ -1,0 +1,1 @@
+cmd_/root/myprog/C/book_os_concepts/ch2/simple.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -T /usr/src/linux-5.3.18-24.43/scripts/module-common.lds --build-id  -o /root/myprog/C/book_os_concepts/ch2/simple.ko /root/myprog/C/book_os_concepts/ch2/simple.o /root/myprog/C/book_os_concepts/ch2/simple.mod.o ;  true

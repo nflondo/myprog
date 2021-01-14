@@ -9,9 +9,11 @@ int main(void){
 	
 	/* Get the source and destination names */
 	printf("\nEnter source file: ");
-	scanf("%80s", source);
+	//scanf("%80s", source);
+	scanf("%s", source);
 	printf("\nEnter destination file: ");
-	scanf("%80s", destination);
+	//scanf("%80s", destination);
+	scanf("%s", destination);
 	
 	if (file_copy(source, destination) == 0 )
 		puts("Copy operation successful");
@@ -24,13 +26,16 @@ int file_copy(char *oldname, char *newname){
 	FILE *fold, *fnew;
 	int c;
 	/* Open the source file for reading in binary mode */
-	if (( fold = fopen( oldname, "rb" )) == NULL )
+	//if (( fold = fopen( oldname, "rb" )) == NULL )
+	if (( fold = fopen( oldname, "r" )) == NULL )
 		printf("\n *** File %s doesn't exists ***", oldname);
 		return -1;
 		
 	/* Open the destination file for writing in binary mode. */
-	if (( fnew = fopen( newname, "wb" )) == NULL )
+	//if (( fnew = fopen( newname, "wb" )) == NULL )
+	if (( fnew = fopen( newname, "w" )) == NULL )
 	{
+		printf("Got NULL opening destination file for writing in binary mode\n");
 		fclose (fold);
 		return -1;
 	}
