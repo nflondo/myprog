@@ -14,6 +14,8 @@ struct birthday{
 struct birthday *createPerson(int d, int m, int y);
 /*void printList(struct birthday *start); */
 //static LIST_HEAD(birthday_list);
+struct birthday birthday_list;
+
 /* This function is called when the module is loaded. */
 int simple_init(void)
 {
@@ -41,13 +43,14 @@ int simple_init(void)
        // list_for_each_entry_safe is a macro that traverses the list but maintains
        // the value of the next pointer of the item being deleted (this is necessary
        // for preserving the structure of the list)
+       /*
        list_for_each_entry_safe(ptr,next,&birthday_list,list){
               printk(KERN_INFO "Entering delete loop...\n");
               //list_del is a macro to remove element from list
               list_del(&ptr->list);
               kfree(ptr);
        }
-
+       */
        return 0;
 }
 
@@ -70,12 +73,13 @@ void printList(struct birthday *start){
 /* This function is called when the module is removed. */
 void simple_exit(void) {
 	printk(KERN_INFO "Removing Module\n");
-       /*
-       struct birthday *ptr, *next;
-       list_for_each_entry_safe(ptr,next,&birthday_list,list){
-              list_del(&ptr->list);
-              kfree(ptr);
-       } */
+    struct birthday *ptr, *next;
+    
+    list_for_each_entry_safe(ptr,next->list,&birthday_list,list){
+        list_del(&ptr->list);
+        kfree(ptr);
+    } 
+    return 0;
 }
 
 /* Macros for registering module entry and exit points. */

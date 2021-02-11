@@ -39,6 +39,6 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "295280A776BA16CE89FEEEB");
+MODULE_INFO(srcversion, "F40BCA31EEC1E70080DC3E9");
 
 MODULE_INFO(suserelease, "SLE15-SP2");

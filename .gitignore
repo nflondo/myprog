@@ -9,6 +9,7 @@
 
 # Ignore these specific dirs and extensions
 __pycache__/
+node_modules/
 *.py[cod]
 *$py.class
 *.o
@@ -18,5 +19,6 @@ __pycache__/
 *.svg
 *~
 *.xml
-*.json
+#*.json
 *.tsf
+.vscode/
