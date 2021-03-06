@@ -10,6 +10,7 @@
 # Ignore these specific dirs and extensions
 __pycache__/
 node_modules/
+dist/
 *.py[cod]
 *$py.class
 *.o

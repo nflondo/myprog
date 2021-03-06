@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,10 +8,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Bootstrap CSS -->
+    <!-- (Line below means this block of css files will be concatenated into a package) -->
+    <!-- build:css css/main.css -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+
     <title>Ristorante Con Fusion</title>
 </head>
 
@@ -38,8 +42,8 @@
                 </ul>
                 <!-- linking to modal here -->
                 <span class="navbar-text">
-                    <a data-toggle="modal" data-target="#loginModal">
-                        <!-- fa = fontawesome icon -->
+                    <!-- <a data-toggle="modal" data-target="#loginModal"> -->
+                    <a id="loginButton"> 
                         <span class="fa fa-sign-in"></span> Login
                     </a>
                 </span>
@@ -50,11 +54,11 @@
     <div id="loginModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg" role="content">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header modal-head-background">
                     <h4 class="modal-title">Login </h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body modal-body-background">
                     <form>
                         <div class="form-row">
                             <div class="form-group col-sm-4">
@@ -104,11 +108,12 @@
                 <div class="col-12 col-sm-3 align-self-center">
                     <img src="img/logo.png" class="img-fluid">
                 </div>
-                <div class="col-12 col-sm-3 align-self-center">
-                    <!-- <button type="submit" class="btn btn-warning btn-sm"> -->
-                    <a role="button" class="btn btn-block nav-link btn-warning btn-sm"
-                        data-toggle="modal" data-target="#reservationModal">Reserve Table</a>
-                    <!-- </button> -->
+                <div class="col-12 col-sm-3 align-self-center">                    
+                    <!-- Assignment 4 - button uses jquery instead of data-* attributes -->
+                    <a id="reserveTableButton" role="button" class="btn btn-block nav-link 
+                        btn-warning btn-sm">
+                        Reserve Table
+                    </a>                    
                 </div>
             </div>
         </div>
@@ -117,11 +122,11 @@
     <div id="reservationModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg" role="content">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header modal-head-background">
                     <h4 class="modal-title">Reserve a Table</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body modal-body-background">
                     <form>
                         <div class="form-group row">
                             <label for="guests_label" class="col-md-2 col-form-label">Number of Guests</label>
@@ -356,17 +361,21 @@
         </div>
     </footer>
     <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+    <!-- build:js js/main.js -->
     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+
     <!-- tool tip script -->
     <!-- <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script> -->
-<!-- JQuery for carousel play/pause buttons -->
-    <script>
+    <!-- JQuery for carousel play/pause buttons -->
+    <!-- <script>
         $(document).ready(function(){
             $('#mycarousel').carousel({interval: 2000});
             $('#carouselButton').click(function() {
@@ -384,6 +393,23 @@
  
         });
     </script>
+    
+    <script>
+        $(document).ready(function(){
+            $('#reserveTableButton').click(function(){
+                $('#reservationModal').modal('show');
+            });
+            $('#loginButton').click(function(){
+                $('#loginModal').modal('show');
+            });             
+        });
+    </script> -->    <!-- <script>
+        $(document).ready(function(){
+            $('#loginButton').click(function(){
+                $('#loginModal').modal('show');
+            });            
+        });
+    </script> -->
 </body>
 
 </html>
