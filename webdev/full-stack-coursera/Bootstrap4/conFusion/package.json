@@ -1,7 +1,7 @@
 {
-  "name": "confusion",
+  "name": "HomeAssetManagement",
   "version": "1.0.0",
-  "description": "This is a website for Ristorante Con Fusion",
+  "description": "This is a website for HomeAssetMgmt",
   "main": "index.html",
   "scripts": {
     "start": "npm run watch:all",
@@ -13,7 +13,7 @@
     "clean": "rimraf dist",
     "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",
     "imagemin": "imagemin img/* -o dist/img",
-    "usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",
+    "usemin": "usemin editasset.html -d dist --htmlmin -o dist/editasset.html && usemin addasset.html -d dist --htmlmin -o dist/addasset.html && usemin index.html -d dist --htmlmin -o dist/index.html",
     "build": "npm run clean && npm run copyfonts && npm run imagemin && npm run usemin"
   },
   "author": "",
