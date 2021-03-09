@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Home Asset Management: Edit Asset</title>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <!-- build:css css/main.css -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="./index.html"><img src="img/lawnlogo.jpg" height="30" width="41"></a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="./index.html">
+                            <span class="fa fa-home fa-lg"></span> Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./addasset.html">
+                            <span class="fa fa-list fa-lg"></span> Add Asset</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#">
+                            <span class="fa fa-list fa-lg"></span> Menu</a></li> -->
+                        <li class="nav-item active"><a class="nav-link" href="#">
+                            <span class="fa fa-address-card fa-lg"></span> Edit Asset</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>Home Asset Management</h1>
+                    <p>Easily keep track of important information regarding home assets and 
+                        provide timely maintenance for uptimal functionality and long life.</p>
+                </div>
+                <div class="col-12 col-sm align-self-center">
+                    <!-- <img src="img/logo.png" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <ol class="col-12 breadcrumb">
+                <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+                <li class="breadcrumb-item active">Edit Asset</li>
+            </ol>
+            <div class="col-12">
+               <h3>Edit Asset</h3>
+               <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 col-sm-2">
+                <h5>Current Assets:</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Furnace</a></li>
+                    <li><a href="#">Mazda 6</a></li>                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-content">
+
+           <div class="col-12">
+              <h3>Furnace: </h3>
+           </div>
+            <div class="col-12 col-md-9">
+                <form>
+                    <div class="form-group row">
+                        <label for="filterdue" class="col-md-2 col-form-label">Next filter due date</label>
+                        <div class="col-md-10">
+                            <input type="date" class="form-control" id="filterdue" name="filterdue"
+                            placeholder="Filter due date">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tuneupdate" class="col-md-2 col-form-label">Next tune up date</label>
+                        <div class="col-md-10">
+                            <input type="date" class="form-control" id="tuneupdate" name="tuneupdate"
+                            placeholder="tune up date">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="feedback" class="col-md-2 col-form-label">Comments</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="feedback" name="feedback"
+                            rows="12"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-md-2 col-md-10">
+                            <button type="submit" class="btn btn-primary">
+                                Update Asset
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+             <div class="col-12 col-md">
+            </div>
+       </div>
+
+    </div>
+
+    <footer class="footer"> <!--Applying manually created footer class here-->
+        <div class="container">
+            <div class="row">
+                <div class="col-4 offset-1 col-sm-2"> <!--extra small take 4 col then div belo take 7 won't stack-->
+                    <!--offset-1 means content will be pushed right by one column.  Will apply from xm to xl-->
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="./addasset.html">Add Asset</a></li>
+                        <!-- <li><a href="#">Menu</a></li> -->
+                        <li><a href="./editasset.html">Edit Asset</a></li>
+                    </ul>
+                </div>
+                <div class="col-7 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+		              121, Go Down Road<br>
+		              Nice City, Super State<br>
+		              Great Country<br>
+		              <i class="fa fa-phone fa-lg"></i>: +345 1234 5678<br>
+		              <i class="fa fa-fax fa-lg"></i>: +453 8765 4321<br>
+		              <i class="fa fa-envelope fa-lg"></i>: <a href="mailto:confusion@food.net">admin@assetmgmt.net</a>
+		           </address>
+                </div>
+                <div class="col-12 col-sm-4 align-self-center"><!--extra sm=stack;md to lg take 4 columns-->
+                    <div class="text-center"><!--text cetner from bootstrap-->
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center"><!--justify content class from bootstrap I believe-->
+                <div class="col-auto">
+                    <p>© Copyright 2021 Home Asset Management Inc.</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+    <!-- build:js js/main.js -->
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>
