@@ -28,12 +28,12 @@ def start_end_decorator(func):
 #    print('Nefi')
 
 @start_end_decorator
-def add5(x):
-    return x + 5
+def add5(x, def_val):
+    return x + 5 + def_val
 #print_name()
 #print_name = start_end_decorator(print_name) # same as @start_end_decorator
 #print_name()
-result = add5(10)
+result = add5(10, def_val=2)
 print(result)
 print(help(add5))
 print(add5.__name__)
