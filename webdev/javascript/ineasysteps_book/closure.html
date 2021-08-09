@@ -1,0 +1,33 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>       
+        <script>
+            // assings self-invoking function to global variable
+            const add = ( function () {
+                // local variables
+                let count = 0
+                const nested = function () { // inner function
+                    return count = count + 1                 
+                }
+                return nested //returns the inner function 
+            })()
+
+            console.log( "Count is " + add())
+            console.log( "Count is " + add())
+            console.log( "Count is " + add())
+            //prototype reveals how the assigned function has been constructed internally
+            // All javascript object inherit proerties and methods form a prototype.
+            console.log( add.prototype )
+        </script>
+    </body>
+</html>

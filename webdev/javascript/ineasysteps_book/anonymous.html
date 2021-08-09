@@ -1,0 +1,37 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            // call a function not yet declared
+            console.log( "Hoisted: " + add( 100, 200 ))
+            // declare the function
+            function add( numOne, numTwo){
+                return numOne + numTwo
+            }
+            // Assign a function to a variable
+            let addition = add
+            console.log("Assigned: " + addition( 32, 64 ))
+            // Assign anonymous function to a variable
+            let anon = function (argOne, argTwo){
+                //let result = numOne + numTwo; return result
+                return argOne + argTwo
+            }
+            console.log("Anonymous: " + anon( 9, 1))
+            // Assing value returned from a self-invoking function to a variable and display the value
+            let iffy = ( function () {
+                let str = "Self Invoked Output"; return str
+            })()
+            console.log( iffy )
+        </script>
+    </body>
+</html>
