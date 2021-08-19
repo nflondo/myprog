@@ -1,0 +1,34 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                let sum, net = "25", tax = 5.00
+                sum = net + tax
+                console.log("sum: " + sum + " " + typeof sum) //sum: 255 string
+
+                sum = parseFloat( net ) + tax
+                console.log("sum: " + sum + " " + typeof sum) // sum: 30 number
+
+                console.log("tax: " + tax + " " + typeof tax) //tax: 5 number
+                tax = tax.toString()
+                console.log( "tax: " + tax + " " + typeof tax) //tax: 5 string
+
+                net = "$" + net
+                console.log( "net: " + net + " " + parseInt( net )) //net: $25 NaN
+                console.log( "net Not a Number? " + isNaN( net )) //net Not a Number? true
+
+            }) ()
+        </script>
+    </body>
+</html>
