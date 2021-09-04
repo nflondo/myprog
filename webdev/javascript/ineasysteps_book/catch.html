@@ -1,0 +1,38 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                let day = 0
+
+                try {
+                    if( day > 31 ){
+                        throw new RangeError( "Day cannot exceed 31")
+                    }
+                    if ( day < 1 ){
+                        throw "invalid"
+                    }
+                } catch ( errorsote ){
+                    if ( errorsote === "invalid"){
+                        console.log("Variable has invalid value of " + day)
+                    } else {
+                        console.log( errorsote.name + " My Exception: " + errorsote.message)
+                    }
+                } finally {
+                    console.log("The script has ignored the error...")
+                }
+
+            }) ()
+        </script>
+    </body>
+</html>

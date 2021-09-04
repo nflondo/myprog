@@ -1,0 +1,36 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                //primitives, not objects
+                let jsString = "Text"
+                let jsNumber = 125000
+                let jsBoolean = true
+                //objects of each other type
+                let jsObject = { firstName: "Mike", lastName: "McGrath"}
+                let jsDate = new Date()
+                let jsArray = [1, 2, 3]
+                let jsRegExp = /ineasysteps/i
+                let jsMath = Math
+                let jsError = new Error("Error!")
+
+                console.log("Date Object: " + jsDate)
+                console.log("Locale Date String: " + jsDate.toLocaleString())
+                console.log("\nPrimitive Number: " + jsNumber)
+                console.log("Locale Number String: " + jsNumber.toLocaleString())
+
+            }) ()
+        </script>
+    </body>
+</html>

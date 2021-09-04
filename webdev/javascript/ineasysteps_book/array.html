@@ -1,0 +1,33 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                // create an array the wrong way
+                let jsArray = new Array( 10 )
+                console.log( jsArray[0])
+                console.log( jsArray )
+
+                let month, summer = ["June", "July", "August"]
+                for ( month in summer){ // for .... in ... loop
+                    if ( month !== ""){
+                        console.log( month + ":" + summer[ month ])
+                    }
+                }
+                console.log( "Start of Summer: " + summer[0])
+                console.log( summer )
+
+            }) ()
+        </script>
+    </body>
+</html>

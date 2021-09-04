@@ -1,0 +1,38 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                //values are assigned to the object as a comma-separated list 
+                //of name:value pairs within {}
+                let car = {
+                    make: "Jeep",
+                    model: "Wrangler",
+                    //object's methods
+                    accelerate: function(){
+                        return this.model + " drives away"
+                    },
+                    brake: function() {
+                        return this.make + " pulls up"
+                    }
+                }
+                // uses different reference techniques to call attributes/properties
+                console.log("Car is a " + car.make + " " + car["model"])
+                // call methods
+                console.log( car.accelerate())
+                console.log( car.brake())
+
+            }) ()
+        </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+               let seasons = [ "Spring", "Summer", "Fall", "Winter"]
+               console.log("Elements: " + seasons)
+               console.log("Joined: " + seasons.join(" & "))
+               console.log("Popped: " + seasons.pop())
+               console.log("Elements: " + seasons)
+               console.log("Pushed: " + seasons.push("Winter"))
+               console.log("Elements: " + seasons)
+               console.log("Sliced: " + seasons.slice( 1, 3))
+               console.log("Spliced: " + seasons.splice(2, 1, "Autumn"))
+               console.log("Elements: " + seasons)
+               //Use the splice() without a replacement value to delete a 
+               //specified number of elements at a specified position and it will
+               //automatically renumber all remaining elements that follow in 
+               //that array
+               console.log("Spliced: " + seasons.splice(2, 1))
+               console.log("Elements: " + seasons)
+            }) ()
+        </script>
+    </body>
+</html>

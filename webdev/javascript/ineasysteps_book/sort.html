@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                let hues = ["Red", "RED", "red", "Green", "Blue"]
+                let nums = [ 1, 20, 3, 17, 14, 0.5]
+                console.log("Colors: " + hues)
+                console.log("Dictionary Sort: " + hues.sort())
+                console.log("\nNumbers: " + nums)
+                console.log("Dictionary Sort: " + nums.sort())
+                console.log("Numerical Sort: " + nums.sort(sortNums))
+                console.log("Reverse Sort: " + nums.reverse())             
+            }) ()
+            /* A comparison function nominated by the sort() method will be 
+            passed successive pairs of elements values for comparison, and it 
+            must return an integer value to indicate each comparison's result.
+            When the first value is greater than the second it should return a
+            value greater than zero to indicate that the first value should be
+            sorted to a higher index position.  In summary:
+            if ( x > y ) return 1
+            else if ( x < y ) return -1
+            else return 0
+            */
+            function sortNums( numOne, numTwo){
+                return numOne - numTwo
+            }
+
+        </script>
+    </body>
+</html>

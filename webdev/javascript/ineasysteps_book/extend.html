@@ -1,0 +1,52 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                //values are assigned to the object as a comma-separated list 
+                //of name:value pairs within {}
+                let car = {
+                    make: "Jeep",
+                    model: "Wrangler",
+                    //object's methods
+                    accelerate: function(){
+                        return this.model + " drives away"
+                    },
+                    brake: function() {
+                        return this.make + " pulls up"
+                    }
+                }
+
+                //list the name and value of each property and method
+                for ( property in car ){
+                    console.log( property + ":" + car[ property ])
+                }
+                // assign new values to properties
+                car.make = "Ford"
+                car.model = "Bronco"
+                //extend the object
+                car.engine = "V6"
+                car.start = function(){
+                    return this.make + " motor is running"
+                }
+                console.log( "\nCar is a " + car.make + " " + car["model"])
+                console.log( "Engine Type: " + car.engine)
+
+                console.log( car.start())
+                console.log( car.accelerate())
+                console.log( car.brake())
+
+            }) ()
+        </script>
+    </body>
+</html>

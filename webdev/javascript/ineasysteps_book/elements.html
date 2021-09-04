@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+            ( function () {
+                // Topic: Loop Elements
+                let i, result, boolArray = []
+                console.log("Fill Elements...")
+                for(i = 1; i < 11; i++){
+                    boolArray[ i ] = ( i % 2 === 0 )? true : false
+                    console.log("Element " + i + ": " + boolArray[ i ])
+                }
+                console.log("Read Elements...")
+                result = ""
+                for( i = 1; i < boolArray.length; i++){
+                    if( boolArray[i]){ // if true
+                        result += i + " | "
+                    }                                                           
+                }
+                console.log("True in Elements: " + result) 
+                result=""
+                for( i = 1; i < boolArray.length; i++){
+                    if( !boolArray[i]){ // if not true
+                        result += i + " | "
+                    }                    
+                }
+                console.log("False in Elements: " + result)
+
+            }) ()
+        </script>
+    </body>
+</html>
