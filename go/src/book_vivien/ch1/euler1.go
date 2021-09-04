@@ -1,5 +1,6 @@
 // Calculates sum of all multiple of 3 and 5 less than MAX value.
 // See https://projecteuler.net/problem=1
+// Illustrates goroutine and channels
 package main
 
 import (
