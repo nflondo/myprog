@@ -7,22 +7,35 @@ an address. Your program should create a map and add the name and address to the
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
-	var userName, userAddr string
-	fmt.Println("Enter your name: ")
-	fmt.Scanln(&userName)
-	fmt.Println("Enter your address")
-	fmt.Scanln(&userAddr)
+	//var userName, userAddr string
+	// fmt.Println("Enter your name: ")
+	// fmt.Scanln(&userName)
+	// fmt.Println("Enter your address")
+	// fmt.Scanln(&userAddr)
 
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Please enter your name: ")
+	userName, _ := reader.ReadString('\n')
+	//remove \n char
+	userName = strings.Replace(userName, "\n", "", -1)
+
+	fmt.Print("Please enter your address: ")
+	userAddr, _ := reader.ReadString('\n')
+	//remove \n char
+	userAddr = strings.Replace(userAddr, "\n", "", -1)
+	//Create a map
 	userMap := make(map[string]string)
 	userMap["name"] = userName
 	userMap["address"] = userAddr
-
+	// Create json object
 	barr, err := json.Marshal(userMap)
 	if err != nil {
 		fmt.Println("Failed during json.Marshal")
