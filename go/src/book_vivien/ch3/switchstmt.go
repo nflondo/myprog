@@ -54,7 +54,7 @@ func isDollar2(curr Curr) bool {
 
 func isEuro(curr Curr) bool {
 	switch curr {
-	case currencies[2], currencies[4], currencies[10]: //implied or
+	case currencies[2], currencies[4], currencies[10]: //implied OR
 		return true
 	default:
 		return false
