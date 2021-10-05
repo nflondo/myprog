@@ -124,10 +124,13 @@ func main() {
 			switch new_animal_type {
 			case "cow":
 				animalList = append(animalList, Cow{name: new_animal_name})
+				fmt.Println("Created it!")
 			case "bird":
 				animalList = append(animalList, Bird{name: new_animal_name})
+				fmt.Println("Created it!")
 			case "snake":
 				animalList = append(animalList, Snake{name: new_animal_name})
+				fmt.Println("Created it!")
 			}
 		case "query": //>query <animal_name> <eat/move/speak>
 			animal_name := input[1]
