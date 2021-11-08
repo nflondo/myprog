@@ -79,9 +79,12 @@ func main() {
 		}
 		fmt.Println("Enter integers one at a time and press [enter], press 'q' to quit: ")
 		_, err := fmt.Scan(&userInput)
+		if userInput == "q" || idx == maxInputNum {
+			break
+		}
 		convertedInt, err = strconv.Atoi(userInput)
 		if err != nil {
-			fmt.Println("%e", err)
+			fmt.Println("Unable to convert to integer: ", err)
 			os.Exit(1)
 		}
 		userNums = append(userNums, convertedInt)

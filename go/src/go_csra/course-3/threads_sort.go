@@ -75,7 +75,7 @@ func main() {
 	for _, element := range input {
 		convertedInt, err := strconv.Atoi(element)
 		if err != nil {
-			fmt.Println("%e", err)
+			fmt.Println("Unable to convert to integer: ", err)
 			os.Exit(1)
 		}
 		userNums = append(userNums, convertedInt)
