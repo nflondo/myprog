@@ -16,9 +16,9 @@
             ( function () {
                 const now = new Date()
                 let offset = now.getTimezoneOffset()
-                let dst = 60
+                let dst = 60 // substract 60 min for periods of DST
                 //turn off daylight saving time from Nov 3 to Mar 10
-                if(( now.getMonth() < 3) && ( now.getDate() < 10))
+                if(( now.getMonth() < 3) && ( now.getDate() < 10)) //getDate() returns day of month 1 - 31
                 { dst = 0 }
                 if(( now.getMonth() > 9 ) && ( now.getDate() > 2))
                 { dst = 0 }

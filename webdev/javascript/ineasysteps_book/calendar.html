@@ -1,0 +1,40 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                const days = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                const months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
+                                    "Aug", "Sep", "Oct", "Nov", "Dec" ]                                                  
+                const now = new Date()
+
+                let year = now.getFullYear()
+                let month = now.getMonth()
+                let dayNumber = now.getDate()
+                let dayName = now.getDay()
+
+                month = months[ month ]
+                dayName = days[ dayName ]
+                
+                let usDate = dayName + ", " + month + " " + dayNumber + ", " + year
+                let ukDate = dayName + ", " + dayNumber + " " + month + ", " + year
+
+                // output date and time info                
+                console.log("U.S. Date: " + usDate)
+                console.log("U.K. Date: " + ukDate)
+                
+            }) ()
+        </script>
+    </body>
+</html>
