@@ -1,0 +1,39 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                const system = "Windows", suite = "Office", pattern = /ice/i
+                console.log("In " + system + "? " + pattern.test( system ))
+                console.log("In " + suite + "? " + pattern.test(suite))
+
+                let result = pattern.exec( suite )//exec returns text found and its index
+                if( result )
+                {
+                    console.log("Found " + result + " at " + result.index)
+                }
+                else { console.log("No Match Found")}
+
+                //Validate email
+                let email = "mike@example"
+                const format = /.+\@.+\..+/
+                console.log(email + " Valid? " + format.test(email))
+                //correct the email
+                email += ".com"
+                console.log( email + " Valid? " + format.test( email ))
+
+            }) ()
+        </script>
+    </body>
+</html>
