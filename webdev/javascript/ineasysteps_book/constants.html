@@ -1,0 +1,33 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                let radius = 4
+                console.log("\nRadius of Circle: " + radius)
+                //Calculate area
+                let area = Math.PI * ( radius * radius)//all math constants must be stated in upper case
+                console.log("\nArea of a Circle: " + area)
+                //circumference
+                let circumference = 2 * ( Math.PI * radius )
+                console.log( "\nPerimeter of Circle: " + circumference)
+
+                let cube = ( radius * radius * radius)
+                let volume = (( 4/3) * Math.PI) * cube
+                console.log( "\nVolume of Sphere: " + volume)
+
+            }) ()
+        </script>
+    </body>
+</html>
