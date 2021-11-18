@@ -2,14 +2,16 @@
 # Read 3 ints from user, and display them in sorted order
 # use built-in function min() and max()
 
-numbers = input("Enter 3 numbers (no spaces in between): ")
-if len(numbers) == 3 :     
-    min_number = min(int(numbers[0]), int(numbers[1]), int(numbers[2]))
-    max_number = max(int(numbers[0]), int(numbers[1]), int(numbers[2]))
-    middle_num = ((int(numbers[0]) + int(numbers[1]) + int(numbers[2])) - 
+user_input = input("Enter 3 numbers (separated by a space): ")
+list_num = user_input.split() #splits on space by default
+#print("list_num: ", list_num)
+if len(list_num) == 3 :
+    min_number = min(int(list_num[0]), int(list_num[1]), int(list_num[2]))    
+    max_number = max(int(list_num[0]), int(list_num[1]), int(list_num[2]))
+    middle_num = ((int(list_num[0]) + int(list_num[1]) + int(list_num[2])) -
         min_number - max_number)
 else :
-    print("Please enter 3 numbers")
+    print("Please enter exactly 3 numbers")
 
 #print("Min number: %d" % min_number)
 print("Sorted numbers: %d %d %d" % (min_number, middle_num, max_number))
