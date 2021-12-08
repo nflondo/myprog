@@ -1,0 +1,38 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                let i, rand, temp, nums = []
+                let str = "\n\nYour Six Lucky Numbers: "
+                //fill array elements 1-59
+                for( i = 1; i < 60; i++){ nums[ i ] = i}
+                console.log("filled array: " + nums)
+                //randomize the numbers in the array elements
+                for( i = 1; i < 60; i++){
+                    rand = Math.ceil( Math.random() * 59) //number 1 - 59
+                    temp = nums[ i ] //store initial value of array index in temp
+                    nums[ i ] = nums[ rand ] //change value with random index
+                    nums[ rand ] = temp
+                }
+                //append hyphenated list of six elements values to the string var
+                for( i = 1; i < 7; i++){
+                    str += nums[ i ]
+                    if( i !== 6 ){ str += " - "}
+                }
+                console.log(str)
+            }) ()
+        </script>
+    </body>
+</html>
