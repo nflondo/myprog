@@ -1,0 +1,34 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+//                let definition = "JavaScript is the original dialect of the \
+//ECMAScript standard language"
+                let definition = "JavaScript is the original dialect of the " +
+                    "ECMAScript standard language"
+                let str = definition.slice( 0, 27 ) //returns chars between 2 pos
+                str += definition.slice( 62, 70 )
+                console.log( str )
+                console.log( str.split(" ", 5))//separator, size of array to return
+
+                str = definition.substring( 42, 52 )//copy chars from index to index
+                str += definition.substring( 10, 17 )
+                str += definition.substr( 52, 70 )//copy from index, then number of chars to copy
+
+                console.log(str)
+            }) ()
+        </script>
+    </body>
+</html>
