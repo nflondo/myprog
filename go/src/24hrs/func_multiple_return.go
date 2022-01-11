@@ -1,3 +1,5 @@
+// Function that takes two arguments and returns three
+// Hour 4 ex 3, Go in 24 hrs.
 package main
 
 import "fmt"
