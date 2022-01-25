@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                let str = 'JavaScript in easy steps'
+                //case sensitive string searches
+                console.log('"Script" Search: ' + str.search( 'Script' ))
+                console.log('"script" Search: ' + str.search( 'script' ))
+                //case sensitive string matches
+                console.log( '\n"Script" Match: ' + str.match( 'Script' ))
+                console.log( '"script" Match: ' + str.match( 'script' ))
+                //first and last index positions of a character
+                console.log( '\nindexOf "s": ' + str.indexOf( 's'))
+                console.log( 'indexOf "m":' + str.indexOf( 'm'))
+                console.log( '\nlastindexOf "s":' + str.lastIndexOf( 's'))
+                console.log( 'lastindexOf "m":' + str.lastIndexOf( 'm'))
+                //output the first character in the string and its Unicode value, 
+                //plus four characters specified by their Unicode values
+                console.log( '\ncharAt 0: '+ str.charAt( 0))
+                console.log( 'charCodeAt 0: ' + str.charCodeAt( 0))
+                console.log( 'fromCharCode: '+ String.fromCharCode( 74, 97, 118,97))
+                //output original string and a modified version of that string
+                console.log('\nOriginal: ' + str)
+                //does not actually change original string
+                console.log( 'Replaced: ' + str.replace('easy', 'simple'))
+
+            }) ()
+        </script>
+    </body>
+</html>
