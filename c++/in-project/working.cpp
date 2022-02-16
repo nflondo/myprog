@@ -2,6 +2,10 @@
 // updated 2020-06-24
 #include <cstdio>
 
+//Reference function
+const int & f(const int & i) {
+    return i;
+}
 int main()
 {
     const int i = 7;
@@ -40,5 +44,12 @@ int main()
         printf("element %d is: %d\n", i2, array[i2]);
         ++i2;
     }
+    //References.  It's useful cause it doesn't make a copy
+    int j = 5;
+    int & jr = j; //reference
+    jr = 10;
+    printf("j is %d\n", j);
+    printf("f(j) is %d\n", f(j));
+
     return 0;
 }
