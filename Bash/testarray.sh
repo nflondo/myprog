@@ -7,9 +7,11 @@ atest=$(cat /tmp/ip-vms-10.1.1.10 2> /dev/null | sort | uniq)
 count=0
 atest_array=""
 TestCmdLine="-l -d Bug1196463-test -i 10.1.1.10 -p Get_MVM_Test_Logs -t /opt/suse/testKits/system/bin/gatherlogs -i ~vm-ipaddr~ -f Virtualization_Reduced"
-TestCmdLine=${TestCmdLine/-f/}
-#${TestCmdLine/-d Bug1196463-test}
-echo $TestCmdLine
+#TestCmdLine="-f Virtualization_Reduced -l -d Bug1196463-test -i 10.1.1.10 -p Get_MVM_Test_Logs -t /opt/suse/testKits/system/bin/gatherlogs -i ~vm-ipaddr~"
+echo "   TestCmdLine=$TestCmdLine"
+#TestCmdLine=${TestCmdLine/-f\w+\s/}
+TestCmdLine=$(echo $TestCmdLine | sed 's/-f(.*)(.*)//g')
+echo "2- TestCmdLine:$TestCmdLine"
 exit 1
 for element in ${atest};do
 	atest_array[count]=$element
