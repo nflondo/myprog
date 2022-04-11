@@ -15,7 +15,7 @@ int main() {
     char * cp = nullptr;
     
     // strncpy -- copy a string
-    strncpy(sd1, s1, maxbuf);
+    strncpy(sd1, s1, maxbuf); // n means it uses a count argument
     printf("sd1 is %s\n", sd1);
     strncpy(sd2, s2, maxbuf);
     printf("sd2 is %s\n", sd2);
@@ -30,6 +30,7 @@ int main() {
     printf("length of sd2 is %zd\n", strnlen(sd2, maxbuf));
     
     // strcmp -- compare strings
+    //results  of comparison = 1 is greater; -1 is less than, 0 for equal 
     i = strcmp(sd1, sd2);
     printf("sd1 %s sd2 (%d)\n", (i == 0) ? "==" : "!=", i);
     i = strcmp(sd2, s2);

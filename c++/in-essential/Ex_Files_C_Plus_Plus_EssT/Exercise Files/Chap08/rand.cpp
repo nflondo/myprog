@@ -8,8 +8,8 @@ int main()
 {
     printf("time value: %ld\n", (long) time(nullptr));
 
-    srand((unsigned)time(nullptr));
-    rand();
+    srand((unsigned)time(nullptr)); //seeds the pseudorandom generator
+    rand(); //throw away one rand
 
     printf("pseudo-random value: %d\n", rand() % 1000);
     printf("pseudo-random value: %d\n", rand() % 1000);
