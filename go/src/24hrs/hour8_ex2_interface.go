@@ -1,5 +1,3 @@
-//Add a method called "Talk" to robot interface and modify structs
-//to implement the method
 package main
 
 import (
@@ -20,8 +18,8 @@ func (a *T850) PowerOn() error {
 	return nil
 }
 
-func (r *T850) Talk() {
-	fmt.Println("Speaking for T850")
+func (a *T850) Talk() {
+	fmt.Println("Robot talking")
 }
 
 type R2D2 struct {
@@ -37,15 +35,11 @@ func (r *R2D2) PowerOn() error {
 }
 
 func (r *R2D2) Talk() {
-	fmt.Println("Speaking for R2D2")
+	fmt.Println("R2D2 Robot Talking")
 }
 
 func Boot(r Robot) error {
 	return r.PowerOn()
-}
-
-func Speak(r Robot) {
-	r.Talk()
 }
 
 func main() {
@@ -73,8 +67,5 @@ func main() {
 	} else {
 		fmt.Println("Robot is powered on!")
 	}
-
-	Speak(&t)
-	Speak(&r)
 
 }
