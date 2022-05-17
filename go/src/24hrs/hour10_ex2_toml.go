@@ -1,3 +1,5 @@
+/*** This program does Marshaling: Represents  Go structure as a TOML document
+Unmarshal reads a TOML document and fills a Go structure with its content. ***/
 package main
 
 import (
