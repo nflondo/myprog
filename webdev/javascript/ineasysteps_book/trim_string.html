@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                let str = ' Love for All, Hatred for None. '
+                // test beginning and end of string
+                console.log( 'String: ' + str)
+                console.log( 'Starts with "L" ? ' + str.startsWith( 'L' ))
+                console.log( 'Ends with "." ? ' + str.endsWith( '.' ))
+                console.log( 'First Letter: ' + str[ 0 ])
+
+                // assign trimmed version of string to variable str
+                str = str.trim()
+
+                // new tests
+                console.log( 'Trimmed: ' + str)
+                console.log( 'Starts with "L" ? ' + str.startsWith( 'L' ))
+                console.log( 'Ends With "." ? ' + str.endsWith( '.' ))
+                console.log( 'First Letter: ' + str[ 0 ])
+
+                console.log( '\nincludes "Hat" ? ' + str.includes( 'Hat' ))
+                console.log( 'Includes "hat" ?'+ str.includes( 'hat' ))
+
+                // output 10 copies of the trimmed string
+                console.log( '\nRepeat:\n' + str.repeat( 10 ))
+
+            }) ()
+        </script>
+    </body>
+</html>
