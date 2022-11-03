@@ -1,0 +1,36 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p id="info" style="width:2000px; margin-left:300px;font:1.2em sans-serif"></p>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                const info = document.getElementById('info')
+                let i = 0
+                // loop to write a column of 40 numbers into paragraph
+                for( i = 1; i < 41; i++)
+                {
+                    info.innerHTML += (i + '<br>')
+                }
+                //scrolls the window 200 px horizontally to the right, and by the
+                // height of the paragraph element vertically downward
+                window.scrollBy(200, info.clientHeight)
+                // statement to append a confirmation of the current window's thumb
+                // positions
+                info.innerHTML += 'scrollX: ' + window.scrollX + ' & scrollY: ' +
+                            window.scrollY
+                
+            }) ()
+        </script>
+    </body>
+</html>
