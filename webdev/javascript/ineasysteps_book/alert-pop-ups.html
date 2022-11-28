@@ -1,0 +1,28 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p id="response" style="font:1.5em sans-serif"></p>
+        <div id="panel">
+            <noscript>
+                <div>
+                    ! JavaScript is not enabled
+                </div>
+            </noscript>        
+        
+        </div>
+        <script>
+
+            ( function () {
+                const info = document.getElementById('response')
+                window.alert('Hello from JavaScript')
+                // request decision and write response in paragraph
+                info.innerHTML = 'Confirm: ' + window.confirm('Go or Stop?')
+                // request input and write response in paragraph
+                info.innerHTML += '<br>Prompt: ' + window.prompt('Yes or No?', 'Yes')
+                
+            }) ()
+        </script>
+    </body>
+</html>
