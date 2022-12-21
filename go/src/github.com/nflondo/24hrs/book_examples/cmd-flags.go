@@ -19,7 +19,7 @@ func main() {
 	//flag.Parse is called so that the program may pass arguments once they have
 	//been declared
 	flag.Parse()
-	//print value of s. Use * to dereference the pointer and how underlying value
+	//print value of s. Use * to dereference the pointer and Show underlying value
 	fmt.Println("value of s:", *s)
 	fmt.Println("value of o:", *o)
 	fmt.Println("value of i:", *i)
