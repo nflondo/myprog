@@ -33,7 +33,7 @@ func main() {
 	}
 	jsonStringData := string(jsonByteData)
 	fmt.Println(jsonStringData)
-
+	// print second person s
 	fmt.Printf("%+v\n", s)
 	sjsonByteData, err := json.Marshal(s)
 	if err != nil {
