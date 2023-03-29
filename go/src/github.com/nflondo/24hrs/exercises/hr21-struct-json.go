@@ -1,4 +1,5 @@
 // This program prints information about a pet
+// author: Nefi Munoz <nefi.munoz@gmail.com>
 package main
 
 import (
