@@ -22,12 +22,19 @@ func main() {
 	src := string(body)
 
 	re := regexp.MustCompile("\\<h2\\>.*\\</h2\\>")
+	// match HTML tags
+	// match "<" then match anything not ">", zero or more times, then match ">"
+	rHTML := regexp.MustCompile("<[^>]*>")
 	//FindAllString() used to look for all occurrences of a regular expression
 	//within a String
 	titles := re.FindAllString(src, -1)
+	//cleanTitles := rHTML.FindAllString(re, -1)
 
 	for _, title := range titles {
-		fmt.Println(title)
+
+		//fmt.Println(title)
+		// replaced matched HTML tags with nothing
+		fmt.Println(rHTML.ReplaceAllString(title, ""))
 	}
 
 }
