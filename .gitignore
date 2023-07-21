@@ -22,6 +22,6 @@ dist/
 *.xml
 #*.json
 *.tsf
-.exe
+*.exe
 .vscode/
 pkg/
