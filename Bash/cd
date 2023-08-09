@@ -1,3 +1,0 @@
-# Added this comment
-#!/bin/bash
-builtin cd "$@"
