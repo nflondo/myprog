@@ -25,3 +25,5 @@ dist/
 *.exe
 .vscode/
 pkg/
+.terraform/
+.terraform*
