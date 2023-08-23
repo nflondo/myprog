@@ -9,7 +9,7 @@ spec:
   containers:
   - image: busybox
     name: poda
-    command: ["sh", "-c", "sleep 3600"]
+    command: ["sh", "-c", "sleep 7200"]
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
@@ -26,7 +26,7 @@ spec:
   containers:
   - image: busybox
     name: podb
-    command: ["sh", "-c", "sleep 3600"]
+    command: ["sh", "-c", "sleep 7200"]
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
