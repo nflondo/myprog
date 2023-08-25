@@ -7,9 +7,7 @@ spec:
   egress:
     - to:
       - ipBlock:
-          cidr: 10.42.1.0/24
-          except:
-            - 10.42.1.103/32
+          cidr: 10.42.1.211/32          
   podSelector:
     matchLabels:
       pod: a

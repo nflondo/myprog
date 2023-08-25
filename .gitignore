@@ -27,3 +27,5 @@ dist/
 pkg/
 .terraform/
 .terraform*
+*.tfstate
+*.tfstate.backup

@@ -4,7 +4,7 @@ metadata:
   labels:
     pod: a
   name: poda
-  namespace: net-test-1
+  namespace: citest
 spec:
   containers:
   - image: busybox
@@ -21,7 +21,7 @@ metadata:
   labels:
     pod: b
   name: podb
-  namespace: net-test-1
+  namespace: citest
 spec:
   containers:
   - image: busybox

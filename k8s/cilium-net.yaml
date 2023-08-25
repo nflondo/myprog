@@ -1,0 +1,16 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cilium-cidr-rule"
+  namespace: "net-test-1"
+spec:
+  endpointSelector:
+    matchLabels:
+      pod: a
+  egress:
+  - toCIDR:
+    - 10.42.1.0/24
+  - toCIDRSet:
+    - cidr: 10.0.0.0/8
+      except:
+      - 10.96.0.0/12
