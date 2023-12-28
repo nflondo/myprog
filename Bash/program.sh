@@ -1,9 +1,9 @@
 #!/bin/bash
-echo -e "what is your name?\n"
+echo -ne "what is your name?: "
 read first
-echo -e "lastname? \n"
+echo -ne "lastname?: "
 read last
-echo -e "age?: \n"
+echo -ne "age?: "
 read age
 
-echo -e "Your name is: $first $last and age: $age"
+echo "Your name is: $first $last and age: $age"
