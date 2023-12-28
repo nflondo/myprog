@@ -1,0 +1,113 @@
+#!/bin/bash
+# Facilitate vm operations via cmdline using the following options:
+# stop, start, list, plus VM name as argument
+# Example: myvm start vm1
+# Author: nefi.munoz@gmail.com
+
+###############################################################################
+# Functions
+###############################################################################
+#=========================================================#
+# Display help
+#
+function display_help {
+    echo "Usage: $0 options [arguments]"
+    echo "Options:"
+    echo "  list                Displays all VMs"
+    echo "  start [vm name]     Starts a VM"
+    echo "  stop  [vm name]     Gracefully shutdowns a VM"
+    echo "  help                Displays this help message"
+}
+
+#=========================================================#
+# List all VMs
+#
+function list_vms {    
+    local rc
+    echo "Listing VMs"
+    sudo virsh list --all
+    rc=$?
+    if [[ $rc -eq 0 ]];then
+        return 0
+    else
+        return $rc
+    fi
+}
+
+#=========================================================#
+# Start a VM
+#
+function start_vm {
+    local vm_name=$1
+    local rc
+    echo "Starting ${vm_name}"
+    sudo virsh start "${vm_name}" &>$LOG
+    rc=$?
+    if [[ $rc -eq 0 ]];then
+        echo "Successfully started ${vm_name}" | tee -a $LOG
+        return 0
+    else
+        echo "Failed to start ${vm_name}.  For details, see log at: $LOG"
+        return $rc
+    fi
+}
+
+#=========================================================#
+# Shutdown a VM
+#
+function stop_vm {
+    local vm_name=$1
+    local rc
+    echo "Shutting down ${vm_name}..."
+    sudo virsh shutdown "${vm_name}" &>$LOG    
+    rc=$?
+    if [[ $rc -eq 0 ]];then
+        echo "Successfully started to shut down ${vm_name} !" | tee -a $LOG
+        return 0
+    else
+        echo "Failed to shut down ${vm_name}.  For details, see log at: $LOG"
+        return $rc
+    fi
+}
+
+###############################################################################
+# Main line code
+###############################################################################
+LOG=/var/log/myvm.txt
+sudo touch $LOG
+sudo chmod 666 $LOG
+# Check if there are no arguments
+if [ $# -eq 0 ]; then
+    echo "Error: No arguments provided."
+    display_help
+    exit 1
+fi
+
+# Parse options and arguments
+case $1 in
+    "list")
+        list_vms                 
+        ;;
+    "start")
+        if [[ -z $2 ]]; then
+            display_help
+            exit 1
+        fi
+        start_vm "${2}"
+        ;;
+    "stop")
+        if [[ -z $2 ]]; then
+            display_help
+            exit 1
+        fi
+        stop_vm "${2}"
+        ;;
+    "help")
+        display_help
+        ;;
+    *)
+        echo "Error: Unknown option $1."
+        display_help
+        exit 1
+        ;;
+esac
