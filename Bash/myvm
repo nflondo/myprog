@@ -22,63 +22,47 @@ function display_help {
 #=========================================================#
 # List all VMs
 #
-function list_vms {    
-    local rc
+function list_vms {            
     echo "Listing VMs"
-    sudo virsh list --all
-    rc=$?
-    if [[ $rc -eq 0 ]];then
-        return 0
-    else
-        return $rc
-    fi
+    sudo virsh list --all 2>$LOG #only send error msg to log
+    return $?
 }
 
 #=========================================================#
 # Start a VM
 #
 function start_vm {
-    local vm_name=$1
-    local rc
+    local vm_name=$1    
     echo "Starting ${vm_name}"
-    sudo virsh start "${vm_name}" &>$LOG
-    rc=$?
-    if [[ $rc -eq 0 ]];then
-        echo "Successfully started ${vm_name}" | tee -a $LOG
-        return 0
-    else
-        echo "Failed to start ${vm_name}.  For details, see log at: $LOG"
-        return $rc
-    fi
+    sudo virsh start "${vm_name}" &>$LOG #send standard output and errors to log   
+    return $?
 }
 
 #=========================================================#
 # Shutdown a VM
 #
 function stop_vm {
-    local vm_name=$1
-    local rc
+    local vm_name=$1    
     echo "Shutting down ${vm_name}..."
-    sudo virsh shutdown "${vm_name}" &>$LOG    
-    rc=$?
-    if [[ $rc -eq 0 ]];then
-        echo "Successfully started to shut down ${vm_name} !" | tee -a $LOG
-        return 0
-    else
-        echo "Failed to shut down ${vm_name}.  For details, see log at: $LOG"
-        return $rc
-    fi
+    sudo virsh shutdown "${vm_name}" &>$LOG # send standard output and errors to log              
+    return $?
 }
 
 ###############################################################################
 # Main line code
 ###############################################################################
 LOG=/var/log/myvm.txt
+# If log exists from previous run, remove it.
+if [[ $(stat $LOG) ]]; then
+    sudo rm $LOG 
+fi
+# Create a new log every time program runs.
 sudo touch $LOG
 sudo chmod 666 $LOG
-# Check if there are no arguments
+
+# Check if there are no options passed to program
 if [ $# -eq 0 ]; then
-    echo "Error: No arguments provided."
+    echo "***Error: No options provided."
     display_help
     exit 1
 fi
@@ -86,7 +70,16 @@ fi
 # Parse options and arguments
 case $1 in
     "list")
-        list_vms                 
+        list_vms           
+        RC=$?        
+        if [[ $RC -eq 0 ]] ;then
+            echo "Success listing VMs!" | tee -a $LOG
+            exit 0
+        else
+            echo "***Failed to list VMs. For details, see log at:$LOG" \
+                | tee -a $LOG
+            exit 1
+        fi
         ;;
     "start")
         if [[ -z $2 ]]; then
@@ -94,6 +87,15 @@ case $1 in
             exit 1
         fi
         start_vm "${2}"
+        RC=$? 
+        if [[ $RC -eq 0 ]];then
+            echo "Success starting: ${2}" | tee -a $LOG
+            exit 0
+        else
+            echo "***Failed to start: ${2}. For details, see log at:$LOG" \
+                | tee -a $LOG
+            exit 1
+        fi
         ;;
     "stop")
         if [[ -z $2 ]]; then
@@ -101,13 +103,23 @@ case $1 in
             exit 1
         fi
         stop_vm "${2}"
+        RC=$?        
+        if [[ $RC -eq 0 ]] ;then
+            echo "Success stopping ${2}!" | tee -a $LOG
+            exit 0
+        else
+            echo "***Failed to shutdown ${2}. For details, see log at:$LOG" \
+                | tee -a $LOG
+            exit 1
+        fi
         ;;
     "help")
         display_help
         ;;
     *)
-        echo "Error: Unknown option $1."
+        echo "*** Error: Unknown option: \"$1\"."
         display_help
         exit 1
         ;;
 esac
+exit 0
