@@ -13,10 +13,10 @@
 function display_help {
     echo "Usage: $0 options [arguments]"
     echo "Options:"
-    echo "  list                Displays all VMs"
-    echo "  start [vm name]     Starts a VM"
-    echo "  stop  [vm name]     Gracefully shutdowns a VM"
-    echo "  help                Displays this help message"
+    echo "  list                    Displays all VMs"
+    echo "  start [vm_name | all]   Starts one or all inactive VMs"
+    echo "  stop  [vm_name | all]   Gracefully shutdowns one or all VMs"
+    echo "  help                    Displays this help message"
 }
 
 #=========================================================#
@@ -32,20 +32,32 @@ function list_vms {
 # Start a VM
 #
 function start_vm {
-    local vm_name=$1    
-    echo "Starting ${vm_name}"
-    sudo virsh start "${vm_name}" &>$LOG #send standard output and errors to log   
-    return $?
+    local vm_name=$1 
+    if [[ "${vm_name}" -eq "all" ]];then
+        for vm in $(sudo virsh list --inactive --name);do
+            sudo virsh start ${vm} | tee -a $LOG
+        done
+        return $?
+    else         
+        sudo virsh start "${vm_name}" | tee -a $LOG
+        return $?
+    fi
 }
 
 #=========================================================#
 # Shutdown a VM
 #
 function stop_vm {
-    local vm_name=$1    
-    echo "Shutting down ${vm_name}..."
-    sudo virsh shutdown "${vm_name}" &>$LOG # send standard output and errors to log              
-    return $?
+    local vm_name=$1  
+    if [[ "${vm_name}" -eq "all" ]];then
+        for vm in $(sudo virsh list --name);do
+            sudo virsh shutdown ${vm} | tee -a $LOG
+        done
+        return $?
+    else      
+        sudo virsh shutdown "${vm_name}" &>$LOG # send standard output and errors to log              
+        return $?
+    fi
 }
 
 ###############################################################################
@@ -101,7 +113,7 @@ case $1 in
         if [[ -z $2 ]]; then
             display_help
             exit 1
-        fi
+        fi        
         stop_vm "${2}"
         RC=$?        
         if [[ $RC -eq 0 ]] ;then
