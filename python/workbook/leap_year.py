@@ -18,11 +18,12 @@ def leap_year_check(year):
     else:
         return False
 
+def main():
+    year = int(input("Enter year to check: "))
+    if leap_year_check(year):
+        print("The year %d IS a leap year" % year)
+    else:
+        print("The year %d is NOT a leap year" % year)
 
-year = int(input("Enter year to check: "))
-if leap_year_check(year):
-    print("The year %d IS a leap year" % year)
-else:
-    print("The year %d is NOT a leap year" % year)
-
-
+if __name__ == "__main__":
+    main()
