@@ -33,7 +33,7 @@ function list_vms {
 #
 function start_vm {
     local vm_name=$1 
-    if [[ "${vm_name}" -eq "all" ]];then
+    if [[ "${vm_name}" == "all" ]];then
         for vm in $(sudo virsh list --inactive --name);do
             sudo virsh start ${vm} | tee -a $LOG
         done
@@ -48,14 +48,15 @@ function start_vm {
 # Shutdown a VM
 #
 function stop_vm {
-    local vm_name=$1  
-    if [[ "${vm_name}" -eq "all" ]];then
+    local vm_name=$1      
+    if [[ "${vm_name}" == "all" ]];then
         for vm in $(sudo virsh list --name);do
-            sudo virsh shutdown ${vm} | tee -a $LOG
+            sudo virsh shutdown ${vm} | tee -a $LOG            
         done
         return $?
     else      
         sudo virsh shutdown "${vm_name}" &>$LOG # send standard output and errors to log              
+            
         return $?
     fi
 }
@@ -98,7 +99,7 @@ case $1 in
             display_help
             exit 1
         fi
-        start_vm "${2}"
+        start_vm "${2}" # pass second option (after 'start')
         RC=$? 
         if [[ $RC -eq 0 ]];then
             echo "Success starting: ${2}" | tee -a $LOG
@@ -114,7 +115,7 @@ case $1 in
             display_help
             exit 1
         fi        
-        stop_vm "${2}"
+        stop_vm "${2}" # pass second option ('after stop')
         RC=$?        
         if [[ $RC -eq 0 ]] ;then
             echo "Success stopping ${2}!" | tee -a $LOG
