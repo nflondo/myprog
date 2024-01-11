@@ -1,6 +1,0 @@
-#==[ Verification ]=================================#
-# RPM Not Installed: openwbem
-
-#==[ Verification ]=================================#
-# RPM Not Installed: sblim-sfcb
-

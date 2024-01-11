@@ -1,6 +1,0 @@
-#==[ Verification ]=================================#
-# RPM Not Installed: dhcp-server
-
-#==[ Verification ]=================================#
-# RPM Not Installed: novell-oes-dhcp-conf
-
