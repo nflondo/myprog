@@ -22,3 +22,15 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
+icon: https://wile.example.com/anvil.svg
+keywords:
+  - road runner
+  - anvil
+home: https://wile.example.com/anvil
+sources:
+  - https://example.com/Masterminds/learning-helm/tree/main/chapter4/anvil
+maintainers:
+  - name: ACME Corp 
+    email: maintainers@example.com
+  - name: Wile 
+    email: wile@example.com
